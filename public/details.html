@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Details – Academy Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/programm.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="back" id="back-link">← Zurück</a>
+        <div class="badge">Details</div>
+    </header>
+    <div class="logo-bar">
+        <img src="/img/logo-southside.png" alt="Adventure Southside">
+        <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
+    </div>
+
+    <main class="detail-content" id="detail-content">
+        <div class="loading" id="detail-loading">Details werden geladen…</div>
+    </main>
+
+    <footer>
+        <img src="/img/logo-southside.png" alt="" class="footer-logo">
+        <p>Adventure Southside 2026</p>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const API_URL = '/api/workshops.json';
+        const STORAGE_KEY = 'as26_favorites';
+
+        // Workshop-ID aus URL extrahieren: /w/{id}/details
+        function getWorkshopId() {
+            const match = window.location.pathname.match(/\/w\/([a-f0-9]{32})/);
+            return match ? match[1] : null;
+        }
+
+        function getFavorites() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+            catch { return []; }
+        }
+
+        function toggleFavorite(id) {
+            const favs = getFavorites();
+            const idx = favs.indexOf(id);
+            if (idx > -1) favs.splice(idx, 1);
+            else favs.push(id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(favs));
+            return favs.includes(id);
+        }
+
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        async function loadDetails() {
+            const wsId = getWorkshopId();
+            if (!wsId) {
+                showError('Workshop-ID nicht gefunden.');
+                return;
+            }
+
+            // Back-Link setzen
+            document.getElementById('back-link').href = '/w/' + wsId;
+
+            try {
+                const resp = await fetch(API_URL);
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const data = await resp.json();
+                const ws = (data.workshops || []).find(w => w.id === wsId);
+
+                if (!ws) {
+                    showError('Workshop nicht gefunden.');
+                    return;
+                }
+
+                document.title = ws.title + ' – Details – Academy Live';
+                renderDetails(ws);
+            } catch (err) {
+                console.error(err);
+                showError('Details konnten nicht geladen werden.<br>Bitte prüfe deine Internetverbindung.');
+            }
+        }
+
+        function renderDetails(ws) {
+            const container = document.getElementById('detail-content');
+            const favs = getFavorites();
+            const isFav = favs.includes(ws.id);
+
+            let html = '';
+
+            // Workshop Card (oben)
+            html += `<div class="workshop-card">
+                <span class="typ-badge">${escapeHtml(ws.typ)}</span>
+                <h1>${escapeHtml(ws.title)}</h1>
+                <div class="meta-row">
+                    ${ws.tag ? `<span class="meta-item">📅 ${escapeHtml(ws.tag)}</span>` : ''}
+                    ${ws.zeit ? `<span class="meta-item">🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
+                    ${ws.ort ? `<span class="meta-item">📍 ${escapeHtml(ws.ort)}</span>` : ''}
+                </div>
+            </div>`;
+
+            // Action Buttons
+            html += `<div class="detail-actions">
+                <a href="/w/${ws.id}/qa" class="btn btn-primary">💬 Frage stellen</a>
+                <a href="/w/${ws.id}/ical" class="btn btn-secondary">📅 Kalender</a>
+                <button class="btn btn-secondary fav-toggle" id="fav-toggle" data-id="${ws.id}">
+                    ${isFav ? '❤️ Gemerkt' : '🤍 Merken'}
+                </button>
+            </div>`;
+
+            // Page Content
+            if (ws.has_content && ws.content_html) {
+                html += '<div class="detail-body">' + ws.content_html + '</div>';
+            } else {
+                html += '<div class="empty">Keine weiteren Details verfügbar.</div>';
+            }
+
+            // Zurück zum Programm
+            html += `<div style="margin-top:2rem;text-align:center">
+                <a href="/programm.html" class="btn btn-secondary">📋 Zum Programm</a>
+            </div>`;
+
+            container.innerHTML = html;
+
+            // Fav-Toggle Event
+            const favBtn = document.getElementById('fav-toggle');
+            if (favBtn) {
+                favBtn.addEventListener('click', () => {
+                    const isNow = toggleFavorite(ws.id);
+                    favBtn.innerHTML = isNow ? '❤️ Gemerkt' : '🤍 Merken';
+                });
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('detail-content').innerHTML =
+                `<div class="empty">${msg}</div>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDetails);
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    })();
+    </script>
+</body>
+</html>

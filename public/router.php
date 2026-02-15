@@ -47,7 +47,12 @@ switch ($action) {
         break;
 
     case 'details':
-        require __DIR__ . '/details.php';
+        // Statisches HTML – Workshop-ID wird client-seitig aus URL gelesen
+        readfile(__DIR__ . '/details.html');
+        break;
+
+    case 'ical':
+        require __DIR__ . '/ics.php';
         break;
 
     case '':   // Landing-Page

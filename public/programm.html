@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Programm – Academy Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/programm.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-top">
+            <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
+            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
+        </div>
+        <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+    </div>
+
+    <!-- ── Tab-Navigation ── -->
+    <nav class="tab-bar">
+        <button class="tab active" data-tab="programm">📋 Programm</button>
+        <button class="tab" data-tab="favoriten">❤️ Favoriten <span class="fav-count" id="fav-count"></span></button>
+    </nav>
+
+    <main class="programm-main">
+        <!-- ── Filter ── -->
+        <div class="filter-bar">
+            <div class="day-filters" id="day-filters">
+                <button class="day-btn active" data-day="all">Alle</button>
+                <button class="day-btn" data-day="Freitag">Fr 10.07.</button>
+                <button class="day-btn" data-day="Samstag">Sa 11.07.</button>
+                <button class="day-btn" data-day="Sonntag">So 12.07.</button>
+            </div>
+            <div class="typ-filter">
+                <select id="typ-filter">
+                    <option value="all">Alle Formate</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ── Workshop-Liste ── -->
+        <div id="workshop-list" class="workshop-list">
+            <div class="loading">Programm wird geladen…</div>
+        </div>
+
+        <!-- ── Favoriten (initial hidden) ── -->
+        <div id="favoriten-list" class="workshop-list" style="display:none">
+            <p class="empty" id="no-favs">Noch keine Favoriten gespeichert. Tippe auf ❤️ um Workshops zu merken.</p>
+        </div>
+    </main>
+
+    <footer>
+        <img src="/img/logo-southside.png" alt="" class="footer-logo">
+        <p>Adventure Southside 2026</p>
+    </footer>
+
+    <script src="/js/programm.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+    </script>
+</body>
+</html>

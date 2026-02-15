@@ -149,6 +149,88 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
         ]);
     }
 
+    // ── BULK READ (für JSON-Export) ──────────────────────
+
+    /**
+     * Alle Workshops aus der DB laden, optional nach Tag filtern.
+     * Paginiert (max 100 pro Request).
+     */
+    public function getAllWorkshops(string $dbId, array $tags = []): array
+    {
+        $body = ['page_size' => 100];
+
+        // Filter: nur bestimmte Tage
+        if (!empty($tags)) {
+            $or = [];
+            foreach ($tags as $tag) {
+                $or[] = [
+                    'property' => 'Tag',
+                    'select'   => ['equals' => $tag],
+                ];
+            }
+            $body['filter'] = ['or' => $or];
+        }
+
+        $body['sorts'] = [
+            ['property' => 'Tag', 'direction' => 'ascending'],
+            ['property' => 'Uhrzeit', 'direction' => 'ascending'],
+        ];
+
+        $all = [];
+        $cursor = null;
+
+        do {
+            if ($cursor) $body['start_cursor'] = $cursor;
+            $data = $this->queryDatabase($dbId, $body);
+            if (!$data) break;
+
+            foreach ($data['results'] ?? [] as $page) {
+                $props = $page['properties'] ?? [];
+                $all[] = [
+                    'id'           => str_replace('-', '', $page['id']),
+                    'page_id'      => $page['id'],
+                    'title'        => $this->extractTitle($props['Titel'] ?? []),
+                    'typ'          => $props['Typ']['select']['name'] ?? '',
+                    'tag'          => $props['Tag']['select']['name'] ?? '',
+                    'zeit'         => $props['Uhrzeit']['select']['name'] ?? '',
+                    'ort'          => $props['Bühne/Ort']['select']['name'] ?? '',
+                    'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
+                    'datum_start'  => $props['Datum']['date']['start'] ?? null,
+                ];
+            }
+
+            $cursor = $data['next_cursor'] ?? null;
+        } while ($data['has_more'] ?? false);
+
+        return $all;
+    }
+
+    /**
+     * Block-Children einer Seite laden (paginiert).
+     * Gibt flaches Array aller Blöcke zurück.
+     */
+    public function getPageBlocks(string $pageId): array
+    {
+        $blocks = [];
+        $cursor = null;
+
+        do {
+            $url = "/blocks/{$pageId}/children?page_size=100";
+            if ($cursor) $url .= "&start_cursor={$cursor}";
+
+            $data = $this->request('GET', $url);
+            if (!$data) break;
+
+            foreach ($data['results'] ?? [] as $block) {
+                $blocks[] = $block;
+            }
+
+            $cursor = $data['next_cursor'] ?? null;
+        } while ($data['has_more'] ?? false);
+
+        return $blocks;
+    }
+
     // ── HELPERS ──────────────────────────────────────────
 
     private function extractTitle(array $prop): string

@@ -2,14 +2,19 @@
  * Service Worker – Academy Live (Adventure Southside 2026)
  * Cache-First für statische Assets, Network-First für API/PHP.
  */
-const CACHE_NAME = 'academy-live-v1';
+const CACHE_NAME = 'academy-live-v2';
 
 const PRECACHE_URLS = [
   '/css/style.css',
+  '/css/programm.css',
   '/js/app.js',
+  '/js/programm.js',
   '/img/logo-southside.png',
   '/img/logo-academy.png',
   '/manifest.json',
+  '/programm.html',
+  '/details.html',
+  '/api/workshops.json',
 ];
 
 // ── Install: Statische Assets vorab cachen ──
@@ -42,12 +47,30 @@ self.addEventListener('fetch', (event) => {
   // POST-Requests nie cachen
   if (request.method !== 'GET') return;
 
+  // workshops.json → Stale-While-Revalidate
+  if (url.pathname === '/api/workshops.json') {
+    event.respondWith(
+      caches.open(CACHE_NAME).then((cache) =>
+        cache.match(request).then((cached) => {
+          const fetchPromise = fetch(request).then((response) => {
+            cache.put(request, response.clone());
+            return response;
+          });
+          return cached || fetchPromise;
+        })
+      )
+    );
+    return;
+  }
+
   // Statische Assets → Cache-First
   if (
     url.pathname.startsWith('/css/') ||
     url.pathname.startsWith('/js/') ||
     url.pathname.startsWith('/img/') ||
-    url.pathname === '/manifest.json'
+    url.pathname === '/manifest.json' ||
+    url.pathname === '/programm.html' ||
+    url.pathname === '/details.html'
   ) {
     event.respondWith(
       caches.match(request).then(
