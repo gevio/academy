@@ -2,7 +2,7 @@
  * Service Worker – Academy Live (Adventure Southside 2026)
  * Cache-First für statische Assets, Network-First für API/PHP.
  */
-const CACHE_NAME = 'academy-live-v2';
+const CACHE_NAME = 'academy-live-v3';
 
 const PRECACHE_URLS = [
   '/css/style.css',
