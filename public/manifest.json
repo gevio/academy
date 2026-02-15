@@ -1,14 +1,15 @@
 {
-  "name": "Academy Live – Adventure Southside",
-  "short_name": "Academy Live",
-  "description": "Programm, Feedback & Q&A für die Adventure Southside 2026",
-  "start_url": "/programm.html",
+  "name": "AS26 Live – Dein Messe-Begleiter",
+  "short_name": "AS26 Live",
+  "description": "Workshops, Q&A & Programm – Adventure Southside 2026",
+  "start_url": "/home.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F5F0EB",
+  "background_color": "#372F2C",
   "theme_color": "#372F2C",
   "lang": "de",
+  "categories": ["events", "lifestyle"],
   "icons": [
     {
       "src": "/img/icon-192.png",
@@ -21,6 +22,14 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Programm",
+      "short_name": "Programm",
+      "url": "/programm.html",
+      "icons": [{ "src": "/img/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

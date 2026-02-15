@@ -1,100 +1,142 @@
 /**
- * Service Worker – Academy Live (Adventure Southside 2026)
- * Cache-First für statische Assets, Network-First für API/PHP.
+ * Service Worker – AS26 Live (Adventure Southside 2026)
+ *
+ * Strategien:
+ *   Precache:      Alle Shell-Assets beim Install vorab laden
+ *   Cache-First:   Statische Assets (CSS/JS/Img) – schnell, offline-fähig
+ *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
+ *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'academy-live-v4';
+const CACHE_NAME = 'as26-live-v1';
 
+// Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
+  '/',
+  '/home.html',
+  '/programm.html',
+  '/details.html',
+  '/offline.html',
   '/css/style.css',
   '/css/programm.css',
   '/js/app.js',
   '/js/programm.js',
   '/img/logo-southside.png',
   '/img/logo-academy.png',
+  '/img/icon-192.png',
   '/manifest.json',
-  '/programm.html',
-  '/details.html',
   '/api/workshops.json',
 ];
 
-// ── Install: Statische Assets vorab cachen ──
+// ── Install: Shell precachen ──
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS))
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-// ── Activate: Alte Caches aufräumen ──
+// ── Activate: Alte Caches aufräumen + sofort übernehmen ──
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
-    )
+    caches.keys()
+      .then((keys) => Promise.all(
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
+      ))
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// ── Fetch: Strategie pro Request-Typ ──
+// ── Fetch Handler ──
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // POST-Requests nie cachen
+  // Nur GET-Requests cachen
   if (request.method !== 'GET') return;
 
-  // workshops.json → Network-First (frische Daten bevorzugen, Cache als Fallback)
+  // Nur same-origin
+  if (url.origin !== self.location.origin) return;
+
+  // ── 1) API-Daten (workshops.json) → Network-First ──
   if (url.pathname === '/api/workshops.json') {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() => caches.match(request))
-    );
+    event.respondWith(networkFirst(request));
     return;
   }
 
-  // Statische Assets → Cache-First
-  if (
-    url.pathname.startsWith('/css/') ||
-    url.pathname.startsWith('/js/') ||
-    url.pathname.startsWith('/img/') ||
-    url.pathname === '/manifest.json' ||
-    url.pathname === '/programm.html' ||
-    url.pathname === '/details.html'
-  ) {
-    event.respondWith(
-      caches.match(request).then(
-        (cached) =>
-          cached ||
-          fetch(request).then((response) => {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-            return response;
-          })
-      )
-    );
+  // ── 2) Statische Assets → Cache-First ──
+  if (isStaticAsset(url.pathname)) {
+    event.respondWith(cacheFirst(request));
     return;
   }
 
-  // HTML/PHP-Seiten → Network-First mit Offline-Fallback
+  // ── 3) HTML/Navigation → Network-First + Offline-Fallback ──
   if (request.headers.get('accept')?.includes('text/html')) {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() => caches.match(request))
-    );
+    event.respondWith(networkFirstWithOffline(request));
     return;
   }
+
+  // ── 4) Alles andere → Network mit Cache-Fallback ──
+  event.respondWith(networkFirst(request));
 });
+
+// ══════════════════════════════════════════════════════════
+// Strategien
+// ══════════════════════════════════════════════════════════
+
+/** Cache-First: Aus Cache, nur bei Miss aus dem Netzwerk */
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    return new Response('Offline', { status: 503 });
+  }
+}
+
+/** Network-First: Aus Netzwerk, bei Fehler aus Cache */
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    const cached = await caches.match(request);
+    return cached || new Response('Offline', { status: 503 });
+  }
+}
+
+/** Network-First für HTML – bei Offline → offline.html */
+async function networkFirstWithOffline(request) {
+  try {
+    const response = await fetch(request);
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    // Fallback: Offline-Seite
+    return caches.match('/offline.html') || new Response('Offline', { status: 503 });
+  }
+}
+
+/** Prüft ob ein Pfad ein statisches Asset ist */
+function isStaticAsset(pathname) {
+  return pathname.startsWith('/css/') ||
+         pathname.startsWith('/js/') ||
+         pathname.startsWith('/img/') ||
+         pathname === '/manifest.json';
+}
