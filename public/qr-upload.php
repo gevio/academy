@@ -12,6 +12,7 @@ echo "Token geladen: " . substr($notionToken, 0, 10) . "...\n";
 
 $dbId = '11382138ece1494bafa3cd1bb47dda82';
 $qrBaseUrl = 'https://as26.cool-camp.site/qr/';
+$liveBaseUrl = 'https://as26.cool-camp.site/w/';
 
 // Alle Seiten holen
 $pages = [];
@@ -59,6 +60,8 @@ foreach ($pages as $pageId) {
     $cleanId = str_replace('-', '', $pageId);
     $qrUrl = $qrBaseUrl . $cleanId . '.png';
 
+    $liveUrl = $liveBaseUrl . $cleanId;
+
     $update = [
         'properties' => [
             'Feedback-QR' => [
@@ -67,6 +70,9 @@ foreach ($pages as $pageId) {
                     'name' => "QR-$cleanId.png",
                     'external' => ['url' => $qrUrl]
                 ]]
+            ],
+            'Live-URL' => [
+                'url' => $liveUrl
             ]
         ]
     ];
