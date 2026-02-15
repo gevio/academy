@@ -131,9 +131,9 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
             </a>
         </nav>
 
-        <p style="text-align:center;margin-top:1.5rem">
-            <a href="/programm.html" style="color:var(--as-rot);font-weight:700;text-decoration:none">📋 Gesamtes Programm ansehen</a>
-        </p>
+        <a href="/programm.html" class="programm-banner">
+            📋 Gesamtes Programm ansehen
+        </a>
     </main>
 
     <footer>
