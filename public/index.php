@@ -59,7 +59,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <meta name="theme-color" content="#372F2C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title><?= $title ?> – Academy Live</title>
+    <title><?= $title ?> – AS26 Live</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
     <link rel="apple-touch-icon" href="/img/icon-192.png">

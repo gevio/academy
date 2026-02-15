@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AS26 Live">
+    <meta name="description" content="Dein Messe-Begleiter – Workshops, Q&A & Programm für die Adventure Southside 2026">
+    <title>AS26 Live – Dein Messe-Begleiter</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    /* ── Home Landing ── */
+    .home {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+    .home-hero {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(160deg, var(--as-braun-dark) 0%, #4a3f3a 40%, var(--as-braun) 100%);
+        color: #fff;
+        text-align: center;
+        padding: 3rem 2rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .home-hero::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        right: -30%;
+        width: 70%;
+        height: 140%;
+        background: radial-gradient(ellipse, rgba(207,54,40,.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .home-hero::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--as-rot), var(--as-orange), var(--as-rot));
+    }
+    .home-logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+    }
+    .home-logos img {
+        height: 80px;
+        width: auto;
+        filter: brightness(0) invert(1);
+        opacity: .92;
+    }
+    .home-title {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: .02em;
+        line-height: 1.1;
+        margin-bottom: .4rem;
+        position: relative;
+        z-index: 1;
+    }
+    .home-title span {
+        color: var(--as-orange);
+    }
+    .home-subtitle {
+        font-size: 1rem;
+        color: var(--as-pfirsich);
+        font-weight: 700;
+        letter-spacing: .03em;
+        margin-bottom: .6rem;
+        position: relative;
+        z-index: 1;
+    }
+    .home-date {
+        font-size: .85rem;
+        color: var(--as-beige);
+        letter-spacing: .04em;
+        position: relative;
+        z-index: 1;
+    }
+    /* ── CTA Bereich ── */
+    .home-cta {
+        background: var(--bg);
+        padding: 1.5rem 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .85rem;
+    }
+    .cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .65rem;
+        width: 100%;
+        max-width: 360px;
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius);
+        text-decoration: none;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        transition: transform .1s, box-shadow .15s, background .15s;
+    }
+    .cta-btn:active { transform: scale(.97); }
+    .cta-primary {
+        background: var(--as-rot);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(207,54,40,.35);
+    }
+    .cta-primary:hover {
+        background: var(--as-dunkelrot);
+        box-shadow: 0 6px 16px rgba(158,51,35,.4);
+    }
+    .cta-secondary {
+        background: var(--card);
+        color: var(--text);
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow-sm);
+    }
+    .cta-secondary:hover {
+        border-color: var(--as-rot);
+        color: var(--as-rot);
+        box-shadow: var(--shadow-md);
+    }
+    .cta-icon { font-size: 1.3rem; }
+
+    /* ── Install Banner ── */
+    .install-banner {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: .75rem;
+        background: linear-gradient(90deg, var(--as-braun-dark), #4a3f3a);
+        color: #fff;
+        padding: .75rem 1.25rem;
+        font-size: .85rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        width: 100%;
+        font-family: 'PT Sans', sans-serif;
+        transition: background .15s;
+        letter-spacing: .02em;
+    }
+    .install-banner:hover { background: var(--as-warmgrau); }
+    .install-banner.show { display: flex; }
+    .install-banner .install-icon { font-size: 1.2rem; }
+    .install-banner .install-dismiss {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: var(--as-beige);
+        font-size: 1.1rem;
+        cursor: pointer;
+        padding: .2rem;
+        line-height: 1;
+    }
+
+    /* ── Footer auf Home ── */
+    .home-footer {
+        text-align: center;
+        padding: 1rem 1.5rem 1.5rem;
+        background: var(--bg);
+        color: var(--text-light);
+        font-size: .75rem;
+    }
+
+    @media (min-width: 420px) {
+        .home-logos img { height: 100px; }
+        .home-logos { gap: 3rem; }
+        .home-title { font-size: 2.4rem; }
+        .home-subtitle { font-size: 1.1rem; }
+    }
+    @media (min-width: 600px) {
+        .home-logos img { height: 120px; }
+        .home-logos { gap: 3.5rem; }
+        .home-title { font-size: 2.8rem; }
+    }
+    </style>
+</head>
+<body class="home">
+
+    <!-- Install Banner (erscheint wenn A2HS verfügbar) -->
+    <button class="install-banner" id="install-banner">
+        <span class="install-icon">📲</span>
+        App installieren – für schnellen Zugriff
+        <span class="install-dismiss" id="install-dismiss" title="Schließen">✕</span>
+    </button>
+
+    <div class="home-hero">
+        <div class="home-logos">
+            <img src="/img/logo-southside.png" alt="Adventure Southside">
+            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
+        </div>
+        <h1 class="home-title">AS26 <span>Live</span></h1>
+        <p class="home-subtitle">Dein Messe-Begleiter</p>
+        <p class="home-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+    </div>
+
+    <nav class="home-cta">
+        <a href="/programm.html" class="cta-btn cta-primary">
+            <span class="cta-icon">📋</span>
+            Programm ansehen
+        </a>
+        <a href="#" class="cta-btn cta-secondary" id="scan-btn" onclick="startScan(event)">
+            <span class="cta-icon">📷</span>
+            QR-Code scannen
+        </a>
+    </nav>
+
+    <div class="home-footer">
+        <p>Selbstausbauer Academy @ Adventure Southside 2026</p>
+    </div>
+
+    <script>
+    // ── A2HS Install Prompt ──────────────────────────────
+    let deferredPrompt = null;
+    const installBanner = document.getElementById('install-banner');
+    const installDismiss = document.getElementById('install-dismiss');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Nur zeigen wenn nicht schon dismissed
+        if (!sessionStorage.getItem('a2hs_dismissed')) {
+            installBanner.classList.add('show');
+        }
+    });
+
+    installBanner.addEventListener('click', async (e) => {
+        if (e.target === installDismiss || e.target.closest('.install-dismiss')) {
+            installBanner.classList.remove('show');
+            sessionStorage.setItem('a2hs_dismissed', '1');
+            return;
+        }
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBanner.classList.remove('show');
+    });
+
+    // Wenn bereits installiert, Banner verstecken
+    window.addEventListener('appinstalled', () => {
+        installBanner.classList.remove('show');
+        deferredPrompt = null;
+    });
+
+    // Bereits als PWA geöffnet? → Kein Banner
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+        // App ist installiert – Banner nicht zeigen
+    }
+
+    // ── QR-Code Scan (Camera API falls unterstützt) ──
+    function startScan(e) {
+        e.preventDefault();
+        // Einfacher Ansatz: Hinweis dass Kamera-App genutzt werden soll
+        alert('Öffne deine Kamera-App und scanne den QR-Code am Workshop-Stand.\n\nDu wirst automatisch zur Workshop-Seite weitergeleitet.');
+    }
+
+    // ── Service Worker ──
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+    </script>
+</body>
+</html>
