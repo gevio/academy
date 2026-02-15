@@ -2,7 +2,7 @@
  * Service Worker – Academy Live (Adventure Southside 2026)
  * Cache-First für statische Assets, Network-First für API/PHP.
  */
-const CACHE_NAME = 'academy-live-v3';
+const CACHE_NAME = 'academy-live-v4';
 
 const PRECACHE_URLS = [
   '/css/style.css',
@@ -47,18 +47,16 @@ self.addEventListener('fetch', (event) => {
   // POST-Requests nie cachen
   if (request.method !== 'GET') return;
 
-  // workshops.json → Stale-While-Revalidate
+  // workshops.json → Network-First (frische Daten bevorzugen, Cache als Fallback)
   if (url.pathname === '/api/workshops.json') {
     event.respondWith(
-      caches.open(CACHE_NAME).then((cache) =>
-        cache.match(request).then((cached) => {
-          const fetchPromise = fetch(request).then((response) => {
-            cache.put(request, response.clone());
-            return response;
-          });
-          return cached || fetchPromise;
+      fetch(request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          return response;
         })
-      )
+        .catch(() => caches.match(request))
     );
     return;
   }
