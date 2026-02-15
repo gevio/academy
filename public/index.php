@@ -67,10 +67,10 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 </head>
 <body>
     <div class="hero">
-        <div class="hero-top">
+        <a href="/" class="hero-top">
             <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
             <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
-        </div>
+        </a>
         <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
     </div>
 
@@ -137,7 +137,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     </main>
 
     <footer>
-        <img src="/img/logo-southside.png" alt="" class="footer-logo">
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
     </footer>
     <script>
