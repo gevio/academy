@@ -139,6 +139,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <footer>
         <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
+        <p><a href="/impressum.html">Impressum & Datenschutz</a></p>
     </footer>
     <script>
     if ('serviceWorker' in navigator) {

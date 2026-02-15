@@ -152,6 +152,8 @@ footer{text-align:center;padding:2rem 1.5rem;color:var(--text-light);font-size:.
 .footer-logo{height:96px;margin-bottom:.5rem;opacity:.5;filter:grayscale(100%);transition:opacity .2s}
 .footer-logo:hover{opacity:.8}
 footer p{margin-top:.3rem}
+footer a{color:var(--text-light);text-decoration:none;transition:color .15s}
+footer a:hover{color:var(--as-rot)}
 
 /* ═══ WALL (Beamer) ═══ */
 body.wall{background:var(--as-braun-dark)}
