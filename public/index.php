@@ -51,7 +51,6 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     $feedbackActive = true;
 }
 ?>
-<!-- Dev Environment Test -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
