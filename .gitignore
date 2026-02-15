@@ -1,0 +1,16 @@
+# Secrets - NIEMALS committen
+config/.env
+
+# Composer Dependencies
+vendor/
+
+# Generierte QR-Codes
+public/qr/*.png
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
