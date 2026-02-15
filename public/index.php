@@ -89,6 +89,13 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
         <p class="action-hint">Was möchtest du tun?</p>
 
         <nav class="actions">
+            <!-- Details: Workshop-Infos -->
+            <a href="/w/<?= $id ?>/details" class="action-card">
+                <span class="action-icon">📋</span>
+                <span class="action-label">Details anzeigen</span>
+                <span class="action-desc">Ausführliche Workshop-Infos</span>
+            </a>
+
             <!-- Q&A: immer aktiv (Fragen auch vorab möglich) -->
             <a href="/w/<?= $id ?>/qa" class="action-card">
                 <span class="action-icon">💬</span>
@@ -115,7 +122,18 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                     </span>
                 </div>
             <?php endif; ?>
+
+            <!-- Kalender-Download -->
+            <a href="/w/<?= $id ?>/ical" class="action-card">
+                <span class="action-icon">📅</span>
+                <span class="action-label">Zum Kalender</span>
+                <span class="action-desc">Termin in deinen Kalender eintragen</span>
+            </a>
         </nav>
+
+        <p style="text-align:center;margin-top:1.5rem">
+            <a href="/programm.html" style="color:var(--as-rot);font-weight:700;text-decoration:none">📋 Gesamtes Programm ansehen</a>
+        </p>
     </main>
 
     <footer>

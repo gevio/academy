@@ -1,8 +1,8 @@
 {
   "name": "Academy Live – Adventure Southside",
   "short_name": "Academy Live",
-  "description": "Workshop-Feedback & Q&A für die Adventure Southside 2026",
-  "start_url": "/",
+  "description": "Programm, Feedback & Q&A für die Adventure Southside 2026",
+  "start_url": "/programm.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
