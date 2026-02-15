@@ -110,7 +110,7 @@ document.querySelectorAll('.upvote-btn').forEach(btn => {
         // ── Async POST (kein Page-Reload!) ──
         try {
             const wId = btn.dataset.workshopId;
-            const resp = await fetch('/qa.php?id=' + encodeURIComponent(wId), {
+            const resp = await fetch('/w/' + encodeURIComponent(wId) + '/qa', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'upvote_id=' + encodeURIComponent(qId)

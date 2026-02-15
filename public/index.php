@@ -56,7 +56,13 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title><?= $title ?> – Academy Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -84,7 +90,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 
         <nav class="actions">
             <!-- Q&A: immer aktiv (Fragen auch vorab möglich) -->
-            <a href="/qa.php?id=<?= $id ?>" class="action-card">
+            <a href="/w/<?= $id ?>/qa" class="action-card">
                 <span class="action-icon">💬</span>
                 <span class="action-label">Frage stellen</span>
                 <span class="action-desc">Stelle vorab oder live eine Frage</span>
@@ -92,7 +98,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 
             <!-- Feedback: erst ab Workshop-Start -->
             <?php if ($feedbackActive): ?>
-                <a href="/feedback.php?id=<?= $id ?>" class="action-card">
+                <a href="/w/<?= $id ?>/feedback" class="action-card">
                     <span class="action-icon">⭐</span>
                     <span class="action-label">Feedback geben</span>
                     <span class="action-desc">Bewerte diesen Vortrag mit Sternen</span>
@@ -116,5 +122,10 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
         <img src="/img/logo-southside.png" alt="" class="footer-logo">
         <p>Adventure Southside 2026</p>
     </footer>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+    </script>
 </body>
 </html>

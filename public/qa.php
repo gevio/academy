@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['frage'])) {
         $message = 'Frage eingereicht! ✅';
     }
 
-    header('Location: /qa.php?id=' . $id . '&msg=' . urlencode($message));
+    header('Location: /w/' . $id . '/qa?msg=' . urlencode($message));
     exit;
 }
 
@@ -66,12 +66,14 @@ $msg = htmlspecialchars($_GET['msg'] ?? '');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
     <title>Fragen – <?= $title ?></title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
-        <a href="/index.php?id=<?= $id ?>" class="back">← Zurück</a>
+        <a href="/w/<?= $id ?>" class="back">← Zurück</a>
         <div class="badge">Q&A</div>
     </header>
     <div class="logo-bar">
@@ -85,7 +87,7 @@ $msg = htmlspecialchars($_GET['msg'] ?? '');
             <div class="alert success"><?= $msg ?></div>
         <?php endif; ?>
 
-        <form method="post" action="/qa.php?id=<?= $id ?>" class="qa-form">
+        <form method="post" action="/w/<?= $id ?>/qa" class="qa-form">
             <input type="hidden" name="workshop_id" value="<?= $id ?>">
             <textarea name="frage" rows="2" maxlength="300"
                       placeholder="Deine Frage an den Referenten..." required></textarea>

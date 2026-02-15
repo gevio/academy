@@ -108,12 +108,14 @@ $title = htmlspecialchars($workshop['title'] ?? 'Workshop');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
     <title>Feedback – <?= $title ?></title>
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
-        <a href="/index.php?id=<?= $id ?>" class="back">← Zurück</a>
+        <a href="/w/<?= $id ?>" class="back">← Zurück</a>
         <div class="badge">Feedback</div>
     </header>
     <div class="logo-bar">
@@ -128,7 +130,7 @@ $title = htmlspecialchars($workshop['title'] ?? 'Workshop');
                 <h2>Danke für dein Feedback! 🎉</h2>
                 <p>Deine Bewertung hilft uns, das Programm zu verbessern.</p>
 		<p style="margin-top: 2em">
-                    <a href="/index.php?id=<?= $id ?>" class="btn btn-primary">Zurück zum Workshop</a>
+                    <a href="/w/<?= $id ?>" class="btn btn-primary">Zurück zum Workshop</a>
 		</p>
             </div>
         <?php else: ?>
@@ -136,7 +138,7 @@ $title = htmlspecialchars($workshop['title'] ?? 'Workshop');
                 <div class="alert error"><?= $error ?></div>
             <?php endif; ?>
 
-            <form method="post" action="/feedback.php?id=<?= $id ?>" id="feedback-form">
+            <form method="post" action="/w/<?= $id ?>/feedback" id="feedback-form">
                 <input type="hidden" name="workshop_id" value="<?= $id ?>">
 
                 <div class="rating-group">
