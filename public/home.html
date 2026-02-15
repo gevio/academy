@@ -223,9 +223,9 @@
             <span class="cta-icon">📋</span>
             Programm ansehen
         </a>
-        <a href="#" class="cta-btn cta-secondary" id="scan-btn" onclick="startScan(event)">
-            <span class="cta-icon">📷</span>
-            QR-Code scannen
+        <a href="/programm.html#favoriten" class="cta-btn cta-secondary" id="fav-btn" style="display:none">
+            <span class="cta-icon">❤️</span>
+            <span id="fav-label">Meine Favoriten</span>
         </a>
     </nav>
 
@@ -272,12 +272,18 @@
         // App ist installiert – Banner nicht zeigen
     }
 
-    // ── QR-Code Scan (Camera API falls unterstützt) ──
-    function startScan(e) {
-        e.preventDefault();
-        // Einfacher Ansatz: Hinweis dass Kamera-App genutzt werden soll
-        alert('Öffne deine Kamera-App und scanne den QR-Code am Workshop-Stand.\n\nDu wirst automatisch zur Workshop-Seite weitergeleitet.');
-    }
+    // ── Favoriten-Button zeigen wenn welche vorhanden ──
+    (function() {
+        try {
+            const favs = JSON.parse(localStorage.getItem('as26_favorites') || '[]');
+            if (favs.length > 0) {
+                const btn = document.getElementById('fav-btn');
+                const label = document.getElementById('fav-label');
+                btn.style.display = '';
+                label.textContent = 'Meine Favoriten (' + favs.length + ')';
+            }
+        } catch {}
+    })();
 
     // ── Service Worker ──
     if ('serviceWorker' in navigator) {
