@@ -53,6 +53,11 @@ foreach ($workshops as $ws) {
     usleep(350000); // 350ms → ~2.8 req/s (unter Notion-Limit von 3/s)
     $blocks = $notion->getPageBlocks($pageId);
 
+    // ── Redundante Meta-Blöcke filtern ──────────────────
+    // Notion-Pages enthalten oft oben: Titel-Wiederholung, "Veranstaltungsdetails",
+    // Termin/Ort/Format – das zeigen wir bereits im Workshop-Card.
+    $blocks = filterRedundantBlocks($blocks, $ws['title']);
+
     $contentHtml = '';
     $hasContent = false;
 
@@ -95,3 +100,84 @@ echo "\n────────────────────────
 echo "✅ {$outFile}\n";
 echo "   {$ok} mit Content, {$noContent} ohne Content\n";
 echo "   {$size} KB, {$elapsed}s\n";
+
+// ══════════════════════════════════════════════════════════
+// Hilfsfunktionen
+// ══════════════════════════════════════════════════════════
+
+/**
+ * Entfernt redundante Meta-Blöcke am Anfang einer Notion-Page.
+ *
+ * Typisches Muster in den Workshop-Pages:
+ *   🅱️ Workshop: <Titel>           ← Titel-Wiederholung
+ *   Veranstaltungsdetails           ← Heading
+ *   📅 Termin: 10.–12. Juli 2026   ← Meta
+ *   📍 Ort: Selbstausbauer Academy  ← Meta
+ *   🎯 Format: Workshop             ← Meta
+ *
+ * Alles davon wird bereits im Workshop-Card oben angezeigt.
+ */
+function filterRedundantBlocks(array $blocks, string $workshopTitle): array
+{
+    // Patterns: Zeilen die wir als redundant erkennen
+    $metaPatterns = [
+        '/^(🅱️|Ⓑ|🔴|🟡|🟢|🔵)\s*(Workshop|Vortrag|Podium|Panel)\s*[:：]/ui',  // Titel-Echo
+        '/Veranstaltungsdetails/ui',
+        '/^📅\s*Termin\s*[:：]/ui',
+        '/^📍\s*Ort\s*[:：]/ui',
+        '/^🎯\s*(Format|Typ)\s*[:：]/ui',
+        '/^🕐\s*(Uhrzeit|Zeit)\s*[:：]/ui',
+        '/^📌\s*(Bühne|Ort|Location)\s*[:：]/ui',
+    ];
+
+    $filtered = [];
+    $skipZone = true;  // Am Anfang sind wir in der Skip-Zone
+
+    foreach ($blocks as $block) {
+        $type = $block['type'] ?? '';
+
+        // Plain-Text des Blocks extrahieren
+        $plainText = '';
+        $richTextKey = $type; // paragraph → paragraph, heading_1 → heading_1, etc.
+        if (isset($block[$richTextKey]['rich_text'])) {
+            foreach ($block[$richTextKey]['rich_text'] as $seg) {
+                $plainText .= $seg['plain_text'] ?? '';
+            }
+        }
+        $plainText = trim($plainText);
+
+        // Leere Paragraphen in der Skip-Zone → überspringen
+        if ($skipZone && $type === 'paragraph' && $plainText === '') {
+            continue;
+        }
+
+        // Divider in der Skip-Zone → überspringen (oft Trenner nach Meta)
+        if ($skipZone && $type === 'divider') {
+            continue;
+        }
+
+        // Prüfen ob Block zu den redundanten Meta-Patterns passt
+        if ($skipZone) {
+            $isRedundant = false;
+            foreach ($metaPatterns as $pattern) {
+                if (preg_match($pattern, $plainText)) {
+                    $isRedundant = true;
+                    break;
+                }
+            }
+            if ($isRedundant) {
+                continue; // Block überspringen
+            }
+
+            // Wenn wir hier sind und der Block nicht leer/redundant ist,
+            // verlassen wir die Skip-Zone → ab hier alles behalten
+            if ($plainText !== '' || !in_array($type, ['paragraph', 'divider'])) {
+                $skipZone = false;
+            }
+        }
+
+        $filtered[] = $block;
+    }
+
+    return $filtered;
+}
