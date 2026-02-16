@@ -37,10 +37,17 @@
                 <button class="day-btn" data-day="Samstag">Sa 11.07.</button>
                 <button class="day-btn" data-day="Sonntag">So 12.07.</button>
             </div>
-            <div class="typ-filter">
-                <select id="typ-filter">
-                    <option value="all">Alle Formate</option>
-                </select>
+            <div class="filter-row">
+                <div class="typ-filter">
+                    <select id="typ-filter">
+                        <option value="all">Alle Formate</option>
+                    </select>
+                </div>
+                <div class="kat-filter">
+                    <select id="kat-filter">
+                        <option value="all">Alle Kategorien</option>
+                    </select>
+                </div>
             </div>
         </div>
 
@@ -53,12 +60,19 @@
         <div id="favoriten-list" class="workshop-list" style="display:none">
             <p class="empty" id="no-favs">Noch keine Favoriten gespeichert. Tippe auf ❤️ um Workshops zu merken.</p>
         </div>
+
+        <!-- ── Dynamischer Zähler ── -->
+        <div id="result-summary" class="result-summary"></div>
     </main>
 
     <footer>
         <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
-        <p><a href="/impressum.html">Impressum & Datenschutz</a></p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
     </footer>
 
     <script src="/js/programm.js"></script>
