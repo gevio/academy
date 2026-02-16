@@ -7,7 +7,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'as26-live-v2';
+const CACHE_NAME = 'as26-live-v3';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
@@ -64,9 +64,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // ── 2) Statische Assets → Cache-First ──
+  // ── 2) Statische Assets → Stale-While-Revalidate ──
+  //     Sofort aus Cache liefern, im Hintergrund frische Version holen
   if (isStaticAsset(url.pathname)) {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
@@ -99,6 +100,23 @@ async function cacheFirst(request) {
   } catch {
     return new Response('Offline', { status: 503 });
   }
+}
+
+/** Stale-While-Revalidate: Sofort aus Cache, im Hintergrund aktualisieren */
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+
+  // Im Hintergrund frische Version holen und cachen
+  const fetchPromise = fetch(request).then((response) => {
+    if (response.ok) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  }).catch(() => null);
+
+  // Sofort cached Version liefern, oder auf Netzwerk warten
+  return cached || await fetchPromise || new Response('Offline', { status: 503 });
 }
 
 /** Network-First: Aus Netzwerk, bei Fehler aus Cache */
