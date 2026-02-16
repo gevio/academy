@@ -29,7 +29,11 @@
     <footer>
         <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
-        <p><a href="/impressum.html">Impressum & Datenschutz</a></p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
     </footer>
 
     <script>
@@ -38,6 +42,7 @@
 
         const API_URL = '/api/workshops.json';
         const STORAGE_KEY = 'as26_favorites';
+        let backUrl = null;
 
         // Workshop-ID aus URL extrahieren: /w/{id}/details
         function getWorkshopId() {
@@ -72,25 +77,27 @@
                 return;
             }
 
-            // Back-Link setzen
-            document.getElementById('back-link').href = '/w/' + wsId;
+            // Back-Link setzen (mit Filter-State falls vorhanden)
+            const params = new URLSearchParams(location.search);
+            backUrl = params.get('back');
+            document.getElementById('back-link').href = backUrl || ('/w/' + wsId);
 
             try {
-                const resp = await fetch(API_URL);
+                const resp = await fetch(API_URL + '?t=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const data = await resp.json();
                 const ws = (data.workshops || []).find(w => w.id === wsId);
 
                 if (!ws) {
-                    showError('Workshop nicht gefunden.');
+                    showError('Workshop nicht gefunden (ID: ' + wsId + ', Count: ' + (data.workshops||[]).length + ').');
                     return;
                 }
 
                 document.title = ws.title + ' – AS26 Live';
                 renderDetails(ws);
             } catch (err) {
-                console.error(err);
-                showError('Details konnten nicht geladen werden.<br>Bitte prüfe deine Internetverbindung.');
+                console.error('Details-Fehler:', err);
+                showError('Details konnten nicht geladen werden.<br><small>' + err.message + '</small>');
             }
         }
 
@@ -129,8 +136,9 @@
             }
 
             // Zurück zum Programm
+            const programmBackUrl = backUrl || '/programm.html';
             html += `<div style="margin-top:2rem;text-align:center">
-                <a href="/programm.html" class="btn btn-secondary">📋 Zum Programm</a>
+                <a href="${programmBackUrl}" class="btn btn-secondary">📋 Zum Programm</a>
             </div>`;
 
             container.innerHTML = html;

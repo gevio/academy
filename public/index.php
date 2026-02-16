@@ -26,6 +26,36 @@ $typ   = htmlspecialchars($workshop['typ']);
 $zeit  = htmlspecialchars($workshop['zeit']);
 $ort   = htmlspecialchars($workshop['ort']);
 
+// ── Enriched-Daten aus workshops.json (Kategorien, Referent) ──
+$kategorien = [];
+$referentFirma = '';
+$referentPerson = '';
+$cleanId = str_replace('-', '', $id);
+
+$jsonFile = __DIR__ . '/api/workshops.json';
+if (file_exists($jsonFile)) {
+    $jsonData = json_decode(file_get_contents($jsonFile), true);
+    foreach (($jsonData['workshops'] ?? []) as $jws) {
+        if ($jws['id'] === $cleanId) {
+            $kategorien = $jws['kategorien'] ?? [];
+            $referentFirma = $jws['referent_firma'] ?? '';
+            $referentPerson = $jws['referent_person'] ?? '';
+            break;
+        }
+    }
+}
+
+// Referent-Anzeige formatieren
+if ($referentPerson && $referentFirma) {
+    $referentDisplay = htmlspecialchars($referentFirma) . ' – ' . htmlspecialchars($referentPerson);
+} elseif ($referentFirma) {
+    $referentDisplay = 'N.N. (' . htmlspecialchars($referentFirma) . ')';
+} elseif ($referentPerson) {
+    $referentDisplay = htmlspecialchars($referentPerson);
+} else {
+    $referentDisplay = 'N.N.';
+}
+
 // ── Feedback-Zeitsperre ──────────────────────────────────
 // Feedback erst ab Workshop-Start freischalten
 $feedbackActive = false;
@@ -64,6 +94,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
     <link rel="apple-touch-icon" href="/img/icon-192.png">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/programm.css">
 </head>
 <body>
     <div class="hero">
@@ -76,21 +107,28 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 
     <main class="landing">
         <div class="workshop-card">
-            <span class="typ-badge"><?= $typ ?></span>
             <h1><?= $title ?></h1>
-            <?php if ($zeit || $ort): ?>
-                <div class="meta-row">
-                    <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
-                    <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
-                </div>
-            <?php endif; ?>
+            <div class="typ-kat-row">
+                <span class="typ-badge"><?= $typ ?></span>
+                <?php foreach ($kategorien as $kat): ?>
+                    <span class="kat-tag"><?= htmlspecialchars($kat) ?></span>
+                <?php endforeach; ?>
+            </div>
+            <div class="meta-row">
+                <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
+                <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
+                <span class="meta-item">🎤 <?= $referentDisplay ?></span>
+            </div>
+            <button class="fav-btn-landing" id="fav-btn" data-id="<?= htmlspecialchars($cleanId) ?>" title="Favorit">
+                🤍
+            </button>
         </div>
 
         <p class="action-hint">Was möchtest du tun?</p>
 
         <nav class="actions">
             <!-- Details: Workshop-Infos -->
-            <a href="/w/<?= $id ?>/details" class="action-card">
+            <a href="/w/<?= $id ?>/details" class="action-card action-link-back">
                 <span class="action-icon">📋</span>
                 <span class="action-label">Details anzeigen</span>
                 <span class="action-desc">Ausführliche Workshop-Infos</span>
@@ -129,22 +167,75 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                 <span class="action-label">Zum Kalender</span>
                 <span class="action-desc">Termin in deinen Kalender eintragen</span>
             </a>
+
+
         </nav>
 
-        <a href="/programm.html" class="programm-banner">
-            📋 Gesamtes Programm ansehen
+        <a href="/programm.html" class="programm-banner" id="programm-back-link">
+            📋 Zurück zum Programm
         </a>
     </main>
 
     <footer>
         <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
-        <p><a href="/impressum.html">Impressum & Datenschutz</a></p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
     </footer>
     <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js');
     }
+
+    // ── Back-Link mit Filter-State ──
+    (function() {
+        const params = new URLSearchParams(location.search);
+        const back = params.get('back');
+        if (back) {
+            // Programm-Banner zurück
+            const link = document.getElementById('programm-back-link');
+            if (link) link.href = back;
+            // Details-Link: ?back= weitergeben
+            document.querySelectorAll('.action-link-back').forEach(a => {
+                const sep = a.href.includes('?') ? '&' : '?';
+                a.href += sep + 'back=' + encodeURIComponent(back);
+            });
+        }
+    })();
+
+    // ── Favoriten-Logik ──
+    (function() {
+        const STORAGE_KEY = 'as26_favorites';
+        const btn = document.getElementById('fav-btn');
+        if (!btn) return;
+        const id = btn.dataset.id;
+
+        function getFavs() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+            catch { return []; }
+        }
+        function saveFavs(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+
+        function updateBtn() {
+            const isFav = getFavs().includes(id);
+            btn.textContent = isFav ? '❤️' : '🤍';
+            btn.classList.toggle('active', isFav);
+        }
+
+        btn.addEventListener('click', () => {
+            const favs = getFavs();
+            const idx = favs.indexOf(id);
+            if (idx > -1) favs.splice(idx, 1);
+            else favs.push(id);
+            saveFavs(favs);
+            updateBtn();
+        });
+
+        updateBtn();
+    })();
     </script>
 </body>
 </html>

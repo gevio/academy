@@ -34,6 +34,9 @@ class NotionClient
             'ort'   => $props['Bühne/Ort']['select']['name'] ?? '',
             'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
             'datum_start' => $props['Datum']['date']['start'] ?? null,
+            'kategorien'  => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
+            'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
+            'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
         ];
     }
 
@@ -196,6 +199,9 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
                     'ort'          => $props['Bühne/Ort']['select']['name'] ?? '',
                     'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
                     'datum_start'  => $props['Datum']['date']['start'] ?? null,
+                    'kategorien'   => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
+                    'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
+                    'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
                 ];
             }
 
@@ -232,6 +238,37 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
     }
 
     // ── HELPERS ──────────────────────────────────────────
+
+    /**
+     * Titel einer Notion-Page anhand ihrer ID lesen.
+     */
+    public function getPageTitle(string $pageId): string
+    {
+        $data = $this->request('GET', "/pages/{$pageId}");
+        if (!$data) return '';
+        foreach ($data['properties'] ?? [] as $prop) {
+            if (($prop['type'] ?? '') === 'title') {
+                return $this->extractTitle($prop);
+            }
+        }
+        return '';
+    }
+
+    /**
+     * Referent-Details aus einer verknüpften Person-Page lesen.
+     * Gibt ['vorname' => ..., 'nachname' => ..., 'firma_ids' => [...]] zurück.
+     */
+    public function getReferentPerson(string $pageId): array
+    {
+        $data = $this->request('GET', "/pages/{$pageId}");
+        if (!$data) return ['vorname' => '', 'nachname' => '', 'firma_ids' => []];
+        $props = $data['properties'] ?? [];
+        return [
+            'vorname'   => $this->extractRichText($props['Vorname'] ?? []),
+            'nachname'  => $this->extractRichText($props['Nachname'] ?? []),
+            'firma_ids' => array_column($props['Firma']['relation'] ?? [], 'id'),
+        ];
+    }
 
     private function extractTitle(array $prop): string
     {

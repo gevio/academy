@@ -186,6 +186,33 @@
         font-size: .75rem;
     }
 
+    /* ── Install Guide (manuelle Anleitung) ── */
+    .install-guide {
+        background: var(--card);
+        border-bottom: 2px solid var(--as-rot);
+        padding: .85rem 1.25rem;
+        box-shadow: var(--shadow-md);
+    }
+    .install-guide-inner {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .install-guide-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: .9rem;
+        color: var(--as-braun-dark);
+        margin-bottom: .5rem;
+    }
+    .install-guide p {
+        font-size: .85rem;
+        line-height: 1.5;
+        color: var(--text);
+        margin: 0;
+    }
+
     @media (min-width: 420px) {
         .home-logos img { height: 100px; }
         .home-logos { gap: 3rem; }
@@ -204,9 +231,20 @@
     <!-- Install Banner (erscheint wenn A2HS verfügbar) -->
     <button class="install-banner" id="install-banner">
         <span class="install-icon">📲</span>
-        App installieren – für schnellen Zugriff
+        <span id="install-text">App installieren – für schnellen Zugriff</span>
         <span class="install-dismiss" id="install-dismiss" title="Schließen">✕</span>
     </button>
+
+    <!-- Manuelle Install-Anleitung (für Samsung Internet, Firefox, etc.) -->
+    <div class="install-guide" id="install-guide" style="display:none">
+        <div class="install-guide-inner">
+            <div class="install-guide-header">
+                <span>📲 App zum Startbildschirm hinzufügen</span>
+                <button class="install-dismiss" id="guide-dismiss" title="Schließen">✕</button>
+            </div>
+            <p id="guide-text"></p>
+        </div>
+    </div>
 
     <div class="home-hero">
         <div class="home-logos">
@@ -223,7 +261,7 @@
             <span class="cta-icon">📋</span>
             Programm ansehen
         </a>
-        <a href="/programm.html#favoriten" class="cta-btn cta-secondary" id="fav-btn" style="display:none">
+        <a href="/programm.html?tab=favoriten" class="cta-btn cta-secondary" id="fav-btn" style="display:none">
             <span class="cta-icon">❤️</span>
             <span id="fav-label">Meine Favoriten</span>
         </a>
@@ -231,20 +269,58 @@
 
     <div class="home-footer">
         <p>Selbstausbauer Academy @ Adventure Southside 2026</p>
-        <p><a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum & Datenschutz</a></p>
+        <p>
+            <a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum & Datenschutz</a>
+            <span style="color:var(--text-light);font-size:.75rem">&nbsp;·&nbsp;</span>
+            <a href="/faq.html" style="color:var(--text-light);font-size:.75rem">FAQ & Hilfe</a>
+        </p>
     </div>
 
     <script>
     // ── A2HS Install Prompt ──────────────────────────────
-    let deferredPrompt = null;
     const installBanner = document.getElementById('install-banner');
     const installDismiss = document.getElementById('install-dismiss');
+    const installGuide = document.getElementById('install-guide');
+    const guideDismiss = document.getElementById('guide-dismiss');
+    const guideText = document.getElementById('guide-text');
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                      || window.navigator.standalone === true;
+    const dismissed = localStorage.getItem('a2hs_dismissed');
+    let deferredPrompt = null;
 
+    // ── Browser erkennen ──
+    function detectBrowser() {
+        const ua = navigator.userAgent;
+        const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (/SamsungBrowser/i.test(ua)) return 'samsung';
+        if (/Firefox/i.test(ua) && /Android/i.test(ua)) return 'firefox-android';
+        if (/Firefox/i.test(ua) && !(/Android/i.test(ua))) return 'firefox-desktop';
+        if (/CriOS/i.test(ua) && isIOS) return 'chrome-ios';
+        if (isIOS && /Safari/i.test(ua) && !/Chrome/i.test(ua)) return 'safari-ios';
+        if (/Chrome/i.test(ua) && /Android/i.test(ua)) return 'chrome-android';
+        return 'other';
+    }
+
+    // ── Anleitungstexte pro Browser ──
+    const guideTexts = {
+        'samsung': 'Tippe auf das <strong>☰ Menü</strong> (unten rechts) → <strong>„Seite zum Startbildschirm hinzufügen"</strong>',
+        'firefox-android': 'Tippe auf das <strong>⋮ Menü</strong> (oben rechts) → <strong>„Installieren"</strong> oder <strong>„Zum Startbildschirm hinzufügen"</strong>',
+        'firefox-desktop': 'Firefox unterstützt leider keine PWA-Installation. Öffne die Seite in <strong>Chrome</strong> oder <strong>Edge</strong> für die App-Installation.',
+        'safari-ios': 'Tippe unten auf <strong>Teilen</strong> (□↑) → scrolle nach unten → <strong>„Zum Home-Bildschirm"</strong>',
+        'chrome-ios': 'Tippe auf <strong>⋯ Menü</strong> (unten rechts) → <strong>„Zum Home-Bildschirm"</strong>',
+    };
+
+    // Wenn bereits als PWA installiert → nichts zeigen
+    if (isStandalone) {
+        installBanner.style.display = 'none';
+        installGuide.style.display = 'none';
+    }
+
+    // ── 1) Chrome/Edge/Brave: beforeinstallprompt abfangen ──
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        // Nur zeigen wenn nicht schon dismissed
-        if (!sessionStorage.getItem('a2hs_dismissed')) {
+        if (!isStandalone && !dismissed) {
             installBanner.classList.add('show');
         }
     });
@@ -252,7 +328,7 @@
     installBanner.addEventListener('click', async (e) => {
         if (e.target === installDismiss || e.target.closest('.install-dismiss')) {
             installBanner.classList.remove('show');
-            sessionStorage.setItem('a2hs_dismissed', '1');
+            localStorage.setItem('a2hs_dismissed', '1');
             return;
         }
         if (!deferredPrompt) return;
@@ -262,15 +338,31 @@
         installBanner.classList.remove('show');
     });
 
-    // Wenn bereits installiert, Banner verstecken
     window.addEventListener('appinstalled', () => {
         installBanner.classList.remove('show');
+        installGuide.style.display = 'none';
         deferredPrompt = null;
     });
 
-    // Bereits als PWA geöffnet? → Kein Banner
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-        // App ist installiert – Banner nicht zeigen
+    // ── 2) Fallback: Manuelle Anleitung für andere Browser ──
+    // Warte kurz – falls beforeinstallprompt doch noch feuert
+    setTimeout(() => {
+        if (deferredPrompt || isStandalone || dismissed) return;
+
+        const browser = detectBrowser();
+        const text = guideTexts[browser];
+        if (text) {
+            guideText.innerHTML = text;
+            installGuide.style.display = 'block';
+        }
+    }, 2000);
+
+    // Guide dismiss
+    if (guideDismiss) {
+        guideDismiss.addEventListener('click', () => {
+            installGuide.style.display = 'none';
+            localStorage.setItem('a2hs_dismissed', '1');
+        });
     }
 
     // ── Favoriten-Button zeigen wenn welche vorhanden ──

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="robots" content="noindex">
+    <title>FAQ & Hilfe – AS26 Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    .faq-page { max-width: 600px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+    .faq-page h1 { font-size: 1.5rem; margin-bottom: .5rem; }
+    .faq-page .faq-intro { color: var(--text-light); font-size: .9rem; margin-bottom: 1.5rem; line-height: 1.5; }
+    .faq-page .faq-item { border-bottom: 1px solid var(--border); padding: .75rem 0; }
+    .faq-page .faq-item:last-child { border-bottom: none; }
+    .faq-page .faq-item summary {
+        font-weight: 700; font-size: .95rem; color: var(--as-braun-dark); cursor: pointer;
+        list-style: none; display: flex; align-items: center; gap: .5rem;
+        padding: .35rem 0; transition: color .15s; }
+    .faq-page .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-page .faq-item summary::before {
+        content: '▸'; color: var(--as-rot); font-size: .9rem;
+        transition: transform .2s; flex-shrink: 0; }
+    .faq-page .faq-item[open] summary::before { transform: rotate(90deg); }
+    .faq-page .faq-item summary:hover { color: var(--as-rot); }
+    .faq-page .faq-item p {
+        font-size: .9rem; color: var(--text-light); line-height: 1.6;
+        padding: .5rem 0 .25rem 1.2rem; }
+    .faq-page a { color: var(--as-rot); text-decoration: none; font-weight: 700; }
+    .faq-page a:hover { text-decoration: underline; }
+    .faq-page .faq-category { font-size: .85rem; margin: 2rem 0 .75rem; color: var(--as-dunkelrot);
+        font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+        border-bottom: 2px solid var(--as-hellbeige); padding-bottom: .4rem; }
+    .faq-page .contact-box {
+        background: var(--card); border: 2px solid var(--border); border-radius: var(--radius);
+        padding: 1.25rem; margin-top: 2rem; text-align: center; }
+    .faq-page .contact-box p { color: var(--text-light); font-size: .9rem; line-height: 1.5; padding: 0; }
+    .faq-page .contact-box .contact-email {
+        display: inline-block; margin-top: .75rem; padding: .6rem 1.2rem; border-radius: var(--radius);
+        background: var(--as-rot); color: #fff; font-weight: 700; font-size: .95rem;
+        text-decoration: none; transition: background .15s; }
+    .faq-page .contact-box .contact-email:hover { background: var(--as-dunkelrot); color: #fff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back">← Zurück</a>
+        <div class="badge">Hilfe</div>
+    </header>
+    <a href="/" class="logo-bar">
+        <img src="/img/logo-southside.png" alt="Adventure Southside">
+        <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
+    </a>
+
+    <main class="faq-page">
+        <h1>❓ FAQ & Hilfe</h1>
+        <p class="faq-intro">Häufige Fragen zur AS26 Live Web-App – tippe auf eine Frage, um die Antwort zu sehen.</p>
+
+        <!-- ═══ WORKSHOPS & PROGRAMM ═══ -->
+        <h2 class="faq-category">Workshops & Programm</h2>
+
+        <details class="faq-item">
+            <summary>Wie finde ich einen bestimmten Workshop?</summary>
+            <p>Im <a href="/programm.html">Programm</a> kannst du nach Tag, Format und Kategorie filtern. Der Zähler unten zeigt dir, wie viele Workshops auf deinen Filter passen.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Was bedeuten die verschiedenen Formate?</summary>
+            <p>Es gibt Workshops, Expertenpanels, Vorträge und mehr. Das Format wird als farbiges Badge auf jeder Karte angezeigt.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Kann ich Workshops als Favoriten speichern?</summary>
+            <p>Ja! Tippe auf das Herz 🤍 neben dem Workshop-Titel. Im Programm kannst du dann nach „Nur Favoriten" filtern. Favoriten werden lokal auf deinem Gerät gespeichert.</p>
+        </details>
+
+        <!-- ═══ FEEDBACK & Q&A ═══ -->
+        <h2 class="faq-category">Feedback & Fragen</h2>
+
+        <details class="faq-item">
+            <summary>Warum ist Feedback manchmal gesperrt?</summary>
+            <p>Feedback ist erst ab Workshop-Start möglich – so stellen wir sicher, dass nur echte Teilnehmer bewerten.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Wie kann ich Feedback geben?</summary>
+            <p>Scanne den QR-Code am Workshop-Platz und tippe auf „Feedback geben". Vergib Sterne und hinterlasse optional einen Kommentar.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Wie funktioniert das Upvoting bei Fragen?</summary>
+            <p>Tippe auf den Pfeil neben einer Frage, um sie hochzuvoten. Du kannst pro Gerät nur einmal pro Frage voten. Die beliebtesten Fragen werden den Referenten zuerst angezeigt.</p>
+        </details>
+
+        <!-- ═══ TECHNIK ═══ -->
+        <h2 class="faq-category">Technik & App</h2>
+
+        <details class="faq-item">
+            <summary>Probleme beim Scannen des QR-Codes?</summary>
+            <p>Versuche den QR-Code erneut zu scannen oder öffne den Link direkt im Browser. Stelle sicher, dass die Kamera-Berechtigung aktiviert ist.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Was passiert, wenn ich den Cache oder die PWA lösche?</summary>
+            <p>Favoriten und Upvotes werden ausschließlich lokal auf deinem Gerät gespeichert. Wenn du den Browser-Cache oder die installierte App löschst, gehen diese Daten verloren – es gibt keine serverseitige Persistenz.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Kann ich die App auf meinem Homescreen installieren?</summary>
+            <p>Ja! Auf der Startseite erscheint ein Installationshinweis. Alternativ: Im Browser-Menü „Zum Startbildschirm hinzufügen" wählen. Die App funktioniert dann auch offline für grundlegende Funktionen.</p>
+        </details>
+
+        <details class="faq-item">
+            <summary>Werden meine Daten gespeichert?</summary>
+            <p>Die App speichert nur Favoriten und Upvotes lokal auf deinem Gerät. Fragen und Feedback werden anonym an unseren Server übermittelt. Details findest du im <a href="/impressum.html">Datenschutzhinweis</a>.</p>
+        </details>
+
+        <!-- ═══ KONTAKT ═══ -->
+        <div class="contact-box">
+            <p>Deine Frage war nicht dabei?<br>Wir helfen dir gerne weiter!</p>
+            <a href="mailto:peter@adventuresouthside.de" class="contact-email">✉️ peter@adventuresouthside.de</a>
+        </div>
+    </main>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
+        <p>Adventure Southside 2026</p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
+    </footer>
+</body>
+</html>

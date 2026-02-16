@@ -37,6 +37,46 @@ if (empty($workshops)) {
     die("❌ Keine Workshops in der DB. Abbruch.\n");
 }
 
+// ── 1b) Referent-Relationen auflösen ─────────────────────
+echo "👥 Referent-Relationen auflösen...\n";
+$personCache = []; // pageId → ['vorname' => ..., 'nachname' => ..., 'firma_ids' => [...]]
+$firmaCache  = []; // pageId → title (Firmenname)
+
+// Alle unique Person-IDs sammeln
+$allPersonIds = [];
+foreach ($workshops as $ws) {
+    foreach (($ws['referent_person_ids'] ?? []) as $id) $allPersonIds[$id] = true;
+}
+
+// Personen auflösen (Vorname, Nachname, Firma-Relation)
+$personCount = count($allPersonIds);
+echo "   {$personCount} Personen aufzulösen...\n";
+$firmaIdsToResolve = [];
+foreach (array_keys($allPersonIds) as $personId) {
+    usleep(350000);
+    $personData = $notion->getReferentPerson($personId);
+    $personCache[$personId] = $personData;
+    foreach ($personData['firma_ids'] as $fId) {
+        $firmaIdsToResolve[$fId] = true;
+    }
+    $name = trim(($personData['vorname'] ?? '') . ' ' . ($personData['nachname'] ?? ''));
+    echo "   ✓ {$name}\n";
+}
+
+// Firmen aus Workshop-DB + Firmen aus Person-Relationen auflösen
+foreach ($workshops as $ws) {
+    foreach (($ws['referent_firma_ids'] ?? []) as $id) $firmaIdsToResolve[$id] = true;
+}
+
+$firmaCount = count($firmaIdsToResolve);
+echo "   {$firmaCount} Firmen aufzulösen...\n";
+foreach (array_keys($firmaIdsToResolve) as $firmaId) {
+    usleep(350000);
+    $firmaCache[$firmaId] = $notion->getPageTitle($firmaId);
+    echo "   ✓ {$firmaCache[$firmaId]}\n";
+}
+echo "   Referenten fertig.\n\n";
+
 // ── 2) Page-Content (Blocks) für jeden Workshop laden ────
 echo "📄 Page-Content laden & rendern...\n";
 $result = [];
@@ -46,6 +86,32 @@ $noContent = 0;
 foreach ($workshops as $ws) {
     $pageId = $ws['page_id'];
     $cleanId = $ws['id'];
+
+    // Referent-Personen: "Vorname Nachname" oder "N.N."
+    $personNames = [];
+    foreach (($ws['referent_person_ids'] ?? []) as $pId) {
+        $p = $personCache[$pId] ?? [];
+        $name = trim(($p['vorname'] ?? '') . ' ' . ($p['nachname'] ?? ''));
+        $personNames[] = $name ?: 'N.N.';
+    }
+
+    // Firmen: direkt aus Workshop-Relation ODER aus Person→Firma
+    $firmaNames = [];
+    // Zuerst direkte Firma-Relation am Workshop
+    foreach (($ws['referent_firma_ids'] ?? []) as $fId) {
+        $firmaNames[] = $firmaCache[$fId] ?? '';
+    }
+    // Falls keine direkte Firma: aus den Person-Relationen ziehen
+    if (empty(array_filter($firmaNames))) {
+        foreach (($ws['referent_person_ids'] ?? []) as $pId) {
+            foreach (($personCache[$pId]['firma_ids'] ?? []) as $fId) {
+                $firmaNames[] = $firmaCache[$fId] ?? '';
+            }
+        }
+    }
+
+    $ws['referent_firma']  = implode(', ', array_unique(array_filter($firmaNames)));
+    $ws['referent_person'] = implode(', ', array_filter($personNames));
 
     echo "   {$cleanId} ";
 
@@ -75,6 +141,9 @@ foreach ($workshops as $ws) {
         'ort'          => $ws['ort'],
         'beschreibung' => $ws['beschreibung'],
         'datum_start'  => $ws['datum_start'],
+        'kategorien'   => $ws['kategorien'] ?? [],
+        'referent_firma'  => $ws['referent_firma'] ?? '',
+        'referent_person' => $ws['referent_person'] ?? '',
         'content_html' => $contentHtml,
         'has_content'  => $hasContent,
     ];
