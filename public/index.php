@@ -30,6 +30,7 @@ $ort   = htmlspecialchars($workshop['ort']);
 $kategorien = [];
 $referentFirma = '';
 $referentPerson = '';
+$aussteller = [];
 $cleanId = str_replace('-', '', $id);
 
 $jsonFile = __DIR__ . '/api/workshops.json';
@@ -40,20 +41,32 @@ if (file_exists($jsonFile)) {
             $kategorien = $jws['kategorien'] ?? [];
             $referentFirma = $jws['referent_firma'] ?? '';
             $referentPerson = $jws['referent_person'] ?? '';
+            $aussteller = $jws['aussteller'] ?? [];
             break;
         }
     }
 }
 
 // Referent-Anzeige formatieren
-if ($referentPerson && $referentFirma) {
-    $referentDisplay = htmlspecialchars($referentFirma) . ' – ' . htmlspecialchars($referentPerson);
+$referentPersonHtml = '';
+if ($referentPerson) {
+    $referentPersonHtml = '🎤 ' . htmlspecialchars($referentPerson);
+}
+
+// Firma: Aussteller-Links haben Vorrang, dann referent_firma als Fallback-Text
+$firmaHtml = '';
+if (!empty($aussteller)) {
+    $links = [];
+    foreach ($aussteller as $a) {
+        $firma = htmlspecialchars($a['firma'] ?? '');
+        $stand = $a['stand'] ?? '';
+        $standInfo = $stand ? ' · Stand ' . htmlspecialchars($stand) : '';
+        $ausId = htmlspecialchars($a['id'] ?? '');
+        $links[] = '<a href="/aussteller.html#id=' . $ausId . '" style="color:var(--as-rot);text-decoration:none;font-weight:600">' . $firma . $standInfo . ' 📍</a>';
+    }
+    $firmaHtml = implode(', ', $links);
 } elseif ($referentFirma) {
-    $referentDisplay = 'N.N. (' . htmlspecialchars($referentFirma) . ')';
-} elseif ($referentPerson) {
-    $referentDisplay = htmlspecialchars($referentPerson);
-} else {
-    $referentDisplay = 'N.N.';
+    $firmaHtml = htmlspecialchars($referentFirma);
 }
 
 // ── Feedback-Zeitsperre ──────────────────────────────────
@@ -117,8 +130,11 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
             <div class="meta-row">
                 <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
                 <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
-                <span class="meta-item">🎤 <?= $referentDisplay ?></span>
+                <?php if ($referentPersonHtml): ?><span class="meta-item"><?= $referentPersonHtml ?></span><?php endif; ?>
             </div>
+            <?php if ($firmaHtml): ?>
+                <div style="margin-top:.4rem;font-size:.85rem;color:var(--text-light)"><?= $firmaHtml ?></div>
+            <?php endif; ?>
             <button class="fav-btn-landing" id="fav-btn" data-id="<?= htmlspecialchars($cleanId) ?>" title="Favorit">
                 🤍
             </button>
