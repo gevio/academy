@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Aussteller – AS26 Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/aussteller.css">
+</head>
+<body>
+    <div class="hero">
+        <a href="/" class="hero-top">
+            <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
+            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
+        </a>
+        <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+    </div>
+
+    <main>
+        <!-- ── Suche ── -->
+        <div class="search-bar">
+            <input type="search" class="search-input" id="search-input" placeholder="Aussteller suchen…" autocomplete="off">
+        </div>
+
+        <!-- ── Schlagwort-Filter ── -->
+        <div class="tag-filters" id="tag-filters">
+            <button class="tag-btn active" data-tag="all">Alle</button>
+        </div>
+
+        <!-- ── Ergebnis-Zähler ── -->
+        <div class="aussteller-count" id="aussteller-count"></div>
+
+        <!-- ── Aussteller-Liste ── -->
+        <div id="aussteller-list" class="aussteller-list">
+            <div class="loading">Aussteller werden geladen…</div>
+        </div>
+    </main>
+
+    <!-- ── Karten-Overlay (fullscreen) ── -->
+    <div class="map-overlay" id="map-overlay">
+        <div class="map-header">
+            <button class="map-back" id="map-back" title="Zurück">&larr;</button>
+            <div class="map-header-info">
+                <div class="map-header-firma" id="map-firma"></div>
+                <div class="map-header-stand" id="map-stand"></div>
+            </div>
+        </div>
+        <div class="map-body">
+            <div class="zoom-hint">Zum Vergrößern mit zwei Fingern zoomen</div>
+            <div class="map-image-wrap" id="map-image-wrap"></div>
+        </div>
+        <div class="map-footer">
+            <div class="map-footer-desc" id="map-desc"></div>
+            <div class="map-footer-tags" id="map-tags"></div>
+            <a class="map-footer-link" id="map-link" href="#" target="_blank" rel="noopener">🌐</a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
+        <p>Adventure Southside 2026</p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
+    </footer>
+
+    <script src="/js/aussteller.js"></script>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+    }
+    </script>
+</body>
+</html>

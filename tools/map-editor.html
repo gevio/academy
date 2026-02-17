@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS26 Standplan Mapping-Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #1a1a2e; color: #e0e0e0; }
+
+        .toolbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: #16213e; padding: 10px 20px;
+            display: flex; align-items: center; gap: 15px; flex-wrap: wrap;
+            border-bottom: 2px solid #e94560;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .toolbar label { font-size: 13px; color: #aaa; }
+        .toolbar select, .toolbar input, .toolbar button {
+            padding: 6px 12px; border-radius: 4px; border: 1px solid #333;
+            background: #0f3460; color: #e0e0e0; font-size: 14px;
+        }
+        .toolbar button {
+            cursor: pointer; font-weight: 600;
+            transition: background 0.2s;
+        }
+        .toolbar button:hover { background: #e94560; }
+        .toolbar button.primary { background: #e94560; }
+        .toolbar button.primary:hover { background: #c73e54; }
+        .toolbar button.danger { background: #a83232; }
+        .toolbar button.danger:hover { background: #8a2828; }
+
+        .toolbar .separator {
+            width: 1px; height: 30px; background: #333; margin: 0 5px;
+        }
+
+        .stats {
+            margin-left: auto; font-size: 13px; color: #aaa;
+        }
+
+        .workspace {
+            margin-top: 70px; padding: 20px;
+            display: flex; gap: 20px;
+        }
+
+        .map-container {
+            flex: 1; position: relative; overflow: hidden;
+            background: #111; border-radius: 8px;
+            border: 2px solid #333;
+        }
+        .map-container img {
+            display: block; width: 100%; height: auto;
+            user-select: none; -webkit-user-drag: none;
+        }
+
+        .marker {
+            position: absolute; transform: translate(-50%, -50%);
+            cursor: pointer; z-index: 10;
+            transition: opacity 0.2s;
+        }
+        .marker .dot {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #e94560; border: 2px solid #fff;
+            box-shadow: 0 0 6px rgba(233,69,96,0.8);
+        }
+        .marker .label {
+            position: absolute; left: 50%; top: -22px;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85); color: #fff;
+            padding: 2px 6px; border-radius: 3px;
+            font-size: 11px; white-space: nowrap;
+            pointer-events: none;
+        }
+        .marker:hover .dot {
+            background: #ff6b81; box-shadow: 0 0 12px rgba(233,69,96,1);
+        }
+        .marker.selected .dot {
+            background: #ffd93d; border-color: #ffd93d;
+            box-shadow: 0 0 12px rgba(255,217,61,0.8);
+        }
+        .marker.rect-mode {
+            transform: none;
+            border: 2px solid #e94560;
+            background: rgba(233,69,96,0.2);
+            border-radius: 2px;
+        }
+        .marker.rect-mode .dot { display: none; }
+        .marker.rect-mode .label { top: -20px; left: 0; transform: none; }
+
+        .crosshair {
+            position: absolute; pointer-events: none; z-index: 5;
+            display: none;
+        }
+        .crosshair .h-line, .crosshair .v-line {
+            position: absolute; background: rgba(233,69,96,0.4);
+        }
+        .crosshair .h-line { left: 0; right: 0; height: 1px; }
+        .crosshair .v-line { top: 0; bottom: 0; width: 1px; }
+
+        .coords-display {
+            position: fixed; bottom: 20px; left: 20px; z-index: 100;
+            background: rgba(0,0,0,0.85); padding: 8px 14px;
+            border-radius: 6px; font-family: monospace; font-size: 14px;
+        }
+
+        .sidebar {
+            width: 350px; background: #16213e; border-radius: 8px;
+            padding: 15px; max-height: calc(100vh - 90px);
+            overflow-y: auto; border: 1px solid #333;
+        }
+        .sidebar h3 { margin-bottom: 10px; color: #e94560; font-size: 15px; }
+
+        .stand-list { list-style: none; }
+        .stand-list li {
+            padding: 8px 10px; margin-bottom: 4px;
+            background: #0f3460; border-radius: 4px;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-size: 13px;
+            transition: background 0.15s;
+        }
+        .stand-list li:hover { background: #1a4a7a; }
+        .stand-list li.selected { background: #e94560; }
+        .stand-list li .stand-coords {
+            font-family: monospace; font-size: 11px; color: #aaa;
+        }
+        .stand-list li .btn-delete {
+            background: none; border: none; color: #e94560;
+            cursor: pointer; font-size: 16px; padding: 0 4px;
+        }
+        .stand-list li.selected .btn-delete { color: #fff; }
+        .stand-list li.selected .stand-coords { color: #ffd93d; }
+
+        /* Rect drawing preview */
+        .rect-preview {
+            position: absolute; border: 2px dashed #ffd93d;
+            background: rgba(255,217,61,0.15); pointer-events: none;
+            z-index: 15;
+        }
+
+        .mode-indicator {
+            padding: 4px 10px; border-radius: 4px; font-size: 12px;
+            font-weight: 600;
+        }
+        .mode-indicator.point { background: #e94560; }
+        .mode-indicator.rect { background: #ffd93d; color: #000; }
+
+        /* Import area */
+        .import-area {
+            margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;
+        }
+        .import-area textarea {
+            width: 100%; height: 80px; background: #0a0a1a; color: #e0e0e0;
+            border: 1px solid #333; border-radius: 4px; padding: 8px;
+            font-family: monospace; font-size: 12px; resize: vertical;
+        }
+
+        /* Help text */
+        .help {
+            position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            background: rgba(0,0,0,0.85); padding: 10px 14px;
+            border-radius: 6px; font-size: 12px; color: #aaa;
+            max-width: 300px; line-height: 1.5;
+        }
+        .help kbd {
+            background: #333; padding: 1px 5px; border-radius: 3px;
+            font-size: 11px;
+        }
+
+        /* File drop zone */
+        .drop-zone {
+            display: flex; align-items: center; justify-content: center;
+            height: 400px; border: 3px dashed #333;
+            border-radius: 8px; color: #555; font-size: 18px;
+            text-align: center; padding: 40px;
+        }
+        .drop-zone.dragover { border-color: #e94560; color: #e94560; }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <label>Halle:</label>
+    <select id="halleSelect">
+        <option value="">-- Bild laden --</option>
+    </select>
+
+    <button onclick="addHalle()" title="Neuen Hallenplan hinzufuegen">+ Halle</button>
+
+    <div class="separator"></div>
+
+    <label>Modus:</label>
+    <span class="mode-indicator point" id="modeIndicator">Punkt</span>
+    <button onclick="toggleMode()">Wechseln (<kbd>M</kbd>)</button>
+
+    <div class="separator"></div>
+
+    <button class="primary" onclick="exportJSON()">Export JSON</button>
+    <button onclick="copyJSON()">Copy JSON</button>
+    <button class="danger" onclick="clearAll()">Alle loeschen</button>
+
+    <div class="stats" id="stats">0 Staende</div>
+</div>
+
+<div class="workspace">
+    <div class="map-container" id="mapContainer">
+        <div class="drop-zone" id="dropZone">
+            Hallenplan-Bild hier ablegen<br>oder oben "Halle" hinzufuegen
+        </div>
+        <img id="mapImage" style="display:none" alt="Hallenplan">
+        <div class="crosshair" id="crosshair">
+            <div class="h-line"></div>
+            <div class="v-line"></div>
+        </div>
+        <div class="rect-preview" id="rectPreview" style="display:none"></div>
+    </div>
+
+    <div class="sidebar">
+        <h3 id="sidebarTitle">Staende (0)</h3>
+        <ul class="stand-list" id="standList"></ul>
+
+        <div class="import-area">
+            <label style="font-size:13px;color:#aaa">Import (standplan.json einfuegen):</label>
+            <textarea id="importArea" placeholder='{"hallen":{...},"staende":{...}}'></textarea>
+            <button onclick="importJSON()" style="margin-top:5px;width:100%">Importieren</button>
+        </div>
+    </div>
+</div>
+
+<div class="coords-display" id="coordsDisplay">X: --.-- % | Y: --.-- %</div>
+
+<div class="help">
+    <strong>Bedienung:</strong><br>
+    <kbd>Klick</kbd> Punkt/Rechteck setzen<br>
+    <kbd>M</kbd> Modus wechseln (Punkt/Rechteck)<br>
+    <kbd>Del</kbd> Ausgew&auml;hlten Stand l&ouml;schen<br>
+    <kbd>Esc</kbd> Auswahl aufheben<br>
+    Rechteck-Modus: Klick+Drag
+</div>
+
+<script>
+// ===== STATE =====
+const state = {
+    hallen: {},        // { prefix: { bild: "data:...", label: "Name" } }
+    staende: {},       // { "H1-A01": { x, y, w?, h? } }
+    currentHalle: '',  // active prefix
+    selectedStand: null,
+    mode: 'point',     // 'point' or 'rect'
+    rectStart: null,   // { x, y } during rect drawing
+    fileMap: {}        // prefix -> original filename
+};
+
+// ===== DOM =====
+const mapContainer = document.getElementById('mapContainer');
+const mapImage = document.getElementById('mapImage');
+const dropZone = document.getElementById('dropZone');
+const crosshair = document.getElementById('crosshair');
+const rectPreview = document.getElementById('rectPreview');
+const coordsDisplay = document.getElementById('coordsDisplay');
+const standList = document.getElementById('standList');
+const halleSelect = document.getElementById('halleSelect');
+const modeIndicator = document.getElementById('modeIndicator');
+const statsEl = document.getElementById('stats');
+const sidebarTitle = document.getElementById('sidebarTitle');
+
+// ===== HALLE MANAGEMENT =====
+function addHalle() {
+    const prefix = prompt('Hallen-Prefix (z.B. FG, H1, H2):');
+    if (!prefix) return;
+    const label = prompt('Anzeigename (z.B. Freigelaende, Halle 1):');
+    if (!label) return;
+
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            state.hallen[prefix] = { bild: `/img/plan/${file.name}`, label, dataUrl: ev.target.result };
+            state.fileMap[prefix] = file.name;
+            updateHalleSelect();
+            halleSelect.value = prefix;
+            switchHalle(prefix);
+        };
+        reader.readAsDataURL(file);
+    };
+    input.click();
+}
+
+function updateHalleSelect() {
+    halleSelect.innerHTML = '<option value="">-- Bild laden --</option>';
+    for (const [prefix, info] of Object.entries(state.hallen)) {
+        const opt = document.createElement('option');
+        opt.value = prefix;
+        opt.textContent = `${prefix} - ${info.label}`;
+        halleSelect.appendChild(opt);
+    }
+}
+
+function switchHalle(prefix) {
+    state.currentHalle = prefix;
+    state.selectedStand = null;
+    const info = state.hallen[prefix];
+    if (info) {
+        mapImage.src = info.dataUrl;
+        mapImage.style.display = 'block';
+        dropZone.style.display = 'none';
+    } else {
+        mapImage.style.display = 'none';
+        dropZone.style.display = 'flex';
+    }
+    renderMarkers();
+    renderStandList();
+}
+
+halleSelect.addEventListener('change', (e) => switchHalle(e.target.value));
+
+// ===== DRAG & DROP =====
+dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
+
+    if (!state.currentHalle) {
+        const prefix = prompt('Hallen-Prefix (z.B. FG, H1, H2):');
+        if (!prefix) return;
+        const label = prompt('Anzeigename (z.B. Freigelaende, Halle 1):');
+        if (!label) return;
+        state.hallen[prefix] = { bild: `/img/plan/${file.name}`, label };
+        state.fileMap[prefix] = file.name;
+        state.currentHalle = prefix;
+        updateHalleSelect();
+        halleSelect.value = prefix;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        state.hallen[state.currentHalle].dataUrl = ev.target.result;
+        switchHalle(state.currentHalle);
+    };
+    reader.readAsDataURL(file);
+});
+
+// ===== COORDINATE CALCULATION =====
+function getPercent(e) {
+    const rect = mapImage.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    return { x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10 };
+}
+
+// ===== MOUSE EVENTS =====
+mapContainer.addEventListener('mousemove', (e) => {
+    if (!mapImage.src || mapImage.style.display === 'none') return;
+    const pos = getPercent(e);
+    coordsDisplay.textContent = `X: ${pos.x.toFixed(1)} % | Y: ${pos.y.toFixed(1)} %`;
+
+    // Crosshair
+    const rect = mapImage.getBoundingClientRect();
+    const containerRect = mapContainer.getBoundingClientRect();
+    crosshair.style.display = 'block';
+    crosshair.querySelector('.h-line').style.top = (e.clientY - containerRect.top) + 'px';
+    crosshair.querySelector('.v-line').style.left = (e.clientX - containerRect.left) + 'px';
+
+    // Rect preview during drag
+    if (state.mode === 'rect' && state.rectStart) {
+        const sx = state.rectStart.x;
+        const sy = state.rectStart.y;
+        const left = Math.min(sx, pos.x);
+        const top = Math.min(sy, pos.y);
+        const width = Math.abs(pos.x - sx);
+        const height = Math.abs(pos.y - sy);
+        rectPreview.style.display = 'block';
+        rectPreview.style.left = left + '%';
+        rectPreview.style.top = top + '%';
+        rectPreview.style.width = width + '%';
+        rectPreview.style.height = height + '%';
+    }
+});
+
+mapContainer.addEventListener('mouseleave', () => {
+    crosshair.style.display = 'none';
+});
+
+mapContainer.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.marker')) return;
+    if (!mapImage.src || mapImage.style.display === 'none') return;
+    if (!state.currentHalle) return;
+
+    const pos = getPercent(e);
+
+    if (state.mode === 'rect') {
+        state.rectStart = pos;
+        e.preventDefault();
+    }
+});
+
+mapContainer.addEventListener('mouseup', (e) => {
+    if (e.target.closest('.marker')) return;
+    if (!mapImage.src || mapImage.style.display === 'none') return;
+    if (!state.currentHalle) return;
+
+    const pos = getPercent(e);
+
+    if (state.mode === 'point') {
+        addStandPoint(pos);
+    } else if (state.mode === 'rect' && state.rectStart) {
+        const sx = state.rectStart.x;
+        const sy = state.rectStart.y;
+        const w = Math.abs(pos.x - sx);
+        const h = Math.abs(pos.y - sy);
+
+        if (w < 0.5 && h < 0.5) {
+            // Too small, treat as point click
+            addStandPoint(pos);
+        } else {
+            const cx = Math.round(((Math.min(sx, pos.x) + w / 2) * 10)) / 10;
+            const cy = Math.round(((Math.min(sy, pos.y) + h / 2) * 10)) / 10;
+            addStandRect(cx, cy, Math.round(w * 10) / 10, Math.round(h * 10) / 10);
+        }
+        state.rectStart = null;
+        rectPreview.style.display = 'none';
+    }
+});
+
+// ===== ADD STAND =====
+function addStandPoint(pos) {
+    const nr = prompt(`Standnummer (ohne Prefix "${state.currentHalle}-"):`);
+    if (!nr) return;
+    const key = `${state.currentHalle}-${nr.trim()}`;
+    state.staende[key] = { x: pos.x, y: pos.y };
+    state.selectedStand = key;
+    renderMarkers();
+    renderStandList();
+    updateStats();
+}
+
+function addStandRect(cx, cy, w, h) {
+    const nr = prompt(`Standnummer (ohne Prefix "${state.currentHalle}-"):`);
+    if (!nr) return;
+    const key = `${state.currentHalle}-${nr.trim()}`;
+    state.staende[key] = { x: cx, y: cy, w, h };
+    state.selectedStand = key;
+    renderMarkers();
+    renderStandList();
+    updateStats();
+}
+
+// ===== RENDER =====
+function renderMarkers() {
+    mapContainer.querySelectorAll('.marker').forEach(m => m.remove());
+    const prefix = state.currentHalle;
+    if (!prefix) return;
+
+    for (const [key, data] of Object.entries(state.staende)) {
+        if (!key.startsWith(prefix + '-')) continue;
+
+        const marker = document.createElement('div');
+        marker.className = 'marker' + (key === state.selectedStand ? ' selected' : '');
+
+        if (data.w && data.h) {
+            marker.classList.add('rect-mode');
+            marker.style.left = (data.x - data.w / 2) + '%';
+            marker.style.top = (data.y - data.h / 2) + '%';
+            marker.style.width = data.w + '%';
+            marker.style.height = data.h + '%';
+        } else {
+            marker.style.left = data.x + '%';
+            marker.style.top = data.y + '%';
+        }
+
+        const label = document.createElement('span');
+        label.className = 'label';
+        label.textContent = key;
+        marker.appendChild(label);
+
+        if (!(data.w && data.h)) {
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            marker.appendChild(dot);
+        }
+
+        marker.addEventListener('click', (e) => {
+            e.stopPropagation();
+            state.selectedStand = key;
+            renderMarkers();
+            renderStandList();
+        });
+
+        mapContainer.appendChild(marker);
+    }
+}
+
+function renderStandList() {
+    const prefix = state.currentHalle;
+    const items = Object.entries(state.staende)
+        .filter(([k]) => !prefix || k.startsWith(prefix + '-'))
+        .sort(([a], [b]) => a.localeCompare(b));
+
+    sidebarTitle.textContent = `Staende (${items.length})`;
+    standList.innerHTML = '';
+
+    for (const [key, data] of items) {
+        const li = document.createElement('li');
+        li.className = key === state.selectedStand ? 'selected' : '';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = key;
+
+        const coordsSpan = document.createElement('span');
+        coordsSpan.className = 'stand-coords';
+        const coordText = data.w
+            ? `${data.x}/${data.y} (${data.w}x${data.h})`
+            : `${data.x}/${data.y}`;
+        coordsSpan.textContent = coordText;
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn-delete';
+        delBtn.textContent = '\u00d7';
+        delBtn.title = 'Loeschen';
+        delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            delete state.staende[key];
+            if (state.selectedStand === key) state.selectedStand = null;
+            renderMarkers();
+            renderStandList();
+            updateStats();
+        });
+
+        li.appendChild(nameSpan);
+        li.appendChild(coordsSpan);
+        li.appendChild(delBtn);
+
+        li.addEventListener('click', () => {
+            state.selectedStand = key;
+            renderMarkers();
+            renderStandList();
+        });
+
+        standList.appendChild(li);
+    }
+}
+
+function updateStats() {
+    const total = Object.keys(state.staende).length;
+    statsEl.textContent = `${total} Staende`;
+}
+
+// ===== MODE TOGGLE =====
+function toggleMode() {
+    state.mode = state.mode === 'point' ? 'rect' : 'point';
+    modeIndicator.textContent = state.mode === 'point' ? 'Punkt' : 'Rechteck';
+    modeIndicator.className = 'mode-indicator ' + state.mode;
+    state.rectStart = null;
+    rectPreview.style.display = 'none';
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key === 'm' || e.key === 'M') {
+        toggleMode();
+    } else if (e.key === 'Delete' || e.key === 'Backspace') {
+        if (state.selectedStand) {
+            delete state.staende[state.selectedStand];
+            state.selectedStand = null;
+            renderMarkers();
+            renderStandList();
+            updateStats();
+        }
+    } else if (e.key === 'Escape') {
+        state.selectedStand = null;
+        state.rectStart = null;
+        rectPreview.style.display = 'none';
+        renderMarkers();
+        renderStandList();
+    }
+});
+
+// ===== EXPORT / IMPORT =====
+function buildExportJSON() {
+    const hallen = {};
+    for (const [prefix, info] of Object.entries(state.hallen)) {
+        hallen[prefix] = { bild: info.bild, label: info.label };
+    }
+
+    const staende = {};
+    for (const [key, data] of Object.entries(state.staende)) {
+        const entry = { x: data.x, y: data.y };
+        if (data.w) entry.w = data.w;
+        if (data.h) entry.h = data.h;
+        staende[key] = entry;
+    }
+
+    return {
+        generated: new Date().toISOString(),
+        hallen,
+        staende
+    };
+}
+
+function exportJSON() {
+    const json = JSON.stringify(buildExportJSON(), null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'standplan.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function copyJSON() {
+    const json = JSON.stringify(buildExportJSON(), null, 2);
+    navigator.clipboard.writeText(json).then(() => {
+        alert('JSON in Zwischenablage kopiert!');
+    });
+}
+
+function importJSON() {
+    const text = document.getElementById('importArea').value.trim();
+    if (!text) return;
+    try {
+        const data = JSON.parse(text);
+        if (data.hallen) {
+            for (const [prefix, info] of Object.entries(data.hallen)) {
+                if (!state.hallen[prefix]) {
+                    state.hallen[prefix] = { bild: info.bild, label: info.label, dataUrl: '' };
+                }
+            }
+            updateHalleSelect();
+        }
+        if (data.staende) {
+            Object.assign(state.staende, data.staende);
+        }
+        renderMarkers();
+        renderStandList();
+        updateStats();
+        alert(`Import erfolgreich: ${Object.keys(data.staende || {}).length} Staende`);
+    } catch (e) {
+        alert('Fehler beim Import: ' + e.message);
+    }
+}
+
+function clearAll() {
+    if (!confirm('Alle Staende der aktuellen Halle loeschen?')) return;
+    const prefix = state.currentHalle;
+    if (!prefix) return;
+    for (const key of Object.keys(state.staende)) {
+        if (key.startsWith(prefix + '-')) {
+            delete state.staende[key];
+        }
+    }
+    state.selectedStand = null;
+    renderMarkers();
+    renderStandList();
+    updateStats();
+}
+</script>
+
+</body>
+</html>
