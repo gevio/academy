@@ -207,6 +207,7 @@
     overflow: auto;
     background: #f5f0eb;
     touch-action: manipulation;
+    padding: 2.5rem 0;
 }
 .map-image-wrap img {
     display: block;
