@@ -214,6 +214,7 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
                     'kategorien'   => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
                     'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
                     'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
+                    'aussteller_ids'      => array_column($props['Aussteller (AS26)']['relation'] ?? [], 'id'),
                 ];
             }
 

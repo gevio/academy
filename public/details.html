@@ -135,6 +135,25 @@
                 html += '<div class="empty">Keine weiteren Details verfügbar.</div>';
             }
 
+            // Aussteller-Sektion (verlinkt auf Aussteller-Seite mit Standplan)
+            if (ws.aussteller && ws.aussteller.length > 0) {
+                html += '<div class="detail-aussteller">';
+                html += '<h3 style="font-size:.9rem;color:var(--text-light);margin-bottom:.5rem">📍 Aussteller</h3>';
+                for (const a of ws.aussteller) {
+                    const standBadge = a.stand ? `<span class="aussteller-card-stand" style="font-size:.7rem;padding:.15rem .4rem">${escapeHtml(a.stand)}</span>` : '';
+                    const hasCoords = a.stand_x != null && a.stand_y != null;
+                    const mapHint = hasCoords ? ' · Standort auf Karte' : '';
+                    html += `<a href="/aussteller.html#id=${a.id}" class="detail-aussteller-link" style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;margin-bottom:.4rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:border-color .2s">
+                        <div style="flex:1;min-width:0">
+                            <div style="font-weight:700;color:var(--as-braun-dark)">${escapeHtml(a.firma)}</div>
+                            <div style="font-size:.75rem;color:var(--text-light)">${standBadge}${mapHint}</div>
+                        </div>
+                        <span style="color:var(--text-light);font-size:1.1rem">›</span>
+                    </a>`;
+                }
+                html += '</div>';
+            }
+
             // Zurück zum Programm
             const programmBackUrl = backUrl || '/programm.html';
             html += `<div style="margin-top:2rem;text-align:center">

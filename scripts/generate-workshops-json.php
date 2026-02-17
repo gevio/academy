@@ -17,6 +17,24 @@ require_once __DIR__ . '/../src/BlockRenderer.php';
 $notion   = new NotionClient(NOTION_TOKEN);
 $renderer = new BlockRenderer();
 $outFile  = __DIR__ . '/../public/api/workshops.json';
+$ausstellerFile = __DIR__ . '/../public/api/aussteller.json';
+
+// ── 0) Aussteller-Daten laden (für Workshop↔Aussteller Verlinkung) ──
+$ausstellerIndex = []; // page_id (mit Bindestrichen) → Aussteller-Daten
+try {
+    $ausstellerRaw = json_decode(file_get_contents($ausstellerFile), true);
+    foreach (($ausstellerRaw['aussteller'] ?? []) as $a) {
+        if (!empty($a['page_id'])) {
+            $ausstellerIndex[$a['page_id']] = $a;
+            // Auch ohne Bindestriche indizieren
+            $ausstellerIndex[str_replace('-', '', $a['page_id'])] = $a;
+        }
+    }
+    echo "📍 " . count($ausstellerRaw['aussteller'] ?? []) . " Aussteller als Lookup geladen.\n\n";
+} catch (Throwable $e) {
+    echo "⚠ aussteller.json nicht verfügbar: {$e->getMessage()}\n";
+    echo "  Workshop↔Aussteller Verlinkung wird übersprungen.\n\n";
+}
 
 // ── 1) Alle Workshops laden (nur Messetage) ──────────────
 echo "📥 Workshops laden...\n";
@@ -144,6 +162,7 @@ foreach ($workshops as $ws) {
         'kategorien'   => $ws['kategorien'] ?? [],
         'referent_firma'  => $ws['referent_firma'] ?? '',
         'referent_person' => $ws['referent_person'] ?? '',
+        'aussteller'   => resolveAussteller($ws['aussteller_ids'] ?? [], $ausstellerIndex),
         'content_html' => $contentHtml,
         'has_content'  => $hasContent,
     ];
@@ -250,4 +269,27 @@ function filterRedundantBlocks(array $blocks, string $workshopTitle): array
     }
 
     return $filtered;
+}
+
+/**
+ * Löst Aussteller-Relation-IDs gegen den Aussteller-Index auf.
+ * Gibt ein Array von Aussteller-Objekten zurück (nur relevante Felder).
+ */
+function resolveAussteller(array $ausstellerIds, array $index): array
+{
+    $result = [];
+    foreach ($ausstellerIds as $id) {
+        $a = $index[$id] ?? null;
+        if (!$a) continue;
+        $result[] = [
+            'id'      => $a['id'],
+            'firma'   => $a['firma'] ?? '',
+            'stand'   => $a['stand'] ?? '',
+            'stand_x' => $a['stand_x'] ?? null,
+            'stand_y' => $a['stand_y'] ?? null,
+            'stand_w' => $a['stand_w'] ?? null,
+            'stand_h' => $a['stand_h'] ?? null,
+        ];
+    }
+    return $result;
 }
