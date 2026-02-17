@@ -133,10 +133,13 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                 <?php if ($tag): ?><span class="meta-item">📅 <?= $tag ?></span><?php endif; ?>
                 <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
                 <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
-                <?php if ($referentPersonHtml): ?><span class="meta-item"><?= $referentPersonHtml ?></span><?php endif; ?>
             </div>
-            <?php if ($firmaHtml): ?>
-                <div style="margin-top:.4rem;font-size:.85rem;color:var(--text-light)"><?= $firmaHtml ?></div>
+            <?php if ($referentPersonHtml || $firmaHtml): ?>
+                <div style="margin-top:.4rem;font-size:.85rem;color:var(--text-light)"><?php
+                    if ($referentPersonHtml) echo $referentPersonHtml;
+                    if ($referentPersonHtml && $firmaHtml) echo ' · ';
+                    if ($firmaHtml) echo $firmaHtml;
+                ?></div>
             <?php endif; ?>
             <button class="fav-btn-landing" id="fav-btn" data-id="<?= htmlspecialchars($cleanId) ?>" title="Favorit">
                 🤍
