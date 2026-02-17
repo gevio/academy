@@ -42,7 +42,12 @@
             background: #111; border-radius: 8px;
             border: 2px solid #333;
         }
-        .map-container img {
+        .image-wrap {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .image-wrap img {
             display: block; width: 100%; height: auto;
             user-select: none; -webkit-user-drag: none;
         }
@@ -219,12 +224,14 @@
         <div class="drop-zone" id="dropZone">
             Oben eine Halle auswaehlen, um den Plan zu laden
         </div>
-        <img id="mapImage" style="display:none" alt="Hallenplan">
+        <div class="image-wrap" id="imageWrap" style="display:none">
+            <img id="mapImage" alt="Hallenplan">
+            <div class="rect-preview" id="rectPreview" style="display:none"></div>
+        </div>
         <div class="crosshair" id="crosshair">
             <div class="h-line"></div>
             <div class="v-line"></div>
         </div>
-        <div class="rect-preview" id="rectPreview" style="display:none"></div>
     </div>
 
     <div class="sidebar">
@@ -316,6 +323,7 @@ const state = {
 
 // ===== DOM =====
 const mapContainer = document.getElementById('mapContainer');
+const imageWrap = document.getElementById('imageWrap');
 const mapImage = document.getElementById('mapImage');
 const dropZone = document.getElementById('dropZone');
 const crosshair = document.getElementById('crosshair');
@@ -388,10 +396,10 @@ function switchHalle(prefix) {
     const config = HALL_CONFIG[prefix];
     if (config) {
         mapImage.src = config.bild;
-        mapImage.style.display = 'block';
+        imageWrap.style.display = 'inline-block';
         dropZone.style.display = 'none';
     } else {
-        mapImage.style.display = 'none';
+        imageWrap.style.display = 'none';
         dropZone.style.display = 'flex';
     }
 
@@ -628,7 +636,7 @@ function manualAddPending() {
 
 // ===== RENDER MARKERS =====
 function renderMarkers() {
-    mapContainer.querySelectorAll('.marker').forEach(m => m.remove());
+    imageWrap.querySelectorAll('.marker').forEach(m => m.remove());
     if (!state.currentHalle) return;
 
     for (const [key, data] of Object.entries(state.staende)) {
@@ -668,7 +676,7 @@ function renderMarkers() {
             renderPlaced();
         });
 
-        mapContainer.appendChild(marker);
+        imageWrap.appendChild(marker);
     }
 }
 
