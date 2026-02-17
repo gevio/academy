@@ -195,17 +195,22 @@
     // Map image + marker
     imageWrap.innerHTML = '';
     if (halle && halle.bild) {
+      // Inner wrapper: position:relative, exakt so groß wie das Bild
+      // → %-basierte Marker-Positionen stimmen mit Map-Editor überein
+      const innerWrap = document.createElement('div');
+      innerWrap.style.cssText = 'position:relative;width:100%;flex-shrink:0';
       const img = document.createElement('img');
       img.src = halle.bild;
       img.alt = halle.label;
       img.draggable = false;
-      imageWrap.appendChild(img);
+      innerWrap.appendChild(img);
+      imageWrap.appendChild(innerWrap);
 
       if (standData) {
         img.addEventListener('load', () => {
-          addMarker(imageWrap, stand, standData);
+          addMarker(innerWrap, stand, standData);
           setTimeout(() => {
-            const marker = imageWrap.querySelector('.map-marker');
+            const marker = innerWrap.querySelector('.map-marker');
             if (marker) {
               // Manuell scrollen statt scrollIntoView (funktioniert zuverlässiger im Overlay)
               const wrapRect = imageWrap.getBoundingClientRect();

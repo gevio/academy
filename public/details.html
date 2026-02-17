@@ -70,6 +70,41 @@
             return div.innerHTML;
         }
 
+        /**
+         * Rendert Referent + Firma unterhalb der Meta-Zeile im Workshop-Card.
+         * Firma ist anklickbar wenn der Aussteller existiert → öffnet Standplan.
+         */
+        function renderReferentFirma(ws) {
+            const person = ws.referent_person || '';
+            const firmaText = ws.referent_firma || '';
+            const aussteller = ws.aussteller || [];
+
+            if (!person && !firmaText && aussteller.length === 0) return '';
+
+            let html = '<div style="margin-top:.6rem;font-size:.85rem;color:var(--text-light)">';
+
+            // Referent Person
+            if (person) {
+                html += `<span>🎤 ${escapeHtml(person)}</span>`;
+            }
+
+            // Firma(s): Aussteller-Links haben Vorrang, dann referent_firma als Fallback
+            if (aussteller.length > 0) {
+                if (person) html += ' · ';
+                const links = aussteller.map(a => {
+                    const standInfo = a.stand ? ` · Stand ${escapeHtml(a.stand)}` : '';
+                    return `<a href="/aussteller.html#id=${a.id}" style="color:var(--as-rot);text-decoration:none;font-weight:600">${escapeHtml(a.firma)}${standInfo} 📍</a>`;
+                });
+                html += links.join(', ');
+            } else if (firmaText) {
+                if (person) html += ' · ';
+                html += `<span>${escapeHtml(firmaText)}</span>`;
+            }
+
+            html += '</div>';
+            return html;
+        }
+
         async function loadDetails() {
             const wsId = getWorkshopId();
             if (!wsId) {
@@ -117,6 +152,7 @@
                     ${ws.zeit ? `<span class="meta-item">🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
                     ${ws.ort ? `<span class="meta-item">📍 ${escapeHtml(ws.ort)}</span>` : ''}
                 </div>
+                ${renderReferentFirma(ws)}
             </div>`;
 
             // Action Buttons
@@ -135,24 +171,7 @@
                 html += '<div class="empty">Keine weiteren Details verfügbar.</div>';
             }
 
-            // Aussteller-Sektion (verlinkt auf Aussteller-Seite mit Standplan)
-            if (ws.aussteller && ws.aussteller.length > 0) {
-                html += '<div class="detail-aussteller">';
-                html += '<h3 style="font-size:.9rem;color:var(--text-light);margin-bottom:.5rem">📍 Aussteller</h3>';
-                for (const a of ws.aussteller) {
-                    const standBadge = a.stand ? `<span class="aussteller-card-stand" style="font-size:.7rem;padding:.15rem .4rem">${escapeHtml(a.stand)}</span>` : '';
-                    const hasCoords = a.stand_x != null && a.stand_y != null;
-                    const mapHint = hasCoords ? ' · Standort auf Karte' : '';
-                    html += `<a href="/aussteller.html#id=${a.id}" class="detail-aussteller-link" style="display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;margin-bottom:.4rem;background:var(--card);border-radius:var(--radius);border:1px solid var(--border);text-decoration:none;color:var(--text);transition:border-color .2s">
-                        <div style="flex:1;min-width:0">
-                            <div style="font-weight:700;color:var(--as-braun-dark)">${escapeHtml(a.firma)}</div>
-                            <div style="font-size:.75rem;color:var(--text-light)">${standBadge}${mapHint}</div>
-                        </div>
-                        <span style="color:var(--text-light);font-size:1.1rem">›</span>
-                    </a>`;
-                }
-                html += '</div>';
-            }
+            // (Referent + Firma wird jetzt im Workshop-Card via renderReferentFirma() gerendert)
 
             // Zurück zum Programm
             const programmBackUrl = backUrl || '/programm.html';
