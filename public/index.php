@@ -23,6 +23,7 @@ if (!$workshop) {
 
 $title = htmlspecialchars($workshop['title']);
 $typ   = htmlspecialchars($workshop['typ']);
+$tag   = htmlspecialchars($workshop['tag']);
 $zeit  = htmlspecialchars($workshop['zeit']);
 $ort   = htmlspecialchars($workshop['ort']);
 
@@ -129,6 +130,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                 <?php endforeach; ?>
             </div>
             <div class="meta-row">
+                <?php if ($tag): ?><span class="meta-item">📅 <?= $tag ?></span><?php endif; ?>
                 <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
                 <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
                 <?php if ($referentPersonHtml): ?><span class="meta-item"><?= $referentPersonHtml ?></span><?php endif; ?>
@@ -145,7 +147,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 
         <nav class="actions">
             <!-- Details: Workshop-Infos -->
-            <a href="/w/<?= $id ?>/details" class="action-card action-link-back">
+            <a href="/w/<?= $id ?>/details?back=<?= urlencode('/w/' . $id) ?>" class="action-card">
                 <span class="action-icon">📋</span>
                 <span class="action-label">Details anzeigen</span>
                 <span class="action-desc">Ausführliche Workshop-Infos</span>
@@ -212,14 +214,8 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
         const params = new URLSearchParams(location.search);
         const back = params.get('back');
         if (back) {
-            // Programm-Banner zurück
             const link = document.getElementById('programm-back-link');
             if (link) link.href = back;
-            // Details-Link: ?back= weitergeben
-            document.querySelectorAll('.action-link-back').forEach(a => {
-                const sep = a.href.includes('?') ? '&' : '?';
-                a.href += sep + 'back=' + encodeURIComponent(back);
-            });
         }
     })();
 
