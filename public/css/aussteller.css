@@ -300,6 +300,11 @@
     margin-bottom: .6rem;
 }
 .map-footer-tags:empty { display: none; }
+.map-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
 .map-footer-link {
     display: inline-flex;
     align-items: center;

@@ -32,6 +32,7 @@
 
       populateKatFilter();
       renderList();
+      return true;
     } catch (err) {
       console.error('Aussteller laden fehlgeschlagen:', err);
       document.getElementById('aussteller-list').innerHTML =
@@ -165,6 +166,10 @@
     const footerDesc = document.getElementById('map-desc');
     const footerTags = document.getElementById('map-tags');
     const footerLink = document.getElementById('map-link');
+    const footerInsta = document.getElementById('map-insta');
+
+    // Deep-Link setzen
+    history.replaceState(null, '', '#id=' + aussteller.id);
 
     // Header
     headerFirma.textContent = aussteller.firma;
@@ -220,10 +225,18 @@
 
     if (aussteller.website) {
       footerLink.href = aussteller.website;
-      footerLink.textContent = aussteller.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      footerLink.textContent = '🌐 ' + aussteller.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
       footerLink.style.display = '';
     } else {
       footerLink.style.display = 'none';
+    }
+
+    if (aussteller.instagram) {
+      footerInsta.href = aussteller.instagram;
+      footerInsta.textContent = '📷 Instagram';
+      footerInsta.style.display = '';
+    } else {
+      footerInsta.style.display = 'none';
     }
 
     overlay.classList.add('open');
@@ -262,6 +275,8 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('map-image-wrap').innerHTML = '';
+    // Deep-Link entfernen
+    history.replaceState(null, '', window.location.pathname);
   }
 
   // ── Events ──
@@ -304,6 +319,14 @@
     initSearch();
     initKatFilters();
     initMapClose();
-    loadData();
+    loadData().then(() => {
+      // Deep-Link: #id=xxx beim Laden auswerten
+      const hash = window.location.hash;
+      const match = hash.match(/^#id=([a-f0-9]{32})$/);
+      if (match) {
+        const aussteller = allAussteller.find(a => a.id === match[1]);
+        if (aussteller) openMap(aussteller);
+      }
+    });
   });
 })();

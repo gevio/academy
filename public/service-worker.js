@@ -30,6 +30,12 @@ const PRECACHE_URLS = [
   '/js/aussteller.js',
   '/api/aussteller.json',
   '/api/standplan.json',
+  '/img/plan/FW.jpg',
+  '/img/plan/FG.jpg',
+  '/img/plan/A3.jpg',
+  '/img/plan/A4.jpg',
+  '/img/plan/A5.jpg',
+  '/img/plan/A6.jpg',
 ];
 
 // ── Install: Shell precachen ──

@@ -269,12 +269,12 @@
 <script>
 // ===== HALL CONFIG =====
 const HALL_CONFIG = {
-    FW:  { bild: '../public/img/plan/FW.jpg',  label: 'Foyer West',        prefixes: ['FW', 'AT'] },
-    FG:  { bild: '../public/img/plan/FG.jpg',  label: 'Freigelaende West', prefixes: ['FG', 'FGO'] },
-    A3:  { bild: '../public/img/plan/A3.jpg',  label: 'Halle A3',          prefixes: ['A3'] },
-    A4:  { bild: '../public/img/plan/A4.jpg',  label: 'Halle A4',          prefixes: ['A4'] },
-    A5:  { bild: '../public/img/plan/A5.jpg',  label: 'Halle A5',          prefixes: ['A5'] },
-    A6:  { bild: '../public/img/plan/A6.jpg',  label: 'Halle A6',          prefixes: ['A6'] },
+    FW:  { bild: '/img/plan/FW.jpg',  label: 'Foyer West',        prefixes: ['FW', 'AT'] },
+    FG:  { bild: '/img/plan/FG.jpg',  label: 'Freigelaende West', prefixes: ['FG', 'FGO'] },
+    A3:  { bild: '/img/plan/A3.jpg',  label: 'Halle A3',          prefixes: ['A3'] },
+    A4:  { bild: '/img/plan/A4.jpg',  label: 'Halle A4',          prefixes: ['A4'] },
+    A5:  { bild: '/img/plan/A5.jpg',  label: 'Halle A5',          prefixes: ['A5'] },
+    A6:  { bild: '/img/plan/A6.jpg',  label: 'Halle A6',          prefixes: ['A6'] },
 };
 
 // Export paths (for the generated JSON, different from local dev paths)
@@ -334,7 +334,7 @@ async function loadAusstellerData() {
     loadStatus.className = 'load-status warn';
 
     try {
-        const res = await fetch('../public/api/aussteller.json');
+        const res = await fetch('/api/aussteller.json');
         const data = await res.json();
 
         if (data.aussteller && data.aussteller.length > 0) {
@@ -792,7 +792,7 @@ function loadDraft() {
 
 async function loadExistingStandplan() {
     try {
-        const res = await fetch('../public/api/standplan.json');
+        const res = await fetch('/api/standplan.json');
         const data = await res.json();
         if (data.staende && Object.keys(data.staende).length > 0) {
             // Bestehende standplan.json als Basis laden
