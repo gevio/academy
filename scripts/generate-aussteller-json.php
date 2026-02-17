@@ -71,23 +71,9 @@ do {
         // Instagram (url)
         $instagram = $props['Instagram']['url'] ?? '';
 
-        // Logo (files) – erste Datei-URL
-        $logo = '';
-        $logoFiles = $props['Logo']['files'] ?? [];
-        if (!empty($logoFiles)) {
-            $first = $logoFiles[0];
-            if (($first['type'] ?? '') === 'file') {
-                $logo = $first['file']['url'] ?? '';
-            } elseif (($first['type'] ?? '') === 'external') {
-                $logo = $first['external']['url'] ?? '';
-            }
-        }
-
-        // Slug (rich_text)
-        $slug = '';
-        foreach ($props['Slug']['rich_text'] ?? [] as $t) {
-            $slug .= $t['plain_text'] ?? '';
-        }
+        // Logo: Notion-hosted URLs haben Expiry (~1h) – erst einbauen
+        // wenn wir Bilder beim Generieren lokal speichern.
+        // Slug: aktuell ungenutzt, bei Bedarf wieder aktivieren.
 
         $entry = [
             'id'           => str_replace('-', '', $page['id']),
@@ -98,11 +84,6 @@ do {
             'website'      => $website ?: '',
             'instagram'    => $instagram ?: '',
         ];
-
-        // Logo nur wenn vorhanden (Notion-hosted URLs haben Expiry)
-        if ($logo) {
-            $entry['logo'] = $logo;
-        }
 
         $all[] = $entry;
 

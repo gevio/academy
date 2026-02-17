@@ -457,6 +457,7 @@ function renderPlaced() {
             e.stopPropagation();
             delete state.staende[key];
             if (state.selectedStand === key) state.selectedStand = null;
+            saveDraft();
             renderMarkers();
             renderPending();
             renderPlaced();
@@ -566,15 +567,14 @@ function placeStand(pos) {
     let key = state.pendingPick;
 
     if (!key) {
-        // No pending pick - ask manually
-        const nr = prompt(`Standnummer (z.B. ${state.currentHalle}-101):`);
-        if (!nr) return;
-        key = nr.includes('-') ? nr.trim() : `${state.currentHalle}-${nr.trim()}`;
+        // Kein Stand ausgewaehlt - Klick ignorieren statt prompt()
+        return;
     }
 
     const entry = { x: pos.x, y: pos.y };
     if (pos.w) { entry.w = pos.w; entry.h = pos.h; }
     state.staende[key] = entry;
+    saveDraft();
 
     // Auto-advance to next pending stand
     const { pending } = getHallStands();
@@ -672,6 +672,7 @@ document.addEventListener('keydown', (e) => {
         if (state.selectedStand) {
             delete state.staende[state.selectedStand];
             state.selectedStand = null;
+            saveDraft();
             renderMarkers();
             renderPending();
             renderPlaced();
@@ -766,14 +767,53 @@ function clearAll() {
     }
     state.selectedStand = null;
     state.pendingPick = null;
+    saveDraft();
     renderMarkers();
     renderPending();
     renderPlaced();
     updateStats();
 }
 
+// ===== LOCALSTORAGE PERSISTENCE =====
+function saveDraft() {
+    try {
+        localStorage.setItem('standplan-draft', JSON.stringify(state.staende));
+    } catch (e) { /* ignore quota errors */ }
+}
+
+function loadDraft() {
+    try {
+        const draft = localStorage.getItem('standplan-draft');
+        if (draft) {
+            Object.assign(state.staende, JSON.parse(draft));
+        }
+    } catch (e) { /* ignore parse errors */ }
+}
+
+async function loadExistingStandplan() {
+    try {
+        const res = await fetch('../public/api/standplan.json');
+        const data = await res.json();
+        if (data.staende && Object.keys(data.staende).length > 0) {
+            // Bestehende standplan.json als Basis laden
+            Object.assign(state.staende, data.staende);
+            loadStatus.textContent += ' | standplan.json geladen';
+        }
+    } catch (e) { /* not found - ok */ }
+    // Draft ueberschreibt (ist neuer)
+    loadDraft();
+}
+
 // ===== INIT =====
-loadAusstellerData();
+async function init() {
+    await loadAusstellerData();
+    await loadExistingStandplan();
+    renderMarkers();
+    renderPending();
+    renderPlaced();
+    updateStats();
+}
+init();
 </script>
 
 </body>

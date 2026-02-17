@@ -206,7 +206,7 @@
     justify-content: center;
     overflow: auto;
     background: #f5f0eb;
-    touch-action: pan-x pan-y;
+    touch-action: manipulation;
 }
 .map-image-wrap img {
     display: block;

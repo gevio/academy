@@ -196,7 +196,12 @@
           setTimeout(() => {
             const marker = imageWrap.querySelector('.map-marker');
             if (marker) {
-              marker.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' });
+              // Manuell scrollen statt scrollIntoView (funktioniert zuverlässiger im Overlay)
+              const wrapRect = imageWrap.getBoundingClientRect();
+              const markerRect = marker.getBoundingClientRect();
+              const scrollLeft = imageWrap.scrollLeft + (markerRect.left - wrapRect.left) - wrapRect.width / 2 + markerRect.width / 2;
+              const scrollTop = imageWrap.scrollTop + (markerRect.top - wrapRect.top) - wrapRect.height / 2 + markerRect.height / 2;
+              imageWrap.scrollTo({ left: scrollLeft, top: scrollTop, behavior: 'smooth' });
             }
           }, 100);
         });
