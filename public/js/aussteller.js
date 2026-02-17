@@ -289,7 +289,14 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('map-image-wrap').innerHTML = '';
-    // Deep-Link entfernen
+    // Zurück-Navigation: ?back= Parameter nutzen wenn vorhanden
+    const params = new URLSearchParams(window.location.search);
+    const backUrl = params.get('back');
+    if (backUrl) {
+      window.location.href = backUrl;
+      return;
+    }
+    // Sonst nur Deep-Link entfernen
     history.replaceState(null, '', window.location.pathname);
   }
 

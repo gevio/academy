@@ -57,12 +57,13 @@ if ($referentPerson) {
 $firmaHtml = '';
 if (!empty($aussteller)) {
     $links = [];
+    $backUrl = urlencode('/w/' . $id);
     foreach ($aussteller as $a) {
         $firma = htmlspecialchars($a['firma'] ?? '');
         $stand = $a['stand'] ?? '';
         $standInfo = $stand ? ' · Stand ' . htmlspecialchars($stand) : '';
         $ausId = htmlspecialchars($a['id'] ?? '');
-        $links[] = '<a href="/aussteller.html#id=' . $ausId . '" style="color:var(--as-rot);text-decoration:none;font-weight:600">' . $firma . $standInfo . ' 📍</a>';
+        $links[] = '<a href="/aussteller.html?back=' . $backUrl . '#id=' . $ausId . '" style="color:var(--as-rot);text-decoration:none;font-weight:600">🏪 ' . $firma . $standInfo . '</a>';
     }
     $firmaHtml = implode(', ', $links);
 } elseif ($referentFirma) {

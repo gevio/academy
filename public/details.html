@@ -91,9 +91,10 @@
             // Firma(s): Aussteller-Links haben Vorrang, dann referent_firma als Fallback
             if (aussteller.length > 0) {
                 if (person) html += ' · ';
+                const backParam = encodeURIComponent(window.location.pathname + window.location.search);
                 const links = aussteller.map(a => {
                     const standInfo = a.stand ? ` · Stand ${escapeHtml(a.stand)}` : '';
-                    return `<a href="/aussteller.html#id=${a.id}" style="color:var(--as-rot);text-decoration:none;font-weight:600">${escapeHtml(a.firma)}${standInfo} 📍</a>`;
+                    return `<a href="/aussteller.html?back=${backParam}#id=${a.id}" style="color:var(--as-rot);text-decoration:none;font-weight:600">🏪 ${escapeHtml(a.firma)}${standInfo}</a>`;
                 });
                 html += links.join(', ');
             } else if (firmaText) {
