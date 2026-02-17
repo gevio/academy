@@ -29,22 +29,16 @@
         .toolbar button.primary:hover { background: #c73e54; }
         .toolbar button.danger { background: #a83232; }
         .toolbar button.danger:hover { background: #8a2828; }
-
-        .toolbar .separator {
-            width: 1px; height: 30px; background: #333; margin: 0 5px;
-        }
-
-        .stats {
-            margin-left: auto; font-size: 13px; color: #aaa;
-        }
+        .toolbar .separator { width: 1px; height: 30px; background: #333; margin: 0 5px; }
+        .stats { margin-left: auto; font-size: 13px; color: #aaa; }
 
         .workspace {
             margin-top: 70px; padding: 20px;
-            display: flex; gap: 20px;
+            display: flex; gap: 20px; height: calc(100vh - 70px);
         }
 
         .map-container {
-            flex: 1; position: relative; overflow: hidden;
+            flex: 1; position: relative; overflow: auto;
             background: #111; border-radius: 8px;
             border: 2px solid #333;
         }
@@ -56,46 +50,32 @@
         .marker {
             position: absolute; transform: translate(-50%, -50%);
             cursor: pointer; z-index: 10;
-            transition: opacity 0.2s;
         }
         .marker .dot {
-            width: 12px; height: 12px; border-radius: 50%;
+            width: 14px; height: 14px; border-radius: 50%;
             background: #e94560; border: 2px solid #fff;
             box-shadow: 0 0 6px rgba(233,69,96,0.8);
         }
         .marker .label {
-            position: absolute; left: 50%; top: -22px;
+            position: absolute; left: 50%; top: -24px;
             transform: translateX(-50%);
-            background: rgba(0,0,0,0.85); color: #fff;
+            background: rgba(0,0,0,0.9); color: #fff;
             padding: 2px 6px; border-radius: 3px;
             font-size: 11px; white-space: nowrap;
             pointer-events: none;
         }
-        .marker:hover .dot {
-            background: #ff6b81; box-shadow: 0 0 12px rgba(233,69,96,1);
-        }
-        .marker.selected .dot {
-            background: #ffd93d; border-color: #ffd93d;
-            box-shadow: 0 0 12px rgba(255,217,61,0.8);
-        }
-        .marker.rect-mode {
-            transform: none;
-            border: 2px solid #e94560;
-            background: rgba(233,69,96,0.2);
-            border-radius: 2px;
-        }
+        .marker:hover .dot { background: #ff6b81; box-shadow: 0 0 14px rgba(233,69,96,1); }
+        .marker.selected .dot { background: #ffd93d; border-color: #ffd93d; box-shadow: 0 0 12px rgba(255,217,61,0.8); }
+        .marker.rect-mode { transform: none; border: 2px solid #e94560; background: rgba(233,69,96,0.2); border-radius: 2px; }
         .marker.rect-mode .dot { display: none; }
         .marker.rect-mode .label { top: -20px; left: 0; transform: none; }
 
-        .crosshair {
-            position: absolute; pointer-events: none; z-index: 5;
-            display: none;
-        }
-        .crosshair .h-line, .crosshair .v-line {
-            position: absolute; background: rgba(233,69,96,0.4);
-        }
+        .crosshair { position: absolute; pointer-events: none; z-index: 5; display: none; }
+        .crosshair .h-line, .crosshair .v-line { position: absolute; background: rgba(233,69,96,0.4); }
         .crosshair .h-line { left: 0; right: 0; height: 1px; }
         .crosshair .v-line { top: 0; bottom: 0; width: 1px; }
+
+        .rect-preview { position: absolute; border: 2px dashed #ffd93d; background: rgba(255,217,61,0.15); pointer-events: none; z-index: 15; }
 
         .coords-display {
             position: fixed; bottom: 20px; left: 20px; z-index: 100;
@@ -103,70 +83,76 @@
             border-radius: 6px; font-family: monospace; font-size: 14px;
         }
 
+        /* ===== SIDEBAR ===== */
         .sidebar {
-            width: 350px; background: #16213e; border-radius: 8px;
-            padding: 15px; max-height: calc(100vh - 90px);
-            overflow-y: auto; border: 1px solid #333;
+            width: 380px; display: flex; flex-direction: column; gap: 0;
+            background: #16213e; border-radius: 8px;
+            border: 1px solid #333; overflow: hidden;
         }
-        .sidebar h3 { margin-bottom: 10px; color: #e94560; font-size: 15px; }
 
-        .stand-list { list-style: none; }
-        .stand-list li {
-            padding: 8px 10px; margin-bottom: 4px;
-            background: #0f3460; border-radius: 4px;
-            display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; font-size: 13px;
+        .sidebar-section {
+            padding: 12px 15px; border-bottom: 1px solid #333;
+        }
+        .sidebar-section:last-child { border-bottom: none; }
+        .sidebar-section h3 { font-size: 14px; color: #e94560; margin-bottom: 8px; }
+
+        /* Pending stands - the pick list */
+        .pending-section { flex: 1; overflow-y: auto; min-height: 0; }
+        .pending-list { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; }
+        .pending-list li {
+            padding: 4px 10px; background: #0f3460; border-radius: 4px;
+            font-size: 13px; cursor: pointer; transition: all 0.15s;
+            border: 2px solid transparent;
+        }
+        .pending-list li:hover { background: #1a4a7a; }
+        .pending-list li.active {
+            background: #ffd93d; color: #000; font-weight: 700;
+            border-color: #fff; animation: pulse-pick 1s infinite;
+        }
+        @keyframes pulse-pick {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,217,61,0.6); }
+            50% { box-shadow: 0 0 0 4px rgba(255,217,61,0); }
+        }
+
+        /* Placed stands list */
+        .placed-section { max-height: 250px; overflow-y: auto; }
+        .placed-list { list-style: none; }
+        .placed-list li {
+            padding: 6px 10px; margin-bottom: 3px; background: #0a2a4a;
+            border-radius: 4px; display: flex; justify-content: space-between;
+            align-items: center; font-size: 13px; cursor: pointer;
             transition: background 0.15s;
         }
-        .stand-list li:hover { background: #1a4a7a; }
-        .stand-list li.selected { background: #e94560; }
-        .stand-list li .stand-coords {
-            font-family: monospace; font-size: 11px; color: #aaa;
-        }
-        .stand-list li .btn-delete {
+        .placed-list li:hover { background: #1a4a7a; }
+        .placed-list li.selected { background: #e94560; }
+        .placed-list li .coords { font-family: monospace; font-size: 11px; color: #aaa; }
+        .placed-list li.selected .coords { color: #ffd93d; }
+        .placed-list li .btn-delete {
             background: none; border: none; color: #e94560;
             cursor: pointer; font-size: 16px; padding: 0 4px;
         }
-        .stand-list li.selected .btn-delete { color: #fff; }
-        .stand-list li.selected .stand-coords { color: #ffd93d; }
+        .placed-list li.selected .btn-delete { color: #fff; }
 
-        /* Rect drawing preview */
-        .rect-preview {
-            position: absolute; border: 2px dashed #ffd93d;
-            background: rgba(255,217,61,0.15); pointer-events: none;
-            z-index: 15;
+        .progress-bar {
+            height: 4px; background: #333; border-radius: 2px; margin-top: 6px; overflow: hidden;
         }
-
-        .mode-indicator {
-            padding: 4px 10px; border-radius: 4px; font-size: 12px;
-            font-weight: 600;
-        }
-        .mode-indicator.point { background: #e94560; }
-        .mode-indicator.rect { background: #ffd93d; color: #000; }
+        .progress-bar .fill { height: 100%; background: #4caf50; transition: width 0.3s; border-radius: 2px; }
 
         /* Import area */
-        .import-area {
-            margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;
-        }
         .import-area textarea {
-            width: 100%; height: 80px; background: #0a0a1a; color: #e0e0e0;
+            width: 100%; height: 60px; background: #0a0a1a; color: #e0e0e0;
             border: 1px solid #333; border-radius: 4px; padding: 8px;
             font-family: monospace; font-size: 12px; resize: vertical;
         }
 
-        /* Help text */
         .help {
             position: fixed; bottom: 20px; right: 20px; z-index: 100;
             background: rgba(0,0,0,0.85); padding: 10px 14px;
             border-radius: 6px; font-size: 12px; color: #aaa;
-            max-width: 300px; line-height: 1.5;
+            max-width: 320px; line-height: 1.6;
         }
-        .help kbd {
-            background: #333; padding: 1px 5px; border-radius: 3px;
-            font-size: 11px;
-        }
+        .help kbd { background: #333; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
 
-        /* File drop zone */
         .drop-zone {
             display: flex; align-items: center; justify-content: center;
             height: 400px; border: 3px dashed #333;
@@ -174,6 +160,26 @@
             text-align: center; padding: 40px;
         }
         .drop-zone.dragover { border-color: #e94560; color: #e94560; }
+
+        .mode-indicator { padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .mode-indicator.point { background: #e94560; }
+        .mode-indicator.rect { background: #ffd93d; color: #000; }
+
+        .load-status { font-size: 12px; padding: 4px 8px; border-radius: 4px; }
+        .load-status.ok { color: #4caf50; }
+        .load-status.warn { color: #ffd93d; }
+        .load-status.err { color: #e94560; }
+
+        .manual-input { display: flex; gap: 4px; margin-top: 8px; }
+        .manual-input input {
+            flex: 1; padding: 4px 8px; background: #0a0a1a; color: #e0e0e0;
+            border: 1px solid #333; border-radius: 4px; font-size: 13px;
+        }
+        .manual-input button {
+            padding: 4px 10px; background: #0f3460; color: #e0e0e0;
+            border: 1px solid #333; border-radius: 4px; cursor: pointer;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -181,10 +187,14 @@
 <div class="toolbar">
     <label>Halle:</label>
     <select id="halleSelect">
-        <option value="">-- Bild laden --</option>
+        <option value="">-- Halle waehlen --</option>
+        <option value="FW">FW - Foyer West</option>
+        <option value="FG">FG - Freigelaende West</option>
+        <option value="A3">A3 - Halle A3</option>
+        <option value="A4">A4 - Halle A4</option>
+        <option value="A5">A5 - Halle A5</option>
+        <option value="A6">A6 - Halle A6</option>
     </select>
-
-    <button onclick="addHalle()" title="Neuen Hallenplan hinzufuegen">+ Halle</button>
 
     <div class="separator"></div>
 
@@ -196,15 +206,16 @@
 
     <button class="primary" onclick="exportJSON()">Export JSON</button>
     <button onclick="copyJSON()">Copy JSON</button>
-    <button class="danger" onclick="clearAll()">Alle loeschen</button>
+    <button class="danger" onclick="clearAll()">Halle leeren</button>
 
-    <div class="stats" id="stats">0 Staende</div>
+    <span class="load-status" id="loadStatus"></span>
+    <div class="stats" id="stats">0 / 0 Staende</div>
 </div>
 
 <div class="workspace">
     <div class="map-container" id="mapContainer">
         <div class="drop-zone" id="dropZone">
-            Hallenplan-Bild hier ablegen<br>oder oben "Halle" hinzufuegen
+            Oben eine Halle auswaehlen, um den Plan zu laden
         </div>
         <img id="mapImage" style="display:none" alt="Hallenplan">
         <div class="crosshair" id="crosshair">
@@ -215,11 +226,26 @@
     </div>
 
     <div class="sidebar">
-        <h3 id="sidebarTitle">Staende (0)</h3>
-        <ul class="stand-list" id="standList"></ul>
+        <!-- Pending stands (pick list) -->
+        <div class="sidebar-section pending-section" id="pendingSection">
+            <h3 id="pendingTitle">Noch zu platzieren (0)</h3>
+            <ul class="pending-list" id="pendingList"></ul>
+            <div class="manual-input">
+                <input type="text" id="manualStandInput" placeholder="Manuell: z.B. 301">
+                <button onclick="manualAddPending()">+</button>
+            </div>
+            <div class="progress-bar"><div class="fill" id="progressFill" style="width:0%"></div></div>
+        </div>
 
-        <div class="import-area">
-            <label style="font-size:13px;color:#aaa">Import (standplan.json einfuegen):</label>
+        <!-- Placed stands -->
+        <div class="sidebar-section placed-section">
+            <h3 id="placedTitle">Platziert (0)</h3>
+            <ul class="placed-list" id="placedList"></ul>
+        </div>
+
+        <!-- Import -->
+        <div class="sidebar-section">
+            <label style="font-size:13px;color:#aaa">Import (standplan.json):</label>
             <textarea id="importArea" placeholder='{"hallen":{...},"staende":{...}}'></textarea>
             <button onclick="importJSON()" style="margin-top:5px;width:100%">Importieren</button>
         </div>
@@ -229,24 +255,60 @@
 <div class="coords-display" id="coordsDisplay">X: --.-- % | Y: --.-- %</div>
 
 <div class="help">
-    <strong>Bedienung:</strong><br>
-    <kbd>Klick</kbd> Punkt/Rechteck setzen<br>
-    <kbd>M</kbd> Modus wechseln (Punkt/Rechteck)<br>
-    <kbd>Del</kbd> Ausgew&auml;hlten Stand l&ouml;schen<br>
+    <strong>Workflow:</strong><br>
+    1. Halle waehlen (oben)<br>
+    2. Stand in der Liste anklicken (gelb)<br>
+    3. Position auf dem Plan klicken<br>
+    4. Fertig! Naechsten Stand waehlen<br><br>
+    <kbd>M</kbd> Punkt/Rechteck-Modus<br>
+    <kbd>Del</kbd> Ausgewaehlten loeschen<br>
     <kbd>Esc</kbd> Auswahl aufheben<br>
-    Rechteck-Modus: Klick+Drag
+    Rechteck: Klick+Drag
 </div>
 
 <script>
+// ===== HALL CONFIG =====
+const HALL_CONFIG = {
+    FW:  { bild: '../public/img/plan/FW.jpg',  label: 'Foyer West',        prefixes: ['FW', 'AT'] },
+    FG:  { bild: '../public/img/plan/FG.jpg',  label: 'Freigelaende West', prefixes: ['FG', 'FGO'] },
+    A3:  { bild: '../public/img/plan/A3.jpg',  label: 'Halle A3',          prefixes: ['A3'] },
+    A4:  { bild: '../public/img/plan/A4.jpg',  label: 'Halle A4',          prefixes: ['A4'] },
+    A5:  { bild: '../public/img/plan/A5.jpg',  label: 'Halle A5',          prefixes: ['A5'] },
+    A6:  { bild: '../public/img/plan/A6.jpg',  label: 'Halle A6',          prefixes: ['A6'] },
+};
+
+// Export paths (for the generated JSON, different from local dev paths)
+const EXPORT_PATHS = {
+    FW:  '/img/plan/FW.jpg',
+    AT:  '/img/plan/FW.jpg',
+    FG:  '/img/plan/FG.jpg',
+    FGO: '/img/plan/FG.jpg',
+    A3:  '/img/plan/A3.jpg',
+    A4:  '/img/plan/A4.jpg',
+    A5:  '/img/plan/A5.jpg',
+    A6:  '/img/plan/A6.jpg',
+};
+
+const EXPORT_LABELS = {
+    FW:  'Foyer West',
+    AT:  'Foyer West (Atrium)',
+    FG:  'Freigelaende West',
+    FGO: 'Freigelaende Ost',
+    A3:  'Halle A3',
+    A4:  'Halle A4',
+    A5:  'Halle A5',
+    A6:  'Halle A6',
+};
+
 // ===== STATE =====
 const state = {
-    hallen: {},        // { prefix: { bild: "data:...", label: "Name" } }
-    staende: {},       // { "H1-A01": { x, y, w?, h? } }
-    currentHalle: '',  // active prefix
-    selectedStand: null,
-    mode: 'point',     // 'point' or 'rect'
-    rectStart: null,   // { x, y } during rect drawing
-    fileMap: {}        // prefix -> original filename
+    staende: {},           // placed: { "A3-300": { x, y, w?, h? } }
+    allStandNummern: [],   // all stand numbers from aussteller.json
+    currentHalle: '',
+    selectedStand: null,   // selected in placed list (for deletion)
+    pendingPick: null,     // stand number selected for placement
+    mode: 'point',
+    rectStart: null,
 };
 
 // ===== DOM =====
@@ -256,96 +318,183 @@ const dropZone = document.getElementById('dropZone');
 const crosshair = document.getElementById('crosshair');
 const rectPreview = document.getElementById('rectPreview');
 const coordsDisplay = document.getElementById('coordsDisplay');
-const standList = document.getElementById('standList');
 const halleSelect = document.getElementById('halleSelect');
 const modeIndicator = document.getElementById('modeIndicator');
 const statsEl = document.getElementById('stats');
-const sidebarTitle = document.getElementById('sidebarTitle');
+const pendingList = document.getElementById('pendingList');
+const placedList = document.getElementById('placedList');
+const pendingTitle = document.getElementById('pendingTitle');
+const placedTitle = document.getElementById('placedTitle');
+const progressFill = document.getElementById('progressFill');
+const loadStatus = document.getElementById('loadStatus');
 
-// ===== HALLE MANAGEMENT =====
-function addHalle() {
-    const prefix = prompt('Hallen-Prefix (z.B. FG, H1, H2):');
-    if (!prefix) return;
-    const label = prompt('Anzeigename (z.B. Freigelaende, Halle 1):');
-    if (!label) return;
+// ===== LOAD AUSSTELLER DATA =====
+async function loadAusstellerData() {
+    loadStatus.textContent = 'Lade Aussteller...';
+    loadStatus.className = 'load-status warn';
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (ev) => {
-            state.hallen[prefix] = { bild: `/img/plan/${file.name}`, label, dataUrl: ev.target.result };
-            state.fileMap[prefix] = file.name;
-            updateHalleSelect();
-            halleSelect.value = prefix;
-            switchHalle(prefix);
-        };
-        reader.readAsDataURL(file);
-    };
-    input.click();
-}
+    try {
+        const res = await fetch('../public/api/aussteller.json');
+        const data = await res.json();
 
-function updateHalleSelect() {
-    halleSelect.innerHTML = '<option value="">-- Bild laden --</option>';
-    for (const [prefix, info] of Object.entries(state.hallen)) {
-        const opt = document.createElement('option');
-        opt.value = prefix;
-        opt.textContent = `${prefix} - ${info.label}`;
-        halleSelect.appendChild(opt);
+        if (data.aussteller && data.aussteller.length > 0) {
+            state.allStandNummern = data.aussteller
+                .map(a => a.stand)
+                .filter(s => s && s.includes('-'))
+                .sort();
+
+            loadStatus.textContent = `${state.allStandNummern.length} Standnummern geladen`;
+            loadStatus.className = 'load-status ok';
+        } else {
+            loadStatus.textContent = 'aussteller.json leer - manuell eingeben';
+            loadStatus.className = 'load-status warn';
+        }
+    } catch (e) {
+        loadStatus.textContent = 'aussteller.json nicht gefunden - manuell eingeben';
+        loadStatus.className = 'load-status warn';
     }
+
+    updateStats();
+    renderPending();
 }
+
+// ===== HALL SWITCH =====
+halleSelect.addEventListener('change', (e) => switchHalle(e.target.value));
 
 function switchHalle(prefix) {
     state.currentHalle = prefix;
     state.selectedStand = null;
-    const info = state.hallen[prefix];
-    if (info) {
-        mapImage.src = info.dataUrl;
+    state.pendingPick = null;
+
+    const config = HALL_CONFIG[prefix];
+    if (config) {
+        mapImage.src = config.bild;
         mapImage.style.display = 'block';
         dropZone.style.display = 'none';
     } else {
         mapImage.style.display = 'none';
         dropZone.style.display = 'flex';
     }
+
     renderMarkers();
-    renderStandList();
+    renderPending();
+    renderPlaced();
+    updateStats();
 }
 
-halleSelect.addEventListener('change', (e) => switchHalle(e.target.value));
+// ===== GET STANDS FOR CURRENT HALL =====
+function getPrefixesForHall(hall) {
+    const config = HALL_CONFIG[hall];
+    return config ? config.prefixes : [hall];
+}
 
-// ===== DRAG & DROP =====
-dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    dropZone.classList.remove('dragover');
-    const file = e.dataTransfer.files[0];
-    if (!file || !file.type.startsWith('image/')) return;
+function standBelongsToHall(standNr, hall) {
+    const prefixes = getPrefixesForHall(hall);
+    return prefixes.some(p => standNr.startsWith(p + '-'));
+}
 
-    if (!state.currentHalle) {
-        const prefix = prompt('Hallen-Prefix (z.B. FG, H1, H2):');
-        if (!prefix) return;
-        const label = prompt('Anzeigename (z.B. Freigelaende, Halle 1):');
-        if (!label) return;
-        state.hallen[prefix] = { bild: `/img/plan/${file.name}`, label };
-        state.fileMap[prefix] = file.name;
-        state.currentHalle = prefix;
-        updateHalleSelect();
-        halleSelect.value = prefix;
+function getHallStands() {
+    if (!state.currentHalle) return { pending: [], placed: [] };
+    const all = state.allStandNummern.filter(s => standBelongsToHall(s, state.currentHalle));
+    const placed = all.filter(s => state.staende[s]);
+    const pending = all.filter(s => !state.staende[s]);
+    // Also include manually placed stands not in aussteller.json
+    const extraPlaced = Object.keys(state.staende)
+        .filter(s => standBelongsToHall(s, state.currentHalle) && !all.includes(s));
+    return { pending, placed: [...placed, ...extraPlaced].sort() };
+}
+
+// ===== RENDER PENDING LIST =====
+function renderPending() {
+    const { pending } = getHallStands();
+    pendingTitle.textContent = `Noch zu platzieren (${pending.length})`;
+    pendingList.innerHTML = '';
+
+    for (const nr of pending) {
+        const li = document.createElement('li');
+        li.textContent = nr;
+        if (state.pendingPick === nr) li.classList.add('active');
+        li.addEventListener('click', () => {
+            state.pendingPick = (state.pendingPick === nr) ? null : nr;
+            state.selectedStand = null;
+            renderPending();
+            renderPlaced();
+            renderMarkers();
+        });
+        pendingList.appendChild(li);
     }
 
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-        state.hallen[state.currentHalle].dataUrl = ev.target.result;
-        switchHalle(state.currentHalle);
-    };
-    reader.readAsDataURL(file);
-});
+    updateProgress();
+}
 
-// ===== COORDINATE CALCULATION =====
+// ===== RENDER PLACED LIST =====
+function renderPlaced() {
+    const { placed } = getHallStands();
+    placedTitle.textContent = `Platziert (${placed.length})`;
+    placedList.innerHTML = '';
+
+    for (const key of placed) {
+        const data = state.staende[key];
+        if (!data) continue;
+
+        const li = document.createElement('li');
+        li.className = key === state.selectedStand ? 'selected' : '';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = key;
+
+        const coordsSpan = document.createElement('span');
+        coordsSpan.className = 'coords';
+        coordsSpan.textContent = data.w
+            ? `${data.x}/${data.y} (${data.w}x${data.h})`
+            : `${data.x}/${data.y}`;
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn-delete';
+        delBtn.textContent = '\u00d7';
+        delBtn.title = 'Loeschen';
+        delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            delete state.staende[key];
+            if (state.selectedStand === key) state.selectedStand = null;
+            renderMarkers();
+            renderPending();
+            renderPlaced();
+            updateStats();
+        });
+
+        li.appendChild(nameSpan);
+        li.appendChild(coordsSpan);
+        li.appendChild(delBtn);
+
+        li.addEventListener('click', () => {
+            state.selectedStand = key;
+            state.pendingPick = null;
+            renderPending();
+            renderPlaced();
+            renderMarkers();
+        });
+
+        placedList.appendChild(li);
+    }
+}
+
+// ===== PROGRESS BAR =====
+function updateProgress() {
+    const { pending, placed } = getHallStands();
+    const total = pending.length + placed.length;
+    const pct = total > 0 ? (placed.length / total) * 100 : 0;
+    progressFill.style.width = pct + '%';
+}
+
+// ===== STATS =====
+function updateStats() {
+    const totalPlaced = Object.keys(state.staende).length;
+    const totalKnown = state.allStandNummern.length;
+    statsEl.textContent = `${totalPlaced} / ${totalKnown || '?'} Staende`;
+}
+
+// ===== COORDINATE CALC =====
 function getPercent(e) {
     const rect = mapImage.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -359,42 +508,30 @@ mapContainer.addEventListener('mousemove', (e) => {
     const pos = getPercent(e);
     coordsDisplay.textContent = `X: ${pos.x.toFixed(1)} % | Y: ${pos.y.toFixed(1)} %`;
 
-    // Crosshair
-    const rect = mapImage.getBoundingClientRect();
     const containerRect = mapContainer.getBoundingClientRect();
     crosshair.style.display = 'block';
-    crosshair.querySelector('.h-line').style.top = (e.clientY - containerRect.top) + 'px';
-    crosshair.querySelector('.v-line').style.left = (e.clientX - containerRect.left) + 'px';
+    crosshair.querySelector('.h-line').style.top = (e.clientY - containerRect.top + mapContainer.scrollTop) + 'px';
+    crosshair.querySelector('.v-line').style.left = (e.clientX - containerRect.left + mapContainer.scrollLeft) + 'px';
 
-    // Rect preview during drag
     if (state.mode === 'rect' && state.rectStart) {
-        const sx = state.rectStart.x;
-        const sy = state.rectStart.y;
-        const left = Math.min(sx, pos.x);
-        const top = Math.min(sy, pos.y);
-        const width = Math.abs(pos.x - sx);
-        const height = Math.abs(pos.y - sy);
+        const sx = state.rectStart.x, sy = state.rectStart.y;
         rectPreview.style.display = 'block';
-        rectPreview.style.left = left + '%';
-        rectPreview.style.top = top + '%';
-        rectPreview.style.width = width + '%';
-        rectPreview.style.height = height + '%';
+        rectPreview.style.left = Math.min(sx, pos.x) + '%';
+        rectPreview.style.top = Math.min(sy, pos.y) + '%';
+        rectPreview.style.width = Math.abs(pos.x - sx) + '%';
+        rectPreview.style.height = Math.abs(pos.y - sy) + '%';
     }
 });
 
-mapContainer.addEventListener('mouseleave', () => {
-    crosshair.style.display = 'none';
-});
+mapContainer.addEventListener('mouseleave', () => { crosshair.style.display = 'none'; });
 
 mapContainer.addEventListener('mousedown', (e) => {
     if (e.target.closest('.marker')) return;
     if (!mapImage.src || mapImage.style.display === 'none') return;
     if (!state.currentHalle) return;
 
-    const pos = getPercent(e);
-
     if (state.mode === 'rect') {
-        state.rectStart = pos;
+        state.rectStart = getPercent(e);
         e.preventDefault();
     }
 });
@@ -407,57 +544,76 @@ mapContainer.addEventListener('mouseup', (e) => {
     const pos = getPercent(e);
 
     if (state.mode === 'point') {
-        addStandPoint(pos);
+        placeStand(pos);
     } else if (state.mode === 'rect' && state.rectStart) {
-        const sx = state.rectStart.x;
-        const sy = state.rectStart.y;
-        const w = Math.abs(pos.x - sx);
-        const h = Math.abs(pos.y - sy);
+        const sx = state.rectStart.x, sy = state.rectStart.y;
+        const w = Math.abs(pos.x - sx), h = Math.abs(pos.y - sy);
 
         if (w < 0.5 && h < 0.5) {
-            // Too small, treat as point click
-            addStandPoint(pos);
+            placeStand(pos);
         } else {
             const cx = Math.round(((Math.min(sx, pos.x) + w / 2) * 10)) / 10;
             const cy = Math.round(((Math.min(sy, pos.y) + h / 2) * 10)) / 10;
-            addStandRect(cx, cy, Math.round(w * 10) / 10, Math.round(h * 10) / 10);
+            placeStand({ x: cx, y: cy, w: Math.round(w * 10) / 10, h: Math.round(h * 10) / 10 });
         }
         state.rectStart = null;
         rectPreview.style.display = 'none';
     }
 });
 
-// ===== ADD STAND =====
-function addStandPoint(pos) {
-    const nr = prompt(`Standnummer (ohne Prefix "${state.currentHalle}-"):`);
-    if (!nr) return;
-    const key = `${state.currentHalle}-${nr.trim()}`;
-    state.staende[key] = { x: pos.x, y: pos.y };
-    state.selectedStand = key;
+// ===== PLACE STAND =====
+function placeStand(pos) {
+    let key = state.pendingPick;
+
+    if (!key) {
+        // No pending pick - ask manually
+        const nr = prompt(`Standnummer (z.B. ${state.currentHalle}-101):`);
+        if (!nr) return;
+        key = nr.includes('-') ? nr.trim() : `${state.currentHalle}-${nr.trim()}`;
+    }
+
+    const entry = { x: pos.x, y: pos.y };
+    if (pos.w) { entry.w = pos.w; entry.h = pos.h; }
+    state.staende[key] = entry;
+
+    // Auto-advance to next pending stand
+    const { pending } = getHallStands();
+    state.pendingPick = pending.length > 0 ? pending[0] : null;
+    state.selectedStand = null;
+
     renderMarkers();
-    renderStandList();
+    renderPending();
+    renderPlaced();
     updateStats();
 }
 
-function addStandRect(cx, cy, w, h) {
-    const nr = prompt(`Standnummer (ohne Prefix "${state.currentHalle}-"):`);
-    if (!nr) return;
-    const key = `${state.currentHalle}-${nr.trim()}`;
-    state.staende[key] = { x: cx, y: cy, w, h };
-    state.selectedStand = key;
-    renderMarkers();
-    renderStandList();
+// ===== MANUAL ADD =====
+function manualAddPending() {
+    const input = document.getElementById('manualStandInput');
+    let val = input.value.trim();
+    if (!val) return;
+
+    if (!val.includes('-') && state.currentHalle) {
+        val = state.currentHalle + '-' + val;
+    }
+
+    if (!state.allStandNummern.includes(val)) {
+        state.allStandNummern.push(val);
+        state.allStandNummern.sort();
+    }
+
+    input.value = '';
+    renderPending();
     updateStats();
 }
 
-// ===== RENDER =====
+// ===== RENDER MARKERS =====
 function renderMarkers() {
     mapContainer.querySelectorAll('.marker').forEach(m => m.remove());
-    const prefix = state.currentHalle;
-    if (!prefix) return;
+    if (!state.currentHalle) return;
 
     for (const [key, data] of Object.entries(state.staende)) {
-        if (!key.startsWith(prefix + '-')) continue;
+        if (!standBelongsToHall(key, state.currentHalle)) continue;
 
         const marker = document.createElement('div');
         marker.className = 'marker' + (key === state.selectedStand ? ' selected' : '');
@@ -487,67 +643,14 @@ function renderMarkers() {
         marker.addEventListener('click', (e) => {
             e.stopPropagation();
             state.selectedStand = key;
+            state.pendingPick = null;
             renderMarkers();
-            renderStandList();
+            renderPending();
+            renderPlaced();
         });
 
         mapContainer.appendChild(marker);
     }
-}
-
-function renderStandList() {
-    const prefix = state.currentHalle;
-    const items = Object.entries(state.staende)
-        .filter(([k]) => !prefix || k.startsWith(prefix + '-'))
-        .sort(([a], [b]) => a.localeCompare(b));
-
-    sidebarTitle.textContent = `Staende (${items.length})`;
-    standList.innerHTML = '';
-
-    for (const [key, data] of items) {
-        const li = document.createElement('li');
-        li.className = key === state.selectedStand ? 'selected' : '';
-
-        const nameSpan = document.createElement('span');
-        nameSpan.textContent = key;
-
-        const coordsSpan = document.createElement('span');
-        coordsSpan.className = 'stand-coords';
-        const coordText = data.w
-            ? `${data.x}/${data.y} (${data.w}x${data.h})`
-            : `${data.x}/${data.y}`;
-        coordsSpan.textContent = coordText;
-
-        const delBtn = document.createElement('button');
-        delBtn.className = 'btn-delete';
-        delBtn.textContent = '\u00d7';
-        delBtn.title = 'Loeschen';
-        delBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            delete state.staende[key];
-            if (state.selectedStand === key) state.selectedStand = null;
-            renderMarkers();
-            renderStandList();
-            updateStats();
-        });
-
-        li.appendChild(nameSpan);
-        li.appendChild(coordsSpan);
-        li.appendChild(delBtn);
-
-        li.addEventListener('click', () => {
-            state.selectedStand = key;
-            renderMarkers();
-            renderStandList();
-        });
-
-        standList.appendChild(li);
-    }
-}
-
-function updateStats() {
-    const total = Object.keys(state.staende).length;
-    statsEl.textContent = `${total} Staende`;
 }
 
 // ===== MODE TOGGLE =====
@@ -559,7 +662,7 @@ function toggleMode() {
     rectPreview.style.display = 'none';
 }
 
-// ===== KEYBOARD SHORTCUTS =====
+// ===== KEYBOARD =====
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
@@ -570,23 +673,39 @@ document.addEventListener('keydown', (e) => {
             delete state.staende[state.selectedStand];
             state.selectedStand = null;
             renderMarkers();
-            renderStandList();
+            renderPending();
+            renderPlaced();
             updateStats();
         }
     } else if (e.key === 'Escape') {
         state.selectedStand = null;
+        state.pendingPick = null;
         state.rectStart = null;
         rectPreview.style.display = 'none';
         renderMarkers();
-        renderStandList();
+        renderPending();
+        renderPlaced();
     }
 });
 
 // ===== EXPORT / IMPORT =====
 function buildExportJSON() {
+    // Build hallen from all known prefixes that have stands
+    const usedPrefixes = new Set();
+    for (const key of Object.keys(state.staende)) {
+        const prefix = key.split('-')[0];
+        usedPrefixes.add(prefix);
+    }
+    // Always include all configured halls
+    for (const hall of Object.values(HALL_CONFIG)) {
+        for (const p of hall.prefixes) usedPrefixes.add(p);
+    }
+
     const hallen = {};
-    for (const [prefix, info] of Object.entries(state.hallen)) {
-        hallen[prefix] = { bild: info.bild, label: info.label };
+    for (const prefix of [...usedPrefixes].sort()) {
+        if (EXPORT_PATHS[prefix]) {
+            hallen[prefix] = { bild: EXPORT_PATHS[prefix], label: EXPORT_LABELS[prefix] || prefix };
+        }
     }
 
     const staende = {};
@@ -597,11 +716,7 @@ function buildExportJSON() {
         staende[key] = entry;
     }
 
-    return {
-        generated: new Date().toISOString(),
-        hallen,
-        staende
-    };
+    return { generated: new Date().toISOString(), hallen, staende };
 }
 
 function exportJSON() {
@@ -617,9 +732,7 @@ function exportJSON() {
 
 function copyJSON() {
     const json = JSON.stringify(buildExportJSON(), null, 2);
-    navigator.clipboard.writeText(json).then(() => {
-        alert('JSON in Zwischenablage kopiert!');
-    });
+    navigator.clipboard.writeText(json).then(() => alert('JSON in Zwischenablage kopiert!'));
 }
 
 function importJSON() {
@@ -627,40 +740,40 @@ function importJSON() {
     if (!text) return;
     try {
         const data = JSON.parse(text);
-        if (data.hallen) {
-            for (const [prefix, info] of Object.entries(data.hallen)) {
-                if (!state.hallen[prefix]) {
-                    state.hallen[prefix] = { bild: info.bild, label: info.label, dataUrl: '' };
-                }
-            }
-            updateHalleSelect();
-        }
         if (data.staende) {
             Object.assign(state.staende, data.staende);
         }
         renderMarkers();
-        renderStandList();
+        renderPending();
+        renderPlaced();
         updateStats();
-        alert(`Import erfolgreich: ${Object.keys(data.staende || {}).length} Staende`);
+        alert(`Import: ${Object.keys(data.staende || {}).length} Staende geladen`);
     } catch (e) {
         alert('Fehler beim Import: ' + e.message);
     }
 }
 
 function clearAll() {
-    if (!confirm('Alle Staende der aktuellen Halle loeschen?')) return;
-    const prefix = state.currentHalle;
-    if (!prefix) return;
+    if (!state.currentHalle) return;
+    const prefixes = getPrefixesForHall(state.currentHalle);
+    const label = HALL_CONFIG[state.currentHalle]?.label || state.currentHalle;
+    if (!confirm(`Alle Staende von ${label} loeschen?`)) return;
+
     for (const key of Object.keys(state.staende)) {
-        if (key.startsWith(prefix + '-')) {
+        if (prefixes.some(p => key.startsWith(p + '-'))) {
             delete state.staende[key];
         }
     }
     state.selectedStand = null;
+    state.pendingPick = null;
     renderMarkers();
-    renderStandList();
+    renderPending();
+    renderPlaced();
     updateStats();
 }
+
+// ===== INIT =====
+loadAusstellerData();
 </script>
 
 </body>
