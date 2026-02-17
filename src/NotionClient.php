@@ -25,15 +25,18 @@ class NotionClient
         if (!$data) return null;
 
         $props = $data['properties'] ?? [];
+        $datumStart = $props['Datum']['date']['start'] ?? null;
+        $datumEnd   = $props['Datum']['date']['end'] ?? null;
         return [
             'id'    => $pageId,
             'title' => $this->extractTitle($props['Titel'] ?? []),
             'typ'   => $props['Typ']['select']['name'] ?? '',
             'tag'   => $props['Tag']['select']['name'] ?? '',
-            'zeit'  => $props['Zeitslot']['formula']['string'] ?? '',
+            'zeit'  => $this->formatZeitslot($datumStart, $datumEnd),
             'ort'   => $props['Bühne/Ort']['select']['name'] ?? '',
             'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
-            'datum_start' => $props['Datum']['date']['start'] ?? null,
+            'datum_start' => $datumStart,
+            'datum_end'   => $datumEnd,
             'kategorien'  => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
             'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
             'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
@@ -188,7 +191,7 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
 
         $body['sorts'] = [
             ['property' => 'Tag', 'direction' => 'ascending'],
-            ['property' => 'Zeitslot', 'direction' => 'ascending'],
+            ['property' => 'Datum', 'direction' => 'ascending'],
         ];
 
         $all = [];
@@ -201,16 +204,19 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
 
             foreach ($data['results'] ?? [] as $page) {
                 $props = $page['properties'] ?? [];
+                $datumStart = $props['Datum']['date']['start'] ?? null;
+                $datumEnd   = $props['Datum']['date']['end'] ?? null;
                 $all[] = [
                     'id'           => str_replace('-', '', $page['id']),
                     'page_id'      => $page['id'],
                     'title'        => $this->extractTitle($props['Titel'] ?? []),
                     'typ'          => $props['Typ']['select']['name'] ?? '',
                     'tag'          => $props['Tag']['select']['name'] ?? '',
-                    'zeit'         => $props['Zeitslot']['formula']['string'] ?? '',
+                    'zeit'         => $this->formatZeitslot($datumStart, $datumEnd),
                     'ort'          => $props['Bühne/Ort']['select']['name'] ?? '',
                     'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
-                    'datum_start'  => $props['Datum']['date']['start'] ?? null,
+                    'datum_start'  => $datumStart,
+                    'datum_end'    => $datumEnd,
                     'kategorien'   => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
                     'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
                     'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
@@ -293,6 +299,29 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
     {
         $parts = $prop['rich_text'] ?? [];
         return implode('', array_map(fn($t) => $t['plain_text'] ?? '', $parts));
+    }
+
+    /**
+     * Zeitslot aus Datum-Start/End ableiten (Timezone-korrekt).
+     * z.B. "11:00 \u2013 11:45 Uhr" oder "11:00 Uhr" (ohne End).
+     */
+    private function formatZeitslot(?string $start, ?string $end): string
+    {
+        if (!$start) return '';
+        try {
+            $tz = new \DateTimeZone('Europe/Berlin');
+            $s = new \DateTime($start);
+            $s->setTimezone($tz);
+            $result = $s->format('H:i');
+            if ($end) {
+                $e = new \DateTime($end);
+                $e->setTimezone($tz);
+                $result .= " \u{2013} " . $e->format('H:i');
+            }
+            return $result . ' Uhr';
+        } catch (\Throwable $ex) {
+            return '';
+        }
     }
 
     private function request(string $method, string $endpoint, ?array $body = null): ?array
