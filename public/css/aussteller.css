@@ -256,6 +256,18 @@
     border-top-color: var(--as-braun-dark);
 }
 
+/* Label unten (bei Markern am oberen Bildrand) */
+.map-marker.label-below .map-marker-label {
+    bottom: auto;
+    top: calc(100% + 6px);
+}
+.map-marker.label-below .map-marker-label::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: var(--as-braun-dark);
+}
+
 /* Rect marker variant */
 .map-marker.rect-variant {
     transform: none;
@@ -267,6 +279,8 @@
 .map-marker.rect-variant .map-marker-dot { display: none; }
 .map-marker.rect-variant .map-marker-label { bottom: calc(100% + 4px); left: 0; transform: none; }
 .map-marker.rect-variant .map-marker-label::after { left: 12px; transform: none; }
+.map-marker.rect-variant.label-below .map-marker-label { bottom: auto; top: calc(100% + 4px); }
+.map-marker.rect-variant.label-below .map-marker-label::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--as-braun-dark); }
 
 @keyframes marker-pulse {
     0%   { box-shadow: 0 0 0 0 rgba(207,54,40, .7); }

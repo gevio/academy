@@ -276,6 +276,9 @@
     const label = document.createElement('div');
     label.className = 'map-marker-label';
     label.textContent = stand;
+    // Label nach unten wenn Marker im oberen Bereich (<15%)
+    const yPos = data.w && data.h ? (data.y - data.h / 2) : data.y;
+    if (yPos < 15) marker.classList.add('label-below');
     marker.appendChild(label);
 
     container.appendChild(marker);
