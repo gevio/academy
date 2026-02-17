@@ -1,5 +1,38 @@
 {
-  "generated": "2026-02-17T12:00:00+01:00",
-  "hallen": {},
-  "staende": {}
+    "generated": "2026-02-17T20:33:57+01:00",
+    "hallen": {
+        "FW": {
+            "bild": "/img/plan/FW.jpg",
+            "label": "Foyer West"
+        },
+        "AT": {
+            "bild": "/img/plan/FW.jpg",
+            "label": "Foyer West (Atrium)"
+        },
+        "FG": {
+            "bild": "/img/plan/FG.jpg",
+            "label": "Freigel\\u00e4nde West"
+        },
+        "FGO": {
+            "bild": "/img/plan/FG.jpg",
+            "label": "Freigel\\u00e4nde Ost"
+        },
+        "A3": {
+            "bild": "/img/plan/A3.jpg",
+            "label": "Halle A3"
+        },
+        "A4": {
+            "bild": "/img/plan/A4.jpg",
+            "label": "Halle A4"
+        },
+        "A5": {
+            "bild": "/img/plan/A5.jpg",
+            "label": "Halle A5"
+        },
+        "A6": {
+            "bild": "/img/plan/A6.jpg",
+            "label": "Halle A6"
+        }
+    },
+    "staende": {}
 }

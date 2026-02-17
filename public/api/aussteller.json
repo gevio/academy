@@ -1,1446 +1,2246 @@
 {
-    "generated": "2026-02-17T19:46:24+01:00",
+    "generated": "2026-02-17T20:33:57+01:00",
     "count": 160,
     "aussteller": [
         {
             "id": "32c779c65cfd42c982f0a46a2b02c94c",
+            "page_id": "32c779c6-5cfd-42c9-82f0-a46a2b02c94c",
             "firma": "4Wheel24 GmbH",
             "stand": "FG-200",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.4wheel24.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9417811b5b2a4f028905c03f1b14c1af",
+            "page_id": "9417811b-5b2a-4f02-8905-c03f1b14c1af",
             "firma": "4x4 Exploring GmbH",
             "stand": "A4-101",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://4x4-exploring.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a57d086fd2e94d3b9bfcbee5b5950ebd",
+            "page_id": "a57d086f-d2e9-4d3b-9bfc-bee5b5950ebd",
             "firma": "Abenteuer 4x4 e.K.",
             "stand": "A3-201",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.abenteuer4x4.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "32849b62e6094886bfca4207faac5014",
+            "page_id": "32849b62-e609-4886-bfca-4207faac5014",
             "firma": "ADAC Novosel GmbH",
             "stand": "A5-12",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://novoselgmbh.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1e465634562a4fa1bf7f0af2c0ccc748",
+            "page_id": "1e465634-562a-4fa1-bf7f-0af2c0ccc748",
             "firma": "advantours",
             "stand": "FW-102",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://advantours.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "982c2ac6e38c461987bafd92f158477b",
+            "page_id": "982c2ac6-e38c-4619-87ba-fd92f158477b",
             "firma": "Adventure Offroad",
             "stand": "A5-434",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://adventure-offroad.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "6ac8b5ef9c9848caa48b5656f519ab5c",
+            "page_id": "6ac8b5ef-9c98-48ca-a48b-5656f519ab5c",
             "firma": "AF-Tool",
             "stand": "A4-22",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0701739f61a3464d843953ddffcd3819",
+            "page_id": "0701739f-61a3-464d-8439-53ddffcd3819",
             "firma": "Arturs Gourmet",
             "stand": "A3-8",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3320eeb7325a4daaaaf1a282eb28036e",
+            "page_id": "3320eeb7-325a-4daa-aaf1-a282eb28036e",
             "firma": "ASP Eberle e.K.",
             "stand": "A4-205",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.asp-eberle.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "063b07661d13493686d1fafff74cfccd",
+            "page_id": "063b0766-1d13-4936-86d1-fafff74cfccd",
             "firma": "Australien-Shop Münster",
             "stand": "A5-16",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://australien-lifestyle.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8d73d907926c460c9b7718c3be71c829",
+            "page_id": "8d73d907-926c-460c-9b77-18c3be71c829",
             "firma": "batterium GmbH",
             "stand": "A3-311",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://ective.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c7b0e99404fd4f52ab38bb9ff30018fe",
+            "page_id": "c7b0e994-04fd-4f52-ab38-bb9ff30018fe",
             "firma": "be.overland",
             "stand": "A5-900",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://beoverland.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "7e9ba5fabca64ed6917cff10aae56aaf",
+            "page_id": "7e9ba5fa-bca6-4ed6-917c-ff10aae56aaf",
             "firma": "Belgischer Brocken Vertrieb",
             "stand": "A3-407",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.belgischerbrocken.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "de05e8c9a6164f75bf791f78d638ca2f",
+            "page_id": "de05e8c9-a616-4f75-bf79-1f78d638ca2f",
             "firma": "Brandstein GmbH",
             "stand": "FG-1100",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://brandstein.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "dca54c85c5924ea9bda79781dc3d0454",
+            "page_id": "dca54c85-c592-4ea9-bda7-9781dc3d0454",
             "firma": "Campdesign",
             "stand": "A4-10",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.campdesign.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a45ce1fd3f53454eb7198470ccd10433",
+            "page_id": "a45ce1fd-3f53-454e-b719-8470ccd10433",
             "firma": "Camper & Go",
             "stand": "A5-8",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.camper-and-go.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "95ceaa5517b048019baf932142424f2d",
+            "page_id": "95ceaa55-17b0-4801-9baf-932142424f2d",
             "firma": "Camperwerkstatt Pfister Azalai GmbH",
             "stand": "A4-225",
             "beschreibung": "",
             "kategorie": "Trägersysteme",
             "website": "http://www.azalai.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "aed2446426ef46199c0827142ffc7b16",
+            "page_id": "aed24464-26ef-4619-9c08-27142ffc7b16",
             "firma": "Camping Revolution 3",
             "stand": "A5-105",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.camping-revolution.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "aaf70ba773ee4044abded85285af9c0d",
+            "page_id": "aaf70ba7-73ee-4044-abde-d85285af9c0d",
             "firma": "Camppass",
             "stand": "FW-214",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.camppass.at",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "78e536c4d85f4b4b8d6a4d3b7fbe24d8",
+            "page_id": "78e536c4-d85f-4b4b-8d6a-4d3b7fbe24d8",
             "firma": "CaroSmart e.K.",
             "stand": "A3-20",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.carosmart.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "2e020cdbbe9344afb7178a2cd7f00745",
+            "page_id": "2e020cdb-be93-44af-b717-8a2cd7f00745",
             "firma": "Christine Zimmermann",
             "stand": "A3-14",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://afrikasia.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a2992910a3a04c7aa812718e3d4fbf57",
+            "page_id": "a2992910-a3a0-4c7a-a812-718e3d4fbf57",
             "firma": "cmpny one GmbH",
             "stand": "FG-1008",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.pundmann.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "b77aec68d3aa48c9b518ae9cb6b12b57",
+            "page_id": "b77aec68-d3aa-48c9-b518-ae9cb6b12b57",
             "firma": "Cobber Kühlschal",
             "stand": "A3-23",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://vuursteker.nl",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "4639d87bf2404321a375473fa287781b",
+            "page_id": "4639d87b-f240-4321-a375-473fa287781b",
             "firma": "Comfort-Line RG40 e.K.",
             "stand": "A4-414",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c6df5c757b8e40e9a665d63210734d0e",
+            "page_id": "c6df5c75-7b8e-40e9-a665-d63210734d0e",
             "firma": "CS-RELOC homebase services",
             "stand": "FW-923",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://cs-reloc.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "494efc85e41c43eea176491dd22c3c66",
+            "page_id": "494efc85-e41c-43ee-a176-491dd22c3c66",
             "firma": "Cser Adventures",
             "stand": "A4-214",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "ad5b6242b2c44bfb84961c460c0ee7a6",
+            "page_id": "ad5b6242-b2c4-4bfb-8496-1c460c0ee7a6",
             "firma": "Dachzelt Camp",
             "stand": "A4-201",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c241a289e7644c239cdba7cde8a465e2",
+            "page_id": "c241a289-e764-4c23-9cdb-a7cde8a465e2",
             "firma": "Dare to be Different Outdoor B.V.",
             "stand": "A5-133",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.dtbdoutdoor.eu",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "dec145b55a784b08bae6c6663175cfed",
+            "page_id": "dec145b5-5a78-4b08-bae6-c6663175cfed",
             "firma": "DEKA Kleben & Dichten GmbH",
             "stand": "A6-14",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://dekalin.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "fb6b790a0ffa490882bcce13231666f2",
+            "page_id": "fb6b790a-0ffa-4908-82bc-ce13231666f2",
             "firma": "Detec GmbH",
             "stand": "A4-424",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.teleskopschienen-shop.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c16cd248b2b7444695a3d818b4a3d076",
+            "page_id": "c16cd248-b2b7-4446-95a3-d818b4a3d076",
             "firma": "DIE WEGGEFÄHRTEN - OUTDOOR / MARKETING / AUSRÜSTUNG",
             "stand": "A4-131",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.dieweggefaehrten.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1453674436044d428ae55c89bd4d63d0",
+            "page_id": "14536744-3604-4d42-8ae5-5c89bd4d63d0",
             "firma": "Dopfer Reisemobilbau",
             "stand": "A6-300",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.dopfer-reisemobilbau.de/reisemobile",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "4d059cecf1c94dcd92a543916101b7cb",
+            "page_id": "4d059cec-f1c9-4dcd-92a5-43916101b7cb",
             "firma": "DSA-electronic",
             "stand": "A3-108",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.dsa-electronic.de/about/",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "03169d0a9d594a0d8e8c308033aa08f0",
+            "page_id": "03169d0a-9d59-4a0d-8e8c-308033aa08f0",
             "firma": "Ed Mahony",
             "stand": "A3-16",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.edmahony-knives.com/impressum",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e2cd370a7d6948fd993b9a22b8ce7d26",
+            "page_id": "e2cd370a-7d69-48fd-993b-9a22b8ce7d26",
             "firma": "EMUK",
             "stand": "FW-105",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.emuk.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e90b1b48b5894a39a997306b397a0212",
+            "page_id": "e90b1b48-b589-4a39-a997-306b397a0212",
             "firma": "epicPLY GmbH",
             "stand": "A3-203",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://epicply.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "92788300e4d44505a16c5fddb4ddb6f2",
+            "page_id": "92788300-e4d4-4505-a16c-5fddb4ddb6f2",
             "firma": "FENNEK",
             "stand": "FG-406",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://fennek-grill.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "55b6b800ba644f0c9b41e0c37748438b",
+            "page_id": "55b6b800-ba64-4f0c-9b41-e0c37748438b",
             "firma": "fiftyten",
             "stand": "FG-506",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.fiftyten.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "80d667a2796241639a196767e56fa5b0",
+            "page_id": "80d667a2-7962-4163-9a19-6767e56fa5b0",
             "firma": "Flextronic GmbH",
             "stand": "FW-920",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://flextronic.net",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "90ef3617f58a4fccb9ac9d4ccdbbe8fa",
+            "page_id": "90ef3617-f58a-4fcc-b9ac-9d4ccdbbe8fa",
             "firma": "Frank Sewert / Offroad & Outdoor",
             "stand": "A5-100",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.fs-offroad.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "7ed3a9727d8c4e45810fc399ce6fc85a",
+            "page_id": "7ed3a972-7d8c-4e45-810f-c399ce6fc85a",
             "firma": "Freisein Design",
             "stand": "A3-22",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://freisein-design.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9663cb15d2ba447983378b77b5204868",
+            "page_id": "9663cb15-d2ba-4479-8337-8b77b5204868",
             "firma": "FT Design",
             "stand": "FG-812",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.ft-design.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "30383d595dc449f39b2d7efa759fb98f",
+            "page_id": "30383d59-5dc4-49f3-9b2d-7efa759fb98f",
             "firma": "FüssLightline UG",
             "stand": "A3-101",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.fuesslightline.de/kontakt.html",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8f5062b4f7e44018a3dbe5765ffb5ba3",
+            "page_id": "8f5062b4-f7e4-4018-a3db-e5765ffb5ba3",
             "firma": "Gäng-Case GmbH",
             "stand": "FW-103",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.gaeng-case.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "56a2fa7d8e504cad9f1ae2f4777351b1",
+            "page_id": "56a2fa7d-8e50-4cad-9f1a-e2f4777351b1",
             "firma": "GAVON GTS GmbH",
             "stand": "A3-303",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.volker-lapp-outdoor.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "03ac71eb40154a688d3cfc6d1f3886f6",
+            "page_id": "03ac71eb-4015-4a68-8d3c-fc6d1f3886f6",
             "firma": "GlobeGuard GmbH",
             "stand": "A4-20",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://globeguard.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "34aba360c2a644beb0e3b0ac712999c4",
+            "page_id": "34aba360-c2a6-44be-b0e3-b0ac712999c4",
             "firma": "Goodguards",
             "stand": "A5-101",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.goodguards.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "69e9bd5fa9004706846c7feae1361f1d",
+            "page_id": "69e9bd5f-a900-4706-846c-7feae1361f1d",
             "firma": "GPC Automotive GmbH",
             "stand": "A4-108",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.germanpickupcustoms.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c10b419f85b846d4b7171fcf465cc0b4",
+            "page_id": "c10b419f-85b8-46d4-b717-1fcf465cc0b4",
             "firma": "Grayl",
             "stand": "A5-20",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.thegrayl.eu/de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f32ab01a64764f3b976b0e1d5dd96d64",
+            "page_id": "f32ab01a-6476-4f3b-976b-0e1d5dd96d64",
             "firma": "Heinr. Böker Baumwerk GmbH Solingen",
             "stand": "A4-310",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://boker.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a90616833eaa428d9a2834efa77edc62",
+            "page_id": "a9061683-3eaa-428d-9a28-34efa77edc62",
             "firma": "Holz & Form Kiene u. Endress GmbH",
             "stand": "A3-217",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.my-pickupcamping.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8eaee2c7a9ca442ea2f10b23509fc10c",
+            "page_id": "8eaee2c7-a9ca-442e-a2f1-0b23509fc10c",
             "firma": "Horntools GmbH",
             "stand": "A3-300",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.horntools.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "85f934d00502493f80d3238a13ab70f1",
+            "page_id": "85f934d0-0502-493f-80d3-238a13ab70f1",
             "firma": "Hünerkopf GmbH & Co. KG",
             "stand": "FG-1308",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.huenerkopf.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "d3cebb6d6e0a4f9c9e1b26005dbf6fed",
+            "page_id": "d3cebb6d-6e0a-4f9c-9e1b-26005dbf6fed",
             "firma": "IDHartmann GmbH",
             "stand": "FG-1506",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.marq-wohnkabinen.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "552cffd3082b438d8c8b6a8df2bd002f",
+            "page_id": "552cffd3-082b-438d-8c8b-6a8df2bd002f",
             "firma": "Isolierhandel24",
             "stand": "A6-101",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://islierhandel24.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0b6141d59f11490492a22769349c4652",
+            "page_id": "0b6141d5-9f11-4904-92a2-2769349c4652",
             "firma": "Kenucamp",
             "stand": "FW-918",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://kenucamp.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c2804fd264d74c19b8bcbbf858c6f987",
+            "page_id": "c2804fd2-64d7-4c19-b8bc-bbf858c6f987",
             "firma": "Kissenbrett.de",
             "stand": "A4-233",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://kissenbrett.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "32bed87d5f7648b7ad44ac7f6bae5948",
+            "page_id": "32bed87d-5f76-48b7-ad44-ac7f6bae5948",
             "firma": "Klatrucks e.K.",
             "stand": "FG-708",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.klatrucks.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "13937bca0383483f8ecb82ca35f8d6b5",
+            "page_id": "13937bca-0383-483f-8ecb-82ca35f8d6b5",
             "firma": "Klaus Faust",
             "stand": "A3-400",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "946368f660f046d9912059bea1f5d8e7",
+            "page_id": "946368f6-60f0-46d9-9120-59bea1f5d8e7",
             "firma": "Kleox GmbH",
             "stand": "A4-312",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.kleox.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "d07fb9e7bff24e90b7e86a7458aea590",
+            "page_id": "d07fb9e7-bff2-4e90-b7e8-6a7458aea590",
             "firma": "Kopfgetriebeöl GmbH & Co. KG",
             "stand": "A3-10",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.kopfgetriebeoel.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "2c9d01839a1c4d85b5f5dcfc4d24bfe6",
+            "page_id": "2c9d0183-9a1c-4d85-b5f5-dcfc4d24bfe6",
             "firma": "Lambda Coffee GmbH (Lambda Coffee)",
             "stand": "A4-221",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://lambda-coffee.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "95ca0c8e63b24891a633f0f14c3915a5",
+            "page_id": "95ca0c8e-63b2-4891-a633-f0f14c3915a5",
             "firma": "Landy Ausbau",
             "stand": "FW-106",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.landy-ausbau.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "167918fd8ed54019ba8966bc42a26eca",
+            "page_id": "167918fd-8ed5-4019-ba89-66bc42a26eca",
             "firma": "Leitertec GmbH",
             "stand": "A4-428",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.leitertec.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f1dcfb2fb3c245e3851961d3500280e4",
+            "page_id": "f1dcfb2f-b3c2-45e3-8519-61d3500280e4",
             "firma": "Lichtbaummobil doo",
             "stand": "A4-204",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.lichtbaummobil.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e9004fae2edb4a34827de4cf7644f9a6",
+            "page_id": "e9004fae-2edb-4a34-827d-e4cf7644f9a6",
             "firma": "Manufaktur Claus (PipiGuard)",
             "stand": "FG-704",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.manufaktur-claus.eu/impressum",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "4af8779c7eef4cf1ab104ddf0aa185e3",
+            "page_id": "4af8779c-7eef-4cf1-ab10-4ddf0aa185e3",
             "firma": "Marox GmbH",
             "stand": "A4-301",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://marox-offroad.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "cd35c9b21e4a4c4a86632a82aaa56c4d",
+            "page_id": "cd35c9b2-1e4a-4c4a-8663-2a82aaa56c4d",
             "firma": "MAWII",
             "stand": "A5-401",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://mawii.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "300dece4fb104b00bd92b3f84ea5bff0",
+            "page_id": "300dece4-fb10-4b00-bd92-b3f84ea5bff0",
             "firma": "MegaMobil-Campervans e.U.",
             "stand": "A5-224",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://megamobil-campervans.at",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "157933367d3746ce8dfc6140c3e20b0f",
+            "page_id": "15793336-7d37-46ce-8dfc-6140c3e20b0f",
             "firma": "Mercedes Benz Offroad",
             "stand": "A5-930",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://mb-offroad.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "69515c80eeaa477fb176f7653852d4b1",
+            "page_id": "69515c80-eeaa-477f-b176-f7653852d4b1",
             "firma": "Mira-Art GmbH",
             "stand": "FW-207",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.mira-art.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1c2eb2ca11334ee3955f9b7422dce12b",
+            "page_id": "1c2eb2ca-1133-4ee3-955f-9b7422dce12b",
             "firma": "MM Matratzenmanufaktur GmbH",
             "stand": "A4-109",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.flexima.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e8fc5e24b34b4e599f277d60f6b38909",
+            "page_id": "e8fc5e24-b34b-4e59-9f27-7d60f6b38909",
             "firma": "Moro GmbH",
             "stand": "A4-105",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://moro-solutions.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "6a3dacc5be6d4f48bb03dc0faade4f68",
+            "page_id": "6a3dacc5-be6d-4f48-bb03-dc0faade4f68",
             "firma": "Multi 4 GmbH",
             "stand": "FG-1304",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.multi4gmbh.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "6b45fe38cf7a4848ab2718c36ab56f12",
+            "page_id": "6b45fe38-cf7a-4848-ab27-18c36ab56f12",
             "firma": "Multimobil Bernhard Rainer",
             "stand": "A4-136",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.multimobil.at",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0f007b09abdc4d4fa9be9c40908e4192",
+            "page_id": "0f007b09-abdc-4d4f-a9be-9c40908e4192",
             "firma": "myvelo GmbH",
             "stand": "A6-20",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.myvelo.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1f3b6b7a896c44fe8d957738147e8006",
+            "page_id": "1f3b6b7a-896c-44fe-8d95-7738147e8006",
             "firma": "Nakatanenga 4x4-Equipment GmbH & Co. KG",
             "stand": "A5-201",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.nakatanenga-tours.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0d8e92c2bf9945d0b90b651f51982442",
+            "page_id": "0d8e92c2-bf99-45d0-b90b-651f51982442",
             "firma": "Natex Pro Markus Laufer",
             "stand": "A3-26",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f25b4904dd5341838a09ddcbab23c829",
+            "page_id": "f25b4904-dd53-4183-8a09-ddcbab23c829",
             "firma": "Naturbummler GmbH",
             "stand": "A3-210",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.naturbummler.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3de7d051e21a4b4b832f64186b3f57b1",
+            "page_id": "3de7d051-e21a-4b4b-832f-64186b3f57b1",
             "firma": "Nautic Camper",
             "stand": "A5-104",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://nautic-camper.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a965fc9f646c45fb9c9f37fd9dd39dd6",
+            "page_id": "a965fc9f-646c-45fb-9c9f-37fd9dd39dd6",
             "firma": "Naviton Spezialbeschichtungen by Nortech GmbH",
             "stand": "A3-124",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.naviton.eu",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "b7d606bc4d0446ad9550f5434cb4a662",
+            "page_id": "b7d606bc-4d04-46ad-9550-f5434cb4a662",
             "firma": "Nomad Campers",
             "stand": "FG-1106",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.nomadcampers.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9c7ea5f5d4fe41179fa3fdf8b8412872",
+            "page_id": "9c7ea5f5-d4fe-4117-9fa3-fdf8b8412872",
             "firma": "Nomadia Gear Ltd",
             "stand": "FG-1404",
             "beschreibung": "",
-            "kategorie": "Isolierung",
+            "kategorie": "",
             "website": "https://nomadio.shop",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "359a8608e3d64cc28aef8a158dce869b",
+            "page_id": "359a8608-e3d6-4cc2-8aef-8a158dce869b",
             "firma": "Northern Lights Campers",
             "stand": "FG-306",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://4x4-wuppenau.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "db3346cfdb8f4091a15bf4be928b4a55",
+            "page_id": "db3346cf-db8f-4091-a15b-f4be928b4a55",
             "firma": "nutools, Frank Luger",
             "stand": "A4-14",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://nutools.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "80509f33d99f482e934c869f8a7e0530",
+            "page_id": "80509f33-d99f-482e-934c-869f8a7e0530",
             "firma": "O'DONNELL MOONSHINE GmbH",
             "stand": "A3-24",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://odonnell.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "38d7ad0bb99b459184e80f45b6d69ad7",
+            "page_id": "38d7ad0b-b99b-4591-84e8-0f45b6d69ad7",
             "firma": "Ocean Cross GmbH",
             "stand": "FW-205",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.ocean-cross.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0d806252de5749f6b5e4a45217428f59",
+            "page_id": "0d806252-de57-49f6-b5e4-a45217428f59",
             "firma": "Oeventura Onlineshop",
             "stand": "FGO-100",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://oeventura.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3711e411df6d4f85b2146605cdf13a9a",
+            "page_id": "3711e411-df6d-4f85-b214-6605cdf13a9a",
             "firma": "Off Road Accessoires SA",
             "stand": "A3-326",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.adventure-equipment.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "b425ba0da97d4997a68b3b0e36d43f3d",
+            "page_id": "b425ba0d-a97d-4997-a68b-3b0e36d43f3d",
             "firma": "OLC Adventure",
             "stand": "A5-118",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.olc-adventure.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9e2da9eb56e947ceb38225764724e18b",
+            "page_id": "9e2da9eb-56e9-47ce-b382-25764724e18b",
             "firma": "Oliver und Manuela Zimmermann GbR",
             "stand": "A3-118",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://vanriding.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "5aabffc6198a48b8b00f213fc2ebe0d5",
+            "page_id": "5aabffc6-198a-48b8-b00f-213fc2ebe0d5",
             "firma": "Optimal Expedition / OPTIMAL RADOSŁAW PRYBA",
             "stand": "A4-123",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.optimal-expedition.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c35dacda0e504a5498c7e9ff7d2e869e",
+            "page_id": "c35dacda-0e50-4a54-98c7-e9ff7d2e869e",
             "firma": "Ormocamper",
             "stand": "FG-505",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://ormo-camper.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "5f23ca1cbd0c450b8e5670c7f3a1960e",
+            "page_id": "5f23ca1c-bd0c-450b-8e56-70c7f3a1960e",
             "firma": "Ormocar Reisemobile e.K., Inh. Peter Kuhn",
             "stand": "A6-306",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.ormocar.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "cd273317ce554c98912dc12bbc3f3c84",
+            "page_id": "cd273317-ce55-4c98-912d-c12bbc3f3c84",
             "firma": "Out-Trade GmbH",
             "stand": "FW-210",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.faltboot.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "71295849106c4447a66fdbcf26cae10a",
+            "page_id": "71295849-106c-4447-a66f-dbcf26cae10a",
             "firma": "OVERLANDTRUCKS",
             "stand": "A3-406",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.overlandtrucks.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8a008b179c264950b27349c738536e66",
+            "page_id": "8a008b17-9c26-4950-b273-49c738536e66",
             "firma": "P. D. Lederpflege Danter",
             "stand": "A3-402",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "43bcb653163e4e79ac72fb74118f52fd",
+            "page_id": "43bcb653-163e-4e79-ac72-fb74118f52fd",
             "firma": "Perfect Van GmbH",
             "stand": "A4-327",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.perfect-van.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "50b755d54c894daf862f3e111c4728d4",
+            "page_id": "50b755d5-4c89-4daf-862f-3e111c4728d4",
             "firma": "Phantommobil d.o.o.",
             "stand": "A3-229",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://aquila-adventure.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "fff22e7575bc45879d7c82b4eee7c0f2",
+            "page_id": "fff22e75-75bc-4587-9d7c-82b4eee7c0f2",
             "firma": "Philipp GmbH",
             "stand": "A5-438",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://helipott.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "61a912697425494888946a6a09a76be0",
+            "page_id": "61a91269-7425-4948-8894-6a6a09a76be0",
             "firma": "philippi elektrische Systeme gmbh",
             "stand": "A3-301",
             "beschreibung": "",
             "kategorie": "Schutz & Veredelung",
             "website": "http://philippi-online.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "6bd82a6170fc4d598d283d281db692da",
+            "page_id": "6bd82a61-70fc-4d59-8d28-3d281db692da",
             "firma": "Pistenkuh",
             "stand": "A5-340",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.pistenkuh.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3050a6167a24412bb6955e648027ef6e",
+            "page_id": "3050a616-7a24-412b-b695-5e648027ef6e",
             "firma": "Pro-Intex GmbH",
             "stand": "FW-910",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.seile.online",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e1e78cb4d51343549810b16338bb7726",
+            "page_id": "e1e78cb4-d513-4354-9810-b16338bb7726",
             "firma": "PWS Offroad GmbH",
             "stand": "A5-240",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.pws-offroad.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "319dbf3aee3c4b3ab8129cdd5d6927dd",
+            "page_id": "319dbf3a-ee3c-4b3a-b812-9cdd5d6927dd",
             "firma": "Rattlestop",
             "stand": "A4-11",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.rattlestop.shop/Informationen/Impressum",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "b71d33b3632d4470bb72fbbd852cc968",
+            "page_id": "b71d33b3-632d-4470-bb72-fbbd852cc968",
             "firma": "Red Rock Adventures GmbH",
             "stand": "A4-318",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.redrockadventures.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
+            "page_id": "1c9c419c-1b34-4d93-bdba-a9eb7ff76dca",
             "firma": "Reisch-Tech GmbH",
             "stand": "FG-808",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://reisch-tech.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9d278cd32bfe45d4ba2e79dfffe7fb96",
+            "page_id": "9d278cd3-2bfe-45d4-ba2e-79dfffe7fb96",
             "firma": "Restar Automotive Trade & Industry Co.",
             "stand": "A3-318",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.restarglobal.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "bd3033c3c179486ba80882248fdbd84e",
+            "page_id": "bd3033c3-c179-486b-a808-82248fdbd84e",
             "firma": "Retro Mobility GmbH",
             "stand": "FG-604",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.retromobility.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "73c14aa7df0b47958b8c21c095467b2e",
+            "page_id": "73c14aa7-df0b-4795-8b8c-21c095467b2e",
             "firma": "ROCKFOXX",
             "stand": "A4-100",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://rockfoxx.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "b77ca7b2055f4b1184ddc8152261a439",
+            "page_id": "b77ca7b2-055f-4b11-84dd-c8152261a439",
             "firma": "Rolling Space GmbH & Co. KG",
             "stand": "A5-541",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.rolling-space.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f2c55b9ad249483b985a79a990b6a734",
+            "page_id": "f2c55b9a-d249-483b-985a-79a990b6a734",
             "firma": "Roof Space",
             "stand": "FW-100",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://roofspace.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "895a3d2abed149009d6a481c1d32c970",
+            "page_id": "895a3d2a-bed1-4900-9d6a-481c1d32c970",
             "firma": "Rostschutzklinik",
             "stand": "A4-321",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.rostschutzklinik.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "58f4278dc44d41ad8d65c9f3a8fded91",
+            "page_id": "58f4278d-c44d-41ad-8d65-c9f3a8fded91",
             "firma": "Sam the Van GmbH",
             "stand": "A3-317",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://samthevan.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8e9da975d1d446f7915c57d9dbcf7657",
+            "page_id": "8e9da975-d1d4-46f7-915c-57d9dbcf7657",
             "firma": "Sandladder.net",
             "stand": "A5-10",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "90472da60fc1449d8e129e4e06e4d4b0",
+            "page_id": "90472da6-0fc1-449d-8e12-9e4e06e4d4b0",
             "firma": "Schaumstoff Center Schomerus GmbH u. Co. KG",
             "stand": "A3-309",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.schaumstoffcenter-schomerus.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1100b72c731a4dc6aa5a65ced29ddd0f",
+            "page_id": "1100b72c-731a-4dc6-aa5a-65ced29ddd0f",
             "firma": "Schreinerei Reuter",
             "stand": "A5-236",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.reuter-lennestadt.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "68d19888f28e458ead4f1189197ec1d2",
+            "page_id": "68d19888-f28e-458e-ad4f-1189197ec1d2",
             "firma": "Schwanheimer Industriekleber",
             "stand": "A4-2",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.schwanheimer-industriekleber.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "20d458cf049943ac9dd9e48bde100c02",
+            "page_id": "20d458cf-0499-43ac-9dd9-e48bde100c02",
             "firma": "Scriptor Brennerei GmbH",
             "stand": "A3-412",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.scriptor-brennerei.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "13138aebe69b4878b22aca3b01e9db12",
+            "page_id": "13138aeb-e69b-4878-b22a-ca3b01e9db12",
             "firma": "SETRENLO e.U.",
             "stand": "A6-18",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.setrenlo.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0e7f17a7492d49e484513bc685061ee8",
+            "page_id": "0e7f17a7-492d-49e4-8451-3bc685061ee8",
             "firma": "Sichtschutz Roth",
             "stand": "A6-30",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.sichtschutz-roth.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "5dc61a79d7114c9f958fbc5f4458983a",
+            "page_id": "5dc61a79-d711-4c9f-958f-bc5f4458983a",
             "firma": "Simex Outdoor International GmbH",
             "stand": "FW-209",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.bent-club.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f97e4e97ed3040c09b5750bedb7160d6",
+            "page_id": "f97e4e97-ed30-40c0-9b57-50bedb7160d6",
             "firma": "Simplex AER",
             "stand": "A4-402",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://simplexaer.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3de64c6e95954a74a4f21f61386c529e",
+            "page_id": "3de64c6e-9595-4a74-a4f2-1f61386c529e",
             "firma": "Simply Collect Inh. Carolin Veit",
             "stand": "A5-26",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://simply-collect.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "681776255c2140ec8ccad7f97c6070ac",
+            "page_id": "68177625-5c21-40ec-8cca-d7f97c6070ac",
             "firma": "SimplyBest GmbH",
             "stand": "A3-100",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.simplybest-gmbh.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "de10ca0608b64222ae0d5bdc32cef18c",
+            "page_id": "de10ca06-08b6-4222-ae0d-5bdc32cef18c",
             "firma": "Sleep'n 4x4",
             "stand": "A4-128",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://sleepn4x4.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "99431cec7b36432186cda0e2a1b06d33",
+            "page_id": "99431cec-7b36-4321-86cd-a0e2a1b06d33",
             "firma": "Smart Adventure GmbH",
             "stand": "A4-106",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.vanyx.io",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "3860f632010e402e8f75b2e5f4262078",
+            "page_id": "3860f632-010e-402e-8f75-b2e5f4262078",
             "firma": "Staukasten4You GmbH & Co. KG",
             "stand": "A4-227",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.staukasten4you.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "223425a293c3415f88939263a43bf6b2",
+            "page_id": "223425a2-93c3-415f-8893-9263a43bf6b2",
             "firma": "studiototipotente",
             "stand": "A5-18",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.studiototipotente.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "5029d793b19145ed86aa9f57b3271e49",
+            "page_id": "5029d793-b191-45ed-86aa-9f57b3271e49",
             "firma": "Sturm Mobile Kitchen",
             "stand": "A5-404",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.sturm-mobilekitchen.com/impressum",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "d696e010f4514f6aad82f45518e22167",
+            "page_id": "d696e010-f451-4f6a-ad82-f45518e22167",
             "firma": "STYYL GmbH",
             "stand": "A5-224",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://styyl.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "68b1ab36dfae4f7992f97e8f6cad5960",
+            "page_id": "68b1ab36-dfae-4f79-92f9-7e8f6cad5960",
             "firma": "TAB different GmbH",
             "stand": "A3-341",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://tabdifferent.com/events/",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8aefdfeb05f24904b22069a668518d45",
+            "page_id": "8aefdfeb-05f2-4904-b220-69a668518d45",
             "firma": "TBR-Tec GmbH",
             "stand": "A5-440",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.tbr-tec.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e78c89246a654cb6bac19252a564b4d9",
+            "page_id": "e78c8924-6a65-4cb6-bac1-9252a564b4d9",
             "firma": "Tembo Travel Services BV",
             "stand": "A3-116",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "95f208b7a36645af968a44150df3d144",
+            "page_id": "95f208b7-a366-45af-968a-44150df3d144",
             "firma": "Terracab GmbH",
             "stand": "A3-135",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.terracab.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "54584109264e47d2a5df7180be630f57",
+            "page_id": "54584109-264e-47d2-a5df-7180be630f57",
             "firma": "TESSER4x4",
             "stand": "A4-200",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.tesser4x4.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "ca2387a94be1494cbffb678b4f08db7b",
+            "page_id": "ca2387a9-4be1-494c-bffb-678b4f08db7b",
             "firma": "Thomas Schwinn Intertrading",
             "stand": "A4-4",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.tav3.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "12471389450145a39a087cd53eafb5be",
+            "page_id": "12471389-4501-45a3-9a08-7cd53eafb5be",
             "firma": "tjuub Dagmar Kinter",
             "stand": "A4-12",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://tjuub.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "bcc8df435e0f4396802a8c1ef1ea45d9",
+            "page_id": "bcc8df43-5e0f-4396-802a-8c1ef1ea45d9",
             "firma": "Tom's Fahrzeugtechnik Inhaber Veit Ramming",
             "stand": "A3-332",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.toms-fahrzeugtechnik.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a51ffd952d4842f9a7a294706006454b",
+            "page_id": "a51ffd95-2d48-42f9-a7a2-94706006454b",
             "firma": "Tomobil GmbH",
             "stand": "FW-928",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "8c33b007df964d0eb2be06457ad24825",
+            "page_id": "8c33b007-df96-4d0e-b2be-06457ad24825",
             "firma": "Tomtur GmbH",
             "stand": "A5-303",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.tomtur.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "ffe1ee08aad742afa2c8f07ba878c53e",
+            "page_id": "ffe1ee08-aad7-42af-a2c8-f07ba878c53e",
             "firma": "Total Cool LTD",
             "stand": "A5-131",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://totalcool.nl",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "c083957a03354f51b85e104378662e39",
+            "page_id": "c083957a-0335-4f51-b85e-104378662e39",
             "firma": "Travel-Lighting",
             "stand": "A4-219",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.travel-lighting.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9f68605bdcb54e0fbe4692ae5bf3eaf4",
+            "page_id": "9f68605b-dcb5-4e0f-be46-92ae5bf3eaf4",
             "firma": "Trayon Campers Europe",
             "stand": "A4-209",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.trayoncampers.eu",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "53f73905f58c4678aafc1e8a2e14000b",
+            "page_id": "53f73905-f58c-4678-aafc-1e8a2e14000b",
             "firma": "Twiga Travelcars",
             "stand": "A3-111",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://twigatravelcars.nl/en/",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "1ce4050f65ab489ea6b2771e81a03fbb",
+            "page_id": "1ce4050f-65ab-489e-a6b2-771e81a03fbb",
             "firma": "Vannado Schweiz c/o LIVEcomm GmbH",
             "stand": "A4-134",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.vannado.ch",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "576d2b0c21194a9a9772f0c601d656e8",
+            "page_id": "576d2b0c-2119-4a9a-9772-f0c601d656e8",
             "firma": "Wayfarer Camper Deutschland",
             "stand": "A5-124",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.wayfarercamper.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "19b98f971f9c474e9294bdb3b8a8fe1c",
+            "page_id": "19b98f97-1f9c-474e-9294-bdb3b8a8fe1c",
             "firma": "Wenatex Das Schlafsystem GmbH",
             "stand": "A5-426",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.wenatex.com/de/de/",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "823abef4ab3c4d4893415b6613e8b9ce",
+            "page_id": "823abef4-ab3c-4d48-9341-5b6613e8b9ce",
             "firma": "Winch Industry GmbH",
             "stand": "A3-300",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.seilwinden-direkt.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9fa18ab1e9134324ac542dc0853ef295",
+            "page_id": "9fa18ab1-e913-4324-ac54-2dc0853ef295",
             "firma": "WM aquatec GmbH & Co. KG",
             "stand": "A4-330",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.wm-aquatec.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "e7734abb033441f8ac38e2d083462528",
+            "page_id": "e7734abb-0334-41f8-ac38-e2d083462528",
             "firma": "Woelcke GmbH & Co. KG",
             "stand": "A5-109",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.woelcke.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "99d5117be50045f0bcb6aadb817d7ec7",
+            "page_id": "99d5117b-e500-45f0-bcb6-aadb817d7ec7",
             "firma": "Wohnmobilcenter Wehle",
             "stand": "FW-101",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://magicline-wehle.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "a93e8421af614b958b9115930e9d39a0",
+            "page_id": "a93e8421-af61-4b95-8b91-15930e9d39a0",
             "firma": "Wohnmobilcenter Wehle",
             "stand": "FG-304",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://magicline-wehle.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "0001b613145940178ef6ff0d1887ce8c",
+            "page_id": "0001b613-1459-4017-8ef6-ff0d1887ce8c",
             "firma": "WOLFBOARD",
             "stand": "A4-325",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://wolfboard.info",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "16a4ff4ec4e149098faa19d9b88eeb60",
+            "page_id": "16a4ff4e-c4e1-4909-8faa-19d9b88eeb60",
             "firma": "WomoLaden",
             "stand": "A6-22",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.womoladen.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "f8a2df478568497c9891f5f9d8fb327c",
+            "page_id": "f8a2df47-8568-497c-9891-f5f9d8fb327c",
             "firma": "WSR Camper",
             "stand": "FW-111",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://wsr-camper.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "9f9f6198952c4a0db987cfa589f7f877",
+            "page_id": "9f9f6198-952c-4a0d-b987-cfa589f7f877",
             "firma": "Xtremeworx",
             "stand": "FW-222",
             "beschreibung": "",
             "kategorie": "",
             "website": "",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "ee43ed7feb4d4c3c835c69596d8e63ba",
+            "page_id": "ee43ed7f-eb4d-4c3c-835c-69596d8e63ba",
             "firma": "Xtremobility Germany GmbH",
             "stand": "A4-327",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://xtremobility.de",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "22765f7ae76845038b426c809c6549d7",
+            "page_id": "22765f7a-e768-4503-8b42-6c809c6549d7",
             "firma": "Zurich Versicherung",
             "stand": "A5-442",
             "beschreibung": "",
             "kategorie": "",
             "website": "https://www.zurich.de/de-de/vor-ort/david-schroeder",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         },
         {
             "id": "481cdd3b5cc6416eafb16888f990d194",
+            "page_id": "481cdd3b-5cc6-416e-afb1-6888f990d194",
             "firma": "Zurrschienen.com Transportsysteme GmbH",
             "stand": "FG-1306",
             "beschreibung": "",
             "kategorie": "",
             "website": "http://www.zurrschienen.com",
-            "instagram": ""
+            "instagram": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
         }
     ]
 }

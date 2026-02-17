@@ -1,15 +1,27 @@
 /**
  * aussteller.js – Ausstellerliste, Suche, Filter, Standplan-Karte
- * Lädt /api/aussteller.json + /api/standplan.json und rendert client-seitig.
+ * Lädt /api/aussteller.json und rendert client-seitig.
+ * Hallen-Config ist statisch (Prefix → Bild/Label).
+ * Koordinaten kommen direkt aus den Aussteller-Daten (Notion).
  */
 (function () {
   'use strict';
 
   const AUSSTELLER_URL = '/api/aussteller.json';
-  const STANDPLAN_URL  = '/api/standplan.json';
+
+  // Statisches Hallen-Mapping (Prefix → Bild + Label)
+  const HALLEN = {
+    FW:  { bild: '/img/plan/FW.jpg', label: 'Foyer West' },
+    AT:  { bild: '/img/plan/FW.jpg', label: 'Foyer West (Atrium)' },
+    FG:  { bild: '/img/plan/FG.jpg', label: 'Freigel\u00e4nde West' },
+    FGO: { bild: '/img/plan/FG.jpg', label: 'Freigel\u00e4nde Ost' },
+    A3:  { bild: '/img/plan/A3.jpg', label: 'Halle A3' },
+    A4:  { bild: '/img/plan/A4.jpg', label: 'Halle A4' },
+    A5:  { bild: '/img/plan/A5.jpg', label: 'Halle A5' },
+    A6:  { bild: '/img/plan/A6.jpg', label: 'Halle A6' },
+  };
 
   let allAussteller = [];
-  let standplan = { hallen: {}, staende: {} };
   let currentSearch = '';
   let currentKat = 'all';
 
@@ -17,18 +29,10 @@
 
   async function loadData() {
     try {
-      const [ausstellerResp, standplanResp] = await Promise.all([
-        fetch(AUSSTELLER_URL),
-        fetch(STANDPLAN_URL),
-      ]);
-
-      if (!ausstellerResp.ok) throw new Error('Aussteller HTTP ' + ausstellerResp.status);
-      const ausstellerData = await ausstellerResp.json();
-      allAussteller = ausstellerData.aussteller || [];
-
-      if (standplanResp.ok) {
-        standplan = await standplanResp.json();
-      }
+      const resp = await fetch(AUSSTELLER_URL);
+      if (!resp.ok) throw new Error('Aussteller HTTP ' + resp.status);
+      const data = await resp.json();
+      allAussteller = data.aussteller || [];
 
       populateKatFilter();
       renderList();
@@ -177,8 +181,10 @@
     // Halle aus Prefix ableiten (z.B. "FG-A12" → "FG")
     const stand = aussteller.stand || '';
     const prefix = stand.includes('-') ? stand.split('-')[0] : '';
-    const halle = prefix ? standplan.hallen[prefix] : null;
-    const standData = standplan.staende[stand];
+    const halle = prefix ? HALLEN[prefix] : null;
+    const standData = (aussteller.stand_x != null && aussteller.stand_y != null)
+      ? { x: aussteller.stand_x, y: aussteller.stand_y, w: aussteller.stand_w, h: aussteller.stand_h }
+      : null;
 
     if (halle) {
       headerStand.textContent = `${halle.label} \u00b7 Stand ${stand}`;

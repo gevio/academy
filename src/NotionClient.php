@@ -152,6 +152,18 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
         ]);
     }
 
+    /**
+     * Beliebige Properties einer Page aktualisieren.
+     * $properties im Notion-API-Format, z.B.:
+     *   ['Stand_X' => ['number' => 45.2], 'Stand_Y' => ['number' => 32.1]]
+     */
+    public function updatePage(string $pageId, array $properties): ?array
+    {
+        return $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => $properties,
+        ]);
+    }
+
     // ── BULK READ (für JSON-Export) ──────────────────────
 
     /**

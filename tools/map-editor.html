@@ -204,7 +204,9 @@
 
     <div class="separator"></div>
 
-    <button class="primary" onclick="exportJSON()">Export JSON</button>
+    <button class="primary" onclick="saveToNotion()">&#x1f4be; Save to Notion</button>
+    <div class="separator"></div>
+    <button onclick="exportJSON()">Export JSON</button>
     <button onclick="copyJSON()">Copy JSON</button>
     <button class="danger" onclick="clearAll()">Halle leeren</button>
 
@@ -304,6 +306,7 @@ const EXPORT_LABELS = {
 const state = {
     staende: {},           // placed: { "A3-300": { x, y, w?, h? } }
     allStandNummern: [],   // all stand numbers from aussteller.json
+    standToPageId: {},     // mapping: stand number -> Notion page UUID
     currentHalle: '',
     selectedStand: null,   // selected in placed list (for deletion)
     pendingPick: null,     // stand number selected for placement
@@ -338,12 +341,28 @@ async function loadAusstellerData() {
         const data = await res.json();
 
         if (data.aussteller && data.aussteller.length > 0) {
-            state.allStandNummern = data.aussteller
-                .map(a => a.stand)
-                .filter(s => s && s.includes('-'))
-                .sort();
+            state.allStandNummern = [];
+            for (const a of data.aussteller) {
+                if (!a.stand || !a.stand.includes('-')) continue;
+                state.allStandNummern.push(a.stand);
 
-            loadStatus.textContent = `${state.allStandNummern.length} Standnummern geladen`;
+                // page_id Mapping speichern
+                if (a.page_id) {
+                    state.standToPageId[a.stand] = a.page_id;
+                }
+
+                // Bestehende Koordinaten aus Notion laden
+                if (a.stand_x != null && a.stand_y != null) {
+                    const entry = { x: a.stand_x, y: a.stand_y };
+                    if (a.stand_w != null) entry.w = a.stand_w;
+                    if (a.stand_h != null) entry.h = a.stand_h;
+                    state.staende[a.stand] = entry;
+                }
+            }
+            state.allStandNummern.sort();
+
+            const coordCount = Object.keys(state.staende).length;
+            loadStatus.textContent = `${state.allStandNummern.length} Staende, ${coordCount} mit Koordinaten`;
             loadStatus.className = 'load-status ok';
         } else {
             loadStatus.textContent = 'aussteller.json leer - manuell eingeben';
@@ -774,6 +793,87 @@ function clearAll() {
     updateStats();
 }
 
+// ===== SAVE TO NOTION =====
+async function saveToNotion() {
+    const placed = Object.entries(state.staende);
+    if (placed.length === 0) {
+        alert('Keine platzierten Staende zum Speichern.');
+        return;
+    }
+
+    // Nur Staende mit page_id koennen gespeichert werden
+    const items = [];
+    const skipped = [];
+    for (const [stand, data] of placed) {
+        const pageId = state.standToPageId[stand];
+        if (!pageId) {
+            skipped.push(stand);
+            continue;
+        }
+        items.push({
+            page_id: pageId,
+            stand: stand,
+            x: data.x,
+            y: data.y,
+            w: data.w || null,
+            h: data.h || null,
+        });
+    }
+
+    if (items.length === 0) {
+        alert('Keine Staende mit Notion page_id gefunden.');
+        return;
+    }
+
+    const skipMsg = skipped.length > 0 ? `\n${skipped.length} Staende ohne page_id werden uebersprungen.` : '';
+    if (!confirm(`${items.length} Staende in Notion speichern?${skipMsg}\n\nDas dauert ca. ${Math.ceil(items.length * 0.4)} Sekunden.`)) return;
+
+    // UI feedback
+    loadStatus.textContent = `Speichere 0/${items.length}...`;
+    loadStatus.className = 'load-status warn';
+
+    try {
+        // Sende in Batches von 20 um Timeout zu vermeiden
+        const BATCH_SIZE = 20;
+        let totalUpdated = 0;
+        let totalFailed = 0;
+        const allErrors = [];
+
+        for (let i = 0; i < items.length; i += BATCH_SIZE) {
+            const batch = items.slice(i, i + BATCH_SIZE);
+            loadStatus.textContent = `Speichere ${i}/${items.length}...`;
+
+            const resp = await fetch('/api/standplan-save.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items: batch }),
+            });
+
+            const result = await resp.json();
+            totalUpdated += result.updated || 0;
+            totalFailed += result.failed || 0;
+            if (result.errors) allErrors.push(...result.errors);
+        }
+
+        loadStatus.textContent = `Gespeichert: ${totalUpdated} OK, ${totalFailed} Fehler`;
+        loadStatus.className = totalFailed > 0 ? 'load-status warn' : 'load-status ok';
+
+        let msg = `${totalUpdated} Staende in Notion gespeichert.`;
+        if (totalFailed > 0) msg += `\n${totalFailed} Fehler: ${allErrors.join(', ')}`;
+        if (skipped.length > 0) msg += `\n${skipped.length} ohne page_id uebersprungen.`;
+        alert(msg);
+
+        // localStorage leeren nach erfolgreichem Save
+        if (totalFailed === 0) {
+            localStorage.removeItem('standplan-draft');
+        }
+    } catch (e) {
+        loadStatus.textContent = 'Fehler beim Speichern!';
+        loadStatus.className = 'load-status err';
+        alert('Fehler beim Speichern: ' + e.message);
+    }
+}
+
 // ===== LOCALSTORAGE PERSISTENCE =====
 function saveDraft() {
     try {
@@ -791,16 +891,8 @@ function loadDraft() {
 }
 
 async function loadExistingStandplan() {
-    try {
-        const res = await fetch('/api/standplan.json');
-        const data = await res.json();
-        if (data.staende && Object.keys(data.staende).length > 0) {
-            // Bestehende standplan.json als Basis laden
-            Object.assign(state.staende, data.staende);
-            loadStatus.textContent += ' | standplan.json geladen';
-        }
-    } catch (e) { /* not found - ok */ }
-    // Draft ueberschreibt (ist neuer)
+    // Koordinaten werden jetzt direkt aus aussteller.json geladen (in loadAusstellerData)
+    // localStorage-Draft ueberschreibt bei Bedarf
     loadDraft();
 }
 
