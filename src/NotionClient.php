@@ -30,7 +30,7 @@ class NotionClient
             'title' => $this->extractTitle($props['Titel'] ?? []),
             'typ'   => $props['Typ']['select']['name'] ?? '',
             'tag'   => $props['Tag']['select']['name'] ?? '',
-            'zeit'  => $props['Uhrzeit']['select']['name'] ?? '',
+            'zeit'  => $props['Zeitslot']['formula']['string'] ?? '',
             'ort'   => $props['Bühne/Ort']['select']['name'] ?? '',
             'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
             'datum_start' => $props['Datum']['date']['start'] ?? null,
@@ -188,7 +188,7 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
 
         $body['sorts'] = [
             ['property' => 'Tag', 'direction' => 'ascending'],
-            ['property' => 'Uhrzeit', 'direction' => 'ascending'],
+            ['property' => 'Zeitslot', 'direction' => 'ascending'],
         ];
 
         $all = [];
@@ -207,7 +207,7 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
                     'title'        => $this->extractTitle($props['Titel'] ?? []),
                     'typ'          => $props['Typ']['select']['name'] ?? '',
                     'tag'          => $props['Tag']['select']['name'] ?? '',
-                    'zeit'         => $props['Uhrzeit']['select']['name'] ?? '',
+                    'zeit'         => $props['Zeitslot']['formula']['string'] ?? '',
                     'ort'          => $props['Bühne/Ort']['select']['name'] ?? '',
                     'beschreibung' => $this->extractRichText($props['Beschreibung'] ?? []),
                     'datum_start'  => $props['Datum']['date']['start'] ?? null,
