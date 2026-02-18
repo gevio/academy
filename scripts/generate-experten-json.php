@@ -90,15 +90,9 @@ foreach ($referenten as $ref) {
     }
     sort($allKats);
 
-    // Firma aus den Aussteller-Verknüpfungen der Workshops ableiten
-    $firmen = [];
-    foreach ($workshops as $ws) {
-        foreach ($ws['aussteller'] ?? [] as $a) {
-            $f = $a['firma'] ?? '';
-            if ($f && !in_array($f, $firmen)) $firmen[] = $f;
-        }
-    }
-    $firma = implode(', ', $firmen);
+    // Firma: nur aus Referenten-Funktion oder Bio ableiten (nicht aus Workshop-Ausstellern,
+    // da diese dem Workshop gehören, nicht unbedingt dem einzelnen Referenten)
+    $firma = '';
 
     $result[] = [
         'id'        => $ref['id'],

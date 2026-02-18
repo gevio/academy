@@ -1,5 +1,5 @@
 {
-    "generated": "2026-02-18T20:19:19+01:00",
+    "generated": "2026-02-18T20:21:58+01:00",
     "count": 12,
     "experten": [
         {
@@ -7,7 +7,7 @@
             "name": "Dennis Dietmair",
             "vorname": "Dennis",
             "nachname": "Dietmair",
-            "foto": "https://prod-files-secure.s3.us-west-2.amazonaws.com/06f9c964-c82f-816a-8a35-0003d9f96007/19888e40-1cf6-401c-be70-fea2d9127e67/images.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YGSCFRLO%2F20260218%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260218T191918Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDTKv37IzsadBvK6F%2BMA0y1S3l4Jer5RtKvjm8xUKQLTgIgAwVTuF%2BEGj3VIuAmJRflwkxchCkLE8eY0fyMoKvscEYq%2FwMIbBAAGgw2Mzc0MjMxODM4MDUiDGZ6zaOtDZ%2FuXaLwsircA9yS0G9Kani%2BE%2FFlKjLwHnFbosNbOuJXFPDqAsz3isMdvS7vWNGZLVZv%2FpuRRqntrwUCM8Z7DQqlbzbsawNvkbw8A%2BrCoVDhR0yQGAyvsul%2BHlZlkEf4y1DWyOrr6sC0hhJy3Pfej0SYmqccyRsGKOnlzkkofI9OTrTpObHOInmg8gZ2agMYYN1t0y9F1ot5yDVOcsEh0qykpDEld2MK04HC%2Bx05pIu74Gjm9qbV4b1xXmrnsR37Lm2FpnIBsHuN%2FqgSHKs%2BIuox58hVE38e4iStREf8b7P8Dc7fm9%2F66SJdbhnqSf9zyaI6Ye2kaPWUllG6XmjRq21JRlQdQFimHqXvyckAPjYExCZT%2BGVyLa4Oah3saOCbyV4Ct%2Bv9h5Q55DzC%2BCCdDbaMTtt6RQAE1j5YIFtj0biaH87nJyAzHZeqe12ZykDc6oFT3YyltXkIB%2BrJPAWeJOF%2BVrD5mmvqgBVzNyEucUiZf6KlIuNDzHK4G28PU%2B4zOZGlwyaSkOan%2Bt63bQAVaUxLXWF8R9QRgULBsPyo%2BuoZ4QmyKJU%2FvUA6bN%2BcA6v8TkXHpd5tdRMHUz4XbL7zGvS4Xwrie2LqIIaK4okMjDydHjyGxyI%2Bwlhx87k2NTy%2Bg6ARCYRyMP%2BN2MwGOqUB4vHcDyXi6R98wkA6ZDRwiL8gRulaZwyLi0%2BuGlYm9y8EcA4806YsxtFanHiNZRH0cYkfTP9d%2BYQjlYwXekqH6qgEsRQtwI9%2Fc%2FSrhGzmdlelDUn48QMhtWeVb15sd%2BxUDLuo7lTc4WxWllP%2BxV3cqOJapG7H9uYOGZ47hLBxjZWQ46Ta0RxatEcRyEaO%2B21VyWbHGxWfZcnmC9HzaLgU4iQqros1&X-Amz-Signature=a633a23f87d52d33961da6de8cf08fbf8e5a27e090e799c6f8c2a2e926361f2e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "foto": "https://prod-files-secure.s3.us-west-2.amazonaws.com/06f9c964-c82f-816a-8a35-0003d9f96007/19888e40-1cf6-401c-be70-fea2d9127e67/images.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB46645WSL2XI%2F20260218%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260218T192158Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIEBemmX6glGJHwfJO4FZhn5XjsucB3daZOQB5NuyqMErAiEAlbs5bZsfXqA1o%2F6l7y4AjI5024FiknzFcDFMM3Aobs0q%2FwMIbBAAGgw2Mzc0MjMxODM4MDUiDIrfQzK1rCPHjNbzLyrcA84L4r4wVyRzsDTzSMRG7SlZD1bBiUGSJoe%2BOgN8ZoH0cgisFVa6pjgeD%2Ft1IZHOvjObpupb3TJFgCY4j3XOlgNROr5JimKv0DDcr8JTZqv7kMFrFY540qQzMh2A2g832dYz3VUR8eh53AEkVstsKslBH4dfaq2RMHDpaVWLFdSkcMUBWe2tyFvlF803%2BH5DyvebguymkUoRanpjBGlX4lzb6st8CI4o0val5aucfU5VR0G81ZKjcC5jR39f7ObAnJv69nt2fQUe9Bl6x0cRMITVWHWlactlt0hkstho%2FlNo1%2BKo%2FPecEpluYb%2B36PVSJlmK8RlCtrG3A3FiqA4k%2BWUxntyEKgsdJn5JszkMFYVRYOjjvJCvo0%2FLTfYokPbgPRCKs7uW6IqQ2Ebbo0XtG%2F8TQYBgJ7w%2B0oys1RuZ%2BClOfhQlliwE9fQ%2FMeGeSyu1DKHFVRetpR1u6jOxBjYB7J2jcR4DpoQchgDTU9k905WNMFGiTeQ6QBhf5hdB5nZfMeio6gOi5h%2Fa3DL2uq9kxetezQvsJxZbpeLQJMtWtmFB9ek9u93kUcYDMLhPot01dYHjm%2Bxg5tgxRQrYnlhe7H3CtnnOXmDD6h1OfSn7n8WBCsVbVs%2BcXnbavonoMP%2BN2MwGOqUBe8ObbfLMv3TJ8XO0pGY90DG7lOTyR1TYD%2Fou%2BXC8C1LFCGpDXiBOi3APtt6pu78nlSFSpTbtsHFfWPQ1p6Qb10qQ8FULH7JMSuYkZAt3eDlULd3rvkfNvloV0Q9eoT6S9xY%2FX11TKSpbst6MqfuaYKmwghOzSaO4LiUATlZUh8rUuidjBrCbjj1F3dC8tdupQgueClacrLrhWmBsX1b79IgALUYn&X-Amz-Signature=fca3f2e1e249ad55439e9b15c6e1fcd7e23b15215986aceacee74ca296e045a0&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
             "bio": "TÜV Rheinland zertifizierter KFZ-Sachverständiger (PersCert-0217463494), KFZ-Techniker-Meister und Unfallanalytiker. Anerkannter und geprüfter Sachverständiger für Wohnmobil, Wohnwagen und Camper in Norddeutschland. Inhaber von Nordic-Expert Sachverständigenbüro für Fahrzeugtechnik in Elmshorn. Spezialisiert auf Wertgutachten, Unfallgutachten und Fahrzeugbewertungen. Partner bei VanLife Ferropolis 2025 für G607-Gasprüfungen.",
             "funktion": "",
             "kategorie": "",
@@ -90,7 +90,7 @@
             "funktion": "",
             "kategorie": "",
             "website": "",
-            "firma": "Lichtbaummobil doo",
+            "firma": "",
             "kategorien": [
                 "Innenausbau & Module",
                 "Kabinen (Pickup & LKW)"
@@ -132,7 +132,7 @@
             "funktion": "Inhaber",
             "kategorie": "",
             "website": "busbastler.de",
-            "firma": "Reisch-Tech GmbH",
+            "firma": "",
             "kategorien": [
                 "Heizung & Klima"
             ],
@@ -206,7 +206,7 @@
             "funktion": "Geschäftsführer",
             "kategorie": "",
             "website": "",
-            "firma": "Reisch-Tech GmbH",
+            "firma": "",
             "kategorien": [
                 "Heizung & Klima"
             ],
@@ -246,7 +246,7 @@
             "funktion": "",
             "kategorie": "",
             "website": "",
-            "firma": "Lichtbaummobil doo",
+            "firma": "",
             "kategorien": [
                 "Innenausbau & Module",
                 "Kabinen (Pickup & LKW)"
@@ -322,7 +322,7 @@
             "funktion": "",
             "kategorie": "",
             "website": "",
-            "firma": "Lichtbaummobil doo",
+            "firma": "",
             "kategorien": [
                 "Innenausbau & Module",
                 "Kabinen (Pickup & LKW)"
@@ -394,7 +394,7 @@
             "funktion": "",
             "kategorie": "",
             "website": "",
-            "firma": "Lichtbaummobil doo",
+            "firma": "",
             "kategorien": [
                 "Innenausbau & Module",
                 "Kabinen (Pickup & LKW)"
@@ -436,7 +436,7 @@
             "funktion": "",
             "kategorie": "",
             "website": "",
-            "firma": "FT Design",
+            "firma": "",
             "kategorien": [
                 "Wassersysteme & Hygiene"
             ],
