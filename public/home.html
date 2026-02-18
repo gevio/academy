@@ -186,23 +186,7 @@
         font-size: .75rem;
     }
 
-    /* ── Share-Button ── */
-    .share-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: .4rem;
-        background: none;
-        border: 1px solid var(--border);
-        color: var(--text-light);
-        padding: .5rem 1rem;
-        border-radius: 8px;
-        font-size: .78rem;
-        cursor: pointer;
-        font-family: inherit;
-        transition: border-color .15s, color .15s;
-        margin-top: .3rem;
-    }
-    .share-btn:hover { border-color: var(--as-rot); color: var(--as-rot); }
+
 
     /* ── Install Guide (manuelle Anleitung) ── */
     .install-guide {
@@ -295,7 +279,7 @@
 
     <div class="home-footer">
         <p>Selbstausbauer Academy @ Adventure Southside 2026</p>
-        <button class="share-btn" id="share-btn">📤 Freunden empfehlen</button>
+        <button class="share-btn" onclick="(function(){var d={title:'AS26 Live \u2013 Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten &amp; Standplan \u2013 alles in einer App:',url:'https://as26.cool-camp.site'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()">📤 Freunden empfehlen</button>
         <p>
             <a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum & Datenschutz</a>
             <span style="color:var(--text-light);font-size:.75rem">&nbsp;·&nbsp;</span>
@@ -403,32 +387,6 @@
                 label.textContent = 'Meine Favoriten (' + favs.length + ')';
             }
         } catch {}
-    })();
-
-    // ── Share-Button ──
-    (function() {
-        const shareBtn = document.getElementById('share-btn');
-        if (!shareBtn) return;
-
-        const shareData = {
-            title: 'AS26 Live – Dein Messe-Begleiter',
-            text: 'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten & Standplan – alles in einer App:',
-            url: 'https://as26.cool-camp.site'
-        };
-
-        if (navigator.share) {
-            // Web Share API verfügbar (Mobile)
-            shareBtn.addEventListener('click', function() {
-                navigator.share(shareData).catch(function() {});
-            });
-        } else {
-            // Fallback: mailto-Link
-            shareBtn.addEventListener('click', function() {
-                const subject = encodeURIComponent(shareData.title);
-                const body = encodeURIComponent(shareData.text + '\n\n' + shareData.url);
-                window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-            });
-        }
     })();
 
     // ── Service Worker ──
