@@ -1,7 +1,39 @@
 {
-    "generated": "2026-02-18T20:09:43+01:00",
-    "count": 11,
+    "generated": "2026-02-18T20:19:19+01:00",
+    "count": 12,
     "experten": [
+        {
+            "id": "22b8373fd98e43e08e9e593fa0494233",
+            "name": "Dennis Dietmair",
+            "vorname": "Dennis",
+            "nachname": "Dietmair",
+            "foto": "https://prod-files-secure.s3.us-west-2.amazonaws.com/06f9c964-c82f-816a-8a35-0003d9f96007/19888e40-1cf6-401c-be70-fea2d9127e67/images.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466YGSCFRLO%2F20260218%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260218T191918Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDTKv37IzsadBvK6F%2BMA0y1S3l4Jer5RtKvjm8xUKQLTgIgAwVTuF%2BEGj3VIuAmJRflwkxchCkLE8eY0fyMoKvscEYq%2FwMIbBAAGgw2Mzc0MjMxODM4MDUiDGZ6zaOtDZ%2FuXaLwsircA9yS0G9Kani%2BE%2FFlKjLwHnFbosNbOuJXFPDqAsz3isMdvS7vWNGZLVZv%2FpuRRqntrwUCM8Z7DQqlbzbsawNvkbw8A%2BrCoVDhR0yQGAyvsul%2BHlZlkEf4y1DWyOrr6sC0hhJy3Pfej0SYmqccyRsGKOnlzkkofI9OTrTpObHOInmg8gZ2agMYYN1t0y9F1ot5yDVOcsEh0qykpDEld2MK04HC%2Bx05pIu74Gjm9qbV4b1xXmrnsR37Lm2FpnIBsHuN%2FqgSHKs%2BIuox58hVE38e4iStREf8b7P8Dc7fm9%2F66SJdbhnqSf9zyaI6Ye2kaPWUllG6XmjRq21JRlQdQFimHqXvyckAPjYExCZT%2BGVyLa4Oah3saOCbyV4Ct%2Bv9h5Q55DzC%2BCCdDbaMTtt6RQAE1j5YIFtj0biaH87nJyAzHZeqe12ZykDc6oFT3YyltXkIB%2BrJPAWeJOF%2BVrD5mmvqgBVzNyEucUiZf6KlIuNDzHK4G28PU%2B4zOZGlwyaSkOan%2Bt63bQAVaUxLXWF8R9QRgULBsPyo%2BuoZ4QmyKJU%2FvUA6bN%2BcA6v8TkXHpd5tdRMHUz4XbL7zGvS4Xwrie2LqIIaK4okMjDydHjyGxyI%2Bwlhx87k2NTy%2Bg6ARCYRyMP%2BN2MwGOqUB4vHcDyXi6R98wkA6ZDRwiL8gRulaZwyLi0%2BuGlYm9y8EcA4806YsxtFanHiNZRH0cYkfTP9d%2BYQjlYwXekqH6qgEsRQtwI9%2Fc%2FSrhGzmdlelDUn48QMhtWeVb15sd%2BxUDLuo7lTc4WxWllP%2BxV3cqOJapG7H9uYOGZ47hLBxjZWQ46Ta0RxatEcRyEaO%2B21VyWbHGxWfZcnmC9HzaLgU4iQqros1&X-Amz-Signature=a633a23f87d52d33961da6de8cf08fbf8e5a27e090e799c6f8c2a2e926361f2e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "bio": "TÜV Rheinland zertifizierter KFZ-Sachverständiger (PersCert-0217463494), KFZ-Techniker-Meister und Unfallanalytiker. Anerkannter und geprüfter Sachverständiger für Wohnmobil, Wohnwagen und Camper in Norddeutschland. Inhaber von Nordic-Expert Sachverständigenbüro für Fahrzeugtechnik in Elmshorn. Spezialisiert auf Wertgutachten, Unfallgutachten und Fahrzeugbewertungen. Partner bei VanLife Ferropolis 2025 für G607-Gasprüfungen.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Fahrzeugausbau",
+                "Zulassung & TÜV"
+            ],
+            "workshops": [
+                {
+                    "id": "3a91c864bdc442718541aa46e068b889",
+                    "title": "⛺️ Von der Werkstatt bis zur Grenze – Fahrzeuggutachten & Carnet de Passage",
+                    "typ": "Vortrag",
+                    "tag": "Freitag",
+                    "zeit": "12:00 – 12:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Zulassung & TÜV",
+                        "Fahrzeugausbau"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
         {
             "id": "f9a55a744a4b4cc9bac0a636d0872a4c",
             "name": "Uli Dolde",

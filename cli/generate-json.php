@@ -51,16 +51,20 @@ $generators = [
 foreach ($generators as $name => $script) {
     echo date('[Y-m-d H:i:s]') . " START {$name}\n";
     $gt0 = microtime(true);
-    ob_start();
-    try {
-        require $script;
+
+    // Jeder Generator läuft als Sub-Prozess (isolierter Scope)
+    $cmd = 'php ' . escapeshellarg($script) . ' 2>&1';
+    $output = '';
+    $rc = 0;
+    exec($cmd, $lines, $rc);
+    $output = implode("\n", $lines);
+
+    if ($rc === 0) {
         $results[$name] = 'OK';
-    } catch (Throwable $e) {
+    } else {
         $exitCode = 1;
         $results[$name] = 'FAIL';
-        echo date('[Y-m-d H:i:s]') . " ERROR [{$name}] – " . $e->getMessage() . "\n";
     }
-    $output = ob_get_clean();
     $gDur = round(microtime(true) - $gt0, 1);
 
     // Bei Fehler: Output anzeigen
