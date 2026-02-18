@@ -13,9 +13,66 @@ $t0 = microtime(true);
 require_once __DIR__ . '/../config/bootstrap.php';
 require_once __DIR__ . '/../src/NotionClient.php';
 
-$notion  = new NotionClient(NOTION_TOKEN);
-$outFile = __DIR__ . '/../public/api/experten.json';
-$wsFile  = __DIR__ . '/../public/api/workshops.json';
+$notion   = new NotionClient(NOTION_TOKEN);
+$outFile  = __DIR__ . '/../public/api/experten.json';
+$wsFile   = __DIR__ . '/../public/api/workshops.json';
+$imgDir   = __DIR__ . '/../public/img/experten';
+$imgUrl   = '/img/experten';               // relativer Web-Pfad
+
+if (!is_dir($imgDir)) {
+    mkdir($imgDir, 0755, true);
+}
+
+/**
+ * Notion-Foto herunterladen, als WebP speichern und lokalen Pfad zurückgeben.
+ * Gibt '' zurück, wenn kein Foto oder Download fehlschlägt.
+ */
+function downloadFoto(string $notionUrl, string $id, string $imgDir, string $imgUrl): string
+{
+    if (!$notionUrl) return '';
+
+    $localFile = $imgDir . '/' . $id . '.webp';
+    $localPath = $imgUrl . '/' . $id . '.webp';
+
+    // Herunterladen
+    $ctx = stream_context_create(['http' => [
+        'timeout'       => 15,
+        'ignore_errors' => true,
+    ]]);
+    $imgData = @file_get_contents($notionUrl, false, $ctx);
+    if (!$imgData || strlen($imgData) < 100) {
+        echo "   ⚠ Foto-Download fehlgeschlagen für {$id}\n";
+        // Fallback: existierende Datei behalten
+        return file_exists($localFile) ? $localPath : '';
+    }
+
+    // Mit GD laden und als WebP speichern (max 400px breit)
+    $src = @imagecreatefromstring($imgData);
+    if (!$src) {
+        echo "   ⚠ Foto nicht lesbar für {$id}\n";
+        return file_exists($localFile) ? $localPath : '';
+    }
+
+    $origW = imagesx($src);
+    $origH = imagesy($src);
+    $maxW  = 400;
+
+    if ($origW > $maxW) {
+        $newW = $maxW;
+        $newH = (int) round($origH * ($maxW / $origW));
+        $dst  = imagecreatetruecolor($newW, $newH);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newW, $newH, $origW, $origH);
+        imagedestroy($src);
+        $src = $dst;
+    }
+
+    imagewebp($src, $localFile, 82);
+    imagedestroy($src);
+
+    $size = round(filesize($localFile) / 1024, 1);
+    echo "   📸 Foto gespeichert: {$id}.webp ({$size} KB)\n";
+    return $localPath;
+}
 
 if (!NOTION_REFERENTEN_DB) {
     die("❌ NOTION_REFERENTEN_DB nicht gesetzt. Bitte in .env eintragen.\n");
@@ -94,12 +151,15 @@ foreach ($referenten as $ref) {
     // da diese dem Workshop gehören, nicht unbedingt dem einzelnen Referenten)
     $firma = '';
 
+    // Foto lokal herunterladen (Notion-S3-URLs sind temporär ~1h)
+    $fotoLocal = downloadFoto($ref['foto'], $ref['id'], $imgDir, $imgUrl);
+
     $result[] = [
         'id'        => $ref['id'],
         'name'      => $name,
         'vorname'   => $ref['vorname'],
         'nachname'  => $ref['nachname'],
-        'foto'      => $ref['foto'],
+        'foto'      => $fotoLocal,
         'bio'       => $ref['bio'],
         'funktion'  => $ref['funktion'],
         'kategorie' => $ref['kategorie'],
