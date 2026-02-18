@@ -163,12 +163,7 @@
     const filtered = getFilteredAussteller();
 
     if (countEl) {
-      const total = allAussteller.length;
-      if (currentSearch || currentKat !== 'all') {
-        countEl.textContent = `${filtered.length} von ${total} Ausstellern`;
-      } else {
-        countEl.textContent = `${total} Aussteller`;
-      }
+      countEl.textContent = '';
     }
 
     if (filtered.length === 0) {

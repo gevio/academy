@@ -7,7 +7,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'as26-live-v21';
+const CACHE_NAME = 'as26-live-v22';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
