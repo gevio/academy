@@ -149,8 +149,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
             <?php if ($referentPersonHtml || $firmaHtml): ?>
                 <div style="margin-top:.4rem;font-size:.85rem;color:var(--text-light)"><?php
                     if ($referentPersonHtml) echo $referentPersonHtml;
-                    if ($referentPersonHtml && $firmaHtml) echo ' · ';
-                    if ($firmaHtml) echo $firmaHtml;
+                    if ($firmaHtml) echo '<div style="margin-top:.3rem">' . $firmaHtml . '</div>';
                 ?></div>
             <?php endif; ?>
             <button class="fav-btn-landing" id="fav-btn" data-id="<?= htmlspecialchars($cleanId) ?>" title="Favorit">

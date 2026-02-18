@@ -240,7 +240,7 @@
       firmaHtml = escapeHtml(firma);
     }
 
-    if (personHtml && firmaHtml) return `${personHtml} · ${firmaHtml}`;
+    if (personHtml && firmaHtml) return `${personHtml}<div style="margin-top:.35rem">${firmaHtml}</div>`;
     if (firmaHtml) return firmaHtml;
     if (personHtml) return personHtml;
     return 'N.N.';
