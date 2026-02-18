@@ -218,9 +218,56 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
                     'datum_start'  => $datumStart,
                     'datum_end'    => $datumEnd,
                     'kategorien'   => array_map(fn($k) => $k['name'], $props['Kategorien']['multi_select'] ?? []),
+                    'status'       => $props['Status']['status']['name'] ?? '',
                     'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
                     'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
                     'aussteller_ids'      => array_column($props['Aussteller (AS26)']['relation'] ?? [], 'id'),
+                ];
+            }
+
+            $cursor = $data['next_cursor'] ?? null;
+        } while ($data['has_more'] ?? false);
+
+        return $all;
+    }
+
+    /**
+     * Alle Referenten aus der DB laden (paginiert).
+     * Gibt Array mit Vorname, Nachname, Foto, Bio, Funktion, Kategorie, Website zurück.
+     */
+    public function getAllReferenten(string $dbId): array
+    {
+        $body = ['page_size' => 100];
+        $all = [];
+        $cursor = null;
+
+        do {
+            if ($cursor) $body['start_cursor'] = $cursor;
+            $data = $this->queryDatabase($dbId, $body);
+            if (!$data) break;
+
+            foreach ($data['results'] ?? [] as $page) {
+                $props = $page['properties'] ?? [];
+
+                // Foto: erstes File aus dem Files-Property
+                $foto = '';
+                $fotoFiles = $props['Foto']['files'] ?? [];
+                if (!empty($fotoFiles)) {
+                    $f = $fotoFiles[0];
+                    $foto = $f['file']['url'] ?? $f['external']['url'] ?? '';
+                }
+
+                $all[] = [
+                    'id'        => str_replace('-', '', $page['id']),
+                    'page_id'   => $page['id'],
+                    'vorname'   => $this->extractRichText($props['Vorname'] ?? []),
+                    'nachname'  => $this->extractRichText($props['Nachname'] ?? []),
+                    'foto'      => $foto,
+                    'bio'       => $this->extractRichText($props['Kurz-Bio'] ?? []),
+                    'funktion'  => $this->extractRichText($props['Funktion'] ?? []),
+                    'kategorie' => $props['Kategorie']['select']['name'] ?? '',
+                    'website'   => $props['Website']['url'] ?? '',
+                    'workshop_ids' => array_column($props['Workshops & Vorträge']['relation'] ?? [], 'id'),
                 ];
             }
 

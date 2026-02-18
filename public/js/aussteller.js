@@ -8,6 +8,7 @@
   'use strict';
 
   const AUSSTELLER_URL = '/api/aussteller.json';
+  const WORKSHOPS_URL = '/api/workshops.json';
 
   // Statisches Hallen-Mapping (Prefix → Bild + Label)
   const HALLEN = {
@@ -29,10 +30,30 @@
 
   async function loadData() {
     try {
-      const resp = await fetch(AUSSTELLER_URL);
-      if (!resp.ok) throw new Error('Aussteller HTTP ' + resp.status);
-      const data = await resp.json();
+      const [ausResp, wsResp] = await Promise.all([
+        fetch(AUSSTELLER_URL),
+        fetch(WORKSHOPS_URL).catch(() => null),
+      ]);
+      if (!ausResp.ok) throw new Error('Aussteller HTTP ' + ausResp.status);
+      const data = await ausResp.json();
       allAussteller = data.aussteller || [];
+
+      // Workshop-Kategorien pro Aussteller-ID mappen
+      if (wsResp && wsResp.ok) {
+        const wsData = await wsResp.json();
+        const wsKatMap = {}; // aussteller-id → Set<kategorie>
+        for (const ws of (wsData.workshops || [])) {
+          for (const a of (ws.aussteller || [])) {
+            if (!wsKatMap[a.id]) wsKatMap[a.id] = new Set();
+            for (const k of (ws.kategorien || [])) {
+              wsKatMap[a.id].add(k);
+            }
+          }
+        }
+        for (const a of allAussteller) {
+          a.ws_kategorien = wsKatMap[a.id] ? [...wsKatMap[a.id]].sort() : [];
+        }
+      }
 
       populateKatFilter();
       renderList();
@@ -48,7 +69,13 @@
 
   function populateKatFilter() {
     const container = document.getElementById('tag-filters');
-    const kats = [...new Set(allAussteller.map(a => a.kategorie).filter(Boolean))].sort();
+    // Sammle Aussteller-Kategorie + Workshop-Kategorien
+    const katSet = new Set();
+    allAussteller.forEach(a => {
+      if (a.kategorie) katSet.add(a.kategorie);
+      (a.ws_kategorien || []).forEach(k => katSet.add(k));
+    });
+    const kats = [...katSet].sort();
 
     kats.forEach(kat => {
       const btn = document.createElement('button');
@@ -80,7 +107,8 @@
     let list = allAussteller;
 
     if (currentKat !== 'all') {
-      list = list.filter(a => a.kategorie === currentKat);
+      list = list.filter(a => a.kategorie === currentKat ||
+        (a.ws_kategorien || []).includes(currentKat));
     }
 
     if (currentSearch) {
@@ -109,6 +137,10 @@
       ? `<span class="aussteller-tag">${escapeHtml(a.kategorie)}</span>`
       : '';
 
+    const wsKatHtml = (a.ws_kategorien || [])
+      .map(k => `<span class="aussteller-ws-tag">${escapeHtml(k)}</span>`)
+      .join('');
+
     const standLabel = a.stand
       ? `<span class="aussteller-card-stand">${escapeHtml(a.stand)}</span>`
       : '';
@@ -119,7 +151,7 @@
           <div class="aussteller-card-firma">${escapeHtml(a.firma)}</div>
           ${standLabel}
           ${a.beschreibung ? `<div class="aussteller-card-desc">${escapeHtml(a.beschreibung)}</div>` : ''}
-          ${katHtml ? `<div class="aussteller-tags">${katHtml}</div>` : ''}
+          ${(katHtml || wsKatHtml) ? `<div class="aussteller-tags">${katHtml}${wsKatHtml}</div>` : ''}
         </div>
         <span class="aussteller-card-arrow">\u203A</span>
       </div>`;

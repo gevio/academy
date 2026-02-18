@@ -75,6 +75,12 @@
         .marker.rect-mode .dot { display: none; }
         .marker.rect-mode .label { top: -20px; left: 0; transform: none; }
 
+        .marker.venue .dot { background: #4caf50; width: 16px; height: 16px; border-color: #fff; box-shadow: 0 0 8px rgba(76,175,80,0.8); }
+        .marker.venue .label { color: #4caf50; font-size: 12px; font-weight: 600; }
+        .marker.venue:hover .dot { background: #66bb6a; box-shadow: 0 0 14px rgba(76,175,80,1); }
+        .marker.venue.selected .dot { background: #ffd93d; border-color: #ffd93d; box-shadow: 0 0 12px rgba(255,217,61,0.8); }
+        .marker.venue.selected .label { color: #ffd93d; }
+
         .crosshair { position: absolute; pointer-events: none; z-index: 5; display: none; }
         .crosshair .h-line, .crosshair .v-line { position: absolute; background: rgba(233,69,96,0.4); }
         .crosshair .h-line { left: 0; right: 0; height: 1px; }
@@ -199,6 +205,8 @@
         <option value="A4">A4 - Halle A4</option>
         <option value="A5">A5 - Halle A5</option>
         <option value="A6">A6 - Halle A6</option>
+        <option disabled>──────────</option>
+        <option value="overview">🗺️ Veranstaltungsorte</option>
     </select>
 
     <div class="separator"></div>
@@ -265,10 +273,10 @@
 
 <div class="help">
     <strong>Workflow:</strong><br>
-    1. Halle waehlen (oben)<br>
-    2. Stand in der Liste anklicken (gelb)<br>
+    1. Halle / Veranstaltungsorte waehlen<br>
+    2. Stand/Ort in der Liste anklicken (gelb)<br>
     3. Position auf dem Plan klicken<br>
-    4. Fertig! Naechsten Stand waehlen<br><br>
+    4. Fertig! Naechsten waehlen<br><br>
     <kbd>M</kbd> Punkt/Rechteck-Modus<br>
     <kbd>Del</kbd> Ausgewaehlten loeschen<br>
     <kbd>Esc</kbd> Auswahl aufheben<br>
@@ -309,6 +317,17 @@ const EXPORT_LABELS = {
     A6:  'Halle A6',
 };
 
+// ===== VENUE CONFIG =====
+const VENUE_LIST = [
+    { id: 'buehne-fgo',         label: 'Bühne Selbstausbau-Academy (FGO)' },
+    { id: 'buehne-a6',          label: 'Bühne (Halle A6)' },
+    { id: 'foyer-west',         label: 'Foyer West und Atrium' },
+    { id: 'raum-oesterreich',   label: 'Raum Österreich (Foyer West)' },
+    { id: 'raum-schweiz',       label: 'Raum Schweiz (Foyer West)' },
+    { id: 'raum-liechtenstein', label: 'Raum Liechtenstein (Foyer West)' },
+];
+const VENUE_LABEL_MAP = Object.fromEntries(VENUE_LIST.map(v => [v.id, v.label]));
+
 // ===== STATE =====
 const state = {
     staende: {},           // placed: { "A3-300": { x, y, w?, h? } }
@@ -319,6 +338,11 @@ const state = {
     pendingPick: null,     // stand number selected for placement
     mode: 'point',
     rectStart: null,
+    // Venue mode
+    orte: {},              // placed venues: { "buehne-fgo": { x, y } }
+    venueMode: false,
+    pendingVenue: null,    // venue id selected for placement
+    selectedVenue: null,   // venue selected in placed list
 };
 
 // ===== DOM =====
@@ -392,15 +416,30 @@ function switchHalle(prefix) {
     state.currentHalle = prefix;
     state.selectedStand = null;
     state.pendingPick = null;
+    state.pendingVenue = null;
+    state.selectedVenue = null;
 
-    const config = HALL_CONFIG[prefix];
-    if (config) {
-        mapImage.src = config.bild;
+    if (prefix === 'overview') {
+        state.venueMode = true;
+        mapImage.src = '/img/plan/overview.jpg';
         imageWrap.style.display = 'inline-block';
         dropZone.style.display = 'none';
+        state.mode = 'point';
+        modeIndicator.textContent = 'Punkt';
+        modeIndicator.className = 'mode-indicator point';
+        document.querySelector('.manual-input').style.display = 'none';
     } else {
-        imageWrap.style.display = 'none';
-        dropZone.style.display = 'flex';
+        state.venueMode = false;
+        document.querySelector('.manual-input').style.display = '';
+        const config = HALL_CONFIG[prefix];
+        if (config) {
+            mapImage.src = config.bild;
+            imageWrap.style.display = 'inline-block';
+            dropZone.style.display = 'none';
+        } else {
+            imageWrap.style.display = 'none';
+            dropZone.style.display = 'flex';
+        }
     }
 
     renderMarkers();
@@ -433,6 +472,25 @@ function getHallStands() {
 
 // ===== RENDER PENDING LIST =====
 function renderPending() {
+    if (state.venueMode) {
+        const pending = VENUE_LIST.filter(v => !state.orte[v.id]);
+        pendingTitle.textContent = `Noch zu platzieren (${pending.length})`;
+        pendingList.innerHTML = '';
+        for (const v of pending) {
+            const li = document.createElement('li');
+            li.textContent = v.label;
+            if (state.pendingVenue === v.id) li.classList.add('active');
+            li.addEventListener('click', () => {
+                state.pendingVenue = (state.pendingVenue === v.id) ? null : v.id;
+                state.selectedVenue = null;
+                renderPending(); renderPlaced(); renderMarkers();
+            });
+            pendingList.appendChild(li);
+        }
+        updateProgress();
+        return;
+    }
+
     const { pending } = getHallStands();
     pendingTitle.textContent = `Noch zu platzieren (${pending.length})`;
     pendingList.innerHTML = '';
@@ -456,6 +514,42 @@ function renderPending() {
 
 // ===== RENDER PLACED LIST =====
 function renderPlaced() {
+    if (state.venueMode) {
+        const placed = VENUE_LIST.filter(v => state.orte[v.id]);
+        placedTitle.textContent = `Platziert (${placed.length})`;
+        placedList.innerHTML = '';
+        for (const v of placed) {
+            const data = state.orte[v.id];
+            const li = document.createElement('li');
+            li.className = v.id === state.selectedVenue ? 'selected' : '';
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = v.label;
+            const coordsSpan = document.createElement('span');
+            coordsSpan.className = 'coords';
+            coordsSpan.textContent = `${data.x}/${data.y}`;
+            const delBtn = document.createElement('button');
+            delBtn.className = 'btn-delete';
+            delBtn.textContent = '\u00d7';
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                delete state.orte[v.id];
+                if (state.selectedVenue === v.id) state.selectedVenue = null;
+                saveVenueDraft();
+                renderMarkers(); renderPending(); renderPlaced(); updateStats();
+            });
+            li.appendChild(nameSpan);
+            li.appendChild(coordsSpan);
+            li.appendChild(delBtn);
+            li.addEventListener('click', () => {
+                state.selectedVenue = v.id;
+                state.pendingVenue = null;
+                renderPending(); renderPlaced(); renderMarkers();
+            });
+            placedList.appendChild(li);
+        }
+        return;
+    }
+
     const { placed } = getHallStands();
     placedTitle.textContent = `Platziert (${placed.length})`;
     placedList.innerHTML = '';
@@ -509,6 +603,12 @@ function renderPlaced() {
 
 // ===== PROGRESS BAR =====
 function updateProgress() {
+    if (state.venueMode) {
+        const total = VENUE_LIST.length;
+        const done = Object.keys(state.orte).length;
+        progressFill.style.width = (total > 0 ? (done / total) * 100 : 0) + '%';
+        return;
+    }
     const { pending, placed } = getHallStands();
     const total = pending.length + placed.length;
     const pct = total > 0 ? (placed.length / total) * 100 : 0;
@@ -517,6 +617,10 @@ function updateProgress() {
 
 // ===== STATS =====
 function updateStats() {
+    if (state.venueMode) {
+        statsEl.textContent = `${Object.keys(state.orte).length} / ${VENUE_LIST.length} Orte`;
+        return;
+    }
     const totalPlaced = Object.keys(state.staende).length;
     const totalKnown = state.allStandNummern.length;
     statsEl.textContent = `${totalPlaced} / ${totalKnown || '?'} Staende`;
@@ -591,6 +695,17 @@ mapContainer.addEventListener('mouseup', (e) => {
 
 // ===== PLACE STAND =====
 function placeStand(pos) {
+    if (state.venueMode) {
+        if (!state.pendingVenue) return;
+        state.orte[state.pendingVenue] = { x: pos.x, y: pos.y };
+        saveVenueDraft();
+        const nextPending = VENUE_LIST.filter(v => !state.orte[v.id]);
+        state.pendingVenue = nextPending.length > 0 ? nextPending[0].id : null;
+        state.selectedVenue = null;
+        renderMarkers(); renderPending(); renderPlaced(); updateStats();
+        return;
+    }
+
     let key = state.pendingPick;
 
     if (!key) {
@@ -639,6 +754,30 @@ function renderMarkers() {
     imageWrap.querySelectorAll('.marker').forEach(m => m.remove());
     if (!state.currentHalle) return;
 
+    if (state.venueMode) {
+        for (const [id, data] of Object.entries(state.orte)) {
+            const marker = document.createElement('div');
+            marker.className = 'marker venue' + (id === state.selectedVenue ? ' selected' : '');
+            marker.style.left = data.x + '%';
+            marker.style.top = data.y + '%';
+            const label = document.createElement('span');
+            label.className = 'label';
+            label.textContent = VENUE_LABEL_MAP[id] || id;
+            marker.appendChild(label);
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            marker.appendChild(dot);
+            marker.addEventListener('click', (e) => {
+                e.stopPropagation();
+                state.selectedVenue = id;
+                state.pendingVenue = null;
+                renderMarkers(); renderPending(); renderPlaced();
+            });
+            imageWrap.appendChild(marker);
+        }
+        return;
+    }
+
     for (const [key, data] of Object.entries(state.staende)) {
         if (!standBelongsToHall(key, state.currentHalle)) continue;
 
@@ -682,6 +821,7 @@ function renderMarkers() {
 
 // ===== MODE TOGGLE =====
 function toggleMode() {
+    if (state.venueMode) return;
     state.mode = state.mode === 'point' ? 'rect' : 'point';
     modeIndicator.textContent = state.mode === 'point' ? 'Punkt' : 'Rechteck';
     modeIndicator.className = 'mode-indicator ' + state.mode;
@@ -696,7 +836,12 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'm' || e.key === 'M') {
         toggleMode();
     } else if (e.key === 'Delete' || e.key === 'Backspace') {
-        if (state.selectedStand) {
+        if (state.venueMode && state.selectedVenue) {
+            delete state.orte[state.selectedVenue];
+            state.selectedVenue = null;
+            saveVenueDraft();
+            renderMarkers(); renderPending(); renderPlaced(); updateStats();
+        } else if (state.selectedStand) {
             delete state.staende[state.selectedStand];
             state.selectedStand = null;
             saveDraft();
@@ -708,6 +853,8 @@ document.addEventListener('keydown', (e) => {
     } else if (e.key === 'Escape') {
         state.selectedStand = null;
         state.pendingPick = null;
+        state.pendingVenue = null;
+        state.selectedVenue = null;
         state.rectStart = null;
         rectPreview.style.display = 'none';
         renderMarkers();
@@ -747,19 +894,30 @@ function buildExportJSON() {
     return { generated: new Date().toISOString(), hallen, staende };
 }
 
+function buildVenueExportJSON() {
+    const orte = {};
+    for (const [id, data] of Object.entries(state.orte)) {
+        orte[id] = { x: data.x, y: data.y, label: VENUE_LABEL_MAP[id] || id };
+    }
+    return { generated: new Date().toISOString(), bild: '/img/plan/overview.jpg', orte };
+}
+
 function exportJSON() {
-    const json = JSON.stringify(buildExportJSON(), null, 2);
+    const data = state.venueMode ? buildVenueExportJSON() : buildExportJSON();
+    const filename = state.venueMode ? 'veranstaltungsorte.json' : 'standplan.json';
+    const json = JSON.stringify(data, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'standplan.json';
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
 }
 
 function copyJSON() {
-    const json = JSON.stringify(buildExportJSON(), null, 2);
+    const data = state.venueMode ? buildVenueExportJSON() : buildExportJSON();
+    const json = JSON.stringify(data, null, 2);
     navigator.clipboard.writeText(json).then(() => alert('JSON in Zwischenablage kopiert!'));
 }
 
@@ -768,14 +926,18 @@ function importJSON() {
     if (!text) return;
     try {
         const data = JSON.parse(text);
-        if (data.staende) {
+        if (data.orte) {
+            Object.assign(state.orte, data.orte);
+            saveVenueDraft();
+            renderMarkers(); renderPending(); renderPlaced(); updateStats();
+            alert(`Import: ${Object.keys(data.orte).length} Veranstaltungsorte geladen`);
+        } else if (data.staende) {
             Object.assign(state.staende, data.staende);
+            renderMarkers(); renderPending(); renderPlaced(); updateStats();
+            alert(`Import: ${Object.keys(data.staende).length} Staende geladen`);
+        } else {
+            alert('Keine Daten zum Importieren gefunden.');
         }
-        renderMarkers();
-        renderPending();
-        renderPlaced();
-        updateStats();
-        alert(`Import: ${Object.keys(data.staende || {}).length} Staende geladen`);
     } catch (e) {
         alert('Fehler beim Import: ' + e.message);
     }
@@ -783,6 +945,17 @@ function importJSON() {
 
 function clearAll() {
     if (!state.currentHalle) return;
+
+    if (state.venueMode) {
+        if (!confirm('Alle Veranstaltungsorte loeschen?')) return;
+        state.orte = {};
+        state.selectedVenue = null;
+        state.pendingVenue = null;
+        saveVenueDraft();
+        renderMarkers(); renderPending(); renderPlaced(); updateStats();
+        return;
+    }
+
     const prefixes = getPrefixesForHall(state.currentHalle);
     const label = HALL_CONFIG[state.currentHalle]?.label || state.currentHalle;
     if (!confirm(`Alle Staende von ${label} loeschen?`)) return;
@@ -803,6 +976,10 @@ function clearAll() {
 
 // ===== SAVE TO NOTION =====
 async function saveToNotion() {
+    if (state.venueMode) {
+        alert('Veranstaltungsorte werden per JSON exportiert, nicht in Notion gespeichert.\nNutze "Export JSON" oder "Copy JSON".');
+        return;
+    }
     const placed = Object.entries(state.staende);
     if (placed.length === 0) {
         alert('Keine platzierten Staende zum Speichern.');
@@ -889,11 +1066,26 @@ function saveDraft() {
     } catch (e) { /* ignore quota errors */ }
 }
 
+function saveVenueDraft() {
+    try {
+        localStorage.setItem('venue-draft', JSON.stringify(state.orte));
+    } catch (e) { /* ignore quota errors */ }
+}
+
 function loadDraft() {
     try {
         const draft = localStorage.getItem('standplan-draft');
         if (draft) {
             Object.assign(state.staende, JSON.parse(draft));
+        }
+    } catch (e) { /* ignore parse errors */ }
+}
+
+function loadVenueDraft() {
+    try {
+        const draft = localStorage.getItem('venue-draft');
+        if (draft) {
+            Object.assign(state.orte, JSON.parse(draft));
         }
     } catch (e) { /* ignore parse errors */ }
 }
@@ -908,6 +1100,7 @@ async function loadExistingStandplan() {
 async function init() {
     await loadAusstellerData();
     await loadExistingStandplan();
+    loadVenueDraft();
     renderMarkers();
     renderPending();
     renderPlaced();

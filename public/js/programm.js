@@ -12,6 +12,7 @@
   let allWorkshops = [];
   let currentDay = 'all';
   let currentTyp = 'all';
+  let currentOrt = 'all';
   let currentKat = 'all';
   let currentTab = 'programm';
   let focusId = null;
@@ -22,6 +23,7 @@
     const p = new URLSearchParams(location.search);
     currentDay = p.get('tag') || 'all';
     currentTyp = p.get('typ') || 'all';
+    currentOrt = p.get('ort') || 'all';
     currentKat = p.get('kategorie') || 'all';
     focusId = p.get('focus') || null;
     if (p.get('tab') === 'favoriten') currentTab = 'favoriten';
@@ -31,6 +33,7 @@
     const p = new URLSearchParams();
     if (currentDay !== 'all') p.set('tag', currentDay);
     if (currentTyp !== 'all') p.set('typ', currentTyp);
+    if (currentOrt !== 'all') p.set('ort', currentOrt);
     if (currentKat !== 'all') p.set('kategorie', currentKat);
     if (currentTab === 'favoriten') p.set('tab', 'favoriten');
     const qs = p.toString();
@@ -42,6 +45,7 @@
     const p = new URLSearchParams();
     if (currentDay !== 'all') p.set('tag', currentDay);
     if (currentTyp !== 'all') p.set('typ', currentTyp);
+    if (currentOrt !== 'all') p.set('ort', currentOrt);
     if (currentKat !== 'all') p.set('kategorie', currentKat);
     if (currentTab === 'favoriten') p.set('tab', 'favoriten');
     p.set('focus', workshopId);
@@ -84,6 +88,7 @@
       const data = await resp.json();
       allWorkshops = data.workshops || [];
       populateTypFilter();
+      populateOrtFilter();
       populateKatFilter();
       applyStateToUI();
       renderList();
@@ -103,6 +108,9 @@
     // Typ select
     const typSelect = document.getElementById('typ-filter');
     if (typSelect) typSelect.value = currentTyp;
+    // Ort select
+    const ortSelect = document.getElementById('ort-filter');
+    if (ortSelect) ortSelect.value = currentOrt;
     // Kategorie select
     const katSelect = document.getElementById('kat-filter');
     if (katSelect) katSelect.value = currentKat;
@@ -142,6 +150,17 @@
     });
   }
 
+  function populateOrtFilter() {
+    const select = document.getElementById('ort-filter');
+    const orte = [...new Set(allWorkshops.map(w => w.ort).filter(Boolean))].sort();
+    orte.forEach(o => {
+      const opt = document.createElement('option');
+      opt.value = o;
+      opt.textContent = o;
+      select.appendChild(opt);
+    });
+  }
+
   function populateKatFilter() {
     const select = document.getElementById('kat-filter');
     const kats = [...new Set(allWorkshops.flatMap(w => w.kategorien || []).filter(Boolean))].sort();
@@ -163,6 +182,9 @@
     if (currentTyp !== 'all') {
       list = list.filter(w => w.typ === currentTyp);
     }
+    if (currentOrt !== 'all') {
+      list = list.filter(w => w.ort === currentOrt);
+    }
     if (currentKat !== 'all') {
       list = list.filter(w => (w.kategorien || []).includes(currentKat));
     }
@@ -170,7 +192,7 @@
   }
 
   function isFilterActive() {
-    return currentDay !== 'all' || currentTyp !== 'all' || currentKat !== 'all';
+    return currentDay !== 'all' || currentTyp !== 'all' || currentOrt !== 'all' || currentKat !== 'all';
   }
 
   function updateResultSummary(filteredCount) {
@@ -198,11 +220,29 @@
   }
 
   function formatReferent(ws) {
-    const person = ws.referent_person || '';
+    const persons = ws.referent_persons || [];
     const firma = ws.referent_firma || '';
-    if (person && firma) return `${escapeHtml(firma)} – ${escapeHtml(person)}`;
-    if (firma) return `N.N. (${escapeHtml(firma)})`;
-    if (person) return escapeHtml(person);
+    const aussteller = ws.aussteller || [];
+    const personHtml = persons.length
+      ? persons.map(p => `<a href="/experte.html#id=${p.id}" style="color:inherit;text-decoration:underline;text-decoration-color:var(--as-rot);text-underline-offset:2px">${escapeHtml(p.name)}</a>`).join(', ')
+      : '';
+
+    // Firma: Aussteller-Link hat Vorrang, dann referent_firma als Fallback
+    let firmaHtml = '';
+    if (aussteller.length > 0) {
+      firmaHtml = aussteller.map(a => {
+        if (a.stand) {
+          return `<span data-show-stand="${escapeHtml(a.stand)}" data-firma="${escapeHtml(a.firma)}">🏪 ${escapeHtml(a.firma)} [Stand ${escapeHtml(a.stand)}]</span>`;
+        }
+        return `<span>🏪 ${escapeHtml(a.firma)}</span>`;
+      }).join(', ');
+    } else if (firma) {
+      firmaHtml = escapeHtml(firma);
+    }
+
+    if (personHtml && firmaHtml) return `${personHtml} · ${firmaHtml}`;
+    if (firmaHtml) return firmaHtml;
+    if (personHtml) return personHtml;
     return 'N.N.';
   }
 
@@ -231,7 +271,7 @@
           ${typKatRow}
           <div class="meta-row">
             ${ws.zeit ? `<span class="meta-item">🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
-            ${ws.ort ? `<span class="meta-item">📍 ${escapeHtml(ws.ort)}</span>` : ''}
+            ${ws.ort ? `<span class="meta-item" data-show-ort="${escapeHtml(ws.ort)}">📍 ${escapeHtml(ws.ort)}</span>` : ''}
             ${referentHtml}
           </div>
         </div>
@@ -353,6 +393,14 @@
     });
   }
 
+  function initOrtFilter() {
+    document.getElementById('ort-filter').addEventListener('change', (e) => {
+      currentOrt = e.target.value;
+      writeStateToUrl();
+      renderList();
+    });
+  }
+
   function initKatFilter() {
     document.getElementById('kat-filter').addEventListener('change', (e) => {
       currentKat = e.target.value;
@@ -369,6 +417,7 @@
     initTabs();
     initDayFilters();
     initTypFilter();
+    initOrtFilter();
     initKatFilter();
     loadWorkshops();
   });

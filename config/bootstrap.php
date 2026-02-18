@@ -10,6 +10,7 @@ define('NOTION_WORKSHOP_DB', getenv('NOTION_WORKSHOP_DB'));
 define('NOTION_FEEDBACK_DB', getenv('NOTION_FEEDBACK_DB'));
 define('NOTION_QA_DB',       getenv('NOTION_QA_DB'));
 define('NOTION_AUSSTELLER_DB', getenv('NOTION_AUSSTELLER_DB') ?: '');
+define('NOTION_REFERENTEN_DB', getenv('NOTION_REFERENTEN_DB') ?: '');
 define('N8N_FEEDBACK_WEBHOOK', getenv('N8N_FEEDBACK_WEBHOOK') ?: '');
 define('N8N_QA_WEBHOOK',       getenv('N8N_QA_WEBHOOK') ?: '');
 define('N8N_UPVOTE_WEBHOOK',   getenv('N8N_UPVOTE_WEBHOOK') ?: '');

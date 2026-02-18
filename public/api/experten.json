@@ -1,0 +1,438 @@
+{
+    "generated": "2026-02-18T20:09:43+01:00",
+    "count": 11,
+    "experten": [
+        {
+            "id": "f9a55a744a4b4cc9bac0a636d0872a4c",
+            "name": "Uli Dolde",
+            "vorname": "Uli",
+            "nachname": "Dolde",
+            "foto": "",
+            "bio": "Geschäftsführer von Dolce Vita Verlag GmbH",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Fahrzeugausbau",
+                "Sonstiges"
+            ],
+            "workshops": [
+                {
+                    "id": "2ca9c964c82f80e7b92ae3a350467587",
+                    "title": "⛺️ Wohnmobil-Selbstausbau",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "12:00 – 12:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Sonstiges",
+                        "Fahrzeugausbau"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "76140a0b49b844779b63cc31af0dd939",
+                    "title": "⛺️ Wohnmobil-Selbstausbau",
+                    "typ": "Vortrag",
+                    "tag": "Sonntag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Bühne (Halle A6)",
+                    "kategorien": [
+                        "Sonstiges",
+                        "Fahrzeugausbau"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "827c57f2938a4fdea32ffa27ec3c1611",
+            "name": "Michael Hoffmann",
+            "vorname": "Michael",
+            "nachname": "Hoffmann",
+            "foto": "",
+            "bio": "Schreinermeister aus Missen-Wilhams im Allgäu. Spezialisiert auf maßgefertigte Möbel, nachhaltiges Wohnen, TinyHouses und Modulhäuser. Fokus auf natürliche Materialien, handwerkliche Präzision und gesundes Wohnen.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "Lichtbaummobil doo",
+            "kategorien": [
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "cfddc41f710b45b5a143e003ae2069b9",
+                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "typ": "Expertpanel",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Innenausbau & Module",
+                        "Kabinen (Pickup & LKW)"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "f1dcfb2fb3c245e3851961d3500280e4",
+                            "firma": "Lichtbaummobil doo",
+                            "stand": "A4-204",
+                            "stand_x": null,
+                            "stand_y": null,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "893d5c93385f4e1ea1c37587c9ef5efe",
+            "name": "Manuel Lemke",
+            "vorname": "Manuel",
+            "nachname": "Lemke",
+            "foto": "",
+            "bio": "Inhaber und Gründer von SCHALLDOSE ON TOUR und Busbastler. Autor des Busbastler Handbuchs (ISBN 978-3734310645) – praktischer Ratgeber für Camper-Selbstausbau mit Tipps aus jahrelanger Erfahrung. Betreibt YouTube-Kanal (33.6K Abonnenten) und Busbastler Podcast. Organisiert Busbastler Basecamp Events seit 2018. Referent auf Messen (CMT, f.re.e München). Konzept: Hilfe zur Selbsthilfe für Selbstausbauer.",
+            "funktion": "Inhaber",
+            "kategorie": "",
+            "website": "busbastler.de",
+            "firma": "Reisch-Tech GmbH",
+            "kategorien": [
+                "Heizung & Klima"
+            ],
+            "workshops": [
+                {
+                    "id": "a30973dfa4c249d791be43bce8b4de97",
+                    "title": "⛺️ DIY-Standheizungen – Von Autotherm bis China-Böller",
+                    "typ": "Expertpanel",
+                    "tag": "Freitag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Heizung & Klima"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
+                            "firma": "Reisch-Tech GmbH",
+                            "stand": "FG-808",
+                            "stand_x": 41.3,
+                            "stand_y": 48.9,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "d96da69392664d3b8311f169e826c29b",
+            "name": "Gesa & Thorsten Mähler & Münch",
+            "vorname": "Gesa & Thorsten",
+            "nachname": "Mähler & Münch",
+            "foto": "",
+            "bio": "Weltreisende mit MAN Kat 1 (6x6, Fatti/Fatbaastard). Vortrag: Fehler beim Selbstausbau – und bei der Nutzung des Fahrzeuges. Erfahrung aus 7 Jahren Weltreise, besonders Südamerika. Buch: 543 Seiten, 700 Bilder, 126 Pannen dokumentiert.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Expeditionsmobile",
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "2b99c964c82f8000b1aecaf6b960bc10",
+                    "title": "🅱️ 126 Pannen – 7 Jahre Weltreise",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "13:00 – 13:45 Uhr",
+                    "ort": "Bühne (Halle A6)",
+                    "kategorien": [
+                        "Expeditionsmobile",
+                        "Innenausbau & Module",
+                        "Kabinen (Pickup & LKW)"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "9e1544a1642c43528e887b0ee2d4180d",
+            "name": "Christian Reisch",
+            "vorname": "Christian",
+            "nachname": "Reisch",
+            "foto": "",
+            "bio": "Geschäftsführer",
+            "funktion": "Geschäftsführer",
+            "kategorie": "",
+            "website": "",
+            "firma": "Reisch-Tech GmbH",
+            "kategorien": [
+                "Heizung & Klima"
+            ],
+            "workshops": [
+                {
+                    "id": "a30973dfa4c249d791be43bce8b4de97",
+                    "title": "⛺️ DIY-Standheizungen – Von Autotherm bis China-Böller",
+                    "typ": "Expertpanel",
+                    "tag": "Freitag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Heizung & Klima"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
+                            "firma": "Reisch-Tech GmbH",
+                            "stand": "FG-808",
+                            "stand_x": 41.3,
+                            "stand_y": 48.9,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "31cf375dfd1c41ebbb82836aa2f29ae7",
+            "name": "Matthias Rethberg",
+            "vorname": "Matthias",
+            "nachname": "Rethberg",
+            "foto": "",
+            "bio": "Gründer von Lichtbaummobil doo, einem Hersteller von maßgefertigten Holz-Wohnkabinen für Pickups. Der gelernte Musiker wurde zum Handwerker und spezialisiert sich auf traditionelle Holzbauweise ohne Chemikalien und Metallverbindungen. Kabinen werden in Bosnien-Herzegowina gefertigt. Betreibt zudem das Naturcamp Bosnia.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "Lichtbaummobil doo",
+            "kategorien": [
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "cfddc41f710b45b5a143e003ae2069b9",
+                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "typ": "Expertpanel",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Innenausbau & Module",
+                        "Kabinen (Pickup & LKW)"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "f1dcfb2fb3c245e3851961d3500280e4",
+                            "firma": "Lichtbaummobil doo",
+                            "stand": "A4-204",
+                            "stand_x": null,
+                            "stand_y": null,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "8b3a29a8eab948e0a948308b66a8dd05",
+            "name": "Erik Schmitt",
+            "vorname": "Erik",
+            "nachname": "Schmitt",
+            "foto": "",
+            "bio": "Kfz-Meister und Mechatronik-Ingenieur mit über zehn Jahren Berufserfahrung im Prototypenbau. Hat ein individuell gestaltetes 4x4-LKW Expeditionsfahrzeug für seine Familie gebaut. Vortrag: \"Vom Basisfahrzeug zur Weltreise\" – Einblick in Planung, Bau und Erprobung des Expeditionsfahrzeugs.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Expeditionsmobile",
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "1f174d779dcb4d3fb1e9f347e60e64ee",
+                    "title": "⛺️ Vom Basisfahrzeug zur Weltreise",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "14:00 – 14:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Expeditionsmobile",
+                        "Kabinen (Pickup & LKW)",
+                        "Innenausbau & Module"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "5c61d374c1474d64b3fb2ce21c883432",
+            "name": "Heribert Schneider",
+            "vorname": "Heribert",
+            "nachname": "Schneider",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "Lichtbaummobil doo",
+            "kategorien": [
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "cfddc41f710b45b5a143e003ae2069b9",
+                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "typ": "Expertpanel",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Innenausbau & Module",
+                        "Kabinen (Pickup & LKW)"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "f1dcfb2fb3c245e3851961d3500280e4",
+                            "firma": "Lichtbaummobil doo",
+                            "stand": "A4-204",
+                            "stand_x": null,
+                            "stand_y": null,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "f96aad330f414562adf40f808d10e402",
+            "name": "Axel Telzerow",
+            "vorname": "Axel",
+            "nachname": "Telzerow",
+            "foto": "",
+            "bio": "Gründer von OutdoorMonster (seit 2017). Aktuell: Chief Operating Officer bei netzwelt (seit 2024). Umfangreiche Erfahrung als Chefredakteur bei Funke Mediengruppe (IMTEST, FOTOTEST, STEREO). Medien- und Journalismus-Background.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Offroad-Zubehör"
+            ],
+            "workshops": [
+                {
+                    "id": "fdc287b5d7024509a136b8d48dc559e0",
+                    "title": "⛺️ Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "13:00 – 13:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Offroad-Zubehör"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "845386d594fd421d86ba9db7ac4eef27",
+            "name": "Marion Treichl",
+            "vorname": "Marion",
+            "nachname": "Treichl",
+            "foto": "",
+            "bio": "Physiotherapeutin, kPNI",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "Lichtbaummobil doo",
+            "kategorien": [
+                "Innenausbau & Module",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "workshops": [
+                {
+                    "id": "cfddc41f710b45b5a143e003ae2069b9",
+                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "typ": "Expertpanel",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "kategorien": [
+                        "Innenausbau & Module",
+                        "Kabinen (Pickup & LKW)"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "f1dcfb2fb3c245e3851961d3500280e4",
+                            "firma": "Lichtbaummobil doo",
+                            "stand": "A4-204",
+                            "stand_x": null,
+                            "stand_y": null,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bdf2bb7360324c959ddb9ad6a051120d",
+            "name": "Frank Tschuschke",
+            "vorname": "Frank",
+            "nachname": "Tschuschke",
+            "foto": "",
+            "bio": "Selbständiger Kunststofftankbauer seit über 20 Jahren. Gründer und Inhaber von FT-Design, spezialisiert auf maßgefertigte Wassertanks für Wohnmobile und Expeditionsfahrzeuge. Fertigt passgenaue Tanks nach individuellen Vorgaben und technischen Zeichnungen.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "FT Design",
+            "kategorien": [
+                "Wassersysteme & Hygiene"
+            ],
+            "workshops": [
+                {
+                    "id": "39cfeb4a3a1242ec97f4bb41cd0a70b8",
+                    "title": "⛺️ Maßgeschneiderte Wassertanks – Platz perfekt nutzen",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Bühne (Halle A6)",
+                    "kategorien": [
+                        "Wassersysteme & Hygiene"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "9663cb15d2ba447983378b77b5204868",
+                            "firma": "FT Design",
+                            "stand": "FG-812",
+                            "stand_x": 43.6,
+                            "stand_y": 35.3,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

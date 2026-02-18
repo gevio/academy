@@ -130,8 +130,8 @@ echo "   {$size} KB, {$elapsed}s\n";
 $hallenConfig = [
     'FW'  => ['bild' => '/img/plan/FW.jpg', 'label' => 'Foyer West'],
     'AT'  => ['bild' => '/img/plan/FW.jpg', 'label' => 'Foyer West (Atrium)'],
-    'FG'  => ['bild' => '/img/plan/FG.jpg', 'label' => 'Freigel\u00e4nde West'],
-    'FGO' => ['bild' => '/img/plan/FG.jpg', 'label' => 'Freigel\u00e4nde Ost'],
+    'FG'  => ['bild' => '/img/plan/FG.jpg', 'label' => 'Freigelände West'],
+    'FGO' => ['bild' => '/img/plan/FG.jpg', 'label' => 'Freigelände Ost'],
     'A3'  => ['bild' => '/img/plan/A3.jpg', 'label' => 'Halle A3'],
     'A4'  => ['bild' => '/img/plan/A4.jpg', 'label' => 'Halle A4'],
     'A5'  => ['bild' => '/img/plan/A5.jpg', 'label' => 'Halle A5'],

@@ -1,0 +1,36 @@
+{
+  "generated": "2026-02-18T18:10:47.167Z",
+  "bild": "/img/plan/overview.jpg",
+  "orte": {
+    "buehne-fgo": {
+      "x": 71.8,
+      "y": 30.2,
+      "label": "Bühne Selbstausbau-Academy (FGO)"
+    },
+    "foyer-west": {
+      "x": 4.9,
+      "y": 26.7,
+      "label": "Foyer West und Atrium"
+    },
+    "buehne-a6": {
+      "x": 73.6,
+      "y": 56.9,
+      "label": "Bühne (Halle A6)"
+    },
+    "raum-oesterreich": {
+      "x": 1.2,
+      "y": 49.8,
+      "label": "Raum Österreich (Foyer West)"
+    },
+    "raum-schweiz": {
+      "x": 3.7,
+      "y": 49,
+      "label": "Raum Schweiz (Foyer West)"
+    },
+    "raum-liechtenstein": {
+      "x": 5.3,
+      "y": 50,
+      "label": "Raum Liechtenstein (Foyer West)"
+    }
+  }
+}

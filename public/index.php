@@ -42,15 +42,24 @@ if (file_exists($jsonFile)) {
             $kategorien = $jws['kategorien'] ?? [];
             $referentFirma = $jws['referent_firma'] ?? '';
             $referentPerson = $jws['referent_person'] ?? '';
+            $referentPersons = $jws['referent_persons'] ?? [];
             $aussteller = $jws['aussteller'] ?? [];
             break;
         }
     }
 }
 
-// Referent-Anzeige formatieren
+// Referent-Anzeige formatieren (mit Link zur Experten-Seite)
 $referentPersonHtml = '';
-if ($referentPerson) {
+if (!empty($referentPersons)) {
+    $personLinks = [];
+    foreach ($referentPersons as $rp) {
+        $pName = htmlspecialchars($rp['name'] ?? 'N.N.');
+        $pId   = htmlspecialchars($rp['id'] ?? '');
+        $personLinks[] = '<a href="/experte.html#id=' . $pId . '" style="color:inherit;text-decoration:underline;text-decoration-color:var(--as-rot);text-underline-offset:2px">' . $pName . '</a>';
+    }
+    $referentPersonHtml = '🎤 ' . implode(', ', $personLinks);
+} elseif ($referentPerson) {
     $referentPersonHtml = '🎤 ' . htmlspecialchars($referentPerson);
 }
 
@@ -62,9 +71,11 @@ if (!empty($aussteller)) {
     foreach ($aussteller as $a) {
         $firma = htmlspecialchars($a['firma'] ?? '');
         $stand = $a['stand'] ?? '';
-        $standInfo = $stand ? ' · Stand ' . htmlspecialchars($stand) : '';
-        $ausId = htmlspecialchars($a['id'] ?? '');
-        $links[] = '<a href="/aussteller.html?back=' . $backUrl . '#id=' . $ausId . '" style="color:var(--as-rot);text-decoration:none;font-weight:600">🏪 ' . $firma . $standInfo . '</a>';
+        if ($stand) {
+            $links[] = '<span data-show-stand="' . htmlspecialchars($stand) . '" data-firma="' . $firma . '">🏪 ' . $firma . ' [Stand ' . htmlspecialchars($stand) . ']</span>';
+        } else {
+            $links[] = '<span>🏪 ' . $firma . '</span>';
+        }
     }
     $firmaHtml = implode(', ', $links);
 } elseif ($referentFirma) {
@@ -110,6 +121,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <link rel="apple-touch-icon" href="/img/icon-192.png">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/programm.css">
+    <script src="/js/ortmap.js" defer></script>
 </head>
 <body>
     <div class="hero">
@@ -132,7 +144,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
             <div class="meta-row">
                 <?php if ($tag): ?><span class="meta-item">📅 <?= $tag ?></span><?php endif; ?>
                 <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
-                <?php if ($ort): ?><span class="meta-item">📍 <?= $ort ?></span><?php endif; ?>
+                <?php if ($ort): ?><span class="meta-item" data-show-ort="<?= $ort ?>">📍 <?= $ort ?></span><?php endif; ?>
             </div>
             <?php if ($referentPersonHtml || $firmaHtml): ?>
                 <div style="margin-top:.4rem;font-size:.85rem;color:var(--text-light)"><?php

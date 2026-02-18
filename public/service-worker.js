@@ -7,7 +7,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'as26-live-v9';
+const CACHE_NAME = 'as26-live-v15';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
@@ -30,6 +30,13 @@ const PRECACHE_URLS = [
   '/js/aussteller.js',
   '/api/aussteller.json',
   '/api/standplan.json',
+  '/experten.html',
+  '/experte.html',
+  '/css/experten.css',
+  '/api/experten.json',
+  '/js/ortmap.js',
+  '/api/veranstaltungsorte.json',
+  '/img/plan/overview.jpg',
   '/img/plan/FW.jpg',
   '/img/plan/FG.jpg',
   '/img/plan/A3.jpg',

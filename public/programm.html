@@ -43,6 +43,11 @@
                         <option value="all">Alle Formate</option>
                     </select>
                 </div>
+                <div class="ort-filter">
+                    <select id="ort-filter">
+                        <option value="all">Alle Orte</option>
+                    </select>
+                </div>
                 <div class="kat-filter">
                     <select id="kat-filter">
                         <option value="all">Alle Kategorien</option>
@@ -76,6 +81,7 @@
     </footer>
 
     <script src="/js/programm.js"></script>
+    <script src="/js/ortmap.js"></script>
     <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js');

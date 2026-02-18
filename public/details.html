@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" href="/img/icon-192.png">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/programm.css">
+    <script src="/js/ortmap.js" defer></script>
 </head>
 <body>
     <header>
@@ -75,30 +76,35 @@
          * Firma ist anklickbar wenn der Aussteller existiert → öffnet Standplan.
          */
         function renderReferentFirma(ws) {
-            const person = ws.referent_person || '';
+            const persons = ws.referent_persons || [];
             const firmaText = ws.referent_firma || '';
             const aussteller = ws.aussteller || [];
 
-            if (!person && !firmaText && aussteller.length === 0) return '';
+            if (persons.length === 0 && !firmaText && aussteller.length === 0) return '';
 
             let html = '<div style="margin-top:.6rem;font-size:.85rem;color:var(--text-light)">';
 
-            // Referent Person
-            if (person) {
-                html += `<span>🎤 ${escapeHtml(person)}</span>`;
+            // Referent Person(en) – verlinkt zur Experten-Seite
+            if (persons.length > 0) {
+                const personLinks = persons.map(p =>
+                    `<a href="/experte.html#id=${p.id}" style="color:var(--text-light);text-decoration:underline;text-decoration-color:var(--as-rot);text-underline-offset:2px">${escapeHtml(p.name)}</a>`
+                ).join(', ');
+                html += `<span>🎤 ${personLinks}</span>`;
             }
 
             // Firma(s): Aussteller-Links haben Vorrang, dann referent_firma als Fallback
             if (aussteller.length > 0) {
-                if (person) html += ' · ';
+                if (persons.length > 0) html += ' · ';
                 const backParam = encodeURIComponent(window.location.pathname + window.location.search);
                 const links = aussteller.map(a => {
-                    const standInfo = a.stand ? ` · Stand ${escapeHtml(a.stand)}` : '';
-                    return `<a href="/aussteller.html?back=${backParam}#id=${a.id}" style="color:var(--as-rot);text-decoration:none;font-weight:600">🏪 ${escapeHtml(a.firma)}${standInfo}</a>`;
+                    if (a.stand) {
+                      return `<span data-show-stand="${escapeHtml(a.stand)}" data-firma="${escapeHtml(a.firma)}">🏪 ${escapeHtml(a.firma)} [Stand ${escapeHtml(a.stand)}]</span>`;
+                    }
+                    return `<span>🏪 ${escapeHtml(a.firma)}</span>`;
                 });
                 html += links.join(', ');
             } else if (firmaText) {
-                if (person) html += ' · ';
+                if (persons.length > 0) html += ' · ';
                 html += `<span>${escapeHtml(firmaText)}</span>`;
             }
 
@@ -151,7 +157,7 @@
                 <div class="meta-row">
                     ${ws.tag ? `<span class="meta-item">📅 ${escapeHtml(ws.tag)}</span>` : ''}
                     ${ws.zeit ? `<span class="meta-item">🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
-                    ${ws.ort ? `<span class="meta-item">📍 ${escapeHtml(ws.ort)}</span>` : ''}
+                    ${ws.ort ? `<span class="meta-item" data-show-ort="${escapeHtml(ws.ort)}">📍 ${escapeHtml(ws.ort)}</span>` : ''}
                 </div>
                 ${renderReferentFirma(ws)}
             </div>`;

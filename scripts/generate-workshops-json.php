@@ -107,10 +107,15 @@ foreach ($workshops as $ws) {
 
     // Referent-Personen: "Vorname Nachname" oder "N.N."
     $personNames = [];
+    $personList = []; // [{id, name}] für Frontend-Links
     foreach (($ws['referent_person_ids'] ?? []) as $pId) {
         $p = $personCache[$pId] ?? [];
         $name = trim(($p['vorname'] ?? '') . ' ' . ($p['nachname'] ?? ''));
         $personNames[] = $name ?: 'N.N.';
+        $personList[] = [
+            'id'   => str_replace('-', '', $pId),
+            'name' => $name ?: 'N.N.',
+        ];
     }
 
     // Firmen: direkt aus Workshop-Relation ODER aus Person→Firma
@@ -160,8 +165,10 @@ foreach ($workshops as $ws) {
         'beschreibung' => $ws['beschreibung'],
         'datum_start'  => $ws['datum_start'],
         'kategorien'   => $ws['kategorien'] ?? [],
+        'status'       => $ws['status'] ?? '',
         'referent_firma'  => $ws['referent_firma'] ?? '',
         'referent_person' => $ws['referent_person'] ?? '',
+        'referent_persons' => $personList,
         'aussteller'   => resolveAussteller($ws['aussteller_ids'] ?? [], $ausstellerIndex),
         'content_html' => $contentHtml,
         'has_content'  => $hasContent,
@@ -209,8 +216,8 @@ function filterRedundantBlocks(array $blocks, string $workshopTitle): array
 {
     // Patterns: Zeilen die wir als redundant erkennen
     $metaPatterns = [
-        // Titel-Echo: beliebiges Emoji + Workshop/Vortrag/Expertpanel/Panel/Podium:
-        '/^.{0,8}(Workshop|Vortrag|Expertpanel|Panel|Podium)\s*[:：]/ui',
+        // Titel-Echo: beliebiges Emoji + Workshop/Vortrag/Expertpanel/Panel/Podium/Demo/Reisebericht/eCamper/Roadtrip Girls:
+        '/^.{0,8}(Workshop|Vortrag|Expertpanel|Panel|Podium|Demo|Reisebericht|eCamper|Roadtrip\s*Girls)\s*[:：]/ui',
         '/Veranstaltungsdetails/ui',
         '/^📅\s*Termin/ui',
         '/^📍\s*Ort/ui',

@@ -5,7 +5,7 @@
  * Features:
  *  - Lock-Datei verhindert parallele Läufe
  *  - Timestamp-Logging für Nachvollziehbarkeit
- *  - Kompakte Ausgabe (nur Zusammenfassung, kein Einzel-Log pro Workshop)
+ *  - Führt alle drei Generatoren nacheinander aus
  *  - Exit-Code wird weitergegeben
  *
  * Crontab (stündlich):
@@ -37,44 +37,43 @@ if (file_exists($lockFile)) {
 file_put_contents($lockFile, getmypid());
 
 // ── Generierung starten ──────────────────────────────────
-echo date('[Y-m-d H:i:s]') . " START generate-workshops-json\n";
 $t0 = microtime(true);
-
-// Output des eigentlichen Scripts unterdrücken (nur Fehler durchlassen)
-ob_start();
 $exitCode = 0;
-try {
-    require __DIR__ . '/../scripts/generate-workshops-json.php';
-} catch (Throwable $e) {
-    $exitCode = 1;
-    echo date('[Y-m-d H:i:s]') . " ERROR – " . $e->getMessage() . "\n";
+$results = [];
+
+// Liste der Generatoren
+$generators = [
+    'workshops'  => __DIR__ . '/../scripts/generate-workshops-json.php',
+    'aussteller' => __DIR__ . '/../scripts/generate-aussteller-json.php',
+    'experten'   => __DIR__ . '/../scripts/generate-experten-json.php',
+];
+
+foreach ($generators as $name => $script) {
+    echo date('[Y-m-d H:i:s]') . " START {$name}\n";
+    $gt0 = microtime(true);
+    ob_start();
+    try {
+        require $script;
+        $results[$name] = 'OK';
+    } catch (Throwable $e) {
+        $exitCode = 1;
+        $results[$name] = 'FAIL';
+        echo date('[Y-m-d H:i:s]') . " ERROR [{$name}] – " . $e->getMessage() . "\n";
+    }
+    $output = ob_get_clean();
+    $gDur = round(microtime(true) - $gt0, 1);
+
+    // Bei Fehler: Output anzeigen
+    if ($results[$name] === 'FAIL') {
+        echo "--- {$name} Output ---\n{$output}--- Ende ---\n";
+    }
+
+    echo date('[Y-m-d H:i:s]') . " {$results[$name]} {$name} ({$gDur}s)\n";
 }
-$scriptOutput = ob_get_clean();
 
-$duration = round(microtime(true) - $t0, 1);
-
-// Kompakte Zusammenfassung: nur Zeilen mit Zahlen/Ergebnis extrahieren
-if (preg_match('/(\d+)\s+Workshops gefunden/', $scriptOutput, $m)) {
-    $count = $m[1];
-} else {
-    $count = '?';
-}
-
-if (preg_match('/([\d.]+)\s*KB/', $scriptOutput, $m2)) {
-    $size = $m2[1] . ' KB';
-} else {
-    $size = '?';
-}
-
-$status = ($exitCode === 0) ? 'OK' : 'FAIL';
-echo date('[Y-m-d H:i:s]') . " {$status} – {$count} Workshops, {$size}, {$duration}s\n";
-
-// Bei Fehler: komplettes Output mit ausgeben
-if ($exitCode !== 0) {
-    echo "--- Script-Output ---\n";
-    echo $scriptOutput;
-    echo "--- Ende ---\n";
-}
+$totalDur = round(microtime(true) - $t0, 1);
+$summary = implode(', ', array_map(fn($n, $s) => "{$n}={$s}", array_keys($results), $results));
+echo date('[Y-m-d H:i:s]') . " DONE – {$summary} – Total: {$totalDur}s\n";
 
 // ── Lock entfernen ───────────────────────────────────────
 @unlink($lockFile);

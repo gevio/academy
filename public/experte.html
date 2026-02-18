@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Experte – AS26 Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/experten.css">
+</head>
+<body>
+    <div class="hero">
+        <a href="/" class="hero-top">
+            <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
+            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
+        </a>
+        <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+    </div>
+
+    <div class="exp-back-header">
+        <a href="/experten.html" id="back-link">← Alle Experten</a>
+    </div>
+
+    <main id="detail-content">
+        <div class="loading" style="text-align:center;padding:3rem 0;color:var(--text-light)">Wird geladen…</div>
+    </main>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
+        <p>Adventure Southside 2026</p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const API_URL = '/api/experten.json';
+
+        function getExperteId() {
+            const hash = window.location.hash;
+            const match = hash.match(/id=([a-f0-9]{32})/);
+            return match ? match[1] : null;
+        }
+
+        function escapeHtml(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        function getInitials(vorname, nachname) {
+            const v = (vorname || '').charAt(0).toUpperCase();
+            const n = (nachname || '').charAt(0).toUpperCase();
+            return v + n || '?';
+        }
+
+        function renderDetailAvatar(exp) {
+            if (exp.foto) {
+                return `<img class="exp-detail-avatar" src="${escapeHtml(exp.foto)}" alt="${escapeHtml(exp.name)}">`;
+            }
+            return `<div class="exp-detail-avatar-placeholder">${getInitials(exp.vorname, exp.nachname)}</div>`;
+        }
+
+        function renderDetail(exp) {
+            const container = document.getElementById('detail-content');
+            document.title = exp.name + ' – AS26 Live';
+
+            let html = '<div class="exp-detail-card">';
+
+            // Header mit Avatar + Name
+            html += `<div class="exp-detail-header">
+                ${renderDetailAvatar(exp)}
+                <div class="exp-detail-info">
+                    <h1 class="exp-detail-name">${escapeHtml(exp.name)}</h1>
+                    ${exp.funktion ? `<div class="exp-detail-funktion">${escapeHtml(exp.funktion)}</div>` : ''}
+                    ${exp.kategorie ? `<span class="exp-detail-kategorie">${escapeHtml(exp.kategorie)}</span>` : ''}
+                </div>
+            </div>`;
+
+            // Body
+            html += '<div class="exp-detail-body">';
+
+            // Bio
+            if (exp.bio) {
+                html += `<h2>Über ${escapeHtml(exp.vorname || exp.name)}</h2>`;
+                html += `<p class="exp-bio">${escapeHtml(exp.bio)}</p>`;
+            }
+
+            // Website
+            if (exp.website) {
+                const domain = exp.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*/, '');
+                html += `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-website">🌐 ${escapeHtml(domain)}</a>`;
+            }
+
+            // Workshops
+            if (exp.workshops && exp.workshops.length > 0) {
+                html += `<h2>🎤 Workshops & Vorträge (${exp.workshops.length})</h2>`;
+                html += '<div class="exp-workshops">';
+                exp.workshops.forEach(ws => {
+                    html += `<a href="/w/${ws.id}" class="exp-ws-card">
+                        <div class="exp-ws-title">${escapeHtml(ws.title)}</div>
+                        <div class="exp-ws-meta">
+                            ${ws.typ ? `<span>${escapeHtml(ws.typ)}</span>` : ''}
+                            ${ws.tag ? `<span>📅 ${escapeHtml(ws.tag)}</span>` : ''}
+                            ${ws.zeit ? `<span>🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
+                            ${ws.ort ? `<span>📍 ${escapeHtml(ws.ort)}</span>` : ''}
+                        </div>
+                    </a>`;
+                });
+                html += '</div>';
+            }
+
+            html += '</div></div>';
+
+            // Zurück-Buttons
+            html += `<div style="max-width:600px;margin:1.5rem auto;text-align:center;padding:0 1.25rem 2rem">
+                <a href="/experten.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem">← Alle Experten</a>
+                <a href="/programm.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem;margin-left:.5rem">📋 Programm</a>
+            </div>`;
+
+            container.innerHTML = html;
+        }
+
+        function showError(msg) {
+            document.getElementById('detail-content').innerHTML =
+                `<div style="text-align:center;padding:3rem 1rem;color:var(--text-light)">${msg}</div>`;
+        }
+
+        async function load() {
+            const id = getExperteId();
+            if (!id) {
+                showError('Kein Experte ausgewählt. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                return;
+            }
+
+            try {
+                const resp = await fetch(API_URL);
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const data = await resp.json();
+                const exp = (data.experten || []).find(e => e.id === id);
+
+                if (!exp) {
+                    showError('Experte nicht gefunden. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                    return;
+                }
+
+                renderDetail(exp);
+            } catch (err) {
+                console.error('Experte laden fehlgeschlagen:', err);
+                showError('Daten konnten nicht geladen werden.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', load);
+        window.addEventListener('hashchange', load);
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Unsere Experten – AS26 Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/experten.css">
+</head>
+<body>
+    <div class="hero">
+        <a href="/" class="hero-top">
+            <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
+            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
+        </a>
+        <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+    </div>
+
+    <main>
+        <!-- Suche -->
+        <div class="search-bar">
+            <input type="search" class="search-input" id="search-input" placeholder="Experte suchen…" autocomplete="off">
+        </div>
+
+        <!-- Kategorie-Filter -->
+        <div class="kat-filters" id="kat-filters">
+            <button class="kat-filter-btn active" data-kat="all">Alle</button>
+        </div>
+
+        <!-- Zähler -->
+        <div class="experten-count" id="experten-count"></div>
+
+        <!-- Grid -->
+        <div id="experten-list" class="experten-list">
+            <div class="loading">Experten werden geladen…</div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
+        <p>Adventure Southside 2026</p>
+        <p>
+            <a href="/impressum.html">Impressum & Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ & Hilfe</a>
+        </p>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        const API_URL = '/api/experten.json';
+        let allExperten = [];
+        let currentKat = 'all';
+        let currentSearch = '';
+
+        function escapeHtml(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        function getInitials(vorname, nachname) {
+            const v = (vorname || '').charAt(0).toUpperCase();
+            const n = (nachname || '').charAt(0).toUpperCase();
+            return v + n || '?';
+        }
+
+        function renderAvatar(exp) {
+            if (exp.foto) {
+                return `<img class="exp-avatar" src="${escapeHtml(exp.foto)}" alt="${escapeHtml(exp.name)}" loading="lazy">`;
+            }
+            return `<div class="exp-avatar-placeholder">${getInitials(exp.vorname, exp.nachname)}</div>`;
+        }
+
+        function renderCard(exp) {
+            const kat = exp.kategorie
+                ? `<span class="exp-kategorie">${escapeHtml(exp.kategorie)}</span>`
+                : '';
+            const funktion = exp.funktion
+                ? `<div class="exp-funktion">${escapeHtml(exp.funktion)}</div>`
+                : '';
+            const wsKats = (exp.kategorien || [])
+                .map(k => `<span class="kat-tag">${escapeHtml(k)}</span>`)
+                .join('');
+
+            return `<a href="/experte.html#id=${exp.id}" class="exp-card">
+                ${renderAvatar(exp)}
+                <div class="exp-name">${escapeHtml(exp.name)}</div>
+                ${exp.firma ? `<div class="exp-firma">${escapeHtml(exp.firma)}</div>` : ''}
+                ${funktion}
+                ${kat}
+                ${wsKats ? `<div class="exp-ws-kats">${wsKats}</div>` : ''}
+            </a>`;
+        }
+
+        function getFiltered() {
+            let list = allExperten;
+            if (currentKat !== 'all') {
+                list = list.filter(e => e.kategorie === currentKat ||
+                    (e.kategorien || []).includes(currentKat));
+            }
+            if (currentSearch) {
+                const q = currentSearch.toLowerCase();
+                list = list.filter(e =>
+                    e.name.toLowerCase().includes(q) ||
+                    (e.firma || '').toLowerCase().includes(q) ||
+                    (e.funktion || '').toLowerCase().includes(q) ||
+                    (e.kategorie || '').toLowerCase().includes(q) ||
+                    (e.bio || '').toLowerCase().includes(q)
+                );
+            }
+            return list;
+        }
+
+        function renderList() {
+            const container = document.getElementById('experten-list');
+            const filtered = getFiltered();
+
+            // Zähler
+            const countEl = document.getElementById('experten-count');
+            if (currentSearch || currentKat !== 'all') {
+                countEl.textContent = `${filtered.length} von ${allExperten.length} Experten`;
+            } else {
+                countEl.textContent = `${allExperten.length} Experten`;
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="empty">Keine Experten gefunden.</div>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(renderCard).join('');
+        }
+
+        function populateKatFilter() {
+            const container = document.getElementById('kat-filters');
+            // Sammle Referent-Kategorie + Workshop-Kategorien
+            const katSet = new Set();
+            allExperten.forEach(e => {
+                if (e.kategorie) katSet.add(e.kategorie);
+                (e.kategorien || []).forEach(k => katSet.add(k));
+            });
+            const kats = [...katSet].sort();
+            kats.forEach(k => {
+                const btn = document.createElement('button');
+                btn.className = 'kat-filter-btn';
+                btn.dataset.kat = k;
+                btn.textContent = k;
+                container.appendChild(btn);
+            });
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        async function loadExperten() {
+            try {
+                const resp = await fetch(API_URL);
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const data = await resp.json();
+                allExperten = shuffleArray(data.experten || []);
+                populateKatFilter();
+                renderList();
+            } catch (err) {
+                console.error('Experten laden fehlgeschlagen:', err);
+                document.getElementById('experten-list').innerHTML =
+                    '<div class="empty">Experten konnten nicht geladen werden.</div>';
+            }
+        }
+
+        // Events
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            currentSearch = e.target.value.trim();
+            renderList();
+        });
+
+        document.getElementById('kat-filters').addEventListener('click', (e) => {
+            const btn = e.target.closest('.kat-filter-btn');
+            if (!btn) return;
+            document.querySelectorAll('.kat-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentKat = btn.dataset.kat;
+            renderList();
+        });
+
+        document.addEventListener('DOMContentLoaded', loadExperten);
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    })();
+    </script>
+</body>
+</html>

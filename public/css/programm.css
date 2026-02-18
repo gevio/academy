@@ -84,24 +84,27 @@
 }
 .filter-row {
     display: flex;
-    gap: .5rem;
+    gap: .35rem;
+    flex-wrap: wrap;
 }
 .filter-row .typ-filter,
+.filter-row .ort-filter,
 .filter-row .kat-filter {
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
 }
 .typ-filter select,
+.ort-filter select,
 .kat-filter select {
     width: 100%;
-    padding: .55rem .75rem;
-    border: 2px solid var(--as-hellbeige);
-    border-radius: 8px;
+    padding: .35rem .5rem;
+    border: 1px solid var(--as-hellbeige);
+    border-radius: 6px;
     background: var(--card);
-    color: var(--text);
+    color: var(--text-light);
     font-family: 'PT Sans', sans-serif;
-    font-size: .85rem;
-    font-weight: 700;
+    font-size: .78rem;
+    font-weight: 600;
     cursor: pointer;
     appearance: auto;
 }
