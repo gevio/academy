@@ -67,14 +67,19 @@
 .ortmap-title{padding:10px 16px;font-size:.95rem;font-weight:600;color:#fff;background:rgba(0,0,0,.4);display:flex;justify-content:space-between;align-items:center}
 .ortmap-close{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:4px 8px;opacity:.7;line-height:1}
 .ortmap-close:hover{opacity:1}
-.ortmap-img-wrap{position:relative;line-height:0}
-.ortmap-img-wrap img{display:block;max-width:88vw;max-height:74vh;object-fit:contain}
-.ortmap-pin{position:absolute;transform:translate(-50%,-100%);z-index:2;pointer-events:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
-.ortmap-pin-dot{width:36px;height:36px;background:var(--as-rot,#e94560);border:4px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 0 rgba(233,69,96,.7);animation:ortmap-pulse 1.5s ease-in-out infinite}
-.ortmap-pin-label{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);background:var(--as-rot,#e94560);color:#fff;padding:10px 18px;border-radius:8px;font-size:.85rem;white-space:nowrap;font-weight:700;letter-spacing:.3px;box-shadow:0 2px 8px rgba(0,0,0,.5);text-align:center;line-height:1.4}
-.ortmap-pin-label::after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--as-rot,#e94560)}
+.ortmap-img-wrap{position:relative;line-height:0;overflow:auto;max-height:74vh;text-align:center}
+.ortmap-img-inner{position:relative;display:inline-block}
+.ortmap-img-wrap img{display:block;max-width:88vw;max-height:74vh;height:auto}
+.ortmap-pin{position:absolute;z-index:2;pointer-events:none;transform:translate(-50%,-100%);filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.ortmap-pin-icon{width:40px;height:56px}
+.ortmap-pin-icon svg{width:100%;height:100%;display:block}
+.ortmap-pin-icon .pin-body{fill:var(--as-rot,#CF3628);fill-opacity:.88}
+.ortmap-pin-icon .pin-inner{fill:#fff;fill-opacity:.35}
+.ortmap-pin-pulse{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:rgba(207,54,40,.35);animation:ortmap-pulse 2s ease-out infinite}
+.ortmap-pin-label{position:absolute;left:50%;bottom:calc(100% + 4px);transform:translateX(-50%);background:rgba(207,54,40,.82);color:#fff;padding:8px 16px;border-radius:8px;font-size:.85rem;white-space:nowrap;font-weight:700;letter-spacing:.3px;box-shadow:0 2px 8px rgba(0,0,0,.4);text-align:center;line-height:1.4;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.ortmap-pin-label::after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(207,54,40,.82)}
 .ortmap-no-data{padding:40px;text-align:center;color:#888;font-size:.95rem}
-@keyframes ortmap-pulse{0%,100%{box-shadow:0 0 0 0 rgba(233,69,96,.7)}50%{box-shadow:0 0 0 18px rgba(233,69,96,0)}}
+@keyframes ortmap-pulse{0%{transform:translateX(-50%) scale(1);opacity:.6}70%{transform:translateX(-50%) scale(3.5);opacity:0}100%{transform:translateX(-50%) scale(3.5);opacity:0}}
     `;
     document.head.appendChild(s);
   }
@@ -94,13 +99,19 @@
     return overlay;
   }
 
+  var PIN_SVG = '<svg viewBox="0 0 40 56" xmlns="http://www.w3.org/2000/svg">' +
+    '<path class="pin-body" d="M20 0C9 0 0 9 0 20c0 15.3 18.1 34.2 19 35.1a1.3 1.3 0 0 0 2 0C21.9 54.2 40 35.3 40 20 40 9 31 0 20 0z"/>' +
+    '<circle class="pin-inner" cx="20" cy="20" r="9"/>' +
+    '</svg>';
+
   function renderOverlay(title, imgSrc, pinX, pinY, pinLabel, fallbackMsg) {
     ensureOverlay();
     var pinHtml = '';
     if (pinX != null && pinY != null) {
       pinHtml = '<div class="ortmap-pin" style="left:' + pinX + '%;top:' + pinY + '%">' +
         '<div class="ortmap-pin-label">' + pinLabel + '</div>' +
-        '<div class="ortmap-pin-dot"></div></div>';
+        '<div class="ortmap-pin-icon">' + PIN_SVG + '</div>' +
+        '<div class="ortmap-pin-pulse"></div></div>';
     }
 
     var noMatchHint = (!pinX && fallbackMsg)
@@ -112,8 +123,10 @@
         '<div class="ortmap-title"><span>' + title + '</span>' +
         '<button class="ortmap-close">&times;</button></div>' +
         '<div class="ortmap-img-wrap">' +
-          '<img src="' + imgSrc + '" alt="Plan">' +
-          pinHtml + noMatchHint +
+          '<div class="ortmap-img-inner">' +
+            '<img src="' + imgSrc + '" alt="Plan">' +
+            pinHtml + noMatchHint +
+          '</div>' +
         '</div>' +
       '</div>';
 

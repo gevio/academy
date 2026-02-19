@@ -275,9 +275,14 @@
             ${referentHtml}
           </div>
         </div>
-        <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${ws.id}" title="Favorit">
-          ${isFav ? '❤️' : '🤍'}
-        </button>
+        <div class="prog-card-actions">
+          <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${ws.id}" title="Favorit">
+            ${isFav ? '❤️' : '🤍'}
+          </button>
+          <button class="share-ws-btn" data-id="${ws.id}" data-title="${escapeHtml(ws.title)}" title="Teilen">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>
+          </button>
+        </div>
       </div>`;
   }
 
@@ -349,6 +354,22 @@
         // Bei Favoriten-Tab: Liste neu rendern
         if (currentTab === 'favoriten') {
           renderList();
+        }
+      });
+    });
+    // Share-Buttons
+    document.querySelectorAll('.share-ws-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const title = btn.dataset.title;
+        const url = location.origin + '/w/' + id;
+        const shareData = { title: title + ' – AS26 Live', text: title, url: url };
+        if (navigator.share) {
+          navigator.share(shareData).catch(() => {});
+        } else {
+          location.href = 'mailto:?subject=' + encodeURIComponent(shareData.title) + '&body=' + encodeURIComponent(shareData.text + '\n\n' + shareData.url);
         }
       });
     });

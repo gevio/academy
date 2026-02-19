@@ -63,8 +63,11 @@ do {
             $beschreibung .= $t['plain_text'] ?? '';
         }
 
-        // Kategorie (select)
-        $kategorie = $props['Kategorie']['select']['name'] ?? '';
+        // Kategorie (multi_select)
+        $kategorien = [];
+        foreach ($props['Kategorie']['multi_select'] ?? [] as $ms) {
+            if (!empty($ms['name'])) $kategorien[] = $ms['name'];
+        }
 
         // Website (url)
         $website = $props['Website']['url'] ?? '';
@@ -78,9 +81,16 @@ do {
         $standW = $props['Stand_W']['number'] ?? null;
         $standH = $props['Stand_H']['number'] ?? null;
 
-        // Logo: Notion-hosted URLs haben Expiry (~1h) – erst einbauen
-        // wenn wir Bilder beim Generieren lokal speichern.
-        // Slug: aktuell ungenutzt, bei Bedarf wieder aktivieren.
+        // LogoUrl (formula → Brandfetch CDN)
+        $logoUrl = $props['LogoUrl']['formula']['string'] ?? '';
+
+        // Domain extrahieren für Google Favicon Fallback
+        $domain = '';
+        if ($website) {
+            $parsed = parse_url($website);
+            $domain = $parsed['host'] ?? '';
+            $domain = preg_replace('/^www\./', '', $domain);
+        }
 
         $entry = [
             'id'           => str_replace('-', '', $page['id']),
@@ -88,9 +98,11 @@ do {
             'firma'        => $firma,
             'stand'        => $stand,
             'beschreibung' => trim($beschreibung),
-            'kategorie'    => $kategorie,
+            'kategorien'   => $kategorien,
             'website'      => $website ?: '',
+            'domain'       => $domain,
             'instagram'    => $instagram ?: '',
+            'logo_url'     => $logoUrl ?: '',
             'stand_x'      => $standX,
             'stand_y'      => $standY,
             'stand_w'      => $standW,

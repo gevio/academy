@@ -225,7 +225,14 @@
     overflow: hidden;
 }
 
-/* ── Favorit-Button ── */
+/* ── Card-Action Buttons (Fav + Share) ── */
+.prog-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .25rem;
+    flex-shrink: 0;
+}
 .fav-btn {
     background: none;
     border: none;
@@ -240,6 +247,19 @@
 .fav-btn:hover { opacity: .7; transform: scale(1.15); }
 .fav-btn.active { opacity: 1; }
 .fav-btn.active::after { content: ''; }
+.share-ws-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: .2rem;
+    line-height: 1;
+    opacity: .3;
+    transition: opacity .15s, transform .15s;
+    flex-shrink: 0;
+    color: var(--text);
+}
+.share-ws-btn:hover { opacity: .7; transform: scale(1.15); }
+.share-ws-btn svg { display: block; }
 
 /* ── Details Page ── */
 .detail-content {

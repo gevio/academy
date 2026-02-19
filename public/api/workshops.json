@@ -1,5 +1,5 @@
 {
-    "generated": "2026-02-18T20:19:15+01:00",
+    "generated": "2026-02-19T13:01:19+01:00",
     "count": 30,
     "workshops": [
         {
@@ -431,8 +431,13 @@
             ],
             "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
+            "referent_person": "Gesa & Thorsten Mähler & Münch",
+            "referent_persons": [
+                {
+                    "id": "d96da69392664d3b8311f169e826c29b",
+                    "name": "Gesa & Thorsten Mähler & Münch"
+                }
+            ],
             "aussteller": [],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>126 Pannen in 7 Jahren Weltreise – das klingt nach Drama, ist aber die beste Lehrmeisterin!</strong></p><p>Erfahre aus erster Hand, was beim Ausbau wirklich zählt und welche Fehler du von Anfang an vermeiden kannst.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Die häufigsten Ausbau-Fehler und ihre Folgen</p><p>✓ Was hält wirklich auf Wellblechpisten?</p><p>✓ Materialwahl: Do&#039;s and Don&#039;ts</p><p>✓ Reparaturen unterwegs meistern</p><p>✓ Vorbereitung für Langzeitreisen</p><p>Ehrliche Einblicke, praktische Tipps und echte Erfahrungen von der Straße!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Häufigste Fehler</h4><ul><li>Ausbau-Fehler, die teuer werden</li><li>Vibrations- und Belastungsschäden</li><li>Materialermüdung erkennen</li></ul><h4>Was funktioniert</h4><ul><li>Bewährte Lösungen für Langzeitreisen</li><li>Robuste Verbindungstechniken</li><li>Wartungsfreundliche Konstruktionen</li></ul><h4>Pannen-Management</h4><ul><li>Reparaturen unterwegs durchführen</li><li>Ersatzteile richtig bevorraten</li><li>Improvisieren ohne Werkstatt</li></ul><hr><h4>Zielgruppe</h4><ul><li>Weltreise-Planer und Langzeit-Reisende</li><li>Selbstausbauer, die von Erfahrungen lernen wollen</li><li>Alle, die robuste Ausbauten bauen möchten</li></ul><hr><h4>Zusätzliche Ressourcen</h4><p><strong>Vortrag-Ankündigung:</strong> <a href=\"https://www.notion.so/8aa318b00d2d4fc3b43f605ae985f616\" target=\"_blank\" rel=\"noopener\">Untitled</a></p><p><strong>HTML-Seite:</strong> <a href=\"https://www.notion.so/8b77991e72b64d99aceeaa8a54ccf968\" target=\"_blank\" rel=\"noopener\">Untitled</a></p>",
             "has_content": true

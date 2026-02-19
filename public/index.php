@@ -155,6 +155,9 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
             <button class="fav-btn-landing" id="fav-btn" data-id="<?= htmlspecialchars($cleanId) ?>" title="Favorit">
                 🤍
             </button>
+            <button class="share-btn-landing" id="share-btn" title="Teilen">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>
+            </button>
         </div>
 
         <p class="action-hint">Was möchtest du tun?</p>
@@ -212,7 +215,10 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <footer>
         <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
         <p>Adventure Southside 2026</p>
-        <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten & Standplan – alles in einer App:',url:'https://as26.cool-camp.site'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()">📤 Freunden empfehlen</button>
+        <div class="footer-cta-row">
+            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn">🎫 Ticket sichern</a>
+            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten & Standplan – alles in einer App:',url:'https://as26.cool-camp.site'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+        </div>
         <p>
             <a href="/impressum.html">Impressum & Datenschutz</a>
             &nbsp;·&nbsp;
@@ -263,6 +269,20 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
         });
 
         updateBtn();
+    })();
+
+    // ── Teilen-Logik ──
+    (function() {
+        const shareBtn = document.getElementById('share-btn');
+        if (!shareBtn) return;
+        shareBtn.addEventListener('click', () => {
+            const shareData = { title: document.title, text: document.querySelector('.workshop-card h1').textContent, url: location.href };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+            } else {
+                location.href = 'mailto:?subject=' + encodeURIComponent(shareData.title) + '&body=' + encodeURIComponent(shareData.text + '\n\n' + shareData.url);
+            }
+        });
     })();
     </script>
 </body>

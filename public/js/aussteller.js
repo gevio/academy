@@ -23,8 +23,33 @@
   };
 
   let allAussteller = [];
+  let allWorkshops = [];
   let currentSearch = '';
   let currentKat = 'all';
+
+  // Share-Icon SVG (YouTube-style curved arrow)
+  const SHARE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>';
+
+  // ── Logo Fallback (3 Stufen) ──
+  // 1. Brandfetch CDN (logo_url) → prüfe ob Platzhalter (< 10px)
+  // 2. Google Favicon API (128px)
+  // 3. Letter-Avatar (CSS)
+  function buildLogoImg(a, cssClass, letterClass) {
+    const letter = `<div class="${letterClass}">${escapeHtml((a.firma || '?')[0].toUpperCase())}</div>`;
+    if (!a.logo_url && !a.domain) return letter;
+
+    const src = a.logo_url || '';
+    const fallbackSrc = a.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(a.domain)}&sz=128` : '';
+
+    // data attrs for JS fallback handling
+    return `<img class="${cssClass}" src="${escapeHtml(src || fallbackSrc)}" alt=""
+      loading="lazy"
+      data-fallback="${escapeHtml(fallbackSrc)}"
+      data-letter="${escapeHtml((a.firma || '?')[0].toUpperCase())}"
+      data-letter-class="${letterClass}"
+      onerror="logoFallback(this)"
+      onload="logoCheck(this)">`;
+  }
 
   // ── Data Loading ──
 
@@ -38,11 +63,12 @@
       const data = await ausResp.json();
       allAussteller = data.aussteller || [];
 
-      // Workshop-Kategorien pro Aussteller-ID mappen
+      // Workshop-Daten speichern + Kategorien pro Aussteller mappen
       if (wsResp && wsResp.ok) {
         const wsData = await wsResp.json();
+        allWorkshops = wsData.workshops || [];
         const wsKatMap = {}; // aussteller-id → Set<kategorie>
-        for (const ws of (wsData.workshops || [])) {
+        for (const ws of allWorkshops) {
           for (const a of (ws.aussteller || [])) {
             if (!wsKatMap[a.id]) wsKatMap[a.id] = new Set();
             for (const k of (ws.kategorien || [])) {
@@ -72,7 +98,7 @@
     // Sammle Aussteller-Kategorie + Workshop-Kategorien
     const katSet = new Set();
     allAussteller.forEach(a => {
-      if (a.kategorie) katSet.add(a.kategorie);
+      (a.kategorien || []).forEach(k => katSet.add(k));
       (a.ws_kategorien || []).forEach(k => katSet.add(k));
     });
     const kats = [...katSet].sort();
@@ -107,7 +133,7 @@
     let list = allAussteller;
 
     if (currentKat !== 'all') {
-      list = list.filter(a => a.kategorie === currentKat ||
+      list = list.filter(a => (a.kategorien || []).includes(currentKat) ||
         (a.ws_kategorien || []).includes(currentKat));
     }
 
@@ -117,7 +143,7 @@
         a.firma.toLowerCase().includes(q) ||
         (a.stand || '').toLowerCase().includes(q) ||
         (a.beschreibung || '').toLowerCase().includes(q) ||
-        (a.kategorie || '').toLowerCase().includes(q)
+        (a.kategorien || []).some(k => k.toLowerCase().includes(q))
       );
     }
 
@@ -133,9 +159,9 @@
   }
 
   function renderCard(a) {
-    const katHtml = a.kategorie
-      ? `<span class="aussteller-tag">${escapeHtml(a.kategorie)}</span>`
-      : '';
+    const katHtml = (a.kategorien || [])
+      .map(k => `<span class="aussteller-tag">${escapeHtml(k)}</span>`)
+      .join('');
 
     const wsKatHtml = (a.ws_kategorien || [])
       .map(k => `<span class="aussteller-ws-tag">${escapeHtml(k)}</span>`)
@@ -145,8 +171,11 @@
       ? `<span class="aussteller-card-stand">${escapeHtml(a.stand)}</span>`
       : '';
 
+    const logoHtml = buildLogoImg(a, 'aussteller-card-logo', 'aussteller-letter-avatar');
+
     return `
       <div class="aussteller-card" data-stand="${escapeHtml(a.stand || '')}" data-id="${a.id}">
+        ${logoHtml}
         <div class="aussteller-card-body">
           <div class="aussteller-card-firma">${escapeHtml(a.firma)}</div>
           ${standLabel}
@@ -194,10 +223,6 @@
     const headerFirma = document.getElementById('map-firma');
     const headerStand = document.getElementById('map-stand');
     const imageWrap = document.getElementById('map-image-wrap');
-    const footerDesc = document.getElementById('map-desc');
-    const footerTags = document.getElementById('map-tags');
-    const footerLink = document.getElementById('map-link');
-    const footerInsta = document.getElementById('map-insta');
 
     // Deep-Link setzen
     history.replaceState(null, '', '#id=' + aussteller.id);
@@ -225,6 +250,7 @@
       // Inner wrapper: position:relative, exakt so groß wie das Bild
       // → %-basierte Marker-Positionen stimmen mit Map-Editor überein
       const innerWrap = document.createElement('div');
+      innerWrap.className = 'map-pin-container';
       innerWrap.style.cssText = 'position:relative;width:100%;flex-shrink:0';
       const img = document.createElement('img');
       img.src = halle.bild;
@@ -236,6 +262,7 @@
       if (standData) {
         img.addEventListener('load', () => {
           addMarker(innerWrap, stand, standData);
+          updateMarkerScale(innerWrap, img);
           setTimeout(() => {
             const marker = innerWrap.querySelector('.map-marker');
             if (marker) {
@@ -248,6 +275,12 @@
             }
           }, 100);
         });
+        // Resize-Listener für Rotation/Fenstergröße
+        const onResize = () => updateMarkerScale(innerWrap, img);
+        window.addEventListener('resize', onResize);
+        // Cleanup bei Close
+        const origClose = closeMap;
+        closeMap = function () { window.removeEventListener('resize', onResize); origClose(); };
       }
     } else if (stand) {
       imageWrap.innerHTML = '<div class="empty" style="padding:3rem 1rem">Kein Hallenplan für diesen Bereich verfügbar.<br>Stand: ' + escapeHtml(stand) + '</div>';
@@ -255,60 +288,134 @@
       imageWrap.innerHTML = '<div class="empty" style="padding:3rem 1rem">Standort wird noch bekannt gegeben.</div>';
     }
 
-    // Footer info
-    footerDesc.textContent = aussteller.beschreibung || '';
-    footerTags.innerHTML = aussteller.kategorie
-      ? `<span class="aussteller-tag">${escapeHtml(aussteller.kategorie)}</span>`
-      : '';
-
-    if (aussteller.website) {
-      footerLink.href = aussteller.website;
-      footerLink.textContent = '🌐 ' + aussteller.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-      footerLink.style.display = '';
-    } else {
-      footerLink.style.display = 'none';
-    }
-
-    if (aussteller.instagram) {
-      footerInsta.href = aussteller.instagram;
-      footerInsta.textContent = '📷 Instagram';
-      footerInsta.style.display = '';
-    } else {
-      footerInsta.style.display = 'none';
-    }
-
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    // \u2500\u2500 Firmensteckbrief rendern \u2500\u2500
+    renderProfile(aussteller);
   }
+
+  function renderProfile(a) {
+    const container = document.getElementById('map-profile');
+    if (!container) return;
+
+    const logoHtml = buildLogoImg(a, 'map-profile-logo', 'map-profile-letter');
+
+    // Kategorien (eigene + Workshop)
+    const allKats = [...new Set([...(a.kategorien || []), ...(a.ws_kategorien || [])])];
+    const tagsHtml = allKats
+      .map(k => `<span class="aussteller-tag">${escapeHtml(k)}</span>`)
+      .join('');
+
+    // Links
+    let linksHtml = '';
+    if (a.website) {
+      const display = a.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      linksHtml += `<a class="map-profile-link" href="${escapeHtml(a.website)}" target="_blank" rel="noopener">\ud83c\udf10 ${escapeHtml(display)}</a>`;
+    }
+    if (a.instagram) {
+      linksHtml += `<a class="map-profile-link" href="${escapeHtml(a.instagram)}" target="_blank" rel="noopener">\ud83d\udcf7 Instagram</a>`;
+    }
+
+    // Workshops dieses Ausstellers
+    const relatedWs = allWorkshops.filter(ws =>
+      (ws.aussteller || []).some(aus => aus.id === a.id)
+    );
+    let wsHtml = '';
+    if (relatedWs.length > 0) {
+      wsHtml = `<div class="map-profile-workshops">
+        <div class="map-profile-workshops-title">\ud83d\udcda Workshops dieses Ausstellers</div>
+        ${relatedWs.map(ws => `<a class="map-profile-ws" href="/w/${ws.id}">
+          \ud83d\udccb ${escapeHtml(ws.title)}${ws.tag ? ` <span>${escapeHtml(ws.tag)}${ws.zeit ? ' \u00b7 ' + escapeHtml(ws.zeit) : ''}</span>` : ''}
+        </a>`).join('')}
+      </div>`;
+    }
+
+    // Share
+    const shareUrl = location.origin + '/aussteller.html#id=' + a.id;
+    const shareHtml = `<div class="map-profile-actions">
+      <button class="map-profile-share" id="profile-share" data-title="${escapeHtml(a.firma)}" data-url="${escapeHtml(shareUrl)}">
+        ${SHARE_SVG} Teilen
+      </button>
+    </div>`;
+
+    container.innerHTML = `
+      <div class="map-profile-header">
+        ${logoHtml}
+        <div class="map-profile-title">
+          <h2>${escapeHtml(a.firma)}</h2>
+          ${a.stand ? `<span class="map-profile-stand">${escapeHtml(a.stand)}</span>` : ''}
+        </div>
+      </div>
+      ${a.beschreibung ? `<div class="map-profile-desc">${escapeHtml(a.beschreibung)}</div>` : ''}
+      <div class="map-profile-links">${linksHtml}</div>
+      <div class="map-profile-tags">${tagsHtml}</div>
+      ${wsHtml}
+      ${shareHtml}
+    `;
+
+    // Share click handler
+    const shareBtn = document.getElementById('profile-share');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const title = shareBtn.dataset.title + ' \u2013 Adventure Southside 2026';
+        const url = shareBtn.dataset.url;
+        const shareData = { title: title, text: shareBtn.dataset.title + ' auf der Adventure Southside 2026', url: url };
+        if (navigator.share) {
+          navigator.share(shareData).catch(() => {});
+        } else {
+          location.href = 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(shareData.text + '\\n\\n' + url);
+        }
+      });
+    }
+  }
+
+  // SVG für den Teardrop-Pin
+  const PIN_SVG = '<svg viewBox="0 0 40 56" xmlns="http://www.w3.org/2000/svg">' +
+    '<path class="pin-body" d="M20 0C9 0 0 9 0 20c0 15.3 18.1 34.2 19 35.1a1.3 1.3 0 0 0 2 0C21.9 54.2 40 35.3 40 20 40 9 31 0 20 0z"/>' +
+    '<circle class="pin-inner" cx="20" cy="20" r="9"/>' +
+    '</svg>';
 
   function addMarker(container, stand, data) {
     const marker = document.createElement('div');
+    marker.className = 'map-marker';
+    marker.style.left = data.x + '%';
+    marker.style.top = data.y + '%';
 
-    if (data.w && data.h) {
-      marker.className = 'map-marker rect-variant';
-      marker.style.left = (data.x - data.w / 2) + '%';
-      marker.style.top = (data.y - data.h / 2) + '%';
-      marker.style.width = data.w + '%';
-      marker.style.height = data.h + '%';
-    } else {
-      marker.className = 'map-marker';
-      marker.style.left = data.x + '%';
-      marker.style.top = data.y + '%';
-    }
+    // Pin-Icon
+    const pin = document.createElement('div');
+    pin.className = 'map-marker-pin';
+    pin.innerHTML = PIN_SVG;
+    marker.appendChild(pin);
 
-    const dot = document.createElement('div');
-    dot.className = 'map-marker-dot';
-    marker.appendChild(dot);
+    // Pulse-Ring
+    const pulse = document.createElement('div');
+    pulse.className = 'map-marker-pulse';
+    marker.appendChild(pulse);
 
+    // Label-Badge
     const label = document.createElement('div');
     label.className = 'map-marker-label';
     label.textContent = stand;
-    // Label nach unten wenn Marker im oberen Bereich (<25%)
-    const yPos = data.w && data.h ? (data.y - data.h / 2) : data.y;
-    if (yPos < 25) marker.classList.add('label-below');
+    // Label nach unten wenn Marker im oberen Bereich (<20%)
+    if (data.y < 20) marker.classList.add('label-below');
     marker.appendChild(label);
 
     container.appendChild(marker);
+  }
+
+  /**
+   * Berechne --marker-scale anhand Bild-Skalierung.
+   * Marker soll bei voller Bildgröße scale=1 sein,
+   * bei kleinerer Ansicht proportional mitskalieren (min 0.5).
+   */
+  function updateMarkerScale(container, img) {
+    if (!img || !img.naturalWidth) return;
+    const ratio = img.clientWidth / img.naturalWidth;
+    // Clamp: nicht kleiner als 0.5, nicht größer als 1.2
+    const scale = Math.max(0.5, Math.min(1.2, ratio * 1.6));
+    container.style.setProperty('--marker-scale', scale.toFixed(3));
   }
 
   function closeMap() {
@@ -316,6 +423,8 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('map-image-wrap').innerHTML = '';
+    const profile = document.getElementById('map-profile');
+    if (profile) profile.innerHTML = '';
     // Zurück-Navigation: ?back= Parameter nutzen wenn vorhanden
     const params = new URLSearchParams(window.location.search);
     const backUrl = params.get('back');
@@ -377,4 +486,41 @@
       }
     });
   });
+
+  // ── Globale Logo-Fallback-Funktionen ──
+  // Müssen global sein wegen inline onerror/onload
+
+  function replaceWithLetter(img) {
+    const letter = img.dataset.letter || '?';
+    const cls = img.dataset.letterClass || 'aussteller-letter-avatar';
+    const div = document.createElement('div');
+    div.className = cls;
+    div.textContent = letter;
+    img.replaceWith(div);
+  }
+
+  // onerror: versuche Google Favicon Fallback, dann Letter-Avatar
+  window.logoFallback = function(img) {
+    const fallback = img.dataset.fallback;
+    if (fallback && img.src !== fallback) {
+      img.dataset.fallback = ''; // nur 1x versuchen
+      img.src = fallback;
+    } else {
+      replaceWithLetter(img);
+    }
+  };
+
+  // onload: prüfe ob Brandfetch einen winzigen Platzhalter geliefert hat
+  window.logoCheck = function(img) {
+    if (img.naturalWidth < 10 || img.naturalHeight < 10) {
+      const fallback = img.dataset.fallback;
+      if (fallback && img.src !== fallback) {
+        img.dataset.fallback = '';
+        img.src = fallback;
+      } else if (!fallback) {
+        replaceWithLetter(img);
+      }
+    }
+  };
+
 })();

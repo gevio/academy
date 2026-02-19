@@ -81,6 +81,32 @@
     box-shadow: var(--shadow-md);
     border-color: var(--as-rot);
 }
+
+/* Logo in der Liste */
+.aussteller-card-logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: contain;
+    background: #f5f0eb;
+    border: 1px solid var(--border);
+}
+.aussteller-letter-avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--as-braun-dark);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
 .aussteller-card-body { flex: 1; min-width: 0; }
 .aussteller-card-firma {
     font-size: 1rem;
@@ -226,35 +252,76 @@
     -webkit-user-drag: none;
 }
 
-/* Map Marker */
+/* ══ Unified Map Pin ══
+   Teardrop-Pin mit Label-Badge
+   Skaliert responsive über --marker-scale (JS-berechnet) */
+.map-pin-container {
+    --marker-scale: 1;
+    position: relative;
+    width: 100%;
+}
+
 .map-marker {
     position: absolute;
-    transform: translate(-50%, -50%);
     z-index: 10;
     pointer-events: none;
+    /* Pin-Spitze = Marker-Position (translate: -50% X, -100% Y) */
+    transform: translate(-50%, -100%) scale(var(--marker-scale, 1));
+    transform-origin: center bottom;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.5));
 }
-.map-marker-dot {
-    width: 20px;
-    height: 20px;
+
+/* Pin-Icon (SVG Teardrop) */
+.map-marker-pin {
+    width: 40px;
+    height: 56px;
+    position: relative;
+}
+.map-marker-pin svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.map-marker-pin .pin-body {
+    fill: var(--as-rot, #CF3628);
+    fill-opacity: .88;
+}
+.map-marker-pin .pin-inner {
+    fill: #fff;
+    fill-opacity: .35;
+}
+/* Pulse-Ring um die Pin-Spitze */
+.map-marker-pulse {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: var(--as-rot);
-    border: 3px solid #fff;
-    box-shadow: 0 0 0 0 rgba(207,54,40, .7);
-    animation: marker-pulse 2s ease-out infinite;
+    background: rgba(207,54,40, .35);
+    animation: pin-pulse 2s ease-out infinite;
 }
+
+/* Label-Badge */
 .map-marker-label {
     position: absolute;
     left: 50%;
-    bottom: calc(100% + 6px);
+    bottom: calc(100% + 4px);
     transform: translateX(-50%);
-    background: var(--as-braun-dark);
+    background: rgba(207,54,40, .82);
     color: #fff;
-    padding: .25rem .6rem;
-    border-radius: 4px;
-    font-size: .75rem;
+    padding: .35rem .75rem;
+    border-radius: 6px;
+    font-size: .8rem;
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    letter-spacing: .02em;
+    line-height: 1.3;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 .map-marker-label::after {
     content: '';
@@ -262,45 +329,26 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: var(--as-braun-dark);
+    border: 6px solid transparent;
+    border-top-color: rgba(207,54,40, .82);
 }
 
 /* Label unten (bei Markern am oberen Bildrand) */
 .map-marker.label-below .map-marker-label {
     bottom: auto;
-    top: calc(100% + 6px);
+    top: calc(100% + 4px);
 }
 .map-marker.label-below .map-marker-label::after {
     top: auto;
     bottom: 100%;
     border-top-color: transparent;
-    border-bottom-color: var(--as-braun-dark);
+    border-bottom-color: rgba(207,54,40, .82);
 }
 
-/* Rect marker variant */
-.map-marker.rect-variant {
-    transform: none;
-    border: 3px solid var(--as-rot);
-    background: rgba(207,54,40, .2);
-    border-radius: 4px;
-    animation: marker-rect-pulse 2s ease-out infinite;
-}
-.map-marker.rect-variant .map-marker-dot { display: none; }
-.map-marker.rect-variant .map-marker-label { bottom: calc(100% + 4px); left: 0; transform: none; }
-.map-marker.rect-variant .map-marker-label::after { left: 12px; transform: none; }
-.map-marker.rect-variant.label-below .map-marker-label { bottom: auto; top: calc(100% + 4px); }
-.map-marker.rect-variant.label-below .map-marker-label::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--as-braun-dark); }
-
-@keyframes marker-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(207,54,40, .7); }
-    70%  { box-shadow: 0 0 0 14px rgba(207,54,40, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(207,54,40, 0); }
-}
-@keyframes marker-rect-pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(207,54,40, .5); }
-    70%  { box-shadow: 0 0 0 10px rgba(207,54,40, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(207,54,40, 0); }
+@keyframes pin-pulse {
+    0%   { transform: translateX(-50%) scale(1);   opacity: .6; }
+    70%  { transform: translateX(-50%) scale(3.5); opacity: 0; }
+    100% { transform: translateX(-50%) scale(3.5); opacity: 0; }
 }
 
 /* Map Footer (Aussteller-Info) */
@@ -339,6 +387,149 @@
     text-decoration: none;
 }
 .map-footer-link:hover { text-decoration: underline; }
+
+/* ── Firmensteckbrief im Overlay ── */
+.map-profile {
+    flex-shrink: 0;
+    background: var(--card);
+    border-top: 2px solid var(--border);
+    padding: 1.25rem;
+    max-height: 55vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.map-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: .75rem;
+}
+.map-profile-logo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    object-fit: contain;
+    background: #f5f0eb;
+    border: 1px solid var(--border);
+}
+.map-profile-letter {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: var(--as-braun-dark);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+}
+.map-profile-title {
+    flex: 1;
+    min-width: 0;
+}
+.map-profile-title h2 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: var(--as-braun-dark);
+    margin: 0 0 .2rem;
+}
+.map-profile-stand {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    padding: .15rem .5rem;
+    border-radius: 4px;
+    background: var(--as-braun-dark);
+    color: #fff;
+}
+.map-profile-desc {
+    font-size: .88rem;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: .75rem;
+}
+.map-profile-desc:empty { display: none; }
+.map-profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .75rem;
+}
+.map-profile-links:empty { display: none; }
+.map-profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font-size: .85rem;
+    color: var(--as-rot);
+    font-weight: 700;
+    text-decoration: none;
+}
+.map-profile-link:hover { text-decoration: underline; }
+.map-profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin-bottom: .75rem;
+}
+.map-profile-tags:empty { display: none; }
+
+/* Workshop-Verknüpfungen */
+.map-profile-workshops {
+    margin-top: .5rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--border);
+}
+.map-profile-workshops:empty { display: none; }
+.map-profile-workshops-title {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: .4rem;
+}
+.map-profile-ws {
+    display: flex;
+    align-items: baseline;
+    gap: .4rem;
+    padding: .4rem 0;
+    font-size: .88rem;
+    color: var(--as-braun-dark);
+    text-decoration: none;
+    transition: color .15s;
+}
+.map-profile-ws:hover { color: var(--as-rot); }
+.map-profile-ws span { color: var(--text-light); font-size: .75rem; }
+
+/* Share + Actions Zeile */
+.map-profile-actions {
+    display: flex;
+    gap: .5rem;
+    margin-top: .75rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--border);
+}
+.map-profile-share {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    background: none;
+    border: 2px solid var(--as-beige);
+    color: var(--text-light);
+    padding: .45rem .9rem;
+    border-radius: 8px;
+    font-size: .8rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color .15s, color .15s;
+}
+.map-profile-share:hover { border-color: var(--as-rot); color: var(--as-rot); }
+.map-profile-share svg { flex-shrink: 0; }
 
 /* Zoom hint */
 .zoom-hint {

@@ -1,6 +1,6 @@
 {
-    "generated": "2026-02-18T21:25:13+01:00",
-    "count": 12,
+    "generated": "2026-02-19T13:01:43+01:00",
+    "count": 11,
     "experten": [
         {
             "id": "22b8373fd98e43e08e9e593fa0494233",
@@ -40,7 +40,7 @@
             "vorname": "Uli",
             "nachname": "Dolde",
             "foto": "/img/experten/f9a55a744a4b4cc9bac0a636d0872a4c.webp",
-            "bio": "Geschäftsführer von Dolce Vita Verlag GmbH",
+            "bio": "Ulrich „Uli\" Dolde (*1962, Bruchsal) ist Autor, Verleger und leidenschaftlicher Wohnmobil-Selbstausbauer. Nach einem Studium zum Diplom-Wirtschaftsingenieur (FH) an der Hochschule für Medien in Stuttgart leitete er vier Marketing-Agenturen in Deutschland und war als Geschäftsführer Marketing & Vertrieb eines Reiseveranstalters tätig. 2008 baute er einen ausgemusterten Mercedes 914 Allrad-LKW zu einem Expeditionsmobil aus und dokumentierte den Prozess in seinem Standardwerk „Wohnmobile selbst ausbauen und optimieren\" (mittlerweile in 5. Auflage, 600 Seiten, Dolce Vita Verlag). Das Buch richtet sich an Komplett-Ausbauer ebenso wie an Optimierer und gilt als Referenz in der Selbstausbau-Szene. Uli bietet zudem kostenlose Webinare, individuelles Ausbau-Coaching und geführte Wohnmobil-Touren (u. a. Marokko) an. Er lebt mit seiner Frau Edith in der Schweiz (St. Urban) und ist Geschäftsführer der Dolce Vita Verlag GmbH.",
             "funktion": "",
             "kategorie": "",
             "website": "",
@@ -202,7 +202,7 @@
             "vorname": "Christian",
             "nachname": "Reisch",
             "foto": "/img/experten/9e1544a1642c43528e887b0ee2d4180d.webp",
-            "bio": "Geschäftsführer",
+            "bio": "Christian Reisch ist ein erfahrener Experte der Caravaning-Branche. 40 Jahre lang war er für den schwedischen Heizungshersteller Alde tätig (1984–2023), wo er den deutschen Markt maßgeblich mit aufbaute und in Produktion, Service, Entwicklung sowie Vertrieb arbeitete. Er begleitete zentrale Meilensteine wie die Einführung der Alde 3000er-Serie und die Entwicklung von Warmwasserheizungen für Reisemobile der Mittel- und Oberklasse. Seit 2024 unterstützt er das Familienunternehmen Reisch Tech GmbH in Röthlein (Franken), das auf Ver- und Entsorgungsanlagen, Servicestationen und Buchungssysteme für Stell- und Campingplätze spezialisiert ist. Die Familie Reisch ist bereits in dritter Generation in der Freizeitbranche aktiv und hat europaweit über 800 Stellplätze ausgestattet.",
             "funktion": "Geschäftsführer",
             "kategorie": "",
             "website": "",
@@ -283,7 +283,7 @@
             "name": "Erik Schmitt",
             "vorname": "Erik",
             "nachname": "Schmitt",
-            "foto": "",
+            "foto": "/img/experten/8b3a29a8eab948e0a948308b66a8dd05.webp",
             "bio": "Kfz-Meister und Mechatronik-Ingenieur mit über zehn Jahren Berufserfahrung im Prototypenbau. Hat ein individuell gestaltetes 4x4-LKW Expeditionsfahrzeug für seine Familie gebaut. Vortrag: \"Vom Basisfahrzeug zur Weltreise\" – Einblick in Planung, Bau und Erprobung des Expeditionsfahrzeugs.",
             "funktion": "",
             "kategorie": "",
@@ -309,48 +309,6 @@
                     ],
                     "status": "Referent bestätigt",
                     "aussteller": []
-                }
-            ]
-        },
-        {
-            "id": "5c61d374c1474d64b3fb2ce21c883432",
-            "name": "Heribert Schneider",
-            "vorname": "Heribert",
-            "nachname": "Schneider",
-            "foto": "",
-            "bio": "",
-            "funktion": "",
-            "kategorie": "",
-            "website": "",
-            "firma": "",
-            "kategorien": [
-                "Innenausbau & Module",
-                "Kabinen (Pickup & LKW)"
-            ],
-            "workshops": [
-                {
-                    "id": "cfddc41f710b45b5a143e003ae2069b9",
-                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
-                    "typ": "Expertpanel",
-                    "tag": "Samstag",
-                    "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
-                    "kategorien": [
-                        "Innenausbau & Module",
-                        "Kabinen (Pickup & LKW)"
-                    ],
-                    "status": "Referent bestätigt",
-                    "aussteller": [
-                        {
-                            "id": "f1dcfb2fb3c245e3851961d3500280e4",
-                            "firma": "Lichtbaummobil doo",
-                            "stand": "A4-204",
-                            "stand_x": null,
-                            "stand_y": null,
-                            "stand_w": null,
-                            "stand_h": null
-                        }
-                    ]
                 }
             ]
         },
