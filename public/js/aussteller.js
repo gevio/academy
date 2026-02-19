@@ -32,19 +32,31 @@
 
   // ── Logo Fallback (3 Stufen) ──
   // 1. Brandfetch CDN (logo_url) → prüfe ob Platzhalter (< 10px)
-  // 2. Google Favicon API (128px)
-  // 3. Letter-Avatar (CSS)
+  // Logo-Fallback-Kette:
+  // 1. logo_local (manuell in Notion hochgeladen, lokal gespeichert)
+  // 2. logo_url (Brandfetch CDN)
+  // 3. Google Favicon API (128px)
+  // 4. Letter-Avatar (CSS)
   function buildLogoImg(a, cssClass, letterClass) {
     const letter = `<div class="${letterClass}">${escapeHtml((a.firma || '?')[0].toUpperCase())}</div>`;
-    if (!a.logo_url && !a.domain) return letter;
+    if (!a.logo_local && !a.logo_url && !a.domain) return letter;
 
-    const src = a.logo_url || '';
-    const fallbackSrc = a.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(a.domain)}&sz=128` : '';
+    // Beste verfügbare Quelle als src
+    const src = a.logo_local || a.logo_url || '';
+    // Fallback-Kette: wenn logo_local → brandfetch → favicon, wenn brandfetch → favicon
+    let fallbackSrc = '';
+    if (a.logo_local && a.logo_url) {
+      fallbackSrc = a.logo_url; // brandfetch als 1. Fallback
+    } else if (a.domain) {
+      fallbackSrc = `https://www.google.com/s2/favicons?domain=${encodeURIComponent(a.domain)}&sz=128`;
+    }
+    const faviconSrc = a.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(a.domain)}&sz=128` : '';
 
     // data attrs for JS fallback handling
     return `<img class="${cssClass}" src="${escapeHtml(src || fallbackSrc)}" alt=""
       loading="lazy"
       data-fallback="${escapeHtml(fallbackSrc)}"
+      data-favicon="${escapeHtml(faviconSrc)}"
       data-letter="${escapeHtml((a.firma || '?')[0].toUpperCase())}"
       data-letter-class="${letterClass}"
       onerror="logoFallback(this)"
@@ -499,12 +511,16 @@
     img.replaceWith(div);
   }
 
-  // onerror: versuche Google Favicon Fallback, dann Letter-Avatar
+  // onerror: versuche nächsten Fallback in der Kette
   window.logoFallback = function(img) {
     const fallback = img.dataset.fallback;
+    const favicon  = img.dataset.favicon;
     if (fallback && img.src !== fallback) {
-      img.dataset.fallback = ''; // nur 1x versuchen
+      img.dataset.fallback = ''; // 1. Fallback verbraucht
       img.src = fallback;
+    } else if (favicon && img.src !== favicon) {
+      img.dataset.favicon = ''; // Favicon verbraucht
+      img.src = favicon;
     } else {
       replaceWithLetter(img);
     }
@@ -514,10 +530,14 @@
   window.logoCheck = function(img) {
     if (img.naturalWidth < 10 || img.naturalHeight < 10) {
       const fallback = img.dataset.fallback;
+      const favicon  = img.dataset.favicon;
       if (fallback && img.src !== fallback) {
         img.dataset.fallback = '';
         img.src = fallback;
-      } else if (!fallback) {
+      } else if (favicon && img.src !== favicon) {
+        img.dataset.favicon = '';
+        img.src = favicon;
+      } else {
         replaceWithLetter(img);
       }
     }

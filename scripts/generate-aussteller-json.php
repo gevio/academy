@@ -16,6 +16,71 @@ require_once __DIR__ . '/../src/NotionClient.php';
 $notion  = new NotionClient(NOTION_TOKEN);
 $outFile     = __DIR__ . '/../public/api/aussteller.json';
 $standFile   = __DIR__ . '/../public/api/standplan.json';
+$imgDir      = __DIR__ . '/../public/img/aussteller';
+$imgUrl      = '/img/aussteller';               // relativer Web-Pfad
+
+if (!is_dir($imgDir)) {
+    mkdir($imgDir, 0755, true);
+}
+
+/**
+ * Notion-Logo herunterladen, als WebP speichern und lokalen Pfad zurückgeben.
+ * Gibt '' zurück, wenn kein Logo oder Download fehlschlägt.
+ */
+function downloadLogo(string $notionUrl, string $id, string $imgDir, string $imgUrl): string
+{
+    if (!$notionUrl) return '';
+
+    $localFile = $imgDir . '/' . $id . '.webp';
+    $localPath = $imgUrl . '/' . $id . '.webp';
+
+    // Herunterladen
+    $ctx = stream_context_create(['http' => [
+        'timeout'       => 15,
+        'ignore_errors' => true,
+    ]]);
+    $imgData = @file_get_contents($notionUrl, false, $ctx);
+    if (!$imgData || strlen($imgData) < 100) {
+        echo "   ⚠ Logo-Download fehlgeschlagen für {$id}\n";
+        return file_exists($localFile) ? $localPath : '';
+    }
+
+    // Mit GD laden und als WebP speichern (max 200px breit)
+    $src = @imagecreatefromstring($imgData);
+    if (!$src) {
+        echo "   ⚠ Logo nicht lesbar für {$id}\n";
+        return file_exists($localFile) ? $localPath : '';
+    }
+
+    $origW = imagesx($src);
+    $origH = imagesy($src);
+    $maxW  = 200;
+
+    if ($origW > $maxW) {
+        $newW = $maxW;
+        $newH = (int) round($origH * ($maxW / $origW));
+        $dst  = imagecreatetruecolor($newW, $newH);
+        // Transparenz beibehalten (PNG-Logos)
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+        $transparent = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+        imagefill($dst, 0, 0, $transparent);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newW, $newH, $origW, $origH);
+        imagedestroy($src);
+        $src = $dst;
+    } else {
+        // Auch bei kleinen Bildern Alpha beibehalten
+        imagealphablending($src, false);
+        imagesavealpha($src, true);
+    }
+
+    imagewebp($src, $localFile, 82);
+    imagedestroy($src);
+
+    $size = round(filesize($localFile) / 1024, 1);
+    echo "   🖼 Logo gespeichert: {$id}.webp ({$size} KB)\n";
+    return $localPath;
+}
 
 if (!defined('NOTION_AUSSTELLER_DB') || empty(NOTION_AUSSTELLER_DB)) {
     die("❌ NOTION_AUSSTELLER_DB nicht gesetzt. Bitte in .env konfigurieren.\n");
@@ -81,6 +146,18 @@ do {
         $standW = $props['Stand_W']['number'] ?? null;
         $standH = $props['Stand_H']['number'] ?? null;
 
+        // Logo (files-Feld, manuell hochgeladen)
+        $logoNotionUrl = '';
+        $logoFiles = $props['Logo']['files'] ?? [];
+        if (!empty($logoFiles)) {
+            $first = $logoFiles[0];
+            if (($first['type'] ?? '') === 'file') {
+                $logoNotionUrl = $first['file']['url'] ?? '';
+            } elseif (($first['type'] ?? '') === 'external') {
+                $logoNotionUrl = $first['external']['url'] ?? '';
+            }
+        }
+
         // LogoUrl (formula → Brandfetch CDN)
         $logoUrl = $props['LogoUrl']['formula']['string'] ?? '';
 
@@ -92,8 +169,16 @@ do {
             $domain = preg_replace('/^www\./', '', $domain);
         }
 
+        $id = str_replace('-', '', $page['id']);
+
+        // Logo lokal herunterladen (nur wenn Logo-Feld in Notion gefüllt)
+        $logoLocal = '';
+        if ($logoNotionUrl) {
+            $logoLocal = downloadLogo($logoNotionUrl, $id, $imgDir, $imgUrl);
+        }
+
         $entry = [
-            'id'           => str_replace('-', '', $page['id']),
+            'id'           => $id,
             'page_id'      => $page['id'],
             'firma'        => $firma,
             'stand'        => $stand,
@@ -103,6 +188,7 @@ do {
             'domain'       => $domain,
             'instagram'    => $instagram ?: '',
             'logo_url'     => $logoUrl ?: '',
+            'logo_local'   => $logoLocal,
             'stand_x'      => $standX,
             'stand_y'      => $standY,
             'stand_w'      => $standW,
