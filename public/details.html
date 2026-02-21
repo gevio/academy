@@ -47,7 +47,31 @@
 
         const API_URL = '/api/workshops.json';
         const STORAGE_KEY = 'as26_favorites';
+        const ADMIN_KEY = 'as26_admin_secret';
         let backUrl = null;
+
+        // ── Admin-Modus ──────────────────────────────────
+        // Aktivierung: ?admin=DEIN_SECRET an beliebige URL hängen
+        // Speichert in sessionStorage → gilt nur für diesen Tab/Session
+        (function initAdmin() {
+            const params = new URLSearchParams(location.search);
+            const secret = params.get('admin');
+            if (secret) {
+                sessionStorage.setItem(ADMIN_KEY, secret);
+                // Secret aus URL entfernen (clean URL)
+                params.delete('admin');
+                const cleanUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+                history.replaceState(null, '', cleanUrl);
+            }
+        })();
+
+        function isAdmin() {
+            return !!sessionStorage.getItem(ADMIN_KEY);
+        }
+
+        function getAdminSecret() {
+            return sessionStorage.getItem(ADMIN_KEY) || '';
+        }
 
         // Workshop-ID aus URL extrahieren: /w/{id}/details
         function getWorkshopId() {
@@ -175,6 +199,18 @@
                 </button>
             </div>`;
 
+            // Admin: Review-Button (nur sichtbar wenn Admin-Modus aktiv)
+            if (isAdmin()) {
+                html += `<div class="admin-actions" style="margin:.8rem 0;padding:.6rem;background:#fff3cd;border:2px dashed #e76f51;border-radius:8px;text-align:center">
+                    <span style="font-size:.75rem;color:#666;display:block;margin-bottom:.4rem">🔧 Admin</span>
+                    <button class="btn btn-primary" id="send-review-btn" data-id="${ws.id}" data-title="${escapeHtml(ws.title)}"
+                        style="background:#e76f51;border:none;font-weight:600">
+                        📧 Review an Referent senden
+                    </button>
+                    <div id="review-result" style="margin-top:.5rem;font-size:.85rem"></div>
+                </div>`;
+            }
+
             // Page Content
             if (ws.has_content && ws.content_html) {
                 html += '<div class="detail-body">' + ws.content_html + '</div>';
@@ -212,6 +248,57 @@
                         navigator.share(shareData).catch(() => {});
                     } else {
                         location.href = 'mailto:?subject=' + encodeURIComponent(shareData.title) + '&body=' + encodeURIComponent(shareData.text + '\n\n' + shareData.url);
+                    }
+                });
+            }
+
+            // Admin: Review senden Event
+            const reviewBtn = document.getElementById('send-review-btn');
+            if (reviewBtn) {
+                reviewBtn.addEventListener('click', async () => {
+                    const wsId = reviewBtn.dataset.id;
+                    const wsTitle = reviewBtn.dataset.title;
+                    const resultEl = document.getElementById('review-result');
+
+                    // Bestätigungsdialog
+                    const deadlineDefault = new Date(Date.now() + 28 * 86400000).toISOString().split('T')[0];
+                    const deadline = prompt(
+                        `Review für "${wsTitle}" erstellen?\n\nDeadline (YYYY-MM-DD):`,
+                        deadlineDefault
+                    );
+                    if (!deadline) return;
+
+                    reviewBtn.disabled = true;
+                    reviewBtn.textContent = '⏳ Wird erstellt…';
+                    resultEl.textContent = '';
+
+                    try {
+                        const resp = await fetch('/api/send-review.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Admin-Secret': getAdminSecret(),
+                            },
+                            body: JSON.stringify({ workshop_id: wsId, deadline: deadline }),
+                        });
+                        const data = await resp.json();
+
+                        if (data.success) {
+                            resultEl.innerHTML = `<span style="color:green">✅ Review erstellt!</span><br>
+                                <small>👤 ${data.referent_name} (${data.referent_email})</small><br>
+                                <small>📧 E-Mail-Draft: ${data.email_created ? 'erstellt' : '⚠️ Fehler'} (Status: ${data.email_status})</small><br>
+                                <a href="${data.review_url}" target="_blank" rel="noopener" style="color:#e76f51;font-weight:600">→ Review in Notion öffnen</a>`;
+                            reviewBtn.textContent = '✅ Review erstellt';
+                        } else {
+                            resultEl.innerHTML = `<span style="color:red">❌ ${data.error || 'Unbekannter Fehler'}</span>
+                                ${data.hint ? '<br><small>' + data.hint + '</small>' : ''}`;
+                            reviewBtn.disabled = false;
+                            reviewBtn.textContent = '📧 Review an Referent senden';
+                        }
+                    } catch (err) {
+                        resultEl.innerHTML = `<span style="color:red">❌ Netzwerk-Fehler: ${err.message}</span>`;
+                        reviewBtn.disabled = false;
+                        reviewBtn.textContent = '📧 Review an Referent senden';
                     }
                 });
             }

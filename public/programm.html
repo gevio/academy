@@ -87,6 +87,17 @@
     <script src="/js/programm.js"></script>
     <script src="/js/ortmap.js"></script>
     <script>
+    // ── Admin-Modus (Secret in sessionStorage speichern) ──
+    (function() {
+        var p = new URLSearchParams(location.search);
+        var s = p.get('admin');
+        if (s) {
+            sessionStorage.setItem('as26_admin_secret', s);
+            p.delete('admin');
+            history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : '') + location.hash);
+        }
+    })();
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js');
     }

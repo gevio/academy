@@ -1,0 +1,55 @@
+{
+  "_info": "Beispiel-Struktur der Notion-Datenbanken für das Review-System. Dient als Dokumentation, nicht zum Import.",
+
+  "review_db": {
+    "id": "b69393bea0474e7cb34aa314c621d618",
+    "name": "Workshop Reviews",
+    "properties": {
+      "Review-Titel":    { "type": "title",    "example": "Review – Maßgeschneiderte Wassertanks" },
+      "Event":           { "type": "select",   "options": ["Southside 2026", "Northside 2026"] },
+      "Workshop":        { "type": "relation", "target_db": "Workshop-DB (11382138ece1494bafa3cd1bb47dda82)" },
+      "Referent E-Mail": { "type": "email",    "example": "frank@ftdesign.de" },
+      "Deadline":        { "type": "date",     "example": "2026-03-21" },
+      "Notizen":         { "type": "rich_text", "example": "Vorlage – nicht versenden." },
+      "Review-Status":   { "type": "status",   "options": ["Offen", "In Review", "Änderungen nötig", "Freigegeben"] }
+    },
+    "page_body_template": [
+      "callout: Zweck + Regel",
+      "h3: 0) Freigabe-Kontakt → TO_ADRESSE",
+      "h3: 1) Kurz-Anleitung für den Referenten",
+      "h3: 2) Status & Deadlines",
+      "---",
+      "h3: 3) Workshop (für Website/App) → Titel, Beschreibung, Bulletpoints, Kategorien, Format, Dauer, Ort, Termin",
+      "---",
+      "h3: 4) Referent → Name, Funktion, Bio, Website, Foto-Platzhalter",
+      "---",
+      "h3: 5) Firma → Firmenname, Kurzprofil, Website, Logo-Platzhalter",
+      "---",
+      "h3: 6) Änderungswünsche → Checkliste (Titel ok, Beschreibung ok, Bulletpoints ok, Bio ok, Foto, Logo, Sonstiges)"
+    ]
+  },
+
+  "email_db": {
+    "id": "7288c0d68377454f9fccb0a8bb218da9",
+    "name": "E-Mails Ausgehend",
+    "properties": {
+      "Betreff":         { "type": "title",        "example": "Review: Maßgeschneiderte Wassertanks – Adventure Southside 2026" },
+      "Status":          { "type": "select",       "options": ["Draft", "Released", "Sent"], "default": "Draft", "WICHTIG": "Immer Draft beim Erstellen!" },
+      "TO-Adresse":      { "type": "rich_text",    "example": "frank@ftdesign.de" },
+      "E-Mail-Text":     { "type": "rich_text",    "placeholders": ["VORNAME", "REVIEW_LINK", "DEADLINE"] },
+      "Template-Name":   { "type": "rich_text",    "example": "Review-Link Workshop (Kommentieren)" },
+      "Versand-Info":    { "type": "select",       "options": ["Manuell", "n8n", "Notion Mail", "Anderes"] },
+      "Event-Bezug":     { "type": "multi_select", "example": ["Southside 2026"] },
+      "Sendedatum":      { "type": "date" },
+      "CC-Adresse":      { "type": "rich_text" },
+      "Kampagne":        { "type": "rich_text" },
+      "n8n Workflow ID": { "type": "rich_text" },
+      "Anhänge":         { "type": "files" }
+    }
+  },
+
+  "templates": {
+    "review_page": "4bfdf5eaa54448d1ba069332f4da1f74",
+    "email_page":  "3f3fff1f8d1e42768076a656f0440c88"
+  }
+}
