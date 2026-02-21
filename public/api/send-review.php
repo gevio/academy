@@ -83,10 +83,11 @@ if (empty($wsData['page_id'])) {
     $wsData['page_id'] = preg_replace('/^(.{8})(.{4})(.{4})(.{4})(.{12})$/', '$1-$2-$3-$4-$5', $cleanId);
 }
 
-// ── 2) Referent laden ────────────────────────────────
-$referent = ['name' => '', 'vorname' => '', 'nachname' => '', 'email' => '', 'bio' => '', 'funktion' => '', 'website' => '', 'foto' => ''];
+// ── 2) Alle Referenten laden ─────────────────────────
+$referents = [];
+$referentsWithoutEmail = [];
 
-// Referent-Person-IDs aus workshops.json oder Live-Daten
+// Referent-Person-IDs aus workshops.json
 $personIds = [];
 if (!empty($wsData['referent_persons'])) {
     $personIds = array_column($wsData['referent_persons'], 'id');
@@ -94,22 +95,38 @@ if (!empty($wsData['referent_persons'])) {
     $personIds = $wsData['referent_person_ids'];
 }
 
-if (!empty($personIds)) {
-    // Ersten Referenten laden (Haupt-Referent)
-    $refId = $personIds[0];
+foreach ($personIds as $refId) {
     // page_id mit Bindestrichen
     if (strlen($refId) === 32 && strpos($refId, '-') === false) {
         $refId = preg_replace('/^(.{8})(.{4})(.{4})(.{4})(.{12})$/', '$1-$2-$3-$4-$5', $refId);
     }
-    $referent = $notion->getReferentFull($refId);
+    $ref = $notion->getReferentFull($refId);
+    if (!empty($ref['name'])) {
+        if (empty($ref['email'])) {
+            $referentsWithoutEmail[] = $ref['name'];
+        }
+        $referents[] = $ref;
+    }
 }
 
-if (empty($referent['email'])) {
+if (empty($referents)) {
     http_response_code(400);
     echo json_encode([
-        'error' => 'Referent hat keine E-Mail-Adresse',
-        'referent_name' => $referent['name'] ?? 'unbekannt',
-        'hint' => 'Bitte erst E-Mail in der Referenten-DB eintragen.',
+        'error' => 'Keine Referenten gefunden',
+        'hint' => 'Workshop hat keine verknüpften Referenten.',
+    ]);
+    exit;
+}
+
+// Prüfen ob mindestens ein Referent eine E-Mail hat
+$referentsWithEmail = array_filter($referents, fn($r) => !empty($r['email']));
+if (empty($referentsWithEmail)) {
+    $names = array_column($referents, 'name');
+    http_response_code(400);
+    echo json_encode([
+        'error' => 'Kein Referent hat eine E-Mail-Adresse',
+        'referent_names' => implode(', ', $names),
+        'hint' => 'Bitte erst E-Mail(s) in der Referenten-DB eintragen.',
     ]);
     exit;
 }
@@ -117,11 +134,9 @@ if (empty($referent['email'])) {
 // ── 3) Firma / Aussteller laden ─────────────────────
 $firma = ['firma' => '', 'beschreibung' => '', 'website' => '', 'logo' => ''];
 
-// Aus workshops.json
 if (!empty($wsData['aussteller']) && is_array($wsData['aussteller'])) {
     $a = $wsData['aussteller'][0];
     $firma['firma'] = $a['firma'] ?? '';
-    // Für mehr Details: Aussteller aus Notion laden
     if (!empty($a['id'])) {
         $ausstellerId = $a['id'];
         if (strlen($ausstellerId) === 32 && strpos($ausstellerId, '-') === false) {
@@ -136,8 +151,8 @@ if (!empty($wsData['aussteller']) && is_array($wsData['aussteller'])) {
     $firma['firma'] = $wsData['referent_firma'];
 }
 
-// ── 4) Review-Seite erstellen ────────────────────────
-$reviewPage = $notion->createReviewPage($wsData, $referent, $firma, $deadline);
+// ── 4) EINE Review-Seite erstellen (alle Referenten) ─
+$reviewPage = $notion->createReviewPage($wsData, $referents, $firma, $deadline);
 
 if (!$reviewPage || empty($reviewPage['id'])) {
     http_response_code(500);
@@ -148,27 +163,39 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
-// ── 5) E-Mail-Draft erstellen (Status = Draft!) ─────
+// ── 5) E-Mail-Draft PRO Referent (nur mit E-Mail) ───
 $betreff = "Review: {$wsData['title']} – Adventure Southside 2026";
-$emailPage = $notion->createEmailDraft(
-    $betreff,
-    $referent['email'],
-    $referent['vorname'] ?: $referent['name'],
-    $reviewUrl,
-    $deadline
-);
+$emailResults = [];
 
-$emailOk = !empty($emailPage['id']);
+foreach ($referentsWithEmail as $ref) {
+    $emailPage = $notion->createEmailDraft(
+        $betreff,
+        $ref['email'],
+        $ref['vorname'] ?: $ref['name'],
+        $reviewUrl,
+        $deadline
+    );
+    $emailResults[] = [
+        'name'  => $ref['name'],
+        'email' => $ref['email'],
+        'ok'    => !empty($emailPage['id']),
+    ];
+}
 
 // ── Response ─────────────────────────────────────────
-echo json_encode([
+$refSummary = array_map(fn($r) => $r['name'] . ' (' . ($r['email'] ?: 'keine E-Mail') . ')', $referents);
+
+$response = [
     'success' => true,
     'review_page_id' => $reviewPageId,
     'review_url' => $reviewUrl,
-    'email_created' => $emailOk,
-    'email_status' => 'Draft',
-    'referent_name' => $referent['name'],
-    'referent_email' => $referent['email'],
+    'referent_count' => count($referents),
+    'email_count' => count($emailResults),
+    'emails' => $emailResults,
+    'referents_without_email' => $referentsWithoutEmail,
+    'referent_summary' => $refSummary,
     'workshop_title' => $wsData['title'],
     'deadline' => $deadline,
-], JSON_UNESCAPED_UNICODE);
+];
+
+echo json_encode($response, JSON_UNESCAPED_UNICODE);

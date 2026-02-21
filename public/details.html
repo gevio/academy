@@ -284,9 +284,21 @@
                         const data = await resp.json();
 
                         if (data.success) {
+                            // Referenten-Liste aufbauen
+                            let refLines = '';
+                            if (data.emails && data.emails.length > 0) {
+                                refLines = data.emails.map(e =>
+                                    `<small>${e.ok ? '✅' : '⚠️'} ${e.name} (${e.email})</small>`
+                                ).join('<br>');
+                            }
+                            if (data.referents_without_email && data.referents_without_email.length > 0) {
+                                refLines += '<br>' + data.referents_without_email.map(n =>
+                                    `<small>⚠️ ${n} – <em>keine E-Mail</em></small>`
+                                ).join('<br>');
+                            }
                             resultEl.innerHTML = `<span style="color:green">✅ Review erstellt!</span><br>
-                                <small>👤 ${data.referent_name} (${data.referent_email})</small><br>
-                                <small>📧 E-Mail-Draft: ${data.email_created ? 'erstellt' : '⚠️ Fehler'} (Status: ${data.email_status})</small><br>
+                                ${refLines}<br>
+                                <small>📧 ${data.email_count} E-Mail-Draft(s) erstellt</small><br>
                                 <a href="${data.review_url}" target="_blank" rel="noopener" style="color:#e76f51;font-weight:600">→ Review in Notion öffnen</a>`;
                             reviewBtn.textContent = '✅ Review erstellt';
                         } else {

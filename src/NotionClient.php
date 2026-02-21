@@ -229,10 +229,17 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
      *
      * @return array|null  Notion Page (inkl. „id" und „url")
      */
-    public function createReviewPage(array $workshop, array $referent, array $firma, string $deadline): ?array
+    /**
+     * @param array $referents Array von Referenten (jeweils mit name, vorname, email, bio, funktion, website, foto)
+     */
+    public function createReviewPage(array $workshop, array $referents, array $firma, string $deadline): ?array
     {
         $reviewTitel = 'Review – ' . $workshop['title'];
-        $toAdresse   = $referent['email'] ?? '';
+
+        // Alle E-Mails sammeln (für Property – Notion email-Feld nimmt nur 1 Adresse,
+        // daher erste nehmen; alle Adressen stehen zusätzlich in Notizen)
+        $allEmails = array_filter(array_column($referents, 'email'));
+        $firstEmail = $allEmails[0] ?? '';
 
         // ── Page Properties ──
         $properties = [
@@ -253,8 +260,14 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
             ],
         ];
 
-        if ($toAdresse) {
-            $properties['Referent E-Mail'] = ['email' => $toAdresse];
+        if ($firstEmail) {
+            $properties['Referent E-Mail'] = ['email' => $firstEmail];
+        }
+        // Bei mehreren Referenten: alle Adressen in Notizen
+        if (count($allEmails) > 1) {
+            $properties['Notizen'] = [
+                'rich_text' => [['text' => ['content' => 'E-Mails: ' . implode(', ', $allEmails)]]],
+            ];
         }
 
         // ── Page Body (Blöcke nach Template) ──
@@ -306,14 +319,23 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
         $blocks[] = self::paragraph('**SM-Hashtags (optional):**');
         $blocks[] = self::divider();
 
-        // 4) Referent
-        $blocks[] = self::h3('4) Referent');
-        $blocks[] = self::paragraph("**Name:** {$referent['name']}");
-        $blocks[] = self::paragraph("**Titel/Funktion (1 Zeile):** {$referent['funktion']}");
-        $blocks[] = self::paragraph("**Kurz-Bio (max. 6–8 Zeilen):** {$referent['bio']}");
-        $blocks[] = self::paragraph("**Website / Social (optional):** {$referent['website']}");
-        $blocks[] = self::h4('Referent – Foto');
-        $blocks[] = self::calloutBlock('Bitte hier ein Portraitfoto einfügen (quadratisch oder Hochformat, PNG bevorzugt, transparenter Hintergrund wenn möglich).', '📸');
+        // 4) Referent(en)
+        $refCount = count($referents);
+        $blocks[] = self::h3($refCount > 1 ? '4) Referenten' : '4) Referent');
+        foreach ($referents as $idx => $referent) {
+            if ($refCount > 1) {
+                $blocks[] = self::h4('Referent ' . ($idx + 1) . ': ' . ($referent['name'] ?? ''));
+            }
+            $blocks[] = self::paragraph("**Name:** {$referent['name']}");
+            $blocks[] = self::paragraph("**Titel/Funktion (1 Zeile):** {$referent['funktion']}");
+            $blocks[] = self::paragraph("**Kurz-Bio (max. 6–8 Zeilen):** {$referent['bio']}");
+            $blocks[] = self::paragraph("**Website / Social (optional):** {$referent['website']}");
+            $blocks[] = self::h4(($refCount > 1 ? "Referent " . ($idx + 1) . " – " : "Referent – ") . 'Foto');
+            $blocks[] = self::calloutBlock('Bitte hier ein Portraitfoto einfügen (quadratisch oder Hochformat, PNG bevorzugt, transparenter Hintergrund wenn möglich).', '📸');
+            if ($idx < $refCount - 1) {
+                $blocks[] = self::paragraph(''); // Abstand zwischen Referenten
+            }
+        }
         $blocks[] = self::divider();
 
         // 5) Firma
