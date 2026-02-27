@@ -54,17 +54,17 @@ function postToWebhook(string $url, array $data): bool {
  * Cookie-Laufzeit: 1 Jahr. HttpOnly + Secure + SameSite=Lax.
  */
 function getOrCreateDeviceId(): string {
-    if (!empty($_COOKIE['as26_device_id'])) {
-        return $_COOKIE['as26_device_id'];
+    if (!empty($_COOKIE['asa_device_id'])) {
+        return $_COOKIE['asa_device_id'];
     }
     $id = bin2hex(random_bytes(16));
-    setcookie('as26_device_id', $id, [
+    setcookie('asa_device_id', $id, [
         'expires'  => time() + 86400 * 365,
         'path'     => '/',
         'secure'   => true,
         'httponly'  => true,
         'samesite' => 'Lax',
     ]);
-    $_COOKIE['as26_device_id'] = $id;
+    $_COOKIE['asa_device_id'] = $id;
     return $id;
 }

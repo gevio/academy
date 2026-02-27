@@ -85,8 +85,8 @@ $title = str_replace(["\r", "\n", ",", ";"], ['', '', '\\,', '\\;'], $workshop['
 $location = str_replace(["\r", "\n", ",", ";"], ['', '', '\\,', '\\;'], $workshop['ort'] ?? 'Messe Friedrichshafen');
 $description = str_replace(["\r", "\n", ",", ";"], ['', ' ', '\\,', '\\;'],
     mb_substr(strip_tags($workshop['beschreibung'] ?? ''), 0, 300));
-$url = 'https://as26.cool-camp.site/w/' . $id;
-$uid = $id . '@as26.cool-camp.site';
+$url = 'https://agenda.adventuresouthside.com/w/' . $id;
+$uid = $id . '@agenda.adventuresouthside.com';
 $stamp = gmdate('Ymd\THis\Z');
 
 $ics = "BEGIN:VCALENDAR\r\n";

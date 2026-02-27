@@ -1,32 +1,37 @@
 {
-    "generated": "2026-02-19T13:01:19+01:00",
-    "count": 30,
+    "generated": "2026-02-27T12:31:56+01:00",
+    "count": 56,
     "workshops": [
         {
-            "id": "30b9c964c82f80288682ff04d48a074f",
-            "title": "eCamper - Freitag 1",
-            "typ": "eCamper",
+            "id": "f47782e2949e482aa8c5d470fd383f70",
+            "title": "Live Podcast",
+            "typ": "Roadtrip Girls.Hub",
             "tag": "Freitag",
-            "zeit": "11:00 – 12:00 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Reservierter Slot",
-            "datum_start": "2026-07-10T11:00:00.000+02:00",
+            "zeit": "10:30 – 11:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Für ihren Podcast „the female traveller\" interviewt Sara auf der Bühne ein spannendes RoadtripGirl.",
+            "datum_start": "2026-07-10T10:30:00.000+02:00",
             "kategorien": [],
-            "status": "",
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
+            "referent_person": "Sarah Glöckner",
+            "referent_persons": [
+                {
+                    "id": "f0800e993cd04890b40c5146830bcae2",
+                    "name": "Sarah Glöckner"
+                }
+            ],
             "aussteller": [],
             "content_html": "",
             "has_content": false
         },
         {
             "id": "a30973dfa4c249d791be43bce8b4de97",
-            "title": "⛺️ DIY-Standheizungen – Von Autotherm bis China-Böller",
+            "title": "DIY-Standheizungen – Von Autotherm bis China-Böller",
             "typ": "Expertpanel",
             "tag": "Freitag",
             "zeit": "11:00 – 11:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Beim Thema Standheizung hat sich in der DIY-Szene ein massiver Wandel vollzogen. Von Premium (Webasto/Eberspächer 1.200–1.800€) über Preis-Leistung (Autoterm Air 2D 550–750€) bis Budget (Vevor/Hcalory 120–200€). Lerne die drei kritischen Fehler kennen: die Leistungs-Falle (2kW statt 5kW!), warum du ein Höhenkit brauchst und wie Silent-Pumpen dein Schlafproblem lösen. Plus: TÜV-Fallen, E-Prüfzeichen und was du über All-in-One-Boxen wissen musst.",
             "datum_start": "2026-07-10T11:00:00.000+02:00",
             "kategorien": [
@@ -46,8 +51,8 @@
                     "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
                     "firma": "Reisch-Tech GmbH",
                     "stand": "FG-808",
-                    "stand_x": 41.3,
-                    "stand_y": 48.9,
+                    "stand_x": 38.2,
+                    "stand_y": 27.5,
                     "stand_w": null,
                     "stand_h": null
                 }
@@ -57,12 +62,12 @@
         },
         {
             "id": "c483398f9333414b83796b4340fa0a31",
-            "title": "🅱️ Fenster-Einbau ohne Leaks: Von der Aussparung bis zur Abdichtung",
+            "title": "Fenster-Einbau ohne Leaks: Von der Aussparung bis zur Abdichtung",
             "typ": "Workshop",
             "tag": "Freitag",
             "zeit": "11:00 – 11:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Step-by-Step zum dichten Fenster – inkl. häufigster Einbaufehler. EW3-Fenster und KCT zeigen die Profi-Tricks.",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Step-by-Step zum dichten Fenster – inkl. häufigster Einbaufehler. Unsere Experten zeigen die Profi-Tricks.",
             "datum_start": "2026-07-10T11:00:00.000+02:00",
             "kategorien": [
                 "Fenster"
@@ -77,18 +82,77 @@
                 }
             ],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Undichte Fenster sind einer der häufigsten Wasser-Einstiegspunkte im Selbstausbau.</strong> Ein kleiner Fehler bei Ausschnitt, Oberflächenvorbereitung oder Schraubbild reicht oft, damit es später bei Regen „arbeitet“ – und du suchst die Ursache monatelang.</p><p>In diesem Workshop zeigen <strong>EW3-Fenster und KCT</strong> den kompletten Profi-Workflow von der ersten Schablone bis zur finalen Dichtigkeitskontrolle.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Ausschnitt &amp; Kantenfinish: sauber, maßhaltig, ohne Spannungen</p><p>✓ Korrosionsschutz an Schnittkanten (Blech/Alu) und typische Versäumnisse</p><p>✓ Dichtkonzept verstehen: Butyl vs. Dichtmasse vs. Kleben-Dichten – wann was?</p><p>✓ Montage ohne Verzug: Unterfüttern, Schraubbild, gleichmäßiger Anpressdruck</p><p>✓ Häufigste Fehlerbilder (Leckstellen) + schnelle Diagnose-Methoden</p><hr><h4>Referent/Experte</h4><p><strong>EW3-Fenster &amp; KCT</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Praxis aus Einbau/Service und Reklamationsfällen</li><li>Fokus: Abdichtung, Montagequalität, Fehlerdiagnose</li></ul><p><strong>Workshop-Themen:</strong></p><ul><li>Abdichtsysteme und Materialwahl</li><li>Einbaufehler vermeiden</li><li>Lecksuche und Nacharbeit ohne „Pfusch-Layer“</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Planung &amp; Ausschnitt (die Basis)</h4><ul><li>Fensterposition: Wasserlauf, Sicken, Verstärkungen, Öffnungswinkel, Innenausbau-Kollisionen</li><li>Ausschnitt anzeichnen: Schablone, Kontrollmaße, „zweimal messen, einmal schneiden“</li><li>Kantenfinish: entgraten, runden, keine scharfen Grate (Dichtungsschutz)</li><li>Passprobe: spannungsfrei einsetzen, Spiel prüfen, ggf. Rahmen-Ausgleich bei Wölbungen</li></ul><h4>2) Untergrund &amp; Korrosionsschutz</h4><ul><li>Reinigung/Entfettung: Silikon-/Wachsreste vermeiden, richtige Reiniger nutzen</li><li>Schnittkanten schützen (je nach Untergrund): Grundierung/Lackaufbau, Trocknung beachten</li><li>Typische Fehler: Dichtung auf staubigem/öligem Untergrund, Rostschutz „vergessen“, zu früh montiert</li></ul><h4>3) Abdichtung &amp; Montage (Butyl, Dichtmasse, Kleben/Dichten)</h4><ul><li>Dichtprinzip: <em>Dichten</em> ist nicht automatisch <em>Kleben</em></li><li>Butylband: richtige Dicke/Breite, umlaufend ohne Lücken, Stoßstellen sauber ausführen</li><li>Dichtmasse: wo sie sinnvoll ist (z. B. Ergänzung/Details), wo sie später Probleme macht</li><li>Schrauben/Anzug: gleichmäßig über Kreuz, kein Rahmenverzug, kein „totziehen“</li><li>Wärme/Temperatur: Materialverhalten und warum extreme Kälte/Hitze Montagen erschwert</li></ul><h4>4) Qualitätscheck &amp; Fehlerdiagnose</h4><ul><li>Sichtprüfung: gleichmäßige Quetschung, keine „Trockenstellen“, keine Überstände als Wasserfänger</li><li>Dichtigkeits-Check: kontrollierter Wassertest (nicht Hochdruck) und systematische Lecksuche</li><li>Häufige Fehlerbilder:</li><li>Nacharbeit: korrektes Entfernen alter Dichtmassen, sauber neu aufbauen statt „drüber schmieren“</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer, die Fenster neu einbauen oder nachrüsten</li><li>Alle, die bereits Leck-Probleme haben und die Ursache sauber beheben wollen</li><li>Fortgeschrittene, die den Einbauprozess professionalisieren möchten</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Undichte Fenster sind einer der häufigsten Wasser-Einstiegspunkte im Selbstausbau.</strong> Ein kleiner Fehler bei Ausschnitt, Oberflächenvorbereitung oder Schraubbild reicht oft, damit es später bei Regen „arbeitet“ – und du suchst die Ursache monatelang.</p><p>In diesem Workshop zeigen <strong>unsere Experten</strong> den kompletten Profi-Workflow von der ersten Schablone bis zur finalen Dichtigkeitskontrolle.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Ausschnitt &amp; Kantenfinish: sauber, maßhaltig, ohne Spannungen</p><p>✓ Korrosionsschutz an Schnittkanten (Blech/Alu) und typische Versäumnisse</p><p>✓ Dichtkonzept verstehen: Butyl vs. Dichtmasse vs. Kleben-Dichten – wann was?</p><p>✓ Montage ohne Verzug: Unterfüttern, Schraubbild, gleichmäßiger Anpressdruck</p><p>✓ Häufigste Fehlerbilder (Leckstellen) + schnelle Diagnose-Methoden</p><hr><h4>Referent/Experte</h4><p><strong>Unsere Experten</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Praxis aus Einbau/Service und Reklamationsfällen</li><li>Fokus: Abdichtung, Montagequalität, Fehlerdiagnose</li></ul><p><strong>Workshop-Themen:</strong></p><ul><li>Abdichtsysteme und Materialwahl</li><li>Einbaufehler vermeiden</li><li>Lecksuche und Nacharbeit ohne „Pfusch-Layer“</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Planung &amp; Ausschnitt (die Basis)</h4><ul><li>Fensterposition: Wasserlauf, Sicken, Verstärkungen, Öffnungswinkel, Innenausbau-Kollisionen</li><li>Ausschnitt anzeichnen: Schablone, Kontrollmaße, „zweimal messen, einmal schneiden“</li><li>Kantenfinish: entgraten, runden, keine scharfen Grate (Dichtungsschutz)</li><li>Passprobe: spannungsfrei einsetzen, Spiel prüfen, ggf. Rahmen-Ausgleich bei Wölbungen</li></ul><h4>2) Untergrund &amp; Korrosionsschutz</h4><ul><li>Reinigung/Entfettung: Silikon-/Wachsreste vermeiden, richtige Reiniger nutzen</li><li>Schnittkanten schützen (je nach Untergrund): Grundierung/Lackaufbau, Trocknung beachten</li><li>Typische Fehler: Dichtung auf staubigem/öligem Untergrund, Rostschutz „vergessen“, zu früh montiert</li></ul><h4>3) Abdichtung &amp; Montage (Butyl, Dichtmasse, Kleben/Dichten)</h4><ul><li>Dichtprinzip: <em>Dichten</em> ist nicht automatisch <em>Kleben</em></li><li>Butylband: richtige Dicke/Breite, umlaufend ohne Lücken, Stoßstellen sauber ausführen</li><li>Dichtmasse: wo sie sinnvoll ist (z. B. Ergänzung/Details), wo sie später Probleme macht</li><li>Schrauben/Anzug: gleichmäßig über Kreuz, kein Rahmenverzug, kein „totziehen“</li><li>Wärme/Temperatur: Materialverhalten und warum extreme Kälte/Hitze Montagen erschwert</li></ul><h4>4) Qualitätscheck &amp; Fehlerdiagnose</h4><ul><li>Sichtprüfung: gleichmäßige Quetschung, keine „Trockenstellen“, keine Überstände als Wasserfänger</li><li>Dichtigkeits-Check: kontrollierter Wassertest (nicht Hochdruck) und systematische Lecksuche</li><li>Häufige Fehlerbilder:</li><li>Nacharbeit: korrektes Entfernen alter Dichtmassen, sauber neu aufbauen statt „drüber schmieren“</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer, die Fenster neu einbauen oder nachrüsten</li><li>Alle, die bereits Leck-Probleme haben und die Ursache sauber beheben wollen</li><li>Fortgeschrittene, die den Einbauprozess professionalisieren möchten</li></ul>",
             "has_content": true
         },
         {
+            "id": "4f1791d5221c4563834395a34159e1f4",
+            "title": "Mut zum Alleinreisen",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "11:30 – 12:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Fünf erfahrene Solo-Reisende sprechen über den Mut zum Alleinreisen und die Erfahrungen ihrer Roadtrips. Sie geben Tipps und sprechen über die Vorteile, mal ganz allein unterwegs zu sein.",
+            "datum_start": "2026-07-10T11:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "e502948b5f2d4b5387b7f62ec64f5090",
+            "title": "Besucher*innen fragen RoadtripGirls",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "12:00 – 13:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Nutze die Chance und zapfe das Wissen unserer erfahrenen Referentinnen ab. In einer entspannten Runde kannst Du wirklich alles fragen, was Du schon immer wissen wolltest. Jeden Tag stehen 2 oder 3 Expertinnen allen Besuchern und Besucherinnen Rede und Antwort. Komm vorbei und nutze das pure Expertinnen-Wissen.",
+            "datum_start": "2026-07-10T12:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "30b9c964c82f80288682ff04d48a074f",
+            "title": "eCamper - Freitag 1",
+            "typ": "eCamper",
+            "tag": "Freitag",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-10T12:15:00.000+02:00",
+            "kategorien": [],
+            "status": "",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "3a91c864bdc442718541aa46e068b889",
-            "title": "⛺️ Von der Werkstatt bis zur Grenze – Fahrzeuggutachten & Carnet de Passage",
+            "title": "Von der Werkstatt bis zur Grenze – Fahrzeuggutachten & Carnet de Passage",
             "typ": "Vortrag",
             "tag": "Freitag",
-            "zeit": "12:00 – 12:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Sachverständiger Dennis Dietmair zeigt, worauf es bei professionellen Gutachten ankommt, wie man Umbauten technisch nachvollziehbar dokumentiert und welche Fallstricke DIY-Ausbauer vermeiden sollten. Plus: Spezialtipps zum Carnet de Passages für Weltreisende.",
-            "datum_start": "2026-07-10T12:00:00.000+02:00",
+            "datum_start": "2026-07-10T12:15:00.000+02:00",
             "kategorien": [
                 "Zulassung & TÜV",
                 "Fahrzeugausbau"
@@ -107,14 +171,57 @@
             "has_content": true
         },
         {
+            "id": "4b4e36c574ac4a969b20229b22d1ee25",
+            "title": "Georgien offroad & solo",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "13:00 – 14:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "4 Jahre Georgien! Eine langsame und intensive Solo-Vanlife-Reise durch die sieben Klimazonen eines Landes, das so klein wie Bayern ist. Von der subtropischen Schwarzmeer-Küste über die schneebedeckten Gipfel des Großen Kaukasus, durch die Weinregionen Kachetiens, vorbei an Vulkanlandschaften bis in die Halbwüste im Osten. Und dazwischen: Freiheit, Weite und Straßen, die plötzlich zu Offroad-Pisten werden. Georgien ist aber nicht nur landschaftlich interessant. Was Georgien kulturell und kulinarisch zu bieten hat und warum es besonders für alleinreisende Frauen spannend und überraschend sicher sein kann.",
+            "datum_start": "2026-07-10T13:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "Mirja Tiedemann",
+            "referent_persons": [
+                {
+                    "id": "cfadc01a7f554a16994bb277a757317e",
+                    "name": "Mirja Tiedemann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "955995819b3f46bcbb96838339817f0c",
+            "title": "4x4 Sprinter/Crafter-Hype – Allrad für Abenteurer",
+            "typ": "Vortrag",
+            "tag": "Freitag",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Der Fokus verschiebt sich vom Ducato hin zum Allrad-Sprinter oder Crafter. Selbstbau-Kits für Offroad-Fahrwerke und Schnorchel sind absolute Dauerbrenner. Entdecke, wie du deinen Van geländetauglich machst.",
+            "datum_start": "2026-07-10T13:30:00.000+02:00",
+            "kategorien": [
+                "Offroad-Fahrzeuge"
+            ],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>4x4 ist nicht nur „höher + grobe Reifen“.</strong> Wer einen Sprinter, Crafter oder TGE offroad-tauglich machen will, greift oft zu Lift-Kit, AT-Reifen, Unterfahrschutz und Dachträger – und wundert sich später über Vibrationen, schlechtes Fahrverhalten, zu hohe Achslasten oder Stress bei der Eintragung.</p><p>In diesem Vortrag bekommst du einen klaren Praxis-Überblick, <strong>welche Upgrades wirklich Sinn machen</strong> , in welcher Reihenfolge, und wo die typischen Geldverbrennungs-Fehler lauern.</p><p><strong>Was dich erwartet:</strong></p><p>✓ 2WD, AWD/4Motion, 4x4-Umbau: Was passt zu welchem Reisestil?</p><p>✓ Fahrwerk &amp; Lift: Stabilität, Schwerpunkt, Dämpfer-Abstimmung</p><p>✓ Reifen/Felgen: Größe, Traglast, Abrollumfang, Reifendruck-Setup</p><p>✓ Unterfahrschutz, Rockslider, Recovery: Was schützt wirklich?</p><p>✓ Dokumentation &amp; Eintragung: Wie du Probleme bei Abnahme/Versicherung vermeidest</p><p>Für alle, die ihren Van <strong>geländetauglich</strong> machen wollen, ohne Alltagstauglichkeit und Legalität zu verlieren.</p><hr><h4>Referent/Experte</h4><p><strong>9ed Noch offen</strong></p><p><strong>Hintergrund (Wunschprofil):</strong></p><ul><li>4x4-Umbau-/Offroad-Werkstatt oder Overland-Ausbau-Profi</li><li>Erfahrung mit Sprinter/Crafter/TGE Plattformen</li><li>Praxis: Fahrwerk, Reifen, Schutz &amp; Eintragung</li></ul><p><strong>Vortrags-Themen:</strong></p><ul><li>Upgrade-Prioritäten und sinnvolle Setups</li><li>Häufigste Fehler und Folgekosten</li><li>Dokumentation/Abnahme pragmatisch vorbereiten</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Antrieb &amp; Plattform: Erwartungsmanagement</h4><ul><li>AWD vs. „echter“ 4x4: Traktion, Gelände, Wartung, Kosten</li><li>Differentialsperre/LSD: Wann es mehr bringt als noch mehr Lift</li><li>Realistische Grenzen: Radstand, Überhang, Böschungswinkel</li></ul><h4>2) Fahrwerk richtig (statt nur höher)</h4><ul><li>Lift-Kits: Was sie können, was sie kaputt machen können</li><li>Dämpfer/Federn: Beladung, Wankneigung, Bremsverhalten</li><li>Schwerpunkt und Dachlast: „hoch bauen“ ist Offroad oft der Gegner</li><li>Typische Fehler: zu hart, zu weich, falsche Federrate für Ausbaugewicht</li></ul><h4>3) Reifen, Felgen, Luftdruck: Das größte Leistungs-Upgrade</h4><ul><li>AT vs. MT: Geräusch, Verbrauch, Nässe, Schnee</li><li>Traglastindex und Geschwindigkeit: nicht verhandelbar</li><li>Abrollumfang/Übersetzung: Tacho, Assistenzsysteme, Schaltpunkte</li><li>Reifendruck: Kompressor, Ventile, Druckmanagement unterwegs</li></ul><h4>4) Schutz &amp; Recovery: sinnvoll statt Show</h4><ul><li>Unterfahrschutz: Motor, Getriebe, Tank, AdBlue – Prioritäten</li><li>Rockslider/Seitenschutz: schützt Karosse und Schweller</li><li>Bergepunkte, Schäkel, Gurt, Sandbleche: was in den Van gehört</li><li>Typische Fehler: falsche Bergepunkte, zu schweres Zubehör ohne Nutzen</li></ul><h4>5) Legalität, Eintragung &amp; Alltag</h4><ul><li>Dokumentations-Checkliste: Teile, Gutachten, Fotos, Wiegeprotokoll</li><li>Achslasten/zul. Gesamtgewicht: Upgrade vs. Nachweis</li><li>Versicherung: Umbauten sauber deklarieren (sonst Ärger im Schadenfall)</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Sprinter/Crafter/TGE (2WD/AWD/4x4)</li><li>Overland- und Offroad-Einsteiger, die eine robuste Basis wollen</li><li>Alle, die zwischen „Instagram-Offroad“ und echtem Nutzen entscheiden müssen</li></ul>",
+            "has_content": true
+        },
+        {
             "id": "b7b33c55f1c44f66935e6736bf092fc0",
-            "title": "⛺️ 700Ah+ Power-Setups – Die neue Untersitz-Dimension",
+            "title": "700Ah+ Power-Setups – Die neue Untersitz-Dimension",
             "typ": "Expertpanel",
             "tag": "Freitag",
-            "zeit": "13:00 – 13:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Die neue Generation von LiFePO4-Akkus (z. B. von Liontron) ermöglicht bis zu 720 Ah Kapazität direkt unter dem Beifahrersitz. Das macht \"Gas-free\"-Builds erst realistisch und revolutioniert das Energiemanagement im Van. Erlebe, wie du mit kompakten High-Performance-Batterien autark leben kannst.",
-            "datum_start": "2026-07-10T13:00:00.000+02:00",
+            "datum_start": "2026-07-10T13:30:00.000+02:00",
             "kategorien": [
                 "Energie & Solartechnik"
             ],
@@ -137,34 +244,78 @@
             "has_content": true
         },
         {
-            "id": "9159f495f81e47278689f2a55e96f39f",
-            "title": "🅱️ Bestanden! Insider-Tipps von echten Prüfingenieuren",
-            "typ": "Expertpanel",
+            "id": "37772621a3a54359ac4401d4eb9dcc15",
+            "title": "Alle Infos und Tipps zu Georgien",
+            "typ": "Roadtrip Girls.Hub",
             "tag": "Freitag",
-            "zeit": "13:00 – 13:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Der Moment der Wahrheit: Die Wohnmobil-Zulassung. Echte Prüfingenieure verraten, worauf es bei der Abnahme wirklich ankommt. Welche Fehler führen zur Ablehnung? Was sind Mythen, was harte Fakten? Von Mindestausstattung über Gasprüfung bis Elektrik – mit praktischen Tipps, wie ihr von Anfang an TÜV-konform ausbaut und böse Überraschungen vermeidet.",
-            "datum_start": "2026-07-10T13:00:00.000+02:00",
-            "kategorien": [
-                "Zulassung & TÜV"
-            ],
+            "zeit": "14:00 – 15:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Vier Jahre lang war Mirja inzwischen in Georgien in ihrem Van „Schrotti\" unterwegs. Davon berichtet sie in ihrem Vortrag auf der girls.hub BÜHNE – und steht direkt im Anschluss nochmal für alle Fragen zu diesem wunderschönen Reiseland zur Verfügung. Wenn Du also eine Reise dorthin planst und noch offene Fragen dazu hast: nutze diese Gelegenheit und hol Dir die Antworten dazu bei Mirja.",
+            "datum_start": "2026-07-10T14:00:00.000+02:00",
+            "kategorien": [],
             "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "Mirja Tiedemann",
+            "referent_persons": [
+                {
+                    "id": "cfadc01a7f554a16994bb277a757317e",
+                    "name": "Mirja Tiedemann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "de0ed0b772a74f1f8b6eaf63738a5ebb",
+            "title": "Sicherheit für Alleinreisende – die besten Tipps & Tricks",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "14:00 – 15:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Auf Reisen schwingt oft auch Angst mit. Angst vor dem Unbekannten, Angst vor Diebstahl, Angst vor Raubüberfällen und Angst vor körperlichem Angriff. Speziell bei Alleinreisenden und Frauen immer aktuell und nicht selten der ausschlaggebende Grund, erst gar nicht eine Reise anzutreten. Lerne Tipps und Tricks kennen, die Dir unterwegs helfen werden, Risiken zu minimieren und wie Du handlungsfähig wirst und bleiben kannst – auch bei Gefahr. Wie Du von gewissen Ängsten Abschied nimmst, im richtigen Moment auf sie hörst und wie wichtig es ist, auf Dein Bauchgefühl zu hören. Ich gebe Dir Ideen und Kniffe für deine Sicherheit, die Du vorbereiten kannst. Und ich zeige Dir einfache, leichte und somit praktikable Selbstverteidigung, welche dann im Workshop Selbstverteidigung für Alleinreisende praktisch angewandt und geübt werden kann.",
+            "datum_start": "2026-07-10T14:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Ursula Büch",
+            "referent_persons": [
+                {
+                    "id": "71fd04fc3d6e4f56af9ac5df955e879a",
+                    "name": "Ursula Büch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "30f9c964c82f8060937acae7a7da6ed3",
+            "title": "eCamper - Freitag 2",
+            "typ": "eCamper",
+            "tag": "Freitag",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-10T14:45:00.000+02:00",
+            "kategorien": [],
+            "status": "",
             "referent_firma": "",
             "referent_person": "",
             "referent_persons": [],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Der Moment der Wahrheit im Selbstausbau ist nicht die letzte Schraube – sondern die Abnahme.</strong> Viele bauen monatelang, investieren tausende Euro und scheitern dann an Kleinigkeiten wie „nicht fest genug“, fehlenden Unterlagen oder einem Detail, das im Ausbau-Alltag niemand auf dem Schirm hatte.</p><p>In diesem Expertpanel erklären echte Prüfingenieur:innen, <strong>was für die Umschreibung/Zulassung als Wohnmobil wirklich zählt</strong>, welche Anforderungen als Mindestausstattung gelten und wie du typische Ablehnungsgründe von Anfang an vermeidest.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Mindestausstattung: Tisch, Sitzgelegenheit, Schlafgelegenheit, Kochmöglichkeit, Stauraum – <em>was heißt „fest verbaut“ wirklich?</em></p><p>✓ Prüf-Praxis: Die häufigsten Gründe, warum Ausbauten abgelehnt werden (und wie du das verhinderst)</p><p>✓ Gas &amp; Alternativen: wann Gasprüfung relevant wird und warum „gasfrei“ für manche den Prozess vereinfacht</p><p>✓ Sitze &amp; Gurte: was bei Umbauten besonders heikel ist</p><p>✓ Dokumente &amp; Nachweise: welche Unterlagen du zur Abnahme mitbringen solltest</p><hr><h4>Referent/Experte</h4><p><strong>Prüfingenieur:innen (TÜV/DEKRA/GTÜ) – Praxis aus realen Abnahmen</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Durchführung und Begleitung von Einzelabnahmen/Umschreibungen</li><li>Erfahrung mit typischen DIY-Ausbau-Fehlerbildern</li><li>Fokus auf sichere Befestigung, nachvollziehbare Dokumentation und klare Wohnmobil-Kriterien</li></ul><p><strong>Panel-Themen:</strong></p><ul><li>Wohnmobil-Kriterien und „fest verbaut“</li><li>Zulassungspraxis und häufige Ablehnungsgründe</li><li>Nachweise, Gutachten, sinnvolle Vorbereitung</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Wohnmobil-Kriterien: Was formal wirklich verlangt wird</h4><ul><li>Mindest-Setup für Umschreibung zum Wohnmobil: <strong>Tisch, Sitzgelegenheiten, Schlafgelegenheit, fest eingebaute Kochmöglichkeit, Stauraum</strong><a href=\"https://www.gtue.de/de/privatkunden/technischer-dienst-fuer-privatkunden/umbau-zum-wohnmobil\" target=\"_blank\" rel=\"noopener\">[1]</a><a href=\"https://www.tuev-verband.de/mobilitaet/strasse/fahrzeugtypgenehmigung/merkblatt-wohnmobile\" target=\"_blank\" rel=\"noopener\">[2]</a></li><li>„Fest im Fahrzeug“: Welche Teile <em>überwiegend</em> dauerhaft angebracht sein sollen (und warum Campingmöbel meist nicht reichen)<a href=\"https://www.tuev-verband.de/mobilitaet/strasse/fahrzeugtypgenehmigung/merkblatt-wohnmobile\" target=\"_blank\" rel=\"noopener\">[2]</a></li><li><strong>Tisch darf leicht entfernbar sein</strong> (aber muss vorgesehen/zuordenbar sein)<a href=\"https://www.gtue.de/de/privatkunden/technischer-dienst-fuer-privatkunden/umbau-zum-wohnmobil\" target=\"_blank\" rel=\"noopener\">[1]</a></li><li>Fallstrick: herausnehmbare Wohneinrichtungen / wechselbare Aufbauten → oft <em>keine</em> Umschreibung möglich<a href=\"https://www.gtue.de/de/privatkunden/technischer-dienst-fuer-privatkunden/umbau-zum-wohnmobil\" target=\"_blank\" rel=\"noopener\">[1]</a></li></ul><h4>2) Häufige Ablehnungsgründe aus der Praxis</h4><ul><li>Kochmöglichkeit nicht als „fest“ anerkannt (zu mobil / nicht eindeutig dem Wohnteil zugeordnet)</li><li>Möbel/Einbauten nicht ausreichend befestigt (Crash-Sicherheit, „Geschoss“-Thema)</li><li>Sitzplätze während der Fahrt ohne passende Sitz-/Gurtverankerungen (besonders bei nachgerüsteten Sitzlösungen)<a href=\"https://www.gtue.de/de/privatkunden/technischer-dienst-fuer-privatkunden/umbau-zum-wohnmobil\" target=\"_blank\" rel=\"noopener\">[1]</a></li><li>Fehlende Unterlagen (Teilegutachten/ABE/Rechnungen/Nachweise)</li><li>Gewichts-Überraschungen: tatsächliches Reisegewicht über Limit (z. B. 3,5 t)</li></ul><h4>3) Gas, Gasprüfung und „gasfrei“ als Strategie</h4><ul><li>Wann eine Gasprüfung relevant wird (und welche typischen Punkte bei Gasinstallationen Probleme machen)</li><li>Alternative: gasfrei kochen/heizen (z. B. Induktion) kann bestimmte Prüf-/Wartungsthemen vereinfachen (aber erhöht Anforderungen an Elektrik/Leistung)</li></ul><h4>4) Dokumente &amp; Vorbereitung: So gehst du stressfrei in die Abnahme</h4><ul><li>Vorab-Check: frühzeitig mit Prüfstelle sprechen und Ausbau-Konzept kurz abstimmen</li><li>Dokumentenmappe: ABEs/Teilegutachten, Datenblätter, Einbauanleitungen, Rechnungen</li><li>Foto-Doku: relevante Bereiche fotografieren, bevor sie „hinter Verkleidung verschwinden“</li><li>Vorführung: Alle geforderten Funktionen müssen klar erkennbar sein (Wohnteil, Kochmöglichkeit, Schlaflösung, Stauraum)</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer kurz vor der Umschreibung/Zulassung</li><li>Alle, die „TÜV-konform“ planen wollen, bevor gebaut wird</li><li>Ausbauende, die unsicher sind, ob Tisch/Kocher/Stauraum als „fest“ gelten</li><li>Camper mit Sitzumbauten (Gurt-/Sitzverankerungsthema)</li></ul>",
-            "has_content": true
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "4378834b5ffd42ac91002393017b3103",
-            "title": "⛺️ Mobiles Internet - Starlink, Leo und Co",
+            "title": "Mobiles Internet - Starlink, Leo und Co",
             "typ": "Workshop",
             "tag": "Freitag",
-            "zeit": "14:00 – 14:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Digital Nomads treiben das Thema voran: Fest installierte, flache Satelliten-Antennen (Flat High Performance) auf dem Dach, die auch während der Fahrt Internet bieten. Arbeite von überall – mit Highspeed-Internet im rollenden Büro.",
-            "datum_start": "2026-07-10T14:00:00.000+02:00",
+            "datum_start": "2026-07-10T14:45:00.000+02:00",
             "kategorien": [
                 "Sonstiges"
             ],
@@ -177,14 +328,57 @@
             "has_content": true
         },
         {
+            "id": "6776fe6a42514ef587209cf01d30f908",
+            "title": "Selbstverteidigung für Alleinreisende – lernen & üben",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "15:30 – 17:00 Uhr",
+            "ort": "Foyer West/Empore",
+            "beschreibung": "Deine Haltung, Ausstrahlung und Handlungsfähigkeit sind Dein größter Schutz. In diesem Workshop gehst Du in die Umsetzung der Theorie und erlernst die Anwendung effektiver Techniken für Deine Selbstverteidigung. Mit vielen Übungen lernst Du, wie Du Dich leicht und nahezu kraftlos aus verschiedenen Festhaltegriffen befreien kannst, wie du einfach und sehr effektiv verschiedenen Tritten ausweichst und den Angreifer dabei zu Boden bringst, wie du verschiedene Faustschläge blockst, wie wichtig der Verteidigungsangriff ist. Gegenwehrtechniken anzuwenden, die in unterschiedlichen Situationen angemessen sind. Du wirst durch dieses Wissen handlungsfähig und kannst damit eine neue innere Stärke erleben.",
+            "datum_start": "2026-07-10T15:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Ursula Büch",
+            "referent_persons": [
+                {
+                    "id": "71fd04fc3d6e4f56af9ac5df955e879a",
+                    "name": "Ursula Büch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "c03195d5a29642f2a5f41efdaee7bdab",
+            "title": "Ultra-Leichtbau & Kork – Unter 3,5t bleiben",
+            "typ": "Workshop",
+            "tag": "Freitag",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Wegen der 3,5t-Problematik setzen Selbstbauer auf extreme Gewichtsersparnis: Pappelsperrholz mit HPL, Carbon-Elemente oder gespritzter Kork zur Isolierung. Lerne die leichtesten Materialien kennen und wie du dein Traumfahrzeug legal auf der Straße hältst.",
+            "datum_start": "2026-07-10T16:00:00.000+02:00",
+            "kategorien": [
+                "Isolierung"
+            ],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Die 3,5t-Grenze ist dein größter Feind? Extreme Gewichtsersparnis ist die Lösung!</strong></p><p>Selbstbauer setzen auf Pappelsperrholz mit HPL, Carbon-Elemente oder gespritzten Kork zur Isolierung. Lerne die leichtesten Materialien kennen und wie du dein Traumfahrzeug legal auf der Straße hältst.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Pappelsperrholz mit HPL: Leicht und stabil</p><p>✓ Carbon-Elemente für Gewichtsfanatiker</p><p>✓ Kork-Isolierung: Leicht und nachhaltig</p><p>✓ Gewicht sparen ohne Stabilität zu verlieren</p><p>✓ Legal unter 3,5t bleiben</p><p>Für alle, die das Maximalgewicht im Griff behalten wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Leichtbau-Materialien</h4><ul><li>Pappelsperrholz: 30% leichter als Birke</li><li>HPL-Beschichtung: Robust und pflegeleicht</li><li>Carbon-Elemente: High-End und teuer</li><li>Aluminium-Profile statt Holz</li></ul><h4>Kork-Isolierung</h4><ul><li>Gespritzter Kork als Dämmung</li><li>Leicht, nachhaltig, schallhemmend</li><li>Verarbeitung und Einbau</li><li>Kosten vs. klassische Dämmung</li></ul><h4>Gewichtsmanagement</h4><ul><li>Jedes Gramm zählt: Systematisch planen</li><li>Wiegeprotokoll führen</li><li>3,5t-Grenze einhalten</li><li>TÜV-Eintragung und Wiegung</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer an der 3,5t-Grenze</li><li>Gewichtsfanatiker und Leichtbau-Fans</li><li>Alle, die Führerschein-konform bleiben wollen</li></ul>",
+            "has_content": true
+        },
+        {
             "id": "8cc14ef68b69401ea81a26772f9e04e3",
-            "title": "⛺️ Wassseraufbereitung im Camper - Kristallklar oder Keimschleuder?",
+            "title": "Wassseraufbereitung im Camper - Kristallklar oder Keimschleuder?",
             "typ": "Expertpanel",
             "tag": "Freitag",
-            "zeit": "15:00 – 15:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Mechanischer Filter, UV-C, Osmose oder doch Chemie? Biofilm im Tank, Legionellen in der Leitung – Wasser im Wohnmobil ist komplexer als gedacht. Unsere Experten erklären die gängigen Aufbereitungsverfahren, zeigen was wirklich funktioniert und räumen mit Panikmache und Halbwahrheiten auf. Von der Tank-Hygiene über Entkeimung bis zur Wahl des richtigen Filtersystems für euren Einsatzzweck – mit praktischen Tipps für sichere Trinkwasserversorgung unterwegs.\n\nAlternativ: Filter, UV-C, Osmose, Chemie – welches Verfahren passt zu eurem Aufbau? Experten klären über Wassertank-Hygiene, Biofilm-Bekämpfung und die Unterschiede zwischen den gängigen Aufbereitungsmethoden auf. Praktische Entscheidungshilfen für sicheres Trinkwasser im Wohnmobil.",
-            "datum_start": "2026-07-10T15:00:00.000+02:00",
+            "datum_start": "2026-07-10T16:00:00.000+02:00",
             "kategorien": [
                 "Wassersysteme & Hygiene"
             ],
@@ -207,34 +401,67 @@
             "has_content": true
         },
         {
-            "id": "c03195d5a29642f2a5f41efdaee7bdab",
-            "title": "⛺️ Ultra-Leichtbau & Kork – Unter 3,5t bleiben",
+            "id": "44b4e8adebf34a86aedba5c1f16042e6",
+            "title": "meet & greet / RoadtripGirls Ratsch",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "17:00 – 18:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Sei dabei! Die letzte Stunde des Messetages wollen wir RoadtripGirls und deren Fans (Besucherinnen, Ausstellerinnen und Referentinnen) uns auf der Bühne treffen. Lasst uns austauschen, uns vernetzen, Pläne schmieden und unsere Community feiern. Bringt Eure Geschichten, Eure Sticker und Sisterhood-Laune mit!",
+            "datum_start": "2026-07-10T17:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "907e4a5156854a0dbca15ce2f80d8972",
+            "title": "Induktion statt Gas – Kochen ohne Gasprüfung",
             "typ": "Workshop",
             "tag": "Freitag",
-            "zeit": "16:00 – 16:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Wegen der 3,5t-Problematik setzen Selbstbauer auf extreme Gewichtsersparnis: Pappelsperrholz mit HPL, Carbon-Elemente oder gespritzter Kork zur Isolierung. Lerne die leichtesten Materialien kennen und wie du dein Traumfahrzeug legal auf der Straße hältst.",
-            "datum_start": "2026-07-10T16:00:00.000+02:00",
+            "zeit": "17:15 – 18:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Der komplette Verzicht auf Gasanlagen ist der Trend 2026. Gekocht wird über leistungsstarke Wechselrichter und Induktionsfelder, was die TÜV-Abnahme (Gasprüfung) erspart. Erfahre, welche Technik du brauchst und wie du deine Küche gasfrei planst.",
+            "datum_start": "2026-07-10T17:15:00.000+02:00",
             "kategorien": [
-                "Isolierung"
+                "Elektrik & Beleuchtung"
             ],
             "status": "Planung",
             "referent_firma": "",
             "referent_person": "",
             "referent_persons": [],
-            "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Die 3,5t-Grenze ist dein größter Feind? Extreme Gewichtsersparnis ist die Lösung!</strong></p><p>Selbstbauer setzen auf Pappelsperrholz mit HPL, Carbon-Elemente oder gespritzten Kork zur Isolierung. Lerne die leichtesten Materialien kennen und wie du dein Traumfahrzeug legal auf der Straße hältst.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Pappelsperrholz mit HPL: Leicht und stabil</p><p>✓ Carbon-Elemente für Gewichtsfanatiker</p><p>✓ Kork-Isolierung: Leicht und nachhaltig</p><p>✓ Gewicht sparen ohne Stabilität zu verlieren</p><p>✓ Legal unter 3,5t bleiben</p><p>Für alle, die das Maximalgewicht im Griff behalten wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Leichtbau-Materialien</h4><ul><li>Pappelsperrholz: 30% leichter als Birke</li><li>HPL-Beschichtung: Robust und pflegeleicht</li><li>Carbon-Elemente: High-End und teuer</li><li>Aluminium-Profile statt Holz</li></ul><h4>Kork-Isolierung</h4><ul><li>Gespritzter Kork als Dämmung</li><li>Leicht, nachhaltig, schallhemmend</li><li>Verarbeitung und Einbau</li><li>Kosten vs. klassische Dämmung</li></ul><h4>Gewichtsmanagement</h4><ul><li>Jedes Gramm zählt: Systematisch planen</li><li>Wiegeprotokoll führen</li><li>3,5t-Grenze einhalten</li><li>TÜV-Eintragung und Wiegung</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer an der 3,5t-Grenze</li><li>Gewichtsfanatiker und Leichtbau-Fans</li><li>Alle, die Führerschein-konform bleiben wollen</li></ul>",
+            "aussteller": [
+                {
+                    "id": "61a912697425494888946a6a09a76be0",
+                    "firma": "philippi elektrische Systeme gmbh",
+                    "stand": "A3-301",
+                    "stand_x": 45,
+                    "stand_y": 16.8,
+                    "stand_w": null,
+                    "stand_h": null
+                }
+            ],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Der komplette Verzicht auf Gasanlagen ist DER Trend 2026!</strong></p><p>Keine Gasprüfung beim TÜV, keine schweren Gasflaschen, keine Sicherheitsbedenken. Gekocht wird über leistungsstarke Wechselrichter und Induktionsfelder.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Gasfrei kochen: Welche Technik du brauchst</p><p>✓ Induktionsplatten richtig dimensionieren</p><p>✓ Wechselrichter und Batteriekapazität berechnen</p><p>✓ TÜV-Vorteile: Gasprüfung entfällt komplett</p><p>✓ Praxis-Tipps: Stromverbrauch und Alltagstauglichkeit</p><p>Für alle, die gasfrei campen und die TÜV-Abnahme vereinfachen wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Induktionskochen im Camper</h4><ul><li>Leistungsbedarf: 1000W bis 2000W</li><li>Welche Induktionsplatte passt zu deinem System?</li><li>Töpfe und Pfannen: Was funktioniert mit Induktion?</li></ul><h4>Elektrik-Anforderungen</h4><ul><li>Wechselrichter dimensionieren (min. 1500W)</li><li>Batteriekapazität für gasfreies Kochen</li><li>Solar- und Ladebooster-Planung</li><li>Kabelquerschnitte und Absicherung</li></ul><h4>TÜV und Praxis</h4><ul><li>Gasprüfung entfällt: Zeit und Kosten sparen</li><li>Alltagstauglichkeit: Wie lange kochen mit Batterie?</li><li>Alternative Kochmethoden: Omnia, Elektrogrill</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer, die auf Gas verzichten wollen</li><li>Camper mit großer Batteriekapazität</li><li>Alle, die TÜV-Aufwand reduzieren möchten</li></ul>",
             "has_content": true
         },
         {
             "id": "cff7f004cc8944d6890ecc4d5ef9d30b",
-            "title": "🅱️ Rostschutz & Dichtmittel: Die unsichtbaren Helden",
+            "title": "Rostschutz & Dichtmittel: Die unsichtbaren Helden",
             "typ": "Vortrag",
             "tag": "Freitag",
-            "zeit": "17:00 – 17:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Unterbodenschutz, Nahtabdichtung und die richtigen Kleber für jeden Zweck. DEKA Dekalin und Korrosionsschutz-Depot zeigen ihre Produkte.",
-            "datum_start": "2026-07-10T17:00:00.000+02:00",
+            "zeit": "17:15 – 18:00 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Unterbodenschutz, Nahtabdichtung und die richtigen Kleber für jeden Zweck. Unsere Experten zeigen ihre Produkte.",
+            "datum_start": "2026-07-10T17:15:00.000+02:00",
             "kategorien": [
                 "Schutz & Veredelung"
             ],
@@ -262,37 +489,40 @@
                     "stand_h": null
                 }
             ],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Rostschutz und Dichtmittel sieht man nicht – aber sie sind entscheidend für die Langlebigkeit!</strong></p><p>DEKA Dekalin und Korrosionsschutz-Depot zeigen Unterbodenschutz, Nahtabdichtung und die richtigen Kleber für jeden Zweck.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Unterbodenschutz richtig auftragen</p><p>✓ Nahtabdichtung gegen Feuchtigkeit</p><p>✓ Kleber und Dichtmittel: Wann was?</p><p>✓ Rostschutz für Durchbrüche und Bohrungen</p><p>✓ Produkte von DEKA Dekalin und anderen</p><p>Für langlebigen Schutz gegen Rost und Feuchtigkeit!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Unterbodenschutz</h4><ul><li>Wachsbasiert vs. Bitumen</li><li>Hohlraumversiegelung</li><li>Anwendung und Trocknungszeit</li><li>Nachbehandlung nach Jahren</li></ul><h4>Nahtabdichtung</h4><ul><li>Sikaflex vs. Dekalin</li><li>Dach- und Wanddurchbrüche abdichten</li><li>Solar-Module wasserdicht montieren</li><li>UV-beständige Dichtmassen</li></ul><h4>Rostschutz</h4><ul><li>Bohrungen und Durchbrüche schützen</li><li>Hohlraumkonservierung</li><li>Rostumwandler richtig einsetzen</li><li>Prävention statt Reparatur</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Metallfahrzeugen</li><li>Alle, die Langlebigkeit sichern wollen</li><li>Camper in feuchten Klimazonen</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Rostschutz und Dichtmittel sieht man nicht – aber sie sind entscheidend für die Langlebigkeit!</strong></p><p>Unsere Experten zeigen Unterbodenschutz, Nahtabdichtung und die richtigen Kleber für jeden Zweck.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Unterbodenschutz richtig auftragen</p><p>✓ Nahtabdichtung gegen Feuchtigkeit</p><p>✓ Kleber und Dichtmittel: Wann was?</p><p>✓ Rostschutz für Durchbrüche und Bohrungen</p><p>✓ Verschiedene Produkte im Vergleich</p><p>Für langlebigen Schutz gegen Rost und Feuchtigkeit!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Unterbodenschutz</h4><ul><li>Wachsbasiert vs. Bitumen</li><li>Hohlraumversiegelung</li><li>Anwendung und Trocknungszeit</li><li>Nachbehandlung nach Jahren</li></ul><h4>Nahtabdichtung</h4><ul><li>Sikaflex vs. Dekalin</li><li>Dach- und Wanddurchbrüche abdichten</li><li>Solar-Module wasserdicht montieren</li><li>UV-beständige Dichtmassen</li></ul><h4>Rostschutz</h4><ul><li>Bohrungen und Durchbrüche schützen</li><li>Hohlraumkonservierung</li><li>Rostumwandler richtig einsetzen</li><li>Prävention statt Reparatur</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Metallfahrzeugen</li><li>Alle, die Langlebigkeit sichern wollen</li><li>Camper in feuchten Klimazonen</li></ul>",
             "has_content": true
         },
         {
-            "id": "67caaca34d83454dad2c229240d987c3",
-            "title": "🅱️ Daily Switch Module – Transporter meets Camper",
-            "typ": "Workshop",
-            "tag": "Freitag",
-            "zeit": "15:00 – 15:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Fahrzeuge, die unter der Woche als Transporter/Alltagsauto und am Wochenende als Camper fungieren. Modulare Systeme (z.B. CargoClips), die ohne Werkzeug entnehmbar sind, machen's möglich. Perfekt für alle, die Flexibilität brauchen.",
-            "datum_start": "2026-07-11T15:00:00.000+02:00",
-            "kategorien": [
-                "Fahrzeugausbau"
-            ],
-            "status": "Planung",
+            "id": "689cbce559414c0fab7fcc61b33a708b",
+            "title": "Auf einen Kaffee",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "10:00 – 10:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Guten Morgen RoadtripGirls! Wir beginnen den Messetag mit einer gemeinsamen Tasse Kaffee – und etwas Besonderem. Komm mit Deiner Tasse vorbei und wir starten zusammen in den Tag!",
+            "datum_start": "2026-07-11T10:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Ein Fahrzeug, zwei Leben:</strong> Unter der Woche Transporter oder Handwerker-Auto, am Wochenende vollwertiger Camper. Genau dieses „Daily Switch“-Konzept ist 2025/2026 einer der stärksten Trends – weil es Geld, Stellplatz und Nerven spart.</p><p>Aber: Modular heißt nicht automatisch „egal“. Wer mit Boxen, Modulen, Airline-Schienen oder Clip-Systemen unterwegs ist, muss <strong>Ladungssicherung, Gewicht, Gas/Elektrik und die rechtliche Einordnung (Ladung vs. fest verbaut)</strong> im Griff haben.</p><p>In diesem Workshop bekommst du eine klare, praxisnahe Anleitung, wie du modulare Systeme so planst und dokumentierst, dass sie <strong>sicher, alltagstauglich und abnahme-/versicherungsfreundlich</strong> werden.</p><p><strong>Was dich erwartet:</strong></p><p>✓ System-Check: Welche Teile sind „fest“ und welche sind „Ladung“ – und warum das entscheidend ist</p><p>✓ Ladungssicherung ohne Mythos: Was wirklich zählt, damit Module nicht zum Geschoss werden</p><p>✓ Gewicht &amp; 3,5t: Modul-Gewichte sauber erfassen, Worst-Case-Beladung planen</p><p>✓ Gas &amp; Strom im Modul: wann Prüfungen/Checks relevant werden und wie man sauber trennt</p><p>✓ Doku-Paket für TÜV/Versicherung: Fotos, Listen, Montage-Nachweise, sinnvolle Belege</p><hr><h4>Referent/Experte</h4><p><strong>Modulare Ausbau-Systeme (z. B. CargoClips / Airline-/Schienensysteme) + Praxis aus Multi-Use-Vans</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Erfahrung mit modularen Innenausbauten (Holz-/Alu-Module, Schienensysteme, Clip-/Stecksysteme)</li><li>Fokus auf sichere Befestigung, nachvollziehbare Dokumentation und realistische Nutzung</li></ul><p><strong>Workshop-Themen:</strong></p><ul><li>„Fest verbaut“ vs. „Ladung“ in der Praxis</li><li>Ladungssicherung &amp; Gewicht</li><li>Gas/Elektrik in Modulen + Versicherungsfragen</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Daily Switch: Was modular wirklich bedeutet</h4><ul><li>Warum modulare Systeme boomen: Alltag, Kosten, Nachhaltigkeit, Flexibilität</li><li>Typen von Systemen: Clip-/Lochwand, Airline-Schienen, Rahmen/Profilbau, Campingboxen</li><li>Entscheidungsfrage: „Modulbaukasten“ vs. „ein festes Grundsystem + wechselnde Module“</li></ul><h4>2) Rechtliche Einordnung: Ladung vs. fest verbaut</h4><ul><li>Grundidee: <strong>Fest eingebaute Grundsysteme</strong> (z. B. Schienen/Wände/Rahmen) vs. <strong>wechselbare Module</strong></li><li>Typische Stolperfallen:</li></ul><h4>3) Ladungssicherung: Der häufigste Fehler bei Modul-Systemen</h4><ul><li>Ziel: Bei Vollbremsung/Unfall darf nichts rutschen, kippen oder fliegen</li><li>Praxis-Check:</li><li>Dokumentation: Fotos von Sicherungspunkten, Skizze der Zurrpunkte, kurze Modulbeschreibung</li></ul><h4>4) Gewicht &amp; 3,5t: Modul-Liste statt Bauchgefühl</h4><ul><li>Modul-Gewichte erfassen (Küche, Bett, Stauraum, Wasser, Kühlbox, Werkzeug)</li><li>Worst-Case-Beladung planen: „Alle Module + Urlaub + Personenzahl“</li><li>Schnell-Check fürs Wochenende: Was muss raus, wenn’s eng wird?</li></ul><h4>5) Gas/Elektrik in Modulen (saubere Schnittstellen)</h4><ul><li>Gas im Modul: wann das Thema Gasprüfung/Prüfbarkeit relevant wird (und warum „mobil“ nicht automatisch „aus dem Thema raus“ ist)</li><li>Elektrik im Modul:</li><li>Empfehlung aus der Praxis: „Ein sauberer Strom-/Gas-Übergabepunkt“ statt improvisierter Kabel/Schläuche</li></ul><h4>6) TÜV &amp; Versicherung: Das Doku-Paket, das Diskussionen spart</h4><ul><li>Fotos: Grundsystem-Montage, Befestigungspunkte, Sicherungskonzept</li><li>Listen: Modulgewichte, Komponentenliste, ggf. Datenblätter</li><li>Nachweise: Montageanleitung/Belastungswerte (wenn vorhanden), Rechnungen wichtiger Bauteile</li><li>Versicherungs-Check: „fest verbaut oder mobil?“ und was man sinnvoll vorab klärt</li></ul><hr><h4>Zielgruppe</h4><ul><li>Handwerker, Selbständige und alle, die ihren Transporter beruflich nutzen</li><li>Wochenend-Camper, die keine dauerhafte Vollzeit-Camper-Kiste wollen</li><li>Selbstausbauer, die ein modulares System (Schienen/Clips/Boxen) planen oder optimieren</li><li>Alle, die bei TÜV/Versicherung keine Überraschungen erleben wollen</li></ul>",
-            "has_content": true
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "39cfeb4a3a1242ec97f4bb41cd0a70b8",
-            "title": "⛺️ Maßgeschneiderte Wassertanks – Platz perfekt nutzen",
+            "title": "Maßgeschneiderte Wassertanks – Platz perfekt nutzen",
             "typ": "Vortrag",
             "tag": "Samstag",
             "zeit": "11:00 – 11:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Maßgefertigte Wassertank-Lösungen für den individuellen Wohnmobilausbau. Frank Tschuschke von FTDesign aus Eggenstein zeigt, wie man den vorhandenen Platz optimal ausnutzt und erklärt die verschiedenen Möglichkeiten der Tank-Konfiguration nach individuellen Vorgaben.",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Maßgefertigte Wassertank-Lösungen für den individuellen Wohnmobilausbau. Unser Experte zeigt, wie man den vorhandenen Platz optimal ausnutzt und erklärt die verschiedenen Möglichkeiten der Tank-Konfiguration nach individuellen Vorgaben.",
             "datum_start": "2026-07-11T11:00:00.000+02:00",
             "kategorien": [
                 "Wassersysteme & Hygiene"
@@ -306,27 +536,17 @@
                     "name": "Frank Tschuschke"
                 }
             ],
-            "aussteller": [
-                {
-                    "id": "9663cb15d2ba447983378b77b5204868",
-                    "firma": "FT Design",
-                    "stand": "FG-812",
-                    "stand_x": 43.6,
-                    "stand_y": 35.3,
-                    "stand_w": null,
-                    "stand_h": null
-                }
-            ],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Standardtanks passen nie richtig und verschwenden wertvollen Platz?</strong></p><p>Frank Tschuschke von FTDesign zeigt, wie maßgefertigte Wassertank-Lösungen den vorhandenen Raum optimal ausnutzen und welche Konfigurationsmöglichkeiten es gibt.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Verwinkelte Räume intelligent nutzen (unter Sitzbänken, Bettkästen, Unterflur)</p><p>✓ Frischwasser-, Grauwasser- und Abwassertanks richtig planen</p><p>✓ Volumen realistisch berechnen</p><p>✓ Maße und Zeichnungen für maßgefertigte Tanks erstellen</p><p>✓ Anschlüsse und Durchführungen sinnvoll planen</p><p>✓ Fertigungstechnik: Rotations-Schmelzverfahren aus MD-PE</p><p>Praktische Lösungen für effiziente Wasserversorgung – egal ob Van, Pickup oder Truck!</p><hr><h4>Referent</h4><p><strong>Frank Tschuschke – FTDesign</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Spezialist für maßgefertigte Wassertanks</li><li>Standort: Eggenstein-Leopoldshafen</li><li>Fertigung im Rotations-Schmelzverfahren</li></ul><p><strong>Vortrag-Themen:</strong></p><ul><li>Raumoptimierung für Wassertanks</li><li>Individuelle Tank-Konfiguration</li><li>Fertigungstechnik und Materialien</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>Planung</h4><ul><li>Welches Volumen brauche ich?</li><li>Ungenutzte Nischen identifizieren</li><li>Frischwasser vs. Grauwasser vs. Abwasser</li></ul><h4>Maßanfertigung</h4><ul><li>Maße nehmen und Zeichnungen erstellen</li><li>Anschlüsse und Durchführungen planen</li><li>Kommunikation mit dem Hersteller</li></ul><h4>Technik</h4><ul><li>Rotations-Schmelzverfahren (MD-PE)</li><li>Wandstärken: 4-8 mm</li><li>Nahtlos, formstabil, geruchsdicht</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer bei der Wasserversorgungsplanung</li><li>Alle, die Platz optimal nutzen wollen</li><li>Van-, Pickup- und Truck-Ausbauer</li></ul>",
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Standardtanks passen nie richtig und verschwenden wertvollen Platz?</strong></p><p>Unser Experte zeigt, wie maßgefertigte Wassertank-Lösungen den vorhandenen Raum optimal ausnutzen und welche Konfigurationsmöglichkeiten es gibt.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Verwinkelte Räume intelligent nutzen (unter Sitzbänken, Bettkästen, Unterflur)</p><p>✓ Frischwasser-, Grauwasser- und Abwassertanks richtig planen</p><p>✓ Volumen realistisch berechnen</p><p>✓ Maße und Zeichnungen für maßgefertigte Tanks erstellen</p><p>✓ Anschlüsse und Durchführungen sinnvoll planen</p><p>✓ Fertigungstechnik: Rotations-Schmelzverfahren aus MD-PE</p><p>Praktische Lösungen für effiziente Wasserversorgung – egal ob Van, Pickup oder Truck!</p><hr><h4>Referent</h4><p><strong>Unser Experte</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Spezialist für maßgefertigte Wassertanks</li><li>Fertigung im Rotations-Schmelzverfahren</li></ul><p><strong>Vortrag-Themen:</strong></p><ul><li>Raumoptimierung für Wassertanks</li><li>Individuelle Tank-Konfiguration</li><li>Fertigungstechnik und Materialien</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>Planung</h4><ul><li>Welches Volumen brauche ich?</li><li>Ungenutzte Nischen identifizieren</li><li>Frischwasser vs. Grauwasser vs. Abwasser</li></ul><h4>Maßanfertigung</h4><ul><li>Maße nehmen und Zeichnungen erstellen</li><li>Anschlüsse und Durchführungen planen</li><li>Kommunikation mit dem Hersteller</li></ul><h4>Technik</h4><ul><li>Rotations-Schmelzverfahren (MD-PE)</li><li>Wandstärken: 4-8 mm</li><li>Nahtlos, formstabil, geruchsdicht</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer bei der Wasserversorgungsplanung</li><li>Alle, die Platz optimal nutzen wollen</li><li>Van-, Pickup- und Truck-Ausbauer</li></ul>",
             "has_content": true
         },
         {
             "id": "cfddc41f710b45b5a143e003ae2069b9",
-            "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+            "title": "Wohnkabine aus Holz bauen oder ausbauen",
             "typ": "Expertpanel",
             "tag": "Samstag",
-            "zeit": "11:00 – 11:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "11:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Expertpanel zu Materialwahl, Konstruktion, Gesundheit und Praxis-Tipps beim Holzbau für Wohnkabinen",
             "datum_start": "2026-07-11T11:00:00.000+02:00",
             "kategorien": [
@@ -365,14 +585,96 @@
             "has_content": true
         },
         {
+            "id": "a21b22a46a814fdb8dd2b41ba89a3423",
+            "title": "Starthilfe zum Vanlife im Minicamper",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "11:30 – 12:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Hast du dich immer schon gefragt, ob es möglich ist, auch in einem Minicamper ins Vanlife zu starten? Tina lebt seit 2024 Vollzeit in ihrem Minicamper und zeigt dir in diesem Vortrag Wege, wie man mit einem kleinen Auto ins Leben unterwegs starten kann. Für wen ist das Vanlife im Minicamper geeignet? Was gibt es bei der Wahl des Fahrzeuges zu beachten? Ein- und Umbauten, TÜV, Wohnmobil-Zulassung oder nicht? Wo darf ich parken? Herausforderungen gegenüber großen Campern? Wie funktioniert das Arbeiten unterwegs im Minicamper?",
+            "datum_start": "2026-07-11T11:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Tina Degenkolb",
+            "referent_persons": [
+                {
+                    "id": "7a9af27e296f45fbae856d932e5d1076",
+                    "name": "Tina Degenkolb"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "80ab5440953740c5a85d849d570c2110",
+            "title": "Arbeiten auf Reisen – wie funktioniert das im Alltag?",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "12:00 – 13:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Viele Menschen träumen davon, unterwegs zu arbeiten und gleichzeitig zu reisen. Doch wie sieht die Realität wirklich aus? In diesem moderierten Podiumsgespräch geben erfahrene Reisende Einblicke in ihre unterschiedlichen Wege zum ortsunabhängigen Einkommen – von kreativen und beratenden Tätigkeiten, über handwerkliche Arbeiten bis hin zu rechtlichen und organisatorischen Aspekten. Gemeinsam sprechen wir darüber: wie der Arbeitsalltag unterwegs wirklich aussieht, welche Einnahmequellen tragfähig sind, welche Herausforderungen oft unterschätzt werden, was im Alltag wirklich funktioniert – und was eher Wunschdenken bleibt.",
+            "datum_start": "2026-07-11T12:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Anja Müller",
+            "referent_persons": [
+                {
+                    "id": "31eaca54f26842509785b4409082ac84",
+                    "name": "Anja Müller"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "82473b3a34b04517ad7def22d58f9e5b",
+            "title": "Besucher*innen fragen RoadtripGirls",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "12:00 – 13:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Nutze die Chance und zapfe das Wissen unserer erfahrenen Referentinnen ab. In einer entspannten Runde kannst Du wirklich alles fragen, was Du schon immer wissen wolltest. Jeden Tag stehen 2 oder 3 Expertinnen allen Besuchern und Besucherinnen Rede und Antwort. Komm vorbei und nutze das pure Expertinnen-Wissen.",
+            "datum_start": "2026-07-11T12:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "30f9c964c82f8044ae85eaaa662e28de",
+            "title": "eCamper - Samstag 1",
+            "typ": "eCamper",
+            "tag": "Samstag",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-11T12:15:00.000+02:00",
+            "kategorien": [],
+            "status": "",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "2ca9c964c82f80e7b92ae3a350467587",
-            "title": "⛺️ Wohnmobil-Selbstausbau",
+            "title": "Wohnmobil-Selbstausbau",
             "typ": "Vortrag",
             "tag": "Samstag",
-            "zeit": "12:00 – 12:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Vortrag zum Wohnmobil-Selbstausbau",
-            "datum_start": "2026-07-11T12:00:00.000+02:00",
+            "datum_start": "2026-07-11T12:15:00.000+02:00",
             "kategorien": [
                 "Sonstiges",
                 "Fahrzeugausbau"
@@ -392,13 +694,13 @@
         },
         {
             "id": "fdc287b5d7024509a136b8d48dc559e0",
-            "title": "⛺️ Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
+            "title": "Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
             "typ": "Vortrag",
             "tag": "Samstag",
-            "zeit": "13:00 – 13:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Zu viel Kram oder zu wenig dabei? OutdoorMonster zeigt, welche Ausrüstung in keinem Camper fehlen sollte und welche teuren Anschaffungen du dir sparen kannst. Mit Praxistests, Budget-Alternativen und den größten Gear-Fails aus der Community. Der Reality-Check für deine Packliste!",
-            "datum_start": "2026-07-11T13:00:00.000+02:00",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Zu viel Kram oder zu wenig dabei? Unser Experte zeigt, welche Ausrüstung in keinem Camper fehlen sollte und welche teuren Anschaffungen du dir sparen kannst. Mit Praxistests, Budget-Alternativen und den größten Gear-Fails aus der Community. Der Reality-Check für deine Packliste!",
+            "datum_start": "2026-07-11T13:30:00.000+02:00",
             "kategorien": [
                 "Offroad-Zubehör"
             ],
@@ -412,18 +714,18 @@
                 }
             ],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Zu viel Kram – oder im Ernstfall genau das falsche dabei?</strong> Bei Gear passiert oft beides gleichzeitig: Man trägt Gewicht spazieren, aber wenn’s regnet, klemmt oder knallt, fehlt die entscheidende Kleinigkeit.</p><p>In diesem Vortrag macht OutdoorMonster den Reality-Check: Welche Ausrüstung bringt dir auf Reisen wirklich Sicherheit und Komfort – und welche „Must-haves“ sind oft nur teure Social-Media-Mythen?</p><p><strong>Was dich erwartet:</strong></p><p>✓ Kern-Setups nach Reisestil: Wochenend-Van, Langzeitreise, Offroad/Overland</p><p>✓ Sicherheit &amp; Pannen: was du wirklich dabei haben solltest</p><p>✓ Recovery &amp; Bergung: sinnvoll, leicht, praxiserprobt</p><p>✓ Wasser, Strom, Küche, Schlaf: Essentials vs. Nice-to-have</p><p>✓ Die größten Gear-Fails aus der Community (und wie du sie vermeidest)</p><p>Für alle, die <strong>leichter, smarter und stressfreier</strong> unterwegs sein wollen.</p><hr><h4>Referent/Experte</h4><p><strong>OutdoorMonster (Axel Telzerow)</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Gear-Testing und Praxis-Erfahrung (Packlisten, Produkttests, Community-Fails)</li><li>Fokus auf sinnvolle, robuste und bezahlbare Ausrüstung</li></ul><p><strong>Vortrags-Themen:</strong></p><ul><li>Essentials nach Einsatzprofil</li><li>Gewichts- und Platzmanagement</li><li>Fehleranalyse: Was geht in der Praxis wirklich kaputt?</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Das Denkmodell: Gear nach Szenario statt nach „Katalog“</h4><ul><li>Tagestrip vs. Wochenend vs. Langzeitreise</li><li>Sommer-only vs. 4-Jahreszeiten</li><li>Van/Truck/Pickup: Platz, Zuladung, Zugriff</li></ul><h4>2) Safety &amp; Pannenhilfe (Pflicht-Set)</h4><ul><li>Erste Hilfe + Basics für unterwegs</li><li>Feuer/CO-Sicherheit: Löscher, Detektor, schnelle Griffstelle</li><li>Sichtbarkeit: Stirnlampe, Warnmittel, Handschuhe</li><li>Werkzeug-„Minimum Viable“: Bits, Zangen, Kabelbinder, Tape, Draht</li></ul><h4>3) Recovery / Bergung (für Offroad/Schotter/Schnee)</h4><ul><li>Bergegurte/Schäkel: wann sinnvoll, wann gefährlich</li><li>Sandbleche/Traktionshilfen: Nutzen vs. Gewicht</li><li>Reifendruck-Management: Kompressor, Ventile, Manometer</li><li>Spaten/Säge: einfache Helfer mit großem Effekt</li></ul><h4>4) Wasser, Strom, Küche, Schlaf: die echten Komfort-Hebel</h4><ul><li>Wasser: Kanister/Filter/Notreserve, Hygiene</li><li>Strom: Kabel, Adapter, Ersatzsicherungen, Lade-Redundanz</li><li>Küche: 2–3 Teile, die Alltag retten (statt 20 Gadgets)</li><li>Schlaf: Isolations- und Wärme-„Layer“ statt eine Super-Decke</li></ul><h4>5) Gear-Fails (die teuer werden)</h4><ul><li>Zu viel außen am Fahrzeug → Diebstahl, Schäden, Geräusche</li><li>Billig-Tools, die beim ersten Einsatz brechen</li><li>„Ein Teil kann alles“-Gadgets → kann am Ende nichts richtig</li><li>Keine Ordnung/Inventar → du findest das Teil erst, wenn’s zu spät ist</li></ul><hr><h4>Zielgruppe</h4><ul><li>Alle, die eine Packliste aufbauen oder optimieren wollen</li><li>Offroad-/Overland-Einsteiger, die sicher starten möchten</li><li>Minimalisten, die Gewicht und Platz sparen wollen</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Zu viel Kram – oder im Ernstfall genau das falsche dabei?</strong> Bei Gear passiert oft beides gleichzeitig: Man trägt Gewicht spazieren, aber wenn’s regnet, klemmt oder knallt, fehlt die entscheidende Kleinigkeit.</p><p>In diesem Vortrag macht unser Experte den Reality-Check: Welche Ausrüstung bringt dir auf Reisen wirklich Sicherheit und Komfort – und welche „Must-haves“ sind oft nur teure Social-Media-Mythen?</p><p><strong>Was dich erwartet:</strong></p><p>✓ Kern-Setups nach Reisestil: Wochenend-Van, Langzeitreise, Offroad/Overland</p><p>✓ Sicherheit &amp; Pannen: was du wirklich dabei haben solltest</p><p>✓ Recovery &amp; Bergung: sinnvoll, leicht, praxiserprobt</p><p>✓ Wasser, Strom, Küche, Schlaf: Essentials vs. Nice-to-have</p><p>✓ Die größten Gear-Fails aus der Community (und wie du sie vermeidest)</p><p>Für alle, die <strong>leichter, smarter und stressfreier</strong> unterwegs sein wollen.</p><hr><h4>Referent/Experte</h4><p><strong>Unser Experte</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Gear-Testing und Praxis-Erfahrung (Packlisten, Produkttests, Community-Fails)</li><li>Fokus auf sinnvolle, robuste und bezahlbare Ausrüstung</li></ul><p><strong>Vortrags-Themen:</strong></p><ul><li>Essentials nach Einsatzprofil</li><li>Gewichts- und Platzmanagement</li><li>Fehleranalyse: Was geht in der Praxis wirklich kaputt?</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Das Denkmodell: Gear nach Szenario statt nach „Katalog“</h4><ul><li>Tagestrip vs. Wochenend vs. Langzeitreise</li><li>Sommer-only vs. 4-Jahreszeiten</li><li>Van/Truck/Pickup: Platz, Zuladung, Zugriff</li></ul><h4>2) Safety &amp; Pannenhilfe (Pflicht-Set)</h4><ul><li>Erste Hilfe + Basics für unterwegs</li><li>Feuer/CO-Sicherheit: Löscher, Detektor, schnelle Griffstelle</li><li>Sichtbarkeit: Stirnlampe, Warnmittel, Handschuhe</li><li>Werkzeug-„Minimum Viable“: Bits, Zangen, Kabelbinder, Tape, Draht</li></ul><h4>3) Recovery / Bergung (für Offroad/Schotter/Schnee)</h4><ul><li>Bergegurte/Schäkel: wann sinnvoll, wann gefährlich</li><li>Sandbleche/Traktionshilfen: Nutzen vs. Gewicht</li><li>Reifendruck-Management: Kompressor, Ventile, Manometer</li><li>Spaten/Säge: einfache Helfer mit großem Effekt</li></ul><h4>4) Wasser, Strom, Küche, Schlaf: die echten Komfort-Hebel</h4><ul><li>Wasser: Kanister/Filter/Notreserve, Hygiene</li><li>Strom: Kabel, Adapter, Ersatzsicherungen, Lade-Redundanz</li><li>Küche: 2–3 Teile, die Alltag retten (statt 20 Gadgets)</li><li>Schlaf: Isolations- und Wärme-„Layer“ statt eine Super-Decke</li></ul><h4>5) Gear-Fails (die teuer werden)</h4><ul><li>Zu viel außen am Fahrzeug → Diebstahl, Schäden, Geräusche</li><li>Billig-Tools, die beim ersten Einsatz brechen</li><li>„Ein Teil kann alles“-Gadgets → kann am Ende nichts richtig</li><li>Keine Ordnung/Inventar → du findest das Teil erst, wenn’s zu spät ist</li></ul><hr><h4>Zielgruppe</h4><ul><li>Alle, die eine Packliste aufbauen oder optimieren wollen</li><li>Offroad-/Overland-Einsteiger, die sicher starten möchten</li><li>Minimalisten, die Gewicht und Platz sparen wollen</li></ul>",
             "has_content": true
         },
         {
             "id": "2b99c964c82f8000b1aecaf6b960bc10",
-            "title": "🅱️ 126 Pannen – 7 Jahre Weltreise",
+            "title": "126 Pannen – 7 Jahre Weltreise",
             "typ": "Vortrag",
             "tag": "Samstag",
-            "zeit": "13:00 – 13:45 Uhr",
-            "ort": "Bühne (Halle A6)",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Vortragsbühne Halle A6",
             "beschreibung": "Ausbau do and don`t",
-            "datum_start": "2026-07-11T13:00:00.000+02:00",
+            "datum_start": "2026-07-11T13:30:00.000+02:00",
             "kategorien": [
                 "Expeditionsmobile",
                 "Innenausbau & Module",
@@ -443,14 +745,100 @@
             "has_content": true
         },
         {
+            "id": "3ed1672465eb4ef6b6e7d5afaed9040c",
+            "title": "Innere Sicherheit verstehen: Wie Dein Nervensystem funktioniert und was Dir hilft, wieder ruhiger zu werden",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "14:00 – 15:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Allein unterwegs sein kann sich frei anfühlen – und gleichzeitig Angst machen. In diesem Workshop geht es darum, besser zu verstehen, was im Körper geschieht, wenn die innere Sicherheit droht abhanden zu kommen. Eine kleine Reise in die faszinierende Welt Deines Nervensystems – vom Dreieinigen Gehirn entlang des Vagusnervs in Deinen Bauch und wieder zurück. Du erfährst und erlebst, wie Du diese Reise später aktiv nutzen kannst, um Dein Nervensystem zu beruhigen. Dir wird klar, warum Flow und Entspannung nicht willentlich entstehen und warum der Körper kein Feind ist, sondern eine zutiefst weise Instanz.",
+            "datum_start": "2026-07-11T14:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Karin Intveen",
+            "referent_persons": [
+                {
+                    "id": "8d4eb3a3b19e4538901b3de41c61fbe4",
+                    "name": "Karin Intveen"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "1d698b9fa1a54ba79144fba40ec96d5c",
+            "title": "Powerstation vs. DIY-Elektrik – Der große Vergleich 2026",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Powerstation oder fest verbaute Elektrik? Die Antwort ist nicht mehr so eindeutig! Powerstations sind 2026 kein Nischenprodukt mehr: Modulare Systeme (EcoFlow, Bluetti), Preissturz auf 0,23€/Wh, Schnellladung in 1h und fest einbaubare Profi-Lösungen (ECTIVE, Zeliox). Lerne, wann Powerstation gewinnt (Plug & Play, Mobilität), wann DIY (400Ah+, Integration), plus die neue Hybrid-Lösung. Inklusive TÜV-Graubereich: Was muss dokumentiert werden? Ladungssicherung als Versicherungsthema!",
+            "datum_start": "2026-07-11T14:45:00.000+02:00",
+            "kategorien": [
+                "Energie & Solartechnik"
+            ],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Powerstation oder fest verbaute Elektrik? Die Antwort ist 2026 nicht mehr so eindeutig!</strong></p><p>Powerstations sind kein Nischenprodukt mehr: Modulare Systeme (EcoFlow, Bluetti), Preissturz auf 0,23€/Wh, Schnellladung in 1h und fest einbaubare Profi-Lösungen (ECTIVE, Zeliox).</p><p><strong>Was dich erwartet:</strong></p><p>✓ Wann gewinnt Powerstation (Plug &amp; Play, Mobilität)?</p><p>✓ Wann gewinnt DIY (400Ah+, Integration)?</p><p>✓ Die neue Hybrid-Lösung kennenlernen</p><p>✓ TÜV-Graubereich: Dokumentation verstehen</p><p>✓ Ladungssicherung als Versicherungsthema</p><p>Lerne die richtige Entscheidung für deinen Camper-Ausbau!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Powerstation-Vorteile</h4><ul><li>Plug &amp; Play ohne Elektrik-Wissen</li><li>Geprüft und zertifiziert</li></ul><h4>DIY-Elektrik-Vorteile</h4><ul><li>Mobilität: Rausnehmen und woanders nutzen</li><li>Leistung: 400Ah+ möglich</li><li>Integration: Solar, Ladebooster, Landstrom</li><li>Erweiterbarkeit für die Zukunft</li></ul><h4>Trends 2026</h4><ul><li>Modulare Systeme (EcoFlow, Bluetti)</li><li>Fest einbaubare All-in-One-Lösungen</li><li>Hybrid: Basis-Elektrik + mobile Powerstation</li><li>Preissturz und Schnellladung</li></ul><h4>TÜV &amp; Dokumentation</h4><ul><li>Tragbare vs. fest verbaute Powerstations</li><li>Ladungssicherung dokumentieren</li><li>Versicherungsrelevante Aspekte</li></ul><hr><h4>Zielgruppe</h4><ul><li>Einsteiger ohne Elektrik-Vorkenntnisse</li><li>Selbstausbauer, die flexibel bleiben wollen</li><li>Alle, die die richtige Stromlösung suchen</li></ul>",
+            "has_content": true
+        },
+        {
+            "id": "67caaca34d83454dad2c229240d987c3",
+            "title": "Daily Switch Module – Transporter meets Camper",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Fahrzeuge, die unter der Woche als Transporter/Alltagsauto und am Wochenende als Camper fungieren. Modulare Systeme (z.B. CargoClips), die ohne Werkzeug entnehmbar sind, machen's möglich. Perfekt für alle, die Flexibilität brauchen.",
+            "datum_start": "2026-07-11T14:45:00.000+02:00",
+            "kategorien": [
+                "Fahrzeugausbau"
+            ],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Ein Fahrzeug, zwei Leben:</strong> Unter der Woche Transporter oder Handwerker-Auto, am Wochenende vollwertiger Camper. Genau dieses „Daily Switch“-Konzept ist 2025/2026 einer der stärksten Trends – weil es Geld, Stellplatz und Nerven spart.</p><p>Aber: Modular heißt nicht automatisch „egal“. Wer mit Boxen, Modulen, Airline-Schienen oder Clip-Systemen unterwegs ist, muss <strong>Ladungssicherung, Gewicht, Gas/Elektrik und die rechtliche Einordnung (Ladung vs. fest verbaut)</strong> im Griff haben.</p><p>In diesem Workshop bekommst du eine klare, praxisnahe Anleitung, wie du modulare Systeme so planst und dokumentierst, dass sie <strong>sicher, alltagstauglich und abnahme-/versicherungsfreundlich</strong> werden.</p><p><strong>Was dich erwartet:</strong></p><p>✓ System-Check: Welche Teile sind „fest“ und welche sind „Ladung“ – und warum das entscheidend ist</p><p>✓ Ladungssicherung ohne Mythos: Was wirklich zählt, damit Module nicht zum Geschoss werden</p><p>✓ Gewicht &amp; 3,5t: Modul-Gewichte sauber erfassen, Worst-Case-Beladung planen</p><p>✓ Gas &amp; Strom im Modul: wann Prüfungen/Checks relevant werden und wie man sauber trennt</p><p>✓ Doku-Paket für TÜV/Versicherung: Fotos, Listen, Montage-Nachweise, sinnvolle Belege</p><hr><h4>Referent/Experte</h4><p><strong>Modulare Ausbau-Systeme (z. B. CargoClips / Airline-/Schienensysteme) + Praxis aus Multi-Use-Vans</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Erfahrung mit modularen Innenausbauten (Holz-/Alu-Module, Schienensysteme, Clip-/Stecksysteme)</li><li>Fokus auf sichere Befestigung, nachvollziehbare Dokumentation und realistische Nutzung</li></ul><p><strong>Workshop-Themen:</strong></p><ul><li>„Fest verbaut“ vs. „Ladung“ in der Praxis</li><li>Ladungssicherung &amp; Gewicht</li><li>Gas/Elektrik in Modulen + Versicherungsfragen</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Daily Switch: Was modular wirklich bedeutet</h4><ul><li>Warum modulare Systeme boomen: Alltag, Kosten, Nachhaltigkeit, Flexibilität</li><li>Typen von Systemen: Clip-/Lochwand, Airline-Schienen, Rahmen/Profilbau, Campingboxen</li><li>Entscheidungsfrage: „Modulbaukasten“ vs. „ein festes Grundsystem + wechselnde Module“</li></ul><h4>2) Rechtliche Einordnung: Ladung vs. fest verbaut</h4><ul><li>Grundidee: <strong>Fest eingebaute Grundsysteme</strong> (z. B. Schienen/Wände/Rahmen) vs. <strong>wechselbare Module</strong></li><li>Typische Stolperfallen:</li></ul><h4>3) Ladungssicherung: Der häufigste Fehler bei Modul-Systemen</h4><ul><li>Ziel: Bei Vollbremsung/Unfall darf nichts rutschen, kippen oder fliegen</li><li>Praxis-Check:</li><li>Dokumentation: Fotos von Sicherungspunkten, Skizze der Zurrpunkte, kurze Modulbeschreibung</li></ul><h4>4) Gewicht &amp; 3,5t: Modul-Liste statt Bauchgefühl</h4><ul><li>Modul-Gewichte erfassen (Küche, Bett, Stauraum, Wasser, Kühlbox, Werkzeug)</li><li>Worst-Case-Beladung planen: „Alle Module + Urlaub + Personenzahl“</li><li>Schnell-Check fürs Wochenende: Was muss raus, wenn’s eng wird?</li></ul><h4>5) Gas/Elektrik in Modulen (saubere Schnittstellen)</h4><ul><li>Gas im Modul: wann das Thema Gasprüfung/Prüfbarkeit relevant wird (und warum „mobil“ nicht automatisch „aus dem Thema raus“ ist)</li><li>Elektrik im Modul:</li><li>Empfehlung aus der Praxis: „Ein sauberer Strom-/Gas-Übergabepunkt“ statt improvisierter Kabel/Schläuche</li></ul><h4>6) TÜV &amp; Versicherung: Das Doku-Paket, das Diskussionen spart</h4><ul><li>Fotos: Grundsystem-Montage, Befestigungspunkte, Sicherungskonzept</li><li>Listen: Modulgewichte, Komponentenliste, ggf. Datenblätter</li><li>Nachweise: Montageanleitung/Belastungswerte (wenn vorhanden), Rechnungen wichtiger Bauteile</li><li>Versicherungs-Check: „fest verbaut oder mobil?“ und was man sinnvoll vorab klärt</li></ul><hr><h4>Zielgruppe</h4><ul><li>Handwerker, Selbständige und alle, die ihren Transporter beruflich nutzen</li><li>Wochenend-Camper, die keine dauerhafte Vollzeit-Camper-Kiste wollen</li><li>Selbstausbauer, die ein modulares System (Schienen/Clips/Boxen) planen oder optimieren</li><li>Alle, die bei TÜV/Versicherung keine Überraschungen erleben wollen</li></ul>",
+            "has_content": true
+        },
+        {
+            "id": "92465b73445240f3b010ae3eb0976519",
+            "title": "Allein im UAZ Buchanka bis zum Pamir Highway (und zurück)",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "16:00 – 17:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Komm mit mir auf die ultimative Traumreise! Nachdem ich diese Strecke inzwischen drei Mal gefahren bin, kann ich Dir alle Tipps und Tricks verraten, um im Wohnmobil / Van durch Zentralasien bis zum Pamir Highway und zurück zu fahren. In insgesamt 7 Monaten habe ich als Solo-Reisende diesen Roadtrip in meinem kleinen UAZ Buchanka gemacht. Ewige Geradeausfahrten durch extrem heiße Steppe, tausende Kilometer Schlagloch-Pisten im Staub und hinauf im Matsch auf über 4.600 Meter: Ein unfassbar anstrengender Trip – aber eben auch unglaublich wunderschön!",
+            "datum_start": "2026-07-11T16:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "1f174d779dcb4d3fb1e9f347e60e64ee",
-            "title": "⛺️ Vom Basisfahrzeug zur Weltreise",
+            "title": "Vom Basisfahrzeug zur Weltreise",
             "typ": "Vortrag",
             "tag": "Samstag",
-            "zeit": "14:00 – 14:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Vortragsbühne Halle A6",
             "beschreibung": "Der Vortrag gibt einen Einblick in die Planung, den Bau und die Erprobung eines 4x4-LKW Expeditionsfahrzeugs. Anhand von Bildern, technischen Zeichnungen, Berechnungen und praktischen Ideen wird die Entstehung vorgestellt:\n- Auswahl des geeigneten Basisfahrzeugs\n- Abstimmung mit dem TÜV\n- Umsetzung des kompletten Umbaus\n\nErik Schmitt ist Kfz-Meister und Mechatronik-Ingenieur mit über zehn Jahren Berufserfahrung im Prototypenbau. Er hat ein individuell gestaltetes 4x4-LKW Expeditionsfahrzeug für seine Familie gebaut.",
-            "datum_start": "2026-07-11T14:00:00.000+02:00",
+            "datum_start": "2026-07-11T16:00:00.000+02:00",
             "kategorien": [
                 "Expeditionsmobile",
                 "Kabinen (Pickup & LKW)",
@@ -470,34 +858,14 @@
             "has_content": true
         },
         {
-            "id": "1d698b9fa1a54ba79144fba40ec96d5c",
-            "title": "⛺️ Powerstation vs. DIY-Elektrik – Der große Vergleich 2026",
-            "typ": "Workshop",
-            "tag": "Samstag",
-            "zeit": "15:00 – 15:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Powerstation oder fest verbaute Elektrik? Die Antwort ist nicht mehr so eindeutig! Powerstations sind 2026 kein Nischenprodukt mehr: Modulare Systeme (EcoFlow, Bluetti), Preissturz auf 0,23€/Wh, Schnellladung in 1h und fest einbaubare Profi-Lösungen (ECTIVE, Zeliox). Lerne, wann Powerstation gewinnt (Plug & Play, Mobilität), wann DIY (400Ah+, Integration), plus die neue Hybrid-Lösung. Inklusive TÜV-Graubereich: Was muss dokumentiert werden? Ladungssicherung als Versicherungsthema!",
-            "datum_start": "2026-07-11T15:00:00.000+02:00",
-            "kategorien": [
-                "Energie & Solartechnik"
-            ],
-            "status": "Planung",
-            "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Powerstation oder fest verbaute Elektrik? Die Antwort ist 2026 nicht mehr so eindeutig!</strong></p><p>Powerstations sind kein Nischenprodukt mehr: Modulare Systeme (EcoFlow, Bluetti), Preissturz auf 0,23€/Wh, Schnellladung in 1h und fest einbaubare Profi-Lösungen (ECTIVE, Zeliox).</p><p><strong>Was dich erwartet:</strong></p><p>✓ Wann gewinnt Powerstation (Plug &amp; Play, Mobilität)?</p><p>✓ Wann gewinnt DIY (400Ah+, Integration)?</p><p>✓ Die neue Hybrid-Lösung kennenlernen</p><p>✓ TÜV-Graubereich: Dokumentation verstehen</p><p>✓ Ladungssicherung als Versicherungsthema</p><p>Lerne die richtige Entscheidung für deinen Camper-Ausbau!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Powerstation-Vorteile</h4><ul><li>Plug &amp; Play ohne Elektrik-Wissen</li><li>Geprüft und zertifiziert</li></ul><h4>DIY-Elektrik-Vorteile</h4><ul><li>Mobilität: Rausnehmen und woanders nutzen</li><li>Leistung: 400Ah+ möglich</li><li>Integration: Solar, Ladebooster, Landstrom</li><li>Erweiterbarkeit für die Zukunft</li></ul><h4>Trends 2026</h4><ul><li>Modulare Systeme (EcoFlow, Bluetti)</li><li>Fest einbaubare All-in-One-Lösungen</li><li>Hybrid: Basis-Elektrik + mobile Powerstation</li><li>Preissturz und Schnellladung</li></ul><h4>TÜV &amp; Dokumentation</h4><ul><li>Tragbare vs. fest verbaute Powerstations</li><li>Ladungssicherung dokumentieren</li><li>Versicherungsrelevante Aspekte</li></ul><hr><h4>Zielgruppe</h4><ul><li>Einsteiger ohne Elektrik-Vorkenntnisse</li><li>Selbstausbauer, die flexibel bleiben wollen</li><li>Alle, die die richtige Stromlösung suchen</li></ul>",
-            "has_content": true
-        },
-        {
             "id": "73507f8536164ee480a3cf5c700a490a",
-            "title": "⛺️ Hilfsrahmen - Wenn's kracht statt trägt",
+            "title": "Hilfsrahmen - Wenn's kracht statt trägt",
             "typ": "Expertpanel",
             "tag": "Samstag",
-            "zeit": "15:00 – 15:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Direkt verschrauben oder mit Federlagerung? Drei- oder Vierpunkt? Stahl oder Alu? Der Zwischenrahmen ist das kritische Bindeglied zwischen Fahrgestell und Wohnkoffer – und wird oft unterschätzt. Unsere Experten klären die häufigsten Konstruktionsfehler, Materialfragen und was bei Schäden wirklich hilft.\n\nAlternativ: Das kritische Bindeglied zwischen Chassis und Koffer: Experten beantworten eure Fragen zu Konstruktion, Materialwahl, Federlagerung und dem richtigen Vorgehen bei Schäden.",
-            "datum_start": "2026-07-11T15:00:00.000+02:00",
+            "datum_start": "2026-07-11T16:00:00.000+02:00",
             "kategorien": [
                 "Fahrwerk Reifen & Felgen",
                 "Expeditionsmobile"
@@ -516,14 +884,55 @@
             "has_content": true
         },
         {
+            "id": "ff1c8ae522d84ba28547f5ee3041d1f4",
+            "title": "meet & greet / RoadtripGirls Ratsch",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "17:00 – 18:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Sei dabei! Die letzte Stunde des Messetages wollen wir RoadtripGirls und deren Fans (Besucherinnen, Ausstellerinnen und Referentinnen) uns auf der Bühne treffen. Lasst uns austauschen, uns vernetzen, Pläne schmieden und unsere Community feiern. Bringt Eure Geschichten, Eure Sticker und Sisterhood-Laune mit!",
+            "datum_start": "2026-07-11T17:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "30f9c964c82f80bc8279fcfbf7a9c10e",
+            "title": "eCamper - Samstag 2",
+            "typ": "eCamper",
+            "tag": "Samstag",
+            "zeit": "17:15 – 18:00 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-11T17:15:00.000+02:00",
+            "kategorien": [],
+            "status": "",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "e177bbc0209e4aeaa556cda8f713998a",
-            "title": "⛺️ Nachhaltige Dämmung – Schafwolle & Hanf statt Kunststoff",
+            "title": "Nachhaltige Dämmung – Schafwolle & Hanf statt Kunststoff",
             "typ": "Expertpanel",
             "tag": "Samstag",
-            "zeit": "16:00 – 16:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "17:15 – 18:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Schafwolle und Hanf lösen Armaflex in der \"Öko-Blase\" ab. Die Community diskutiert intensiv über Feuchtigkeitsmanagement und Diffusionsoffenheit bei Naturmaterialien. Nachhaltig dämmen – für Klima und Wohnkomfort.",
-            "datum_start": "2026-07-11T16:00:00.000+02:00",
+            "datum_start": "2026-07-11T17:15:00.000+02:00",
             "kategorien": [
                 "Isolierung"
             ],
@@ -536,42 +945,81 @@
             "has_content": true
         },
         {
-            "id": "907e4a5156854a0dbca15ce2f80d8972",
-            "title": "⛺️ Induktion statt Gas – Kochen ohne Gasprüfung",
-            "typ": "Workshop",
-            "tag": "Samstag",
-            "zeit": "17:00 – 17:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Der komplette Verzicht auf Gasanlagen ist der Trend 2026. Gekocht wird über leistungsstarke Wechselrichter und Induktionsfelder, was die TÜV-Abnahme (Gasprüfung) erspart. Erfahre, welche Technik du brauchst und wie du deine Küche gasfrei planst.",
-            "datum_start": "2026-07-11T17:00:00.000+02:00",
-            "kategorien": [
-                "Elektrik & Beleuchtung"
-            ],
-            "status": "Planung",
+            "id": "7bdb6ae8b9324cf8aa69db60cb0fc098",
+            "title": "Auf einen Kaffee",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "10:00 – 10:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Guten Morgen RoadtripGirls! Wir beginnen den Messetag mit einer gemeinsamen Tasse Kaffee – und etwas Besonderem. Komm mit Deiner Tasse vorbei und wir starten zusammen in den Tag!",
+            "datum_start": "2026-07-12T10:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
                 {
-                    "id": "61a912697425494888946a6a09a76be0",
-                    "firma": "philippi elektrische Systeme gmbh",
-                    "stand": "A3-301",
-                    "stand_x": 45,
-                    "stand_y": 16.8,
-                    "stand_w": null,
-                    "stand_h": null
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
                 }
             ],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Der komplette Verzicht auf Gasanlagen ist DER Trend 2026!</strong></p><p>Keine Gasprüfung beim TÜV, keine schweren Gasflaschen, keine Sicherheitsbedenken. Gekocht wird über leistungsstarke Wechselrichter und Induktionsfelder.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Gasfrei kochen: Welche Technik du brauchst</p><p>✓ Induktionsplatten richtig dimensionieren</p><p>✓ Wechselrichter und Batteriekapazität berechnen</p><p>✓ TÜV-Vorteile: Gasprüfung entfällt komplett</p><p>✓ Praxis-Tipps: Stromverbrauch und Alltagstauglichkeit</p><p>Für alle, die gasfrei campen und die TÜV-Abnahme vereinfachen wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Induktionskochen im Camper</h4><ul><li>Leistungsbedarf: 1000W bis 2000W</li><li>Welche Induktionsplatte passt zu deinem System?</li><li>Töpfe und Pfannen: Was funktioniert mit Induktion?</li></ul><h4>Elektrik-Anforderungen</h4><ul><li>Wechselrichter dimensionieren (min. 1500W)</li><li>Batteriekapazität für gasfreies Kochen</li><li>Solar- und Ladebooster-Planung</li><li>Kabelquerschnitte und Absicherung</li></ul><h4>TÜV und Praxis</h4><ul><li>Gasprüfung entfällt: Zeit und Kosten sparen</li><li>Alltagstauglichkeit: Wie lange kochen mit Batterie?</li><li>Alternative Kochmethoden: Omnia, Elektrogrill</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer, die auf Gas verzichten wollen</li><li>Camper mit großer Batteriekapazität</li><li>Alle, die TÜV-Aufwand reduzieren möchten</li></ul>",
-            "has_content": true
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "f83de0153979402eb9d78e523bcbd74b",
+            "title": "Frag mich alle Fragen, die Du schon immer fragen wolltest",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "10:45 – 11:45 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Komm vorbei und löchere mich mit all den Fragen, die Du schon immer von mir wissen wolltest: Brauchst Du noch spezielle Tipps zu meinen Reisezielen, persönliche Tricks zum Alleinreisen, willst wissen, warum meine Autos Namen haben, welchem Fahrzeug ich am meisten hinterhertrauere, warum es mich immer an so abgelegene Orte zieht, warum ich keinen Hund dabei habe, was auf der Packliste niemals fehlen darf… Ich stehe gerne für alle Fragen an meinem eigenen Stand zur Verfügung und freue mich auf Dich.",
+            "datum_start": "2026-07-12T10:45:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "8f006c7d221d4382b3f480b1df015d31",
+            "title": "Dein Einstieg ins Arbeiten unterwegs",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Foyer West/Empore",
+            "beschreibung": "Viele Menschen wünschen sich, unterwegs Geld zu verdienen – wissen aber nicht, wo sie anfangen sollen. In diesem Workshop zeigt Anja Müller konkrete, realistische Wege, wie Einkommen unterwegs entstehen kann: von Remote-Jobs über selbständige Tätigkeiten bis hin zu hybriden Modellen. Die Teilnehmerinnen entwickeln dabei ihren persönlichen Einstiegspfad und erhalten einen klaren Überblick darüber: welche Möglichkeiten es gibt, was zu ihrer Situation passt, welche Schritte als Erstes sinnvoll sind, wie realistisch der Einstieg ist.",
+            "datum_start": "2026-07-12T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Anja Müller",
+            "referent_persons": [
+                {
+                    "id": "31eaca54f26842509785b4409082ac84",
+                    "name": "Anja Müller"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "76140a0b49b844779b63cc31af0dd939",
-            "title": "⛺️ Wohnmobil-Selbstausbau",
+            "title": "Wohnmobil-Selbstausbau",
             "typ": "Vortrag",
             "tag": "Sonntag",
-            "zeit": "11:00 – 12:00 Uhr",
-            "ort": "Bühne (Halle A6)",
+            "zeit": "11:00 – 11:45 Uhr",
+            "ort": "Vortragsbühne Halle A6",
             "beschreibung": "Vortrag zum Wohnmobil-Selbstausbau",
             "datum_start": "2026-07-12T11:00:00.000+02:00",
             "kategorien": [
@@ -593,11 +1041,11 @@
         },
         {
             "id": "675dc8fcdbff43878d33bd5c309de684",
-            "title": "⛺️ Kampf der Zellchemie – LiFePO4, Natrium-Ion & Semi-Solid-State",
+            "title": "Kampf der Zellchemie – LiFePO4, Natrium-Ion & Semi-Solid-State",
             "typ": "Expertpanel",
             "tag": "Sonntag",
             "zeit": "11:00 – 11:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "In der Welt der Camper-Elektrik passiert gerade ein gewaltiger Umbruch. Vom aktuellen Goldstandard LiFePO4 mit Arctic-Funktion und 720 Ah Untersitz-Kapazität, über den Newcomer Natrium-Ionen (perfekt für Wintercamper bei -20°C) bis zur Next-Gen Semi-Solid-State-Technologie mit 30% mehr Energiedichte. Erlebe den Überblick über die Batterietechnologien, die 2026 den Markt aufmischen – von bezahlbar bis High-End.",
             "datum_start": "2026-07-12T11:00:00.000+02:00",
             "kategorien": [
@@ -622,14 +1070,55 @@
             "has_content": true
         },
         {
+            "id": "e32090afa5574c91bec50ddc722ec6cc",
+            "title": "Vollzeit Vanlife: Freuden und Herausforderungen",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "12:00 – 13:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Ich möchte mit Euch über mein ganz normales Leben in meinem Van „Villa\" erzählen: Warum habe ich mich dazu entschieden, in einem Auto zu leben und wie ist seitdem der Kontakt zu den Kindern und dem alten Leben? In welchen Momenten trauere ich meiner festen Wohnung hinterher? Ist es schwierig, alleine als Frau unterwegs zu sein? Warum reise ich viel durch Deutschland und wie ist hier die Stellplatz- bzw. Versorgungs-Situation? Wie verdiene ich mein Geld, während ich ständig unterwegs bin… Vielleicht kann ich Euch dazu inspirieren, den Vollzeit Vanlife Weg zu gehen – oder eben lieber nicht.",
+            "datum_start": "2026-07-12T12:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Isabel Kühnl",
+            "referent_persons": [
+                {
+                    "id": "0b9a373dd6ba4904a1394406cc667fa1",
+                    "name": "Isabel Kühnl"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3685de14af104870a09436c93e854a73",
+            "title": "Besucher*innen fragen RoadtripGirls",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "12:00 – 13:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Nutze die Chance und zapfe das Wissen unserer erfahrenen Referentinnen ab. In einer entspannten Runde kannst Du wirklich alles fragen, was Du schon immer wissen wolltest. Jeden Tag stehen 2 oder 3 Expertinnen allen Besuchern und Besucherinnen Rede und Antwort. Komm vorbei und nutze das pure Expertinnen-Wissen.",
+            "datum_start": "2026-07-12T12:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "4c486889d2ff4f21b1b9afd430ac10a6",
-            "title": "⛺️ Dämmung done right: Armaflex vs. Hanf vs. XPS",
+            "title": "Dämmung done right: Armaflex vs. Hanf vs. XPS",
             "typ": "Expertpanel",
             "tag": "Sonntag",
-            "zeit": "12:00 – 12:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Kondenswasser vermeiden, Kältebrücken eliminieren – die richtige Dämmstrategie. VANUE Camperdämmung und Isoproq erklären die Unterschiede.",
-            "datum_start": "2026-07-12T12:00:00.000+02:00",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Kondenswasser vermeiden, Kältebrücken eliminieren – die richtige Dämmstrategie. Unsere Experten erklären die Unterschiede.",
+            "datum_start": "2026-07-12T12:15:00.000+02:00",
             "kategorien": [
                 "Isolierung"
             ],
@@ -638,78 +1127,18 @@
             "referent_person": "",
             "referent_persons": [],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Kondenswasser vermeiden, Kältebrücken eliminieren – die richtige Dämmstrategie!</strong></p><p>VANUE Camperdämmung und Isoproq erklären die Unterschiede zwischen Armaflex, Hanf und XPS.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Armaflex, Hanf, XPS im direkten Vergleich</p><p>✓ Kondenswasser verstehen und vermeiden</p><p>✓ Kältebrücken eliminieren</p><p>✓ Diffusionsoffenheit vs. Dampfsperre</p><p>✓ Die richtige Dämmung für deinen Einsatz</p><p>Für optimale Dämmung und behagliches Wohnklima!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Dämmmaterialien</h4><ul><li>Armaflex: Der Klassiker</li><li>Hanf: Natürlich und nachhaltig</li><li>XPS: Robust und feuchtigkeitsresistent</li><li>Schafwolle, Kork: Alternative Materialien</li></ul><h4>Kondenswasser</h4><ul><li>Wie entsteht Kondenswasser?</li><li>Dampfsperre vs. diffusionsoffen</li><li>Lüftungskonzept</li><li>Taupunkt verstehen</li></ul><h4>Kältebrücken</h4><ul><li>Wo entstehen Kältebrücken?</li><li>Metallprofile isolieren</li><li>Unterbrechung von Wärmebrücken</li><li>Thermografie nutzen</li></ul><hr><h4>Zielgruppe</h4><ul><li>Truck-Ausbauer mit großen Flächen</li><li>Selbstausbauer in der Dämmphase</li><li>Wintercamper mit Kälte-Problemen</li></ul>",
-            "has_content": true
-        },
-        {
-            "id": "fe77a6999c6d4a98b73879d0d267452d",
-            "title": "🅱️ Versichert statt riskiert - Schutz für individuelle Ausbauten",
-            "typ": "Vortrag",
-            "tag": "Sonntag",
-            "zeit": "12:00 – 12:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Ein Selbstausbau ist mehr als ein Fahrzeug – es ist ein mobiles Zuhause mit individuellem Wert. Doch wie versichert man 20.000 Euro Eigenausbau richtig? Was deckt die Standard-Kfz-Versicherung ab, was nicht? Die Experten von RMV, Deutschlands Marktführer für Wohnmobil-Versicherungen, erklären, worauf es ankommt: von der Bewertung individueller Umbauten über Vollkasko-Optionen bis zum Auslandsschutz. Mit konkreten Tipps für Selbstausbauer.",
-            "datum_start": "2026-07-12T12:00:00.000+02:00",
-            "kategorien": [
-                "Zulassung & TÜV"
-            ],
-            "status": "Planung",
-            "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Ein Selbstausbau ist kein „Serienfahrzeug“ – und genau das wird bei der Versicherung schnell zum Problem.</strong> Im Schadenfall zählt nicht, was du gefühlt investiert hast, sondern was sauber dokumentiert und korrekt versichert ist.</p><p>In diesem Vortrag zeigen die Expertinnen und Experten der <strong>RMV Reise-Mobil-Versicherung</strong> , worauf es bei der Absicherung individueller Ausbauten wirklich ankommt – von Wertermittlung über Kasko-Optionen bis zu Auslandsreisen.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Wertermittlung: Basisfahrzeug vs. Ausbau vs. Zubehör (und wie du es nachweist)</p><p>✓ Typische Fehler: Unterversicherung, falsch deklarierte Umbauten, fehlende Nachweise</p><p>✓ Vollkasko/Teilkasko: welche Bausteine für Selbstausbauer wichtig sind</p><p>✓ Ausland: Grüne Versicherungskarte, Schutzbrief, sinnvolle Zusatzleistungen</p><p>✓ Weltreise-Setup: Carnet de Passage (CdP) – wann relevant und was es bedeutet</p><p>Für alle, die Monate/Jahre Ausbauarbeit <strong>wirklich</strong> absichern wollen.</p><hr><h4>Referent/Experte</h4><p><strong>RMV Reise-Mobil-Versicherung</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Spezialversicherer für Reisemobile und Camper</li><li>Fokus: individuelle Umbauten, Zubehör, Reise- und Auslandsschutz</li></ul><p><strong>Vortrags-Themen:</strong></p><ul><li>Bewertung/Dokumentation von Selbstausbauten</li><li>Leistungsbausteine und typische Fallstricke</li><li>Praxisfälle: so läuft es im Schadenfall wirklich</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Wertermittlung für Selbstausbau (das Kernproblem)</h4><ul><li>Was ist „Fahrzeugwert“ und was ist „Ausbauwert“?</li><li>Nachweise: Rechnungen, Fotos, Baulisten, Ausbau-Tagebuch</li><li>Warum „Pi mal Daumen versichert“ im Schadenfall weh tut</li></ul><h4>2) Zubehör &amp; Sonderausstattung: was ist mitversichert – was nicht?</h4><ul><li>Solaranlage, Markise, Dachträger, Möbel, Elektrik, Wassersystem</li><li>Lose Gegenstände vs. fest verbaut</li><li>Abgrenzung zur Inhaltsversicherung</li></ul><h4>3) Kasko-Optionen &amp; sinnvolle Bausteine</h4><ul><li>Teilkasko vs. Vollkasko: typische Schadensbilder im Camper</li><li>Elementar, Glas, Diebstahl, Wild, Brand</li><li>Selbstbeteiligung und „Schmerzgrenze“ realistisch wählen</li></ul><h4>4) Ausland &amp; Panne</h4><ul><li>Grüne Versicherungskarte: wann nötig, wofür gut</li><li>Schutzbrief: Rücktransport, Abschleppen, Hotelkosten</li><li>Besonderheiten bei großen/heavy Setups</li></ul><h4>5) Weltreise: Carnet de Passage (CdP) – kurz erklärt</h4><ul><li>CdP = Zolldokument für temporäre Einfuhr in bestimmte Länder</li><li>Sicherheitsleistung/Kaution und mögliche Absicherung</li><li>Was passiert bei Diebstahl oder Totalschaden im Ausland?</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit hohem Ausbauwert</li><li>Alle, die ins Ausland (auch außerhalb der EU) reisen wollen</li><li>Menschen, die Versicherung „einmal sauber“ aufsetzen möchten statt später zu kämpfen</li></ul>",
-            "has_content": true
-        },
-        {
-            "id": "124a9c70b1764e0980ae0941f218b737",
-            "title": "⛺️ Wechselrichter richtig dimensionieren: 600W bis 3000W",
-            "typ": "Expertpanel",
-            "tag": "Sonntag",
-            "zeit": "13:00 – 13:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Welche Wechselrichter-Leistung brauche ich wirklich? VOTRONIC erklärt Sinus vs. modifizierte Sinuswelle, Anlaufströme und die richtige Dimensionierung für Kaffeemaschine, Werkzeug & Co.",
-            "datum_start": "2026-07-12T13:00:00.000+02:00",
-            "kategorien": [
-                "Elektrik & Beleuchtung"
-            ],
-            "status": "Idee",
-            "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Welche Wechselrichter-Leistung brauche ich wirklich?</strong></p><p>VOTRONIC erklärt Sinus vs. modifizierte Sinuswelle, Anlaufströme und die richtige Dimensionierung für Kaffeemaschine, Werkzeug &amp; Co.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Sinus vs. modifizierte Sinuswelle verstehen</p><p>✓ Anlaufströme richtig berechnen</p><p>✓ Dimensionierung für verschiedene Verbraucher</p><p>✓ 600W, 1500W oder 3000W? Die richtige Wahl</p><p>✓ Häufigste Fehler bei der Auswahl</p><p>Für alle, die 230V-Geräte im Camper sicher betreiben wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Grundlagen</h4><ul><li>Sinus vs. modifizierte Sinuswelle</li><li>Wann braucht man reinen Sinus?</li><li>Wirkungsgrad und Verlustleistung</li></ul><h4>Dimensionierung</h4><ul><li>Verbraucher und deren Leistung</li><li>Anlaufströme bei Motoren (Kühlschrank, Werkzeug)</li><li>Kaffeemaschine, Laptop, Föhn – Realistische Werte</li></ul><h4>Auswahl &amp; Installation</h4><ul><li>600W für Basics, 1500W für Komfort, 3000W für Profis</li><li>Kabelquerschnitte und Absicherung</li><li>Einbauort und Belüftung</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer in der Elektrik-Planung</li><li>Camper, die 230V-Geräte nutzen wollen</li><li>Alle, die die richtige Wechselrichter-Größe finden müssen</li></ul>",
-            "has_content": true
-        },
-        {
-            "id": "e19486442cd84c0fb9735b8cf5148f05",
-            "title": "🅱️ Individuelle 3D-Planung – Millimetergenau zum Traumausbau",
-            "typ": "Workshop",
-            "tag": "Sonntag",
-            "zeit": "14:00 – 14:45 Uhr",
-            "ort": "Bühne (Halle A6)",
-            "beschreibung": "Weg von der Skizze auf Papier. Tools wie \"Vanspace 3D\" oder detaillierte SketchUp-Modelle sind Standard, um den knappen Raum auf den Millimeter zu nutzen. Plane deinen Ausbau digital und vermeide teure Fehler.",
-            "datum_start": "2026-07-12T14:00:00.000+02:00",
-            "kategorien": [
-                "Sonstiges"
-            ],
-            "status": "Planung",
-            "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Schluss mit Skizzen auf Papier und teuren Planungsfehlern!</strong></p><p>Wer heute einen Camper ausbaut, plant digital. Tools wie Vanspace 3D oder SketchUp helfen dir, den knappen Raum auf den Millimeter zu nutzen und teure Fehlkäufe zu vermeiden.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Überblick über 3D-Planungstools für Camper</p><p>✓ Vanspace 3D vs. SketchUp – welches Tool passt zu dir?</p><p>✓ Schritt für Schritt: vom leeren Van zum fertigen 3D-Modell</p><p>✓ Raumplanung optimieren: Durchgänge, Kopffreiheit, Stauraum</p><p>✓ Materialplanung und Zuschnittlisten aus dem 3D-Modell</p><p>Perfekt für alle, die ihren Ausbau präzise planen und Fehler vermeiden wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>3D-Planungstools</h4><ul><li>Vanspace 3D: Speziell für Camper entwickelt</li><li>SketchUp: Flexibel und mächtig für Fortgeschrittene</li><li>Kostenlose vs. kostenpflichtige Lösungen</li><li>Mobile Apps vs. Desktop-Software</li></ul><h4>Digitale Raumplanung</h4><ul><li>Fahrzeugmaße exakt erfassen</li><li>Möbel und Einbauten millimetergenau planen</li><li>Durchgänge und Bewegungsfreiheit simulieren</li><li>Gewichtsverteilung visualisieren</li></ul><h4>Vom Plan zur Praxis</h4><ul><li>Zuschnittlisten aus 3D-Modellen generieren</li><li>Materialbedarf berechnen</li><li>3D-Modell für TÜV-Dokumentation nutzen</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer in der Planungsphase</li><li>Alle, die teure Planungsfehler vermeiden wollen</li><li>Technikaffine DIY-Enthusiasten</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Kondenswasser vermeiden, Kältebrücken eliminieren – die richtige Dämmstrategie!</strong></p><p>Unsere Experten erklären die Unterschiede zwischen Armaflex, Hanf und XPS.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Armaflex, Hanf, XPS im direkten Vergleich</p><p>✓ Kondenswasser verstehen und vermeiden</p><p>✓ Kältebrücken eliminieren</p><p>✓ Diffusionsoffenheit vs. Dampfsperre</p><p>✓ Die richtige Dämmung für deinen Einsatz</p><p>Für optimale Dämmung und behagliches Wohnklima!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Dämmmaterialien</h4><ul><li>Armaflex: Der Klassiker</li><li>Hanf: Natürlich und nachhaltig</li><li>XPS: Robust und feuchtigkeitsresistent</li><li>Schafwolle, Kork: Alternative Materialien</li></ul><h4>Kondenswasser</h4><ul><li>Wie entsteht Kondenswasser?</li><li>Dampfsperre vs. diffusionsoffen</li><li>Lüftungskonzept</li><li>Taupunkt verstehen</li></ul><h4>Kältebrücken</h4><ul><li>Wo entstehen Kältebrücken?</li><li>Metallprofile isolieren</li><li>Unterbrechung von Wärmebrücken</li><li>Thermografie nutzen</li></ul><hr><h4>Zielgruppe</h4><ul><li>Truck-Ausbauer mit großen Flächen</li><li>Selbstausbauer in der Dämmphase</li><li>Wintercamper mit Kälte-Problemen</li></ul>",
             "has_content": true
         },
         {
             "id": "42e0089a8d6044e9bebe0420c6e0461c",
-            "title": "⛺️ Die Verbindungs-Debatte: Wann schraubt man, wann klebt man?",
+            "title": "Die Verbindungs-Debatte: Wann schraubt man, wann klebt man?",
             "typ": "Expertpanel",
             "tag": "Sonntag",
-            "zeit": "14:00 – 14:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Verschrauben oder verkleben? Diese Grundsatzfrage stellt sich bei fast jedem Ausbauschritt. Unsere Experten von HECO-Schrauben und Reiss Kleber/Turboflex zeigen, wann welche Methode die richtige ist – oder wann die Kombination am besten funktioniert. Mit praktischen Beispielen von Möbelbau über Airlineschienen bis zu Solarpanels.",
-            "datum_start": "2026-07-12T14:00:00.000+02:00",
+            "zeit": "12:15 – 13:00 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Verschrauben oder verkleben? Diese Grundsatzfrage stellt sich bei fast jedem Ausbauschritt. Unsere Experten zeigen, wann welche Methode die richtige ist – oder wann die Kombination am besten funktioniert. Mit praktischen Beispielen von Möbelbau über Airlineschienen bis zu Solarpanels.",
+            "datum_start": "2026-07-12T12:15:00.000+02:00",
             "kategorien": [
                 "Innenausbau & Module",
                 "Kabinen (Pickup & LKW)"
@@ -719,18 +1148,36 @@
             "referent_person": "",
             "referent_persons": [],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Verschrauben oder verkleben? Diese Grundsatzfrage stellt sich bei fast jedem Ausbauschritt!</strong></p><p>Unsere Experten von HECO-Schrauben und Reiss Kleber/Turboflex zeigen, wann welche Methode die richtige ist – oder wann die Kombination am besten funktioniert.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Schrauben vs. Kleben: Vor- und Nachteile</p><p>✓ Wann ist welche Methode die richtige?</p><p>✓ Die Kombination: Das Beste aus beiden Welten</p><p>✓ Praktische Beispiele: Möbelbau, Airlineschienen, Solarpanels</p><p>✓ Materialien und deren Anforderungen</p><p>Mit praktischen Beispielen von Profis, die beide Welten kennen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Schrauben</h4><ul><li>Vorteile: Reversibel, nachziehbar</li><li>Materialien: Holz, Metall, Verbundplatten</li><li>Richtige Schrauben für jeden Einsatz</li></ul><h4>Kleben</h4><ul><li>Vorteile: Flächige Kraftverteilung, keine Löcher</li><li>Klebstoffe: Hybrid, PU, Epoxid</li><li>Aushärtezeiten und Temperatur</li></ul><h4>Kombination</h4><ul><li>Wann macht Schrauben + Kleben Sinn?</li><li>Beispiele aus der Praxis</li><li>Möbelbau, Paneele, Solarpanels</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Verbindungs-Fragen</li><li>Alle, die die richtige Technik finden wollen</li><li>Praktiker, die Haltbarkeit suchen</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Verschrauben oder verkleben? Diese Grundsatzfrage stellt sich bei fast jedem Ausbauschritt!</strong></p><p>Unsere Experten zeigen, wann welche Methode die richtige ist – oder wann die Kombination am besten funktioniert.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Schrauben vs. Kleben: Vor- und Nachteile</p><p>✓ Wann ist welche Methode die richtige?</p><p>✓ Die Kombination: Das Beste aus beiden Welten</p><p>✓ Praktische Beispiele: Möbelbau, Airlineschienen, Solarpanels</p><p>✓ Materialien und deren Anforderungen</p><p>Mit praktischen Beispielen von Profis, die beide Welten kennen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Schrauben</h4><ul><li>Vorteile: Reversibel, nachziehbar</li><li>Materialien: Holz, Metall, Verbundplatten</li><li>Richtige Schrauben für jeden Einsatz</li></ul><h4>Kleben</h4><ul><li>Vorteile: Flächige Kraftverteilung, keine Löcher</li><li>Klebstoffe: Hybrid, PU, Epoxid</li><li>Aushärtezeiten und Temperatur</li></ul><h4>Kombination</h4><ul><li>Wann macht Schrauben + Kleben Sinn?</li><li>Beispiele aus der Praxis</li><li>Möbelbau, Paneele, Solarpanels</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Verbindungs-Fragen</li><li>Alle, die die richtige Technik finden wollen</li><li>Praktiker, die Haltbarkeit suchen</li></ul>",
             "has_content": true
         },
         {
+            "id": "30f9c964c82f80dcaf5be567ca45e8a5",
+            "title": "eCamper - Sonntag 1",
+            "typ": "eCamper",
+            "tag": "Sonntag",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-12T13:30:00.000+02:00",
+            "kategorien": [],
+            "status": "",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "8aad7a8b29e549518acdc82645dd46cb",
-            "title": "⛺️ Heizen im Winter-Van: Diesel, Gas, mit Holz oder elektrisch?",
+            "title": "Heizen im Winter-Van: Diesel, Gas, mit Holz oder elektrisch?",
             "typ": "Expertpanel",
             "tag": "Sonntag",
-            "zeit": "15:00 – 15:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
-            "beschreibung": "Aktuelle Heizsysteme im Vergleich – Vor- und Nachteile, Verbrauch und Installation für Wintercamper. Experten von Truma, Eberspächer und Alde zeigen, welches System zu welchem Nutzungsprofil passt.",
-            "datum_start": "2026-07-12T15:00:00.000+02:00",
+            "zeit": "13:30 – 14:15 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Aktuelle Heizsysteme im Vergleich – Vor- und Nachteile, Verbrauch und Installation für Wintercamper. Unsere Experten zeigen, welches System zu welchem Nutzungsprofil passt.",
+            "datum_start": "2026-07-12T13:30:00.000+02:00",
             "kategorien": [
                 "Heizung & Klima"
             ],
@@ -743,24 +1190,65 @@
                     "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
                     "firma": "Reisch-Tech GmbH",
                     "stand": "FG-808",
-                    "stand_x": 41.3,
-                    "stand_y": 48.9,
+                    "stand_x": 38.2,
+                    "stand_y": 27.5,
                     "stand_w": null,
                     "stand_h": null
                 }
             ],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Welche Heizung ist die richtige für dich?</strong></p><p>Experten von Truma, Eberspächer und Alde zeigen aktuelle Heizsysteme im Vergleich – Vor- und Nachteile, Verbrauch und Installation für Wintercamper.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Diesel-Standheizung: Eberspächer &amp; Webasto</p><p>✓ Gasheizung: Truma und Alde</p><p>✓ Elektrische Heizung: Für große Batterien</p><p>✓ Verbrauch und Kosten im Vergleich</p><p>✓ Installation und Einbau-Tipps</p><p>Welches System passt zu welchem Nutzungsprofil?</p><hr><h4>Themen-Schwerpunkte</h4><h4>Diesel-Standheizung</h4><ul><li>Eberspächer, Webasto, Autoterm</li><li>Verbrauch: ca. 0,1-0,3 L/h</li><li>Unabhängig von Batterie</li><li>Einbau und Abgasführung</li></ul><h4>Gasheizung</h4><ul><li>Truma: Klassiker im Wohnmobil</li><li>Alde: Warmwasser-Heizung</li><li>Gasflasche vs. Gastank</li><li>TÜV-Gasprüfung erforderlich</li></ul><h4>Elektrische Heizung</h4><ul><li>Heizlüfter und Infrarot</li><li>Hoher Stromverbrauch</li><li>Nur für große Batteriesysteme</li><li>Kombination mit Landstrom</li></ul><hr><h4>Zielgruppe</h4><ul><li>Wintercamper mit Heizbedarf</li><li>Selbstausbauer in der Planungsphase</li><li>Alle, die ihr Heizsystem optimieren wollen</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Welche Heizung ist die richtige für dich?</strong></p><p>Unsere Experten zeigen aktuelle Heizsysteme im Vergleich – Vor- und Nachteile, Verbrauch und Installation für Wintercamper.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Diesel-Standheizung: Eberspächer &amp; Webasto</p><p>✓ Gasheizung: Truma und Alde</p><p>✓ Elektrische Heizung: Für große Batterien</p><p>✓ Verbrauch und Kosten im Vergleich</p><p>✓ Installation und Einbau-Tipps</p><p>Welches System passt zu welchem Nutzungsprofil?</p><hr><h4>Themen-Schwerpunkte</h4><h4>Diesel-Standheizung</h4><ul><li>Eberspächer, Webasto, Autoterm</li><li>Verbrauch: ca. 0,1-0,3 L/h</li><li>Unabhängig von Batterie</li><li>Einbau und Abgasführung</li></ul><h4>Gasheizung</h4><ul><li>Truma: Klassiker im Wohnmobil</li><li>Alde: Warmwasser-Heizung</li><li>Gasflasche vs. Gastank</li><li>TÜV-Gasprüfung erforderlich</li></ul><h4>Elektrische Heizung</h4><ul><li>Heizlüfter und Infrarot</li><li>Hoher Stromverbrauch</li><li>Nur für große Batteriesysteme</li><li>Kombination mit Landstrom</li></ul><hr><h4>Zielgruppe</h4><ul><li>Wintercamper mit Heizbedarf</li><li>Selbstausbauer in der Planungsphase</li><li>Alle, die ihr Heizsystem optimieren wollen</li></ul>",
             "has_content": true
         },
         {
+            "id": "65fb2d2d345e4cdd8d172b3bf6ac9190",
+            "title": "Solo-Touren nach Bosnien & Sardinien",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "14:00 – 15:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "2025 war ich unter anderem zweieinhalb Monate auf Sardinien im Winter und drei Monate in Bosnien-Herzegowina. Ich reise allein als Frau, begleitet nur von meinem Hund, und bewege mich dabei abseits klassischer Routen. Mich interessiert nicht die perfekte Instagram-Ansicht, sondern der echte Alltag unterwegs. Begegnungen, Herausforderungen, Unsicherheiten und die Momente, in denen man merkt, wie viel man sich selbst zutrauen kann. Meine Reisen sind kein Urlaub, sondern gelebter Alltag. Genau darüber spreche ich.",
+            "datum_start": "2026-07-12T14:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Dagmar Kinter",
+            "referent_persons": [
+                {
+                    "id": "589401b410024eab8f6be744899e49b1",
+                    "name": "Dagmar Kinter"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "30f9c964c82f8038bfc3f1ca443dd6f3",
+            "title": "eCamper - Sonntag 2",
+            "typ": "eCamper",
+            "tag": "Sonntag",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Reservierter Slot",
+            "datum_start": "2026-07-12T14:45:00.000+02:00",
+            "kategorien": [],
+            "status": "",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "5b94d0bdfe264f598d527d15f8d823d1",
-            "title": "⛺️ Plug-and-Play Elektrik – Kurzschluss-Angst ade",
+            "title": "Plug-and-Play Elektrik – Kurzschluss-Angst ade",
             "typ": "Workshop",
             "tag": "Sonntag",
-            "zeit": "16:00 – 16:45 Uhr",
-            "ort": "Bühne Selbstausbau-Academy (FGO)",
+            "zeit": "14:45 – 15:30 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
             "beschreibung": "Fertig vorverkabelte Elektro-Boards (z.B. von Victron-Partnern), die man nur noch an die Batterie und Verbraucher anschließen muss. Nimmt Anfängern die Angst vor dem Kurzschluss. Professionelle Elektrik ohne Elektrikerkenntnisse!",
-            "datum_start": "2026-07-12T16:00:00.000+02:00",
+            "datum_start": "2026-07-12T14:45:00.000+02:00",
             "kategorien": [
                 "Elektrik & Beleuchtung"
             ],
@@ -780,6 +1268,69 @@
                 }
             ],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Professionelle Elektrik ohne Elektrikerkenntnisse!</strong></p><p>Fertig vorverkabelte Elektro-Boards von Victron-Partnern nimmt Anfängern die Angst vor dem Kurzschluss. Einfach an Batterie und Verbraucher anschließen – fertig!</p><p><strong>Was dich erwartet:</strong></p><p>✓ Plug-and-Play Elektro-Boards im Überblick</p><p>✓ Was ist bereits vorverkabelt?</p><p>✓ Installation: Batterie, Solar, Verbraucher anschließen</p><p>✓ Sicherheit: Keine Kurzschluss-Gefahr</p><p>✓ Kosten vs. DIY-Verkabelung</p><p>Für alle, die professionelle Elektrik ohne Fachwissen verbauen wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Plug-and-Play Systeme</h4><ul><li>Victron-Partner-Systeme</li><li>Fertig verkabelte Boards mit Sicherungen</li><li>MPPT-Regler, Ladebooster, Wechselrichter integriert</li><li>Was ist bereits dabei?</li></ul><h4>Installation</h4><ul><li>Batterie anschließen: Plus, Minus, Masse</li><li>Solar-Module verbinden</li><li>Verbraucher anschließen</li><li>Schritt-für-Schritt-Anleitung</li></ul><h4>Vorteile und Kosten</h4><ul><li>Keine Elektrik-Kenntnisse nötig</li><li>Keine Kurzschluss-Gefahr</li><li>Professionelle Absicherung</li><li>Kosten: ca. 500-1.500 € mehr als DIY</li></ul><hr><h4>Zielgruppe</h4><ul><li>Einsteiger ohne Elektrik-Kenntnisse</li><li>Selbstausbauer mit Kurzschluss-Angst</li><li>Alle, die auf Nummer sicher gehen wollen</li></ul>",
+            "has_content": true
+        },
+        {
+            "id": "2fbd65884d034285980bd99d4c7137c8",
+            "title": "Happy End Abschlussfeier",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "16:00 – 17:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Hoch die Tassen! Auf eine hoffentlich gelungene, freudige und erfolgreiche Messe innerhalb der Adventure Southside. Besucherinnen, Ausstellerinnen und Referent*innen: Wir treffen uns nochmal auf der Bühne und feiern uns RoadtripGirls!",
+            "datum_start": "2026-07-12T16:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Susanne Flachmann",
+            "referent_persons": [
+                {
+                    "id": "3da42b4303e0450f96200491a0f4cda4",
+                    "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "e19486442cd84c0fb9735b8cf5148f05",
+            "title": "Individuelle 3D-Planung – Millimetergenau zum Traumausbau",
+            "typ": "Workshop",
+            "tag": "Sonntag",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Vortragsbühne Halle A6",
+            "beschreibung": "Weg von der Skizze auf Papier. Tools wie \"Vanspace 3D\" oder detaillierte SketchUp-Modelle sind Standard, um den knappen Raum auf den Millimeter zu nutzen. Plane deinen Ausbau digital und vermeide teure Fehler.",
+            "datum_start": "2026-07-12T16:00:00.000+02:00",
+            "kategorien": [
+                "Sonstiges"
+            ],
+            "status": "Planung",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Schluss mit Skizzen auf Papier und teuren Planungsfehlern!</strong></p><p>Wer heute einen Camper ausbaut, plant digital. Tools wie Vanspace 3D oder SketchUp helfen dir, den knappen Raum auf den Millimeter zu nutzen und teure Fehlkäufe zu vermeiden.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Überblick über 3D-Planungstools für Camper</p><p>✓ Vanspace 3D vs. SketchUp – welches Tool passt zu dir?</p><p>✓ Schritt für Schritt: vom leeren Van zum fertigen 3D-Modell</p><p>✓ Raumplanung optimieren: Durchgänge, Kopffreiheit, Stauraum</p><p>✓ Materialplanung und Zuschnittlisten aus dem 3D-Modell</p><p>Perfekt für alle, die ihren Ausbau präzise planen und Fehler vermeiden wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>3D-Planungstools</h4><ul><li>Vanspace 3D: Speziell für Camper entwickelt</li><li>SketchUp: Flexibel und mächtig für Fortgeschrittene</li><li>Kostenlose vs. kostenpflichtige Lösungen</li><li>Mobile Apps vs. Desktop-Software</li></ul><h4>Digitale Raumplanung</h4><ul><li>Fahrzeugmaße exakt erfassen</li><li>Möbel und Einbauten millimetergenau planen</li><li>Durchgänge und Bewegungsfreiheit simulieren</li><li>Gewichtsverteilung visualisieren</li></ul><h4>Vom Plan zur Praxis</h4><ul><li>Zuschnittlisten aus 3D-Modellen generieren</li><li>Materialbedarf berechnen</li><li>3D-Modell für TÜV-Dokumentation nutzen</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer in der Planungsphase</li><li>Alle, die teure Planungsfehler vermeiden wollen</li><li>Technikaffine DIY-Enthusiasten</li></ul>",
+            "has_content": true
+        },
+        {
+            "id": "124a9c70b1764e0980ae0941f218b737",
+            "title": "Wechselrichter richtig dimensionieren: 600W bis 3000W",
+            "typ": "Expertpanel",
+            "tag": "Sonntag",
+            "zeit": "16:00 – 16:45 Uhr",
+            "ort": "Selbstausbau Academy Bühne",
+            "beschreibung": "Welche Wechselrichter-Leistung brauche ich wirklich? Unser Experte erklärt Sinus vs. modifizierte Sinuswelle, Anlaufströme und die richtige Dimensionierung für Kaffeemaschine, Werkzeug & Co.",
+            "datum_start": "2026-07-12T16:00:00.000+02:00",
+            "kategorien": [
+                "Elektrik & Beleuchtung"
+            ],
+            "status": "Idee",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
+            "aussteller": [],
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Welche Wechselrichter-Leistung brauche ich wirklich?</strong></p><p>Unser Experte erklärt Sinus vs. modifizierte Sinuswelle, Anlaufströme und die richtige Dimensionierung für Kaffeemaschine, Werkzeug &amp; Co.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Sinus vs. modifizierte Sinuswelle verstehen</p><p>✓ Anlaufströme richtig berechnen</p><p>✓ Dimensionierung für verschiedene Verbraucher</p><p>✓ 600W, 1500W oder 3000W? Die richtige Wahl</p><p>✓ Häufigste Fehler bei der Auswahl</p><p>Für alle, die 230V-Geräte im Camper sicher betreiben wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Grundlagen</h4><ul><li>Sinus vs. modifizierte Sinuswelle</li><li>Wann braucht man reinen Sinus?</li><li>Wirkungsgrad und Verlustleistung</li></ul><h4>Dimensionierung</h4><ul><li>Verbraucher und deren Leistung</li><li>Anlaufströme bei Motoren (Kühlschrank, Werkzeug)</li><li>Kaffeemaschine, Laptop, Föhn – Realistische Werte</li></ul><h4>Auswahl &amp; Installation</h4><ul><li>600W für Basics, 1500W für Komfort, 3000W für Profis</li><li>Kabelquerschnitte und Absicherung</li><li>Einbauort und Belüftung</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer in der Elektrik-Planung</li><li>Camper, die 230V-Geräte nutzen wollen</li><li>Alle, die die richtige Wechselrichter-Größe finden müssen</li></ul>",
             "has_content": true
         }
     ]

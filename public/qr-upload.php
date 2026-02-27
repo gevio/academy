@@ -11,8 +11,8 @@ if (!$notionToken) {
 echo "Token geladen: " . substr($notionToken, 0, 10) . "...\n";
 
 $dbId = '11382138ece1494bafa3cd1bb47dda82';
-$qrBaseUrl = 'https://as26.cool-camp.site/qr/';
-$liveBaseUrl = 'https://as26.cool-camp.site/w/';
+$qrBaseUrl = 'https://agenda.adventuresouthside.com/qr/';
+$liveBaseUrl = 'https://agenda.adventuresouthside.com/w/';
 
 // Alle Seiten holen
 $pages = [];

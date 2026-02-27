@@ -20,7 +20,7 @@ $options = new QROptions([
 ]);
 
 $dbId = '11382138ece1494bafa3cd1bb47dda82';
-$baseUrl = 'https://as26.cool-camp.site/w/';
+$baseUrl = 'https://agenda.adventuresouthside.com/w/';
 $outDir = __DIR__ . '/qr';
 
 if (!is_dir($outDir)) mkdir($outDir, 0755, true);

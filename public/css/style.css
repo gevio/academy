@@ -67,6 +67,14 @@ header .badge{background:var(--as-rot);color:#fff;padding:.3rem .8rem;border-rad
 .typ-badge{display:inline-block;background:var(--as-dunkelrot);color:#fff;
   padding:.15rem .5rem;border-radius:4px;font-size:.6rem;font-weight:700;
   text-transform:uppercase;letter-spacing:.06em}
+.typ-badge[data-typ="Workshop"]{background:#e76f51}
+.typ-badge[data-typ="Vortrag"]{background:#457b9d}
+.typ-badge[data-typ="Expertpanel"]{background:#6a4c93}
+.typ-badge[data-typ="Interview"]{background:#e9c46a;color:#333}
+.typ-badge[data-typ="Roadtrip Girls.Hub"]{background:#f4a261}
+.typ-badge[data-typ="eCamper"]{background:#2a9d8f}
+.typ-badge[data-typ="Reisebericht"]{background:#8d99ae}
+.typ-badge[data-typ="Demo"]{background:#e63946}
 .meta-row{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap}
 .meta-item{font-size:.85rem;color:var(--text-light);font-weight:700}
 .action-hint{text-align:center;font-size:.85rem;color:var(--text-light);

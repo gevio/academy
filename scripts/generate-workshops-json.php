@@ -217,7 +217,7 @@ function filterRedundantBlocks(array $blocks, string $workshopTitle): array
     // Patterns: Zeilen die wir als redundant erkennen
     $metaPatterns = [
         // Titel-Echo: beliebiges Emoji + Workshop/Vortrag/Expertpanel/Panel/Podium/Demo/Reisebericht/eCamper/Roadtrip Girls:
-        '/^.{0,8}(Workshop|Vortrag|Expertpanel|Panel|Podium|Demo|Reisebericht|eCamper|Roadtrip\s*Girls)\s*[:：]/ui',
+        '/^.{0,8}(Workshop|Vortrag|Expertpanel|Panel|Podium|Demo|Reisebericht|eCamper|Roadtrip\s*Girls|Interview)\.?\s*[:：]/ui',
         '/Veranstaltungsdetails/ui',
         '/^📅\s*Termin/ui',
         '/^📍\s*Ort/ui',

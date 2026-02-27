@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── Optimistic Upvote ──────────────────────────────
 const UPVOTE_MAX = 10;
-const storageKey = 'as26_upvotes';
+const storageKey = 'asa_upvotes';
 
 function getUpvoted() {
     try { return JSON.parse(localStorage.getItem(storageKey) || '[]'); }

@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  const STORAGE_KEY = 'as26_favorites';
+  const STORAGE_KEY = 'asa_favorites';
   const API_URL = '/api/workshops.json';
 
   let allWorkshops = [];
@@ -258,7 +258,7 @@
 
     // Typ + Kategorien Zeile
     const typKatRow = `<div class="typ-kat-row">
-      <span class="typ-badge">${escapeHtml(ws.typ)}</span>${katHtml}
+      <span class="typ-badge" data-typ="${escapeHtml(ws.typ)}">${escapeHtml(ws.typ)}</span>${katHtml}
     </div>`;
 
     // Meta-Zeile: Zeit, Ort, Referent

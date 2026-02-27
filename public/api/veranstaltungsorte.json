@@ -1,21 +1,31 @@
 {
-  "generated": "2026-02-18T18:10:47.167Z",
+  "generated": "2026-02-27T10:00:00.000Z",
   "bild": "/img/plan/overview.jpg",
   "orte": {
     "buehne-fgo": {
       "x": 71.8,
       "y": 30.2,
-      "label": "Bühne Selbstausbau-Academy (FGO)"
+      "label": "Selbstausbau Academy Bühne"
     },
     "foyer-west": {
       "x": 4.9,
       "y": 26.7,
-      "label": "Foyer West und Atrium"
+      "label": "Foyer West/Atrium"
     },
     "buehne-a6": {
       "x": 73.6,
       "y": 56.9,
-      "label": "Bühne (Halle A6)"
+      "label": "Vortragsbühne Halle A6"
+    },
+    "wiese-fgo": {
+      "x": 65.0,
+      "y": 20.0,
+      "label": "Wiese Freigelände West"
+    },
+    "foyer-empore": {
+      "x": 6.0,
+      "y": 30.0,
+      "label": "Foyer West/Empore"
     },
     "raum-oesterreich": {
       "x": 1.2,

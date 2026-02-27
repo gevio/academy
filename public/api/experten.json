@@ -1,5 +1,5 @@
 {
-    "generated": "2026-02-19T13:01:43+01:00",
+    "generated": "2026-02-27T12:34:22+01:00",
     "count": 11,
     "experten": [
         {
@@ -20,11 +20,11 @@
             "workshops": [
                 {
                     "id": "3a91c864bdc442718541aa46e068b889",
-                    "title": "⛺️ Von der Werkstatt bis zur Grenze – Fahrzeuggutachten & Carnet de Passage",
+                    "title": "Von der Werkstatt bis zur Grenze – Fahrzeuggutachten & Carnet de Passage",
                     "typ": "Vortrag",
                     "tag": "Freitag",
-                    "zeit": "12:00 – 12:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "12:15 – 13:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Zulassung & TÜV",
                         "Fahrzeugausbau"
@@ -52,11 +52,11 @@
             "workshops": [
                 {
                     "id": "2ca9c964c82f80e7b92ae3a350467587",
-                    "title": "⛺️ Wohnmobil-Selbstausbau",
+                    "title": "Wohnmobil-Selbstausbau",
                     "typ": "Vortrag",
                     "tag": "Samstag",
-                    "zeit": "12:00 – 12:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "12:15 – 13:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Sonstiges",
                         "Fahrzeugausbau"
@@ -66,11 +66,11 @@
                 },
                 {
                     "id": "76140a0b49b844779b63cc31af0dd939",
-                    "title": "⛺️ Wohnmobil-Selbstausbau",
+                    "title": "Wohnmobil-Selbstausbau",
                     "typ": "Vortrag",
                     "tag": "Sonntag",
-                    "zeit": "11:00 – 12:00 Uhr",
-                    "ort": "Bühne (Halle A6)",
+                    "zeit": "11:00 – 11:45 Uhr",
+                    "ort": "Vortragsbühne Halle A6",
                     "kategorien": [
                         "Sonstiges",
                         "Fahrzeugausbau"
@@ -98,11 +98,11 @@
             "workshops": [
                 {
                     "id": "cfddc41f710b45b5a143e003ae2069b9",
-                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "title": "Wohnkabine aus Holz bauen oder ausbauen",
                     "typ": "Expertpanel",
                     "tag": "Samstag",
-                    "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "11:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Innenausbau & Module",
                         "Kabinen (Pickup & LKW)"
@@ -139,11 +139,11 @@
             "workshops": [
                 {
                     "id": "a30973dfa4c249d791be43bce8b4de97",
-                    "title": "⛺️ DIY-Standheizungen – Von Autotherm bis China-Böller",
+                    "title": "DIY-Standheizungen – Von Autotherm bis China-Böller",
                     "typ": "Expertpanel",
                     "tag": "Freitag",
                     "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Heizung & Klima"
                     ],
@@ -153,8 +153,8 @@
                             "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
                             "firma": "Reisch-Tech GmbH",
                             "stand": "FG-808",
-                            "stand_x": 41.3,
-                            "stand_y": 48.9,
+                            "stand_x": 38.2,
+                            "stand_y": 27.5,
                             "stand_w": null,
                             "stand_h": null
                         }
@@ -181,11 +181,11 @@
             "workshops": [
                 {
                     "id": "2b99c964c82f8000b1aecaf6b960bc10",
-                    "title": "🅱️ 126 Pannen – 7 Jahre Weltreise",
+                    "title": "126 Pannen – 7 Jahre Weltreise",
                     "typ": "Vortrag",
                     "tag": "Samstag",
-                    "zeit": "13:00 – 13:45 Uhr",
-                    "ort": "Bühne (Halle A6)",
+                    "zeit": "13:30 – 14:15 Uhr",
+                    "ort": "Vortragsbühne Halle A6",
                     "kategorien": [
                         "Expeditionsmobile",
                         "Innenausbau & Module",
@@ -213,11 +213,11 @@
             "workshops": [
                 {
                     "id": "a30973dfa4c249d791be43bce8b4de97",
-                    "title": "⛺️ DIY-Standheizungen – Von Autotherm bis China-Böller",
+                    "title": "DIY-Standheizungen – Von Autotherm bis China-Böller",
                     "typ": "Expertpanel",
                     "tag": "Freitag",
                     "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Heizung & Klima"
                     ],
@@ -227,8 +227,8 @@
                             "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
                             "firma": "Reisch-Tech GmbH",
                             "stand": "FG-808",
-                            "stand_x": 41.3,
-                            "stand_y": 48.9,
+                            "stand_x": 38.2,
+                            "stand_y": 27.5,
                             "stand_w": null,
                             "stand_h": null
                         }
@@ -254,11 +254,11 @@
             "workshops": [
                 {
                     "id": "cfddc41f710b45b5a143e003ae2069b9",
-                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "title": "Wohnkabine aus Holz bauen oder ausbauen",
                     "typ": "Expertpanel",
                     "tag": "Samstag",
-                    "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "11:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Innenausbau & Module",
                         "Kabinen (Pickup & LKW)"
@@ -297,11 +297,11 @@
             "workshops": [
                 {
                     "id": "1f174d779dcb4d3fb1e9f347e60e64ee",
-                    "title": "⛺️ Vom Basisfahrzeug zur Weltreise",
+                    "title": "Vom Basisfahrzeug zur Weltreise",
                     "typ": "Vortrag",
                     "tag": "Samstag",
-                    "zeit": "14:00 – 14:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "16:00 – 16:45 Uhr",
+                    "ort": "Vortragsbühne Halle A6",
                     "kategorien": [
                         "Expeditionsmobile",
                         "Kabinen (Pickup & LKW)",
@@ -329,11 +329,11 @@
             "workshops": [
                 {
                     "id": "fdc287b5d7024509a136b8d48dc559e0",
-                    "title": "⛺️ Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
+                    "title": "Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
                     "typ": "Vortrag",
                     "tag": "Samstag",
-                    "zeit": "13:00 – 13:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "13:30 – 14:15 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Offroad-Zubehör"
                     ],
@@ -360,11 +360,11 @@
             "workshops": [
                 {
                     "id": "cfddc41f710b45b5a143e003ae2069b9",
-                    "title": "⛺️ Wohnkabine aus Holz bauen oder ausbauen",
+                    "title": "Wohnkabine aus Holz bauen oder ausbauen",
                     "typ": "Expertpanel",
                     "tag": "Samstag",
-                    "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne Selbstausbau-Academy (FGO)",
+                    "zeit": "11:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
                     "kategorien": [
                         "Innenausbau & Module",
                         "Kabinen (Pickup & LKW)"
@@ -401,26 +401,16 @@
             "workshops": [
                 {
                     "id": "39cfeb4a3a1242ec97f4bb41cd0a70b8",
-                    "title": "⛺️ Maßgeschneiderte Wassertanks – Platz perfekt nutzen",
+                    "title": "Maßgeschneiderte Wassertanks – Platz perfekt nutzen",
                     "typ": "Vortrag",
                     "tag": "Samstag",
                     "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Bühne (Halle A6)",
+                    "ort": "Vortragsbühne Halle A6",
                     "kategorien": [
                         "Wassersysteme & Hygiene"
                     ],
                     "status": "Referent bestätigt",
-                    "aussteller": [
-                        {
-                            "id": "9663cb15d2ba447983378b77b5204868",
-                            "firma": "FT Design",
-                            "stand": "FG-812",
-                            "stand_x": 43.6,
-                            "stand_y": 35.3,
-                            "stand_w": null,
-                            "stand_h": null
-                        }
-                    ]
+                    "aussteller": []
                 }
             ]
         }
