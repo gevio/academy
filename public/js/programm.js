@@ -14,8 +14,10 @@
   let currentTyp = 'all';
   let currentOrt = 'all';
   let currentKat = 'all';
+  let currentSearch = '';
   let currentTab = 'programm';
   let focusId = null;
+  let searchTimer = null;
 
   // ── URL State ──
 
@@ -25,6 +27,7 @@
     currentTyp = p.get('typ') || 'all';
     currentOrt = p.get('ort') || 'all';
     currentKat = p.get('kategorie') || 'all';
+    currentSearch = p.get('q') || '';
     focusId = p.get('focus') || null;
     if (p.get('tab') === 'favoriten') currentTab = 'favoriten';
   }
@@ -35,6 +38,7 @@
     if (currentTyp !== 'all') p.set('typ', currentTyp);
     if (currentOrt !== 'all') p.set('ort', currentOrt);
     if (currentKat !== 'all') p.set('kategorie', currentKat);
+    if (currentSearch) p.set('q', currentSearch);
     if (currentTab === 'favoriten') p.set('tab', 'favoriten');
     const qs = p.toString();
     const url = location.pathname + (qs ? '?' + qs : '');
@@ -47,6 +51,7 @@
     if (currentTyp !== 'all') p.set('typ', currentTyp);
     if (currentOrt !== 'all') p.set('ort', currentOrt);
     if (currentKat !== 'all') p.set('kategorie', currentKat);
+    if (currentSearch) p.set('q', currentSearch);
     if (currentTab === 'favoriten') p.set('tab', 'favoriten');
     p.set('focus', workshopId);
     return '/programm.html?' + p.toString();
@@ -105,6 +110,9 @@
     document.querySelectorAll('.day-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.day === currentDay);
     });
+    // Search input
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = currentSearch;
     // Typ select
     const typSelect = document.getElementById('typ-filter');
     if (typSelect) typSelect.value = currentTyp;
@@ -118,6 +126,8 @@
     document.querySelectorAll('.tab').forEach(t => {
       t.classList.toggle('active', t.dataset.tab === currentTab);
     });
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) searchBar.style.display = currentTab === 'programm' ? '' : 'none';
     document.querySelector('.filter-bar').style.display =
       currentTab === 'programm' ? '' : 'none';
   }
@@ -188,11 +198,23 @@
     if (currentKat !== 'all') {
       list = list.filter(w => (w.kategorien || []).includes(currentKat));
     }
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      list = list.filter(w =>
+        (w.title || '').toLowerCase().includes(q) ||
+        (w.typ || '').toLowerCase().includes(q) ||
+        (w.ort || '').toLowerCase().includes(q) ||
+        (w.referent_firma || '').toLowerCase().includes(q) ||
+        (w.referent_persons || []).some(p => (p.name || '').toLowerCase().includes(q)) ||
+        (w.aussteller || []).some(a => (a.firma || '').toLowerCase().includes(q)) ||
+        (w.kategorien || []).some(k => k.toLowerCase().includes(q))
+      );
+    }
     return list;
   }
 
   function isFilterActive() {
-    return currentDay !== 'all' || currentTyp !== 'all' || currentOrt !== 'all' || currentKat !== 'all';
+    return currentDay !== 'all' || currentTyp !== 'all' || currentOrt !== 'all' || currentKat !== 'all' || !!currentSearch;
   }
 
   function updateResultSummary(filteredCount) {
@@ -384,7 +406,9 @@
         tab.classList.add('active');
         currentTab = tab.dataset.tab;
 
-        // Filter nur im Programm-Tab zeigen
+        // Filter + Suche nur im Programm-Tab zeigen
+        const sb = document.getElementById('search-bar');
+        if (sb) sb.style.display = currentTab === 'programm' ? '' : 'none';
         document.querySelector('.filter-bar').style.display =
           currentTab === 'programm' ? '' : 'none';
 
@@ -440,6 +464,20 @@
     initTypFilter();
     initOrtFilter();
     initKatFilter();
+    initSearch();
     loadWorkshops();
   });
+
+  function initSearch() {
+    const input = document.getElementById('search-input');
+    if (!input) return;
+    input.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => {
+        currentSearch = input.value.trim();
+        writeStateToUrl();
+        renderList();
+      }, 200);
+    });
+  }
 })();
