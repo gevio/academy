@@ -172,8 +172,10 @@ foreach ($referentsWithEmail as $ref) {
         $betreff,
         $ref['email'],
         $ref['vorname'] ?: $ref['name'],
+        $ref['nachname'] ?? '',
         $reviewUrl,
-        $deadline
+        $deadline,
+        $ref['duzen'] ?? true
     );
     $emailResults[] = [
         'name'  => $ref['name'],

@@ -1,6 +1,6 @@
 {
-    "generated": "2026-02-27T12:31:56+01:00",
-    "count": 56,
+    "generated": "2026-02-27T14:28:39+01:00",
+    "count": 88,
     "workshops": [
         {
             "id": "f47782e2949e482aa8c5d470fd383f70",
@@ -19,6 +19,29 @@
                 {
                     "id": "f0800e993cd04890b40c5146830bcae2",
                     "name": "Sarah Glöckner"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "792ce758df5143af85acdf9c1d17d225",
+            "title": "Navigation & Orientierung",
+            "typ": "Workshop",
+            "tag": "Freitag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-10T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
                 }
             ],
             "aussteller": [],
@@ -109,24 +132,6 @@
             "has_content": false
         },
         {
-            "id": "e502948b5f2d4b5387b7f62ec64f5090",
-            "title": "Besucher*innen fragen RoadtripGirls",
-            "typ": "Roadtrip Girls.Hub",
-            "tag": "Freitag",
-            "zeit": "12:00 – 13:00 Uhr",
-            "ort": "Foyer West/Atrium",
-            "beschreibung": "Nutze die Chance und zapfe das Wissen unserer erfahrenen Referentinnen ab. In einer entspannten Runde kannst Du wirklich alles fragen, was Du schon immer wissen wolltest. Jeden Tag stehen 2 oder 3 Expertinnen allen Besuchern und Besucherinnen Rede und Antwort. Komm vorbei und nutze das pure Expertinnen-Wissen.",
-            "datum_start": "2026-07-10T12:00:00.000+02:00",
-            "kategorien": [],
-            "status": "Referent bestätigt",
-            "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
-            "content_html": "",
-            "has_content": false
-        },
-        {
             "id": "30b9c964c82f80288682ff04d48a074f",
             "title": "eCamper - Freitag 1",
             "typ": "eCamper",
@@ -171,6 +176,29 @@
             "has_content": true
         },
         {
+            "id": "30c0f6a88b7847fbbcad01eb25360414",
+            "title": "Freilernen – ein anderer Weg des Lernens - Mutter & Kind berichten",
+            "typ": "Vortrag",
+            "tag": "Freitag",
+            "zeit": "12:30 – 14:00 Uhr",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "Wir sprechen nicht über Freilernen aus der Theorie, sondern aus gelebter Erfahrung. Als Mutter und Freilern-Kind teilen wir unseren gemeinsamen Weg und beantworten Fragen offen aus beiden Perspektiven. So entsteht ein ehrlicher, praxisnaher Einblick, der Freilernen verständlich und greifbar macht.",
+            "datum_start": "2026-07-10T12:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Manuela Rethberg",
+            "referent_persons": [
+                {
+                    "id": "9528f0e980e54ebca9818bb24cfdb2eb",
+                    "name": "Manuela Rethberg"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "4b4e36c574ac4a969b20229b22d1ee25",
             "title": "Georgien offroad & solo",
             "typ": "Roadtrip Girls.Hub",
@@ -189,6 +217,24 @@
                     "name": "Mirja Tiedemann"
                 }
             ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "e502948b5f2d4b5387b7f62ec64f5090",
+            "title": "Besucher*innen fragen RoadtripGirls",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "13:00 – 14:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Nutze die Chance und zapfe das Wissen unserer erfahrenen Referentinnen ab. In einer entspannten Runde kannst Du wirklich alles fragen, was Du schon immer wissen wolltest. Jeden Tag stehen 2 oder 3 Expertinnen allen Besuchern und Besucherinnen Rede und Antwort. Komm vorbei und nutze das pure Expertinnen-Wissen.",
+            "datum_start": "2026-07-10T13:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "",
+            "referent_persons": [],
             "aussteller": [],
             "content_html": "",
             "has_content": false
@@ -244,6 +290,31 @@
             "has_content": true
         },
         {
+            "id": "3149c964c82f80368d1ccdfa0ec19ad3",
+            "title": "Mentales Training",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "14:00 – 15:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "",
+            "datum_start": "2026-07-10T14:00:00.000+02:00",
+            "kategorien": [
+                "Referenten"
+            ],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "N.N.",
+            "referent_persons": [
+                {
+                    "id": "3149c964c82f8063ae1de64ec7f90bc3",
+                    "name": "N.N."
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "37772621a3a54359ac4401d4eb9dcc15",
             "title": "Alle Infos und Tipps zu Georgien",
             "typ": "Roadtrip Girls.Hub",
@@ -260,29 +331,6 @@
                 {
                     "id": "cfadc01a7f554a16994bb277a757317e",
                     "name": "Mirja Tiedemann"
-                }
-            ],
-            "aussteller": [],
-            "content_html": "",
-            "has_content": false
-        },
-        {
-            "id": "de0ed0b772a74f1f8b6eaf63738a5ebb",
-            "title": "Sicherheit für Alleinreisende – die besten Tipps & Tricks",
-            "typ": "Roadtrip Girls.Hub",
-            "tag": "Freitag",
-            "zeit": "14:00 – 15:00 Uhr",
-            "ort": "Foyer West/Atrium",
-            "beschreibung": "Auf Reisen schwingt oft auch Angst mit. Angst vor dem Unbekannten, Angst vor Diebstahl, Angst vor Raubüberfällen und Angst vor körperlichem Angriff. Speziell bei Alleinreisenden und Frauen immer aktuell und nicht selten der ausschlaggebende Grund, erst gar nicht eine Reise anzutreten. Lerne Tipps und Tricks kennen, die Dir unterwegs helfen werden, Risiken zu minimieren und wie Du handlungsfähig wirst und bleiben kannst – auch bei Gefahr. Wie Du von gewissen Ängsten Abschied nimmst, im richtigen Moment auf sie hörst und wie wichtig es ist, auf Dein Bauchgefühl zu hören. Ich gebe Dir Ideen und Kniffe für deine Sicherheit, die Du vorbereiten kannst. Und ich zeige Dir einfache, leichte und somit praktikable Selbstverteidigung, welche dann im Workshop Selbstverteidigung für Alleinreisende praktisch angewandt und geübt werden kann.",
-            "datum_start": "2026-07-10T14:00:00.000+02:00",
-            "kategorien": [],
-            "status": "Referent bestätigt",
-            "referent_firma": "",
-            "referent_person": "Ursula Büch",
-            "referent_persons": [
-                {
-                    "id": "71fd04fc3d6e4f56af9ac5df955e879a",
-                    "name": "Ursula Büch"
                 }
             ],
             "aussteller": [],
@@ -328,6 +376,52 @@
             "has_content": true
         },
         {
+            "id": "88d0f87f9714455ab7eb35ecfbbcf0bc",
+            "title": "Discover Bushcraft",
+            "typ": "Workshop",
+            "tag": "Freitag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-10T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "de0ed0b772a74f1f8b6eaf63738a5ebb",
+            "title": "Sicherheit für Alleinreisende – die besten Tipps & Tricks",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Auf Reisen schwingt oft auch Angst mit. Angst vor dem Unbekannten, Angst vor Diebstahl, Angst vor Raubüberfällen und Angst vor körperlichem Angriff. Speziell bei Alleinreisenden und Frauen immer aktuell und nicht selten der ausschlaggebende Grund, erst gar nicht eine Reise anzutreten. Lerne Tipps und Tricks kennen, die Dir unterwegs helfen werden, Risiken zu minimieren und wie Du handlungsfähig wirst und bleiben kannst – auch bei Gefahr. Wie Du von gewissen Ängsten Abschied nimmst, im richtigen Moment auf sie hörst und wie wichtig es ist, auf Dein Bauchgefühl zu hören. Ich gebe Dir Ideen und Kniffe für deine Sicherheit, die Du vorbereiten kannst. Und ich zeige Dir einfache, leichte und somit praktikable Selbstverteidigung, welche dann im Workshop Selbstverteidigung für Alleinreisende praktisch angewandt und geübt werden kann.",
+            "datum_start": "2026-07-10T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Ursula Büch",
+            "referent_persons": [
+                {
+                    "id": "71fd04fc3d6e4f56af9ac5df955e879a",
+                    "name": "Ursula Büch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "6776fe6a42514ef587209cf01d30f908",
             "title": "Selbstverteidigung für Alleinreisende – lernen & üben",
             "typ": "Roadtrip Girls.Hub",
@@ -344,6 +438,54 @@
                 {
                     "id": "71fd04fc3d6e4f56af9ac5df955e879a",
                     "name": "Ursula Büch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3149c964c82f80fdb1b9e10ce7fa852a",
+            "title": "Alleinreisen und die Angst im Gepäck",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Freitag",
+            "zeit": "16:00 – 17:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "",
+            "datum_start": "2026-07-10T16:00:00.000+02:00",
+            "kategorien": [
+                "Referenten"
+            ],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "N.N.",
+            "referent_persons": [
+                {
+                    "id": "3149c964c82f8051b8f3c20132be8c98",
+                    "name": "N.N."
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "6e4ab11980b242d1b72d19b8cc06ef54",
+            "title": "Videographie",
+            "typ": "Workshop",
+            "tag": "Freitag",
+            "zeit": "16:00 – 17:00 Uhr",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "",
+            "datum_start": "2026-07-10T16:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Stefan Tschumi",
+            "referent_persons": [
+                {
+                    "id": "68db6f97bad34adba99faba497d63543",
+                    "name": "Stefan Tschumi"
                 }
             ],
             "aussteller": [],
@@ -399,6 +541,29 @@
             ],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Mechanischer Filter, UV-C, Osmose oder doch Chemie?</strong></p><p>Biofilm im Tank, Legionellen in der Leitung – Wasser im Wohnmobil ist komplexer als gedacht. Unsere Experten erklären die gängigen Aufbereitungsverfahren, zeigen was wirklich funktioniert und räumen mit Panikmache und Halbwahrheiten auf.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Tank-Hygiene: Biofilm bekämpfen</p><p>✓ Filter, UV-C, Osmose, Chemie im Vergleich</p><p>✓ Legionellen: Reale Gefahr oder Panikmache?</p><p>✓ Entkeimung richtig durchführen</p><p>✓ Das richtige Filtersystem für deinen Einsatzzweck</p><p>Mit praktischen Tipps für sichere Trinkwasserversorgung unterwegs!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Tank-Hygiene</h4><ul><li>Biofilm im Tank: Wie entsteht er?</li><li>Regelmäßige Reinigung</li><li>Silberionen-Konservierung</li><li>Tank-Desinfektion</li></ul><h4>Aufbereitungsverfahren</h4><ul><li>Mechanische Filter: Grobpartikel entfernen</li><li>UV-C-Entkeimung: Bakterien und Viren</li><li>Osmose: 99,9% rein</li><li>Chemische Aufbereitung</li></ul><h4>Legionellen &amp; Co.</h4><ul><li>Legionellen-Gefahr: Wann real?</li><li>Wassertemperatur und Vermehrung</li><li>Prävention statt Panik</li><li>Wasserhygiene im Alltag</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer in der Planungsphase</li><li>Camper, die sicheres Trinkwasser wollen</li><li>Alle, die Wasserhygiene ernst nehmen</li></ul>",
             "has_content": true
+        },
+        {
+            "id": "1d31e073603d40eb9e523997c89a34f3",
+            "title": "Allein mit Hund in die Westsahara – 3 Monate Roadtrip mit Wilma",
+            "typ": "Vortrag",
+            "tag": "Freitag",
+            "zeit": "16:30 – 17:30 Uhr",
+            "ort": "Raum Schweiz (Foyer West)",
+            "beschreibung": "Ein authentischer Reisebericht über drei Monate allein mit Hund im Toyota Land Cruiser: von den Westalpen über die Pyrenäen und Marokko bis in die Westsahara. Es geht um die Faszination einsamer Pisten, Grenzerfahrungen unterwegs, Sicherheit beim Solo-Travel mit Hund, Wildcamping-Spots und die Frage, wie sich ein solcher Trip wirklich anfühlt – auch fernab von Instagram-Romantik.",
+            "datum_start": "2026-07-10T16:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Axel Telzerow",
+            "referent_persons": [
+                {
+                    "id": "a325672fbb184778b76f19874a50b569",
+                    "name": "Axel Telzerow"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "44b4e8adebf34a86aedba5c1f16042e6",
@@ -509,6 +674,100 @@
                 {
                     "id": "3da42b4303e0450f96200491a0f4cda4",
                     "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3149c964c82f80169372dde5f429c6f9",
+            "title": "Live Podcast",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "10:30 – 11:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Für ihren Podcast “the female traveller” interviewt Sara auf der Bühne ein spannendes RoadtripGirl.",
+            "datum_start": "2026-07-11T10:30:00.000+02:00",
+            "kategorien": [
+                "Referenten"
+            ],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Sarah Glöckner",
+            "referent_persons": [
+                {
+                    "id": "f0800e993cd04890b40c5146830bcae2",
+                    "name": "Sarah Glöckner"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "5af507c6754d4d4f88c08b224ac82c19",
+            "title": "Abenteuer Sahara – mit dem Unimog durch die Wüste Tunesiens",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "11:00 – 12:15 Uhr",
+            "ort": "Raum Österreich (Foyer West)",
+            "beschreibung": "Zweimal haben Annika & Flo gemeinsam mit ihrer Hündin Gaia und ihrem Unimog die Weiten der tunesischen Sahara erkundet. Sandstürme, Einsamkeit, technische Herausforderungen, beeindruckende Landschaften und intensive Begegnungen machen diese Reise zu einem echten Abenteuer abseits der Komfortzone. In ihrem Multivisionsvortrag erzählen sie ehrlich und mit viel Gefühl vom Reisen mit ihrem Oldtimer-Unimog durch Tunesien – von Momenten des Zweifelns, von Zusammenhalt, Improvisation und dem Zauber der Wüste. Ein Vortrag für alle, die vom Fernweh gepackt sind oder selbst davon träumen, mit dem eigenen Fahrzeug loszuziehen.",
+            "datum_start": "2026-07-11T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Annika & Flo",
+            "referent_persons": [
+                {
+                    "id": "97405dc2c2b34c5ab6aaa7701a2bd565",
+                    "name": "Annika & Flo"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "829d37d79f604f1192115a3d4240dff3",
+            "title": "Geschichten aus Zentralasien",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Raum Schweiz (Foyer West)",
+            "beschreibung": "Der Weg von Familie Schmitt mit ihrem Expeditionsmobil zu einer der höchsten Passstraßen der Welt. Die schönsten Begegnungen, Geschichten und Erlebnisse aus Georgien, Russland, Kasachstan, Usbekistan, Tadschikistan und Kirgistan. Wie wir all unseren Besitz verkauft haben und in unseren LKW gezogen sind. Es geht um Tage lange Expeditionen durch die Steppe, um Havarien am Wasser, Fahrzeugschäden an den unmöglichsten Stellen und vieles mehr.",
+            "datum_start": "2026-07-11T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Erik Schmitt",
+            "referent_persons": [
+                {
+                    "id": "8b3a29a8eab948e0a948308b66a8dd05",
+                    "name": "Erik Schmitt"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "9bd6cd74268c4591ba503bbd26df929f",
+            "title": "Navigation & Orientierung",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
                 }
             ],
             "aussteller": [],
@@ -693,6 +952,98 @@
             "has_content": true
         },
         {
+            "id": "22af1cc20b2541a4b424323b5ced2f37",
+            "title": "Reisefotografie",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "12:30 – 13:30 Uhr",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T12:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Manuel Mohorovic",
+            "referent_persons": [
+                {
+                    "id": "410283f211464e1587e034461a0e599b",
+                    "name": "Manuel Mohorovic"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "af20522f795a49d38e124fc0900fe607",
+            "title": "Navigation & Orientierung",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "12:30 – 13:30 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T12:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3149c964c82f80d386b4c429b9aaeefa",
+            "title": "Solo Van Life",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "13:00 – 14:00 Uhr",
+            "ort": "",
+            "beschreibung": "",
+            "datum_start": "2026-07-11T13:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "N.N.",
+            "referent_persons": [
+                {
+                    "id": "3149c964c82f800895ade6f5e7931ea1",
+                    "name": "N.N."
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3f5473466b38457eb095c5f08db678e8",
+            "title": "Vanlife in der Schweiz – Highlights, Regeln & warum es nicht immer teuer sein muss",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "13:00 – 14:00 Uhr",
+            "ort": "Raum Österreich (Foyer West)",
+            "beschreibung": "Die Schweiz gilt als traumhaft, aber auch als teuer – stimmt das wirklich? In diesem Vortrag nimmt Marika von adVANtours euch mit durch verschiedene Regionen des Landes, zeigt landschaftliche Highlights und teilt persönliche Lieblingsorte. Gleichzeitig räume ich mit Vorurteilen auf und spreche über Kosten, Einreise, Freistehen: ja oder nein, und was unterwegs wirklich möglich ist. Dazu gibt’s ehrliche Erfahrungen, praktische Tipps und Fakten, mit denen ihr die Schweiz entspannt und überraschend bezahlbar bereisen könnt.",
+            "datum_start": "2026-07-11T13:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Marika & Sandra",
+            "referent_persons": [
+                {
+                    "id": "4a5c221a20d446b2af5217138ad968ff",
+                    "name": "Marika & Sandra"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "fdc287b5d7024509a136b8d48dc559e0",
             "title": "Die ultimative Gear-Checkliste – Was brauchst du wirklich?",
             "typ": "Vortrag",
@@ -745,22 +1096,68 @@
             "has_content": true
         },
         {
-            "id": "3ed1672465eb4ef6b6e7d5afaed9040c",
-            "title": "Innere Sicherheit verstehen: Wie Dein Nervensystem funktioniert und was Dir hilft, wieder ruhiger zu werden",
+            "id": "57349e8446a046ea8ba57359d7efa9c6",
+            "title": "Allein als Frau? Durch Afrika!",
             "typ": "Roadtrip Girls.Hub",
             "tag": "Samstag",
             "zeit": "14:00 – 15:00 Uhr",
             "ort": "Foyer West/Atrium",
-            "beschreibung": "Allein unterwegs sein kann sich frei anfühlen – und gleichzeitig Angst machen. In diesem Workshop geht es darum, besser zu verstehen, was im Körper geschieht, wenn die innere Sicherheit droht abhanden zu kommen. Eine kleine Reise in die faszinierende Welt Deines Nervensystems – vom Dreieinigen Gehirn entlang des Vagusnervs in Deinen Bauch und wieder zurück. Du erfährst und erlebst, wie Du diese Reise später aktiv nutzen kannst, um Dein Nervensystem zu beruhigen. Dir wird klar, warum Flow und Entspannung nicht willentlich entstehen und warum der Körper kein Feind ist, sondern eine zutiefst weise Instanz.",
+            "beschreibung": "Infos folgen",
             "datum_start": "2026-07-11T14:00:00.000+02:00",
             "kategorien": [],
             "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "Karin Intveen",
+            "referent_person": "Diana Rottluff",
             "referent_persons": [
                 {
-                    "id": "8d4eb3a3b19e4538901b3de41c61fbe4",
-                    "name": "Karin Intveen"
+                    "id": "aaa5ef6f26a0476c9b1e8f820a983402",
+                    "name": "Diana Rottluff"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "7a04a0995ac6428b9e65221546c39fc2",
+            "title": "Best of Marocco",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "14:30 – 15:30 Uhr",
+            "ort": "Raum Österreich (Foyer West)",
+            "beschreibung": "In seinem einstündigen Vortrag teilt Uli Dolde seine umfangreichen Erfahrungen aus 17 Jahren Marokko-Reisen mit seinem selbst ausgebauten Allrad-Wohnmobil. Er präsentiert die faszinierendsten Natur- und Kultur-Highlights des Landes und gibt praktische Tipps zur besten Reisezeit sowie zur hohen Sicherheit vor Ort. Besonders im Fokus stehen detaillierte Empfehlungen für spektakuläre Offroad-Pisten und Strecken durch den Sand. Darüber hinaus informiert er über seine geführten Offroad-Touren inklusive Berge-Workshops, die er ab Oktober für kleine Gruppen anbietet.",
+            "datum_start": "2026-07-11T14:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Ulrich Dolde",
+            "referent_persons": [
+                {
+                    "id": "06dcfc2e5a894725b1faa9f7ccd64349",
+                    "name": "Ulrich Dolde"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "5c0d470cd047497ea77a191b3ee23669",
+            "title": "Freilernen – ein anderer Weg des Lernens - Mutter & Kind berichten",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "14:30 – 16:00 Uhr",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "Wir sprechen nicht über Freilernen aus der Theorie, sondern aus gelebter Erfahrung. Als Mutter und Freilern-Kind teilen wir unseren gemeinsamen Weg und beantworten Fragen offen aus beiden Perspektiven. So entsteht ein ehrlicher, praxisnaher Einblick, der Freilernen verständlich und greifbar macht.",
+            "datum_start": "2026-07-11T14:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Manuela Rethberg",
+            "referent_persons": [
+                {
+                    "id": "9528f0e980e54ebca9818bb24cfdb2eb",
+                    "name": "Manuela Rethberg"
                 }
             ],
             "aussteller": [],
@@ -806,6 +1203,121 @@
             "aussteller": [],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Ein Fahrzeug, zwei Leben:</strong> Unter der Woche Transporter oder Handwerker-Auto, am Wochenende vollwertiger Camper. Genau dieses „Daily Switch“-Konzept ist 2025/2026 einer der stärksten Trends – weil es Geld, Stellplatz und Nerven spart.</p><p>Aber: Modular heißt nicht automatisch „egal“. Wer mit Boxen, Modulen, Airline-Schienen oder Clip-Systemen unterwegs ist, muss <strong>Ladungssicherung, Gewicht, Gas/Elektrik und die rechtliche Einordnung (Ladung vs. fest verbaut)</strong> im Griff haben.</p><p>In diesem Workshop bekommst du eine klare, praxisnahe Anleitung, wie du modulare Systeme so planst und dokumentierst, dass sie <strong>sicher, alltagstauglich und abnahme-/versicherungsfreundlich</strong> werden.</p><p><strong>Was dich erwartet:</strong></p><p>✓ System-Check: Welche Teile sind „fest“ und welche sind „Ladung“ – und warum das entscheidend ist</p><p>✓ Ladungssicherung ohne Mythos: Was wirklich zählt, damit Module nicht zum Geschoss werden</p><p>✓ Gewicht &amp; 3,5t: Modul-Gewichte sauber erfassen, Worst-Case-Beladung planen</p><p>✓ Gas &amp; Strom im Modul: wann Prüfungen/Checks relevant werden und wie man sauber trennt</p><p>✓ Doku-Paket für TÜV/Versicherung: Fotos, Listen, Montage-Nachweise, sinnvolle Belege</p><hr><h4>Referent/Experte</h4><p><strong>Modulare Ausbau-Systeme (z. B. CargoClips / Airline-/Schienensysteme) + Praxis aus Multi-Use-Vans</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Erfahrung mit modularen Innenausbauten (Holz-/Alu-Module, Schienensysteme, Clip-/Stecksysteme)</li><li>Fokus auf sichere Befestigung, nachvollziehbare Dokumentation und realistische Nutzung</li></ul><p><strong>Workshop-Themen:</strong></p><ul><li>„Fest verbaut“ vs. „Ladung“ in der Praxis</li><li>Ladungssicherung &amp; Gewicht</li><li>Gas/Elektrik in Modulen + Versicherungsfragen</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Daily Switch: Was modular wirklich bedeutet</h4><ul><li>Warum modulare Systeme boomen: Alltag, Kosten, Nachhaltigkeit, Flexibilität</li><li>Typen von Systemen: Clip-/Lochwand, Airline-Schienen, Rahmen/Profilbau, Campingboxen</li><li>Entscheidungsfrage: „Modulbaukasten“ vs. „ein festes Grundsystem + wechselnde Module“</li></ul><h4>2) Rechtliche Einordnung: Ladung vs. fest verbaut</h4><ul><li>Grundidee: <strong>Fest eingebaute Grundsysteme</strong> (z. B. Schienen/Wände/Rahmen) vs. <strong>wechselbare Module</strong></li><li>Typische Stolperfallen:</li></ul><h4>3) Ladungssicherung: Der häufigste Fehler bei Modul-Systemen</h4><ul><li>Ziel: Bei Vollbremsung/Unfall darf nichts rutschen, kippen oder fliegen</li><li>Praxis-Check:</li><li>Dokumentation: Fotos von Sicherungspunkten, Skizze der Zurrpunkte, kurze Modulbeschreibung</li></ul><h4>4) Gewicht &amp; 3,5t: Modul-Liste statt Bauchgefühl</h4><ul><li>Modul-Gewichte erfassen (Küche, Bett, Stauraum, Wasser, Kühlbox, Werkzeug)</li><li>Worst-Case-Beladung planen: „Alle Module + Urlaub + Personenzahl“</li><li>Schnell-Check fürs Wochenende: Was muss raus, wenn’s eng wird?</li></ul><h4>5) Gas/Elektrik in Modulen (saubere Schnittstellen)</h4><ul><li>Gas im Modul: wann das Thema Gasprüfung/Prüfbarkeit relevant wird (und warum „mobil“ nicht automatisch „aus dem Thema raus“ ist)</li><li>Elektrik im Modul:</li><li>Empfehlung aus der Praxis: „Ein sauberer Strom-/Gas-Übergabepunkt“ statt improvisierter Kabel/Schläuche</li></ul><h4>6) TÜV &amp; Versicherung: Das Doku-Paket, das Diskussionen spart</h4><ul><li>Fotos: Grundsystem-Montage, Befestigungspunkte, Sicherungskonzept</li><li>Listen: Modulgewichte, Komponentenliste, ggf. Datenblätter</li><li>Nachweise: Montageanleitung/Belastungswerte (wenn vorhanden), Rechnungen wichtiger Bauteile</li><li>Versicherungs-Check: „fest verbaut oder mobil?“ und was man sinnvoll vorab klärt</li></ul><hr><h4>Zielgruppe</h4><ul><li>Handwerker, Selbständige und alle, die ihren Transporter beruflich nutzen</li><li>Wochenend-Camper, die keine dauerhafte Vollzeit-Camper-Kiste wollen</li><li>Selbstausbauer, die ein modulares System (Schienen/Clips/Boxen) planen oder optimieren</li><li>Alle, die bei TÜV/Versicherung keine Überraschungen erleben wollen</li></ul>",
             "has_content": true
+        },
+        {
+            "id": "a640f0edd33d497093c9668f978b0e27",
+            "title": "Overland und Offroad-Fotografie mit Handy",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Manuel Mohorovic",
+            "referent_persons": [
+                {
+                    "id": "410283f211464e1587e034461a0e599b",
+                    "name": "Manuel Mohorovic"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "336abcf46f054a95986d3dec66a86b92",
+            "title": "Südamerika",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Raum Schweiz (Foyer West)",
+            "beschreibung": "1½ Jahre größtenteils offroad durch Südamerika haben Gesa, Tosh und die marokkanische Hündin Zaza vor viele Prüfungen gestellt. Raub, Steckenbleiben, platte Reifen, Motorbrand, Dengue-Fieber, WC-Ausfall, Kreditkartensperrung, Dieseltank-Leckagen, Kite-Unfall, Einreiseverbot, glühende Bremsen, Straßen-Blockaden, korrupte Polizisten, Reifenimport für 12.000 €, Ersatzteilschmuggel, Visaprobleme. Tosh berichtet mit spannenden Abenteuergeschichten und Filmen nicht nur über tolle Locations und Secret-Spots, sondern gnadenlos auch über Fehler, Pannen, unerwartete Ereignisse und selbstgestrickte Probleme.",
+            "datum_start": "2026-07-11T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Gesa & Thorsten Mähler & Münch",
+            "referent_persons": [
+                {
+                    "id": "d96da69392664d3b8311f169e826c29b",
+                    "name": "Gesa & Thorsten Mähler & Münch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "69363f7ba03d449782b75eb662718b25",
+            "title": "Discover Bushcraft",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3ed1672465eb4ef6b6e7d5afaed9040c",
+            "title": "Innere Sicherheit verstehen: Wie Dein Nervensystem funktioniert und was Dir hilft, wieder ruhiger zu werden",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Samstag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Allein unterwegs sein kann sich frei anfühlen – und gleichzeitig Angst machen. In diesem Workshop geht es darum, besser zu verstehen, was im Körper geschieht, wenn die innere Sicherheit droht abhanden zu kommen. Eine kleine Reise in die faszinierende Welt Deines Nervensystems – vom Dreieinigen Gehirn entlang des Vagusnervs in Deinen Bauch und wieder zurück. Du erfährst und erlebst, wie Du diese Reise später aktiv nutzen kannst, um Dein Nervensystem zu beruhigen. Dir wird klar, warum Flow und Entspannung nicht willentlich entstehen und warum der Körper kein Feind ist, sondern eine zutiefst weise Instanz.",
+            "datum_start": "2026-07-11T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Karin Intveen",
+            "referent_persons": [
+                {
+                    "id": "8d4eb3a3b19e4538901b3de41c61fbe4",
+                    "name": "Karin Intveen"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "77005f1943f04d7895c3fe24ed4dedd9",
+            "title": "Filmpremiere",
+            "typ": "Vortrag",
+            "tag": "Samstag",
+            "zeit": "16:00 – 17:30 Uhr",
+            "ort": "Raum Österreich (Foyer West)",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T16:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "David Schröder",
+            "referent_persons": [
+                {
+                    "id": "06e2d73021c94f7f9e61a34d3c54365a",
+                    "name": "David Schröder"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "92465b73445240f3b010ae3eb0976519",
@@ -884,6 +1396,29 @@
             "has_content": true
         },
         {
+            "id": "62452b123c1e491294bcc7de22418f38",
+            "title": "Discover Bushcraft",
+            "typ": "Workshop",
+            "tag": "Samstag",
+            "zeit": "17:00 – 18:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-11T17:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "ff1c8ae522d84ba28547f5ee3041d1f4",
             "title": "meet & greet / RoadtripGirls Ratsch",
             "typ": "Roadtrip Girls.Hub",
@@ -925,23 +1460,28 @@
             "has_content": false
         },
         {
-            "id": "e177bbc0209e4aeaa556cda8f713998a",
-            "title": "Nachhaltige Dämmung – Schafwolle & Hanf statt Kunststoff",
+            "id": "9159f495f81e47278689f2a55e96f39f",
+            "title": "Bestanden! Insider-Tipps von echten Prüfingenieuren",
             "typ": "Expertpanel",
             "tag": "Samstag",
             "zeit": "17:15 – 18:00 Uhr",
             "ort": "Selbstausbau Academy Bühne",
-            "beschreibung": "Schafwolle und Hanf lösen Armaflex in der \"Öko-Blase\" ab. Die Community diskutiert intensiv über Feuchtigkeitsmanagement und Diffusionsoffenheit bei Naturmaterialien. Nachhaltig dämmen – für Klima und Wohnkomfort.",
+            "beschreibung": "Der Moment der Wahrheit: Die Wohnmobil-Zulassung. Echte Prüfingenieure verraten, worauf es bei der Abnahme wirklich ankommt. Welche Fehler führen zur Ablehnung? Was sind Mythen, was harte Fakten? Von Mindestausstattung über Gasprüfung bis Elektrik – mit praktischen Tipps, wie ihr von Anfang an TÜV-konform ausbaut und böse Überraschungen vermeidet.",
             "datum_start": "2026-07-11T17:15:00.000+02:00",
             "kategorien": [
-                "Isolierung"
+                "Zulassung & TÜV"
             ],
-            "status": "Planung",
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
+            "referent_person": "Frank Schneider",
+            "referent_persons": [
+                {
+                    "id": "1330b2bfc14449f99317b2cabf07b931",
+                    "name": "Frank Schneider"
+                }
+            ],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Natürliche Dämmstoffe sind beliebt – aber im Van treffen sie auf eine harte Realität: Blech, Temperaturwechsel, Kondenswasser.</strong> Genau hier entstehen die hitzigen Diskussionen: diffusionsoffen vs. dampfbremsend, „Wolle kann Feuchte puffern“ vs. „Feuchte muss raus“. </p><p>In diesem Panel sortieren wir das Thema sauber: <strong>Wie funktionieren Schafwolle und Hanf wirklich im Fahrzeug?</strong> Welche Aufbauten sind robust, und welche Mythen führen zu Schimmel, Rost oder muffigem Ausbau?</p><p><strong>Was dich erwartet:</strong></p><p>✓ Feuchtigkeitsmanagement im Van verständlich erklärt (Taupunkt, Kondensat)</p><p>✓ Diffusionsoffenheit: Was sie kann – und was sie nicht kann</p><p>✓ Praxis-Aufbauten: Wand/Decke/Boden mit Naturmaterialien</p><p>✓ Typische Fehler: eingeschlossene Feuchte, schlechte Hinterlüftung, falsche Folien</p><p>✓ Entscheidungshilfe: Wann Naturdämmung ideal ist und wann Alternativen sinnvoll sind</p><p>Für alle, die <strong>wohngesund und nachhaltig</strong> dämmen wollen, ohne später teuer nachzubessern.</p><hr><h4>Referent/Experten</h4><p><strong>9ed Panel laut DB: BIRDBUS &amp; Busbastler</strong></p><p><strong>Hintergrund (erwartet):</strong></p><ul><li>Praxis-Erfahrung mit Naturdämmung im Fahrzeug</li><li>Verständnis für Feuchte, Lüftung und Fahrzeug-typische Problemstellen</li></ul><p><strong>Panel-Themen:</strong></p><ul><li>Materialwahl Schafwolle/Hanf (Matten/Stopfwolle)</li><li>Aufbauvarianten und Details an Kanten/Traversen</li><li>Lüftung/Heizen als Teil der Dämmstrategie</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Grundlagen: Feuchte im Van (ohne Physik-Overkill)</h4><ul><li>Wo Wasserdampf entsteht: Schlafen, Kochen, nasse Kleidung</li><li>Kaltes Blech + warme Luft = Kondensat</li><li>Taupunkt verschieben: Dämmstärke und lückenloser Aufbau</li></ul><h4>2) Schafwolle &amp; Hanf: Stärken und Grenzen</h4><ul><li>Feuchte puffern: Vorteil für Raumklima (aber keine „Wunderwaffe“)</li><li>Diffusionsoffen: Trocknung braucht trotzdem Luftwechsel</li><li>Setzung/Stopfen: Hohlräume sauber füllen ohne Kältebrücken</li><li>Geruch/Schädlinge: Materialqualität und Behandlung beachten</li></ul><h4>3) Aufbauten, die in der Praxis funktionieren</h4><ul><li>Decke/Wände: lückenlos, Kanten/Stege, Übergänge</li><li>Hinterlüftung: wann sinnvoll, wann kontraproduktiv</li><li>Boden: Druckfestigkeit, Feuchte von unten, Aufbauhöhe</li></ul><h4>4) Typische Fehler (und wie man sie verhindert)</h4><ul><li>Feuchte „einsperren“ durch Folien ohne Konzept</li><li>Nicht entkoppelte Kältebrücken an Metallprofilen</li><li>Stopfwolle zu locker/zu fest → Setzung oder Wärmelücken</li><li>Keine Lüftungsroutine: Dämmung kann Feuchte puffern, aber nicht wegzaubern</li></ul><h4>5) Checkliste für deine Entscheidung</h4><ul><li>Nutzungsprofil: Winter, Ganzjahresvan, Stehhöhe, Schlafplätze</li><li>Klima/Zonen: Nord, Berge, Küste, Sommer-only</li><li>Wartungs- und Nachrüstfreundlichkeit</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer, die nachhaltig und wohngesund bauen wollen</li><li>Alle mit Feuchte-/Kondenswasser-Sorgen</li><li>Menschen, die zwischen „Öko“ und „robust“ die richtige Balance suchen</li></ul>",
+            "content_html": "<h4>Ankündigungstext</h4><p><strong>Der Moment der Wahrheit im Selbstausbau ist nicht die letzte Schraube – sondern die Abnahme.</strong> Viele bauen monatelang, investieren tausende Euro und scheitern dann an Kleinigkeiten wie „nicht fest genug“, fehlenden Unterlagen oder einem Detail, das im Ausbau-Alltag niemand auf dem Schirm hatte.</p><p>In diesem Expertpanel erklären echte Prüfingenieur:innen, <strong>was für die Umschreibung/Zulassung als Wohnmobil wirklich zählt</strong>, welche Anforderungen als Mindestausstattung gelten und wie du typische Ablehnungsgründe von Anfang an vermeidest.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Mindestausstattung: Tisch, Sitzgelegenheit, Schlafgelegenheit, Kochmöglichkeit, Stauraum – <em>was heißt „fest verbaut“ wirklich?</em></p><p>✓ Prüf-Praxis: Die häufigsten Gründe, warum Ausbauten abgelehnt werden (und wie du das verhinderst)</p><p>✓ Gas &amp; Alternativen: wann Gasprüfung relevant wird und warum „gasfrei“ für manche den Prozess vereinfacht</p><p>✓ Sitze &amp; Gurte: was bei Umbauten besonders heikel ist</p><p>✓ Dokumente &amp; Nachweise: welche Unterlagen du zur Abnahme mitbringen solltest</p><hr><h4>Referent/Experte</h4><p><strong>Prüfingenieur:innen (TÜV/DEKRA/GTÜ) – Praxis aus realen Abnahmen</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Durchführung und Begleitung von Einzelabnahmen/Umschreibungen</li><li>Erfahrung mit typischen DIY-Ausbau-Fehlerbildern</li><li>Fokus auf sichere Befestigung, nachvollziehbare Dokumentation und klare Wohnmobil-Kriterien</li></ul><p><strong>Panel-Themen:</strong></p><ul><li>Wohnmobil-Kriterien und „fest verbaut“</li><li>Zulassungspraxis und häufige Ablehnungsgründe</li><li>Nachweise, Gutachten, sinnvolle Vorbereitung</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Wohnmobil-Kriterien: Was formal wirklich verlangt wird</h4><ul><li>Mindest-Setup für Umschreibung zum Wohnmobil: <strong>Tisch, Sitzgelegenheiten, Schlafgelegenheit, fest eingebaute Kochmöglichkeit, Stauraum</strong></li><li>„Fest im Fahrzeug“: Welche Teile <em>überwiegend</em> dauerhaft angebracht sein sollen (und warum Campingmöbel meist nicht reichen)</li><li><strong>Tisch darf leicht entfernbar sein</strong> (aber muss vorgesehen/zuordenbar sein)</li><li>Fallstrick: herausnehmbare Wohneinrichtungen / wechselbare Aufbauten → oft <em>keine</em> Umschreibung möglich</li></ul><h4>2) Häufige Ablehnungsgründe aus der Praxis</h4><ul><li>Kochmöglichkeit nicht als „fest“ anerkannt (zu mobil / nicht eindeutig dem Wohnteil zugeordnet)</li><li>Möbel/Einbauten nicht ausreichend befestigt (Crash-Sicherheit, „Geschoss“-Thema)</li><li>Sitzplätze während der Fahrt ohne passende Sitz-/Gurtverankerungen (besonders bei nachgerüsteten Sitzlösungen)</li><li>Fehlende Unterlagen (Teilegutachten/ABE/Rechnungen/Nachweise)</li><li>Gewichts-Überraschungen: tatsächliches Reisegewicht über Limit (z. B. 3,5 t)</li></ul><h4>3) Gas, Gasprüfung und „gasfrei“ als Strategie</h4><ul><li>Wann eine Gasprüfung relevant wird (und welche typischen Punkte bei Gasinstallationen Probleme machen)</li><li>Alternative: gasfrei kochen/heizen (z. B. Induktion) kann bestimmte Prüf-/Wartungsthemen vereinfachen (aber erhöht Anforderungen an Elektrik/Leistung)</li></ul><h4>4) Dokumente &amp; Vorbereitung: So gehst du stressfrei in die Abnahme</h4><ul><li>Vorab-Check: frühzeitig mit Prüfstelle sprechen und Ausbau-Konzept kurz abstimmen</li><li>Dokumentenmappe: ABEs/Teilegutachten, Datenblätter, Einbauanleitungen, Rechnungen</li><li>Foto-Doku: relevante Bereiche fotografieren, bevor sie „hinter Verkleidung verschwinden“</li><li>Vorführung: Alle geforderten Funktionen müssen klar erkennbar sein (Wohnteil, Kochmöglichkeit, Schlaflösung, Stauraum)</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer kurz vor der Umschreibung/Zulassung</li><li>Alle, die „TÜV-konform“ planen wollen, bevor gebaut wird</li><li>Ausbauende, die unsicher sind, ob Tisch/Kocher/Stauraum als „fest“ gelten</li><li>Camper mit Sitzumbauten (Gurt-/Sitzverankerungsthema)</li></ul>",
             "has_content": true
         },
         {
@@ -968,6 +1508,29 @@
             "has_content": false
         },
         {
+            "id": "e32090afa5574c91bec50ddc722ec6cc",
+            "title": "Vollzeit Vanlife: Freuden und Herausforderungen",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "10:30 – 11:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "Ich möchte mit Euch über mein ganz normales Leben in meinem Van „Villa\" erzählen: Warum habe ich mich dazu entschieden, in einem Auto zu leben und wie ist seitdem der Kontakt zu den Kindern und dem alten Leben? In welchen Momenten trauere ich meiner festen Wohnung hinterher? Ist es schwierig, alleine als Frau unterwegs zu sein? Warum reise ich viel durch Deutschland und wie ist hier die Stellplatz- bzw. Versorgungs-Situation? Wie verdiene ich mein Geld, während ich ständig unterwegs bin… Vielleicht kann ich Euch dazu inspirieren, den Vollzeit Vanlife Weg zu gehen – oder eben lieber nicht.",
+            "datum_start": "2026-07-12T10:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Isabel Kühnl",
+            "referent_persons": [
+                {
+                    "id": "0b9a373dd6ba4904a1394406cc667fa1",
+                    "name": "Isabel Kühnl"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
             "id": "f83de0153979402eb9d78e523bcbd74b",
             "title": "Frag mich alle Fragen, die Du schon immer fragen wolltest",
             "typ": "Roadtrip Girls.Hub",
@@ -984,6 +1547,98 @@
                 {
                     "id": "3da42b4303e0450f96200491a0f4cda4",
                     "name": "Susanne Flachmann"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "25baf725d936477fa06e0a053f76105a",
+            "title": "Zentralamerika",
+            "typ": "Vortrag",
+            "tag": "Sonntag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Raum Schweiz (Foyer West)",
+            "beschreibung": "Fehlt",
+            "datum_start": "2026-07-12T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Gesa & Thorsten Mähler & Münch",
+            "referent_persons": [
+                {
+                    "id": "d96da69392664d3b8311f169e826c29b",
+                    "name": "Gesa & Thorsten Mähler & Münch"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "34b1555789334e959ecbfc837b5a0dc2",
+            "title": "Mit dem Camper durch Finnland zum Nordkap",
+            "typ": "Vortrag",
+            "tag": "Sonntag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Raum Österreich (Foyer West)",
+            "beschreibung": "Weite Wälder, tausend Seen im goldenen Abendlicht und Straßen, die scheinbar endlos gen Norden führen – dieser Vortrag ist eine Einladung, dem Alltag davonzufahren. Sandra von adVANtours nimmt euch mit auf eine ganz besondere Reise: Mit dem Camper quer durch Finnland, durch stille Landschaften voller Magie, vorbei an Rentieren am Straßenrand und Nächten, die im Sommer niemals ganz dunkel werden. Kilometer für Kilometer wächst das Gefühl von Freiheit. Vom Besuch beim Weihnachtsmann bis zum sagenumwobenen Nordkap, bekommt ihr hier tolle Eindrücke über Land und Leute.",
+            "datum_start": "2026-07-12T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Marika & Sandra",
+            "referent_persons": [
+                {
+                    "id": "4a5c221a20d446b2af5217138ad968ff",
+                    "name": "Marika & Sandra"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "1ef5d4b40b5d4d7a9255f0949cf879e5",
+            "title": "Troopy vs. Bulli – Zwei Reisekonzepte im direkten Vergleich",
+            "typ": "Vortrag",
+            "tag": "Sonntag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "Ein vergleichender Blick auf zwei vollkommen unterschiedliche Reisefahrzeuge: den kompromisslos geländegängigen Toyota Land Cruiser „Troopy“ und den komfortablen Bulli. Der Vortrag zeigt Ausbaukonzepte, Stauraum-Ideen, Vor- und Nachteile im Alltag, Geländetauglichkeit vs. Bequemlichkeit – und hilft dabei, das passende Setup für den eigenen Reise- und Festival-Alltag zu finden.",
+            "datum_start": "2026-07-12T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Axel Telzerow",
+            "referent_persons": [
+                {
+                    "id": "a325672fbb184778b76f19874a50b569",
+                    "name": "Axel Telzerow"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "c03ca2bc48414237b06ee54d327f5055",
+            "title": "Navigation & Orientierung",
+            "typ": "Workshop",
+            "tag": "Sonntag",
+            "zeit": "11:00 – 12:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-12T11:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
                 }
             ],
             "aussteller": [],
@@ -1070,22 +1725,22 @@
             "has_content": true
         },
         {
-            "id": "e32090afa5574c91bec50ddc722ec6cc",
-            "title": "Vollzeit Vanlife: Freuden und Herausforderungen",
+            "id": "65fb2d2d345e4cdd8d172b3bf6ac9190",
+            "title": "Solo-Touren nach Bosnien & Sardinien",
             "typ": "Roadtrip Girls.Hub",
             "tag": "Sonntag",
             "zeit": "12:00 – 13:00 Uhr",
             "ort": "Foyer West/Atrium",
-            "beschreibung": "Ich möchte mit Euch über mein ganz normales Leben in meinem Van „Villa\" erzählen: Warum habe ich mich dazu entschieden, in einem Auto zu leben und wie ist seitdem der Kontakt zu den Kindern und dem alten Leben? In welchen Momenten trauere ich meiner festen Wohnung hinterher? Ist es schwierig, alleine als Frau unterwegs zu sein? Warum reise ich viel durch Deutschland und wie ist hier die Stellplatz- bzw. Versorgungs-Situation? Wie verdiene ich mein Geld, während ich ständig unterwegs bin… Vielleicht kann ich Euch dazu inspirieren, den Vollzeit Vanlife Weg zu gehen – oder eben lieber nicht.",
+            "beschreibung": "2025 war ich unter anderem zweieinhalb Monate auf Sardinien im Winter und drei Monate in Bosnien-Herzegowina. Ich reise allein als Frau, begleitet nur von meinem Hund, und bewege mich dabei abseits klassischer Routen. Mich interessiert nicht die perfekte Instagram-Ansicht, sondern der echte Alltag unterwegs. Begegnungen, Herausforderungen, Unsicherheiten und die Momente, in denen man merkt, wie viel man sich selbst zutrauen kann. Meine Reisen sind kein Urlaub, sondern gelebter Alltag. Genau darüber spreche ich.",
             "datum_start": "2026-07-12T12:00:00.000+02:00",
             "kategorien": [],
             "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "Isabel Kühnl",
+            "referent_person": "Dagmar Kinter",
             "referent_persons": [
                 {
-                    "id": "0b9a373dd6ba4904a1394406cc667fa1",
-                    "name": "Isabel Kühnl"
+                    "id": "589401b410024eab8f6be744899e49b1",
+                    "name": "Dagmar Kinter"
                 }
             ],
             "aussteller": [],
@@ -1112,7 +1767,7 @@
         },
         {
             "id": "4c486889d2ff4f21b1b9afd430ac10a6",
-            "title": "Dämmung done right: Armaflex vs. Hanf vs. XPS",
+            "title": "Dämmung done right: Armaflex/XPS vs. Hanf & Schafwolle",
             "typ": "Expertpanel",
             "tag": "Sonntag",
             "zeit": "12:15 – 13:00 Uhr",
@@ -1122,11 +1777,26 @@
             "kategorien": [
                 "Isolierung"
             ],
-            "status": "Idee",
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
-            "aussteller": [],
+            "referent_person": "Mareike Puschban",
+            "referent_persons": [
+                {
+                    "id": "17a1d4c3f6184a38bde2df69f0c5c59e",
+                    "name": "Mareike Puschban"
+                }
+            ],
+            "aussteller": [
+                {
+                    "id": "552cffd3082b438d8c8b6a8df2bd002f",
+                    "firma": "Isolierhandel24",
+                    "stand": "A6-101",
+                    "stand_x": null,
+                    "stand_y": null,
+                    "stand_w": null,
+                    "stand_h": null
+                }
+            ],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Kondenswasser vermeiden, Kältebrücken eliminieren – die richtige Dämmstrategie!</strong></p><p>Unsere Experten erklären die Unterschiede zwischen Armaflex, Hanf und XPS.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Armaflex, Hanf, XPS im direkten Vergleich</p><p>✓ Kondenswasser verstehen und vermeiden</p><p>✓ Kältebrücken eliminieren</p><p>✓ Diffusionsoffenheit vs. Dampfsperre</p><p>✓ Die richtige Dämmung für deinen Einsatz</p><p>Für optimale Dämmung und behagliches Wohnklima!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Dämmmaterialien</h4><ul><li>Armaflex: Der Klassiker</li><li>Hanf: Natürlich und nachhaltig</li><li>XPS: Robust und feuchtigkeitsresistent</li><li>Schafwolle, Kork: Alternative Materialien</li></ul><h4>Kondenswasser</h4><ul><li>Wie entsteht Kondenswasser?</li><li>Dampfsperre vs. diffusionsoffen</li><li>Lüftungskonzept</li><li>Taupunkt verstehen</li></ul><h4>Kältebrücken</h4><ul><li>Wo entstehen Kältebrücken?</li><li>Metallprofile isolieren</li><li>Unterbrechung von Wärmebrücken</li><li>Thermografie nutzen</li></ul><hr><h4>Zielgruppe</h4><ul><li>Truck-Ausbauer mit großen Flächen</li><li>Selbstausbauer in der Dämmphase</li><li>Wintercamper mit Kälte-Problemen</li></ul>",
             "has_content": true
         },
@@ -1150,6 +1820,52 @@
             "aussteller": [],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Verschrauben oder verkleben? Diese Grundsatzfrage stellt sich bei fast jedem Ausbauschritt!</strong></p><p>Unsere Experten zeigen, wann welche Methode die richtige ist – oder wann die Kombination am besten funktioniert.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Schrauben vs. Kleben: Vor- und Nachteile</p><p>✓ Wann ist welche Methode die richtige?</p><p>✓ Die Kombination: Das Beste aus beiden Welten</p><p>✓ Praktische Beispiele: Möbelbau, Airlineschienen, Solarpanels</p><p>✓ Materialien und deren Anforderungen</p><p>Mit praktischen Beispielen von Profis, die beide Welten kennen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Schrauben</h4><ul><li>Vorteile: Reversibel, nachziehbar</li><li>Materialien: Holz, Metall, Verbundplatten</li><li>Richtige Schrauben für jeden Einsatz</li></ul><h4>Kleben</h4><ul><li>Vorteile: Flächige Kraftverteilung, keine Löcher</li><li>Klebstoffe: Hybrid, PU, Epoxid</li><li>Aushärtezeiten und Temperatur</li></ul><h4>Kombination</h4><ul><li>Wann macht Schrauben + Kleben Sinn?</li><li>Beispiele aus der Praxis</li><li>Möbelbau, Paneele, Solarpanels</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Verbindungs-Fragen</li><li>Alle, die die richtige Technik finden wollen</li><li>Praktiker, die Haltbarkeit suchen</li></ul>",
             "has_content": true
+        },
+        {
+            "id": "e48b47bf97ac4090bd509c17584f0508",
+            "title": "Overland und Offroad-Fotografie mit Kamera",
+            "typ": "Workshop",
+            "tag": "Sonntag",
+            "zeit": "12:30 – 15:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-12T12:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Manuel Mohorovic",
+            "referent_persons": [
+                {
+                    "id": "410283f211464e1587e034461a0e599b",
+                    "name": "Manuel Mohorovic"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "3149c964c82f808ea6aefd6cd1a36d84",
+            "title": "Digitales Nomadentum",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "13:30 – 14:30 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "",
+            "datum_start": "2026-07-12T13:30:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "N.N.",
+            "referent_persons": [
+                {
+                    "id": "3149c964c82f800895ade6f5e7931ea1",
+                    "name": "N.N."
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "30f9c964c82f80dcaf5be567ca45e8a5",
@@ -1200,22 +1916,22 @@
             "has_content": true
         },
         {
-            "id": "65fb2d2d345e4cdd8d172b3bf6ac9190",
-            "title": "Solo-Touren nach Bosnien & Sardinien",
-            "typ": "Roadtrip Girls.Hub",
+            "id": "1ce25a902e2447c18e5a9c9d52015a1d",
+            "title": "Videographie",
+            "typ": "Workshop",
             "tag": "Sonntag",
             "zeit": "14:00 – 15:00 Uhr",
-            "ort": "Foyer West/Atrium",
-            "beschreibung": "2025 war ich unter anderem zweieinhalb Monate auf Sardinien im Winter und drei Monate in Bosnien-Herzegowina. Ich reise allein als Frau, begleitet nur von meinem Hund, und bewege mich dabei abseits klassischer Routen. Mich interessiert nicht die perfekte Instagram-Ansicht, sondern der echte Alltag unterwegs. Begegnungen, Herausforderungen, Unsicherheiten und die Momente, in denen man merkt, wie viel man sich selbst zutrauen kann. Meine Reisen sind kein Urlaub, sondern gelebter Alltag. Genau darüber spreche ich.",
+            "ort": "Raum Liechtenstein (Foyer West)",
+            "beschreibung": "",
             "datum_start": "2026-07-12T14:00:00.000+02:00",
             "kategorien": [],
             "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "Dagmar Kinter",
+            "referent_person": "Stefan Tschumi",
             "referent_persons": [
                 {
-                    "id": "589401b410024eab8f6be744899e49b1",
-                    "name": "Dagmar Kinter"
+                    "id": "68db6f97bad34adba99faba497d63543",
+                    "name": "Stefan Tschumi"
                 }
             ],
             "aussteller": [],
@@ -1269,6 +1985,52 @@
             ],
             "content_html": "<h4>Ankündigungstext</h4><p><strong>Professionelle Elektrik ohne Elektrikerkenntnisse!</strong></p><p>Fertig vorverkabelte Elektro-Boards von Victron-Partnern nimmt Anfängern die Angst vor dem Kurzschluss. Einfach an Batterie und Verbraucher anschließen – fertig!</p><p><strong>Was dich erwartet:</strong></p><p>✓ Plug-and-Play Elektro-Boards im Überblick</p><p>✓ Was ist bereits vorverkabelt?</p><p>✓ Installation: Batterie, Solar, Verbraucher anschließen</p><p>✓ Sicherheit: Keine Kurzschluss-Gefahr</p><p>✓ Kosten vs. DIY-Verkabelung</p><p>Für alle, die professionelle Elektrik ohne Fachwissen verbauen wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Plug-and-Play Systeme</h4><ul><li>Victron-Partner-Systeme</li><li>Fertig verkabelte Boards mit Sicherungen</li><li>MPPT-Regler, Ladebooster, Wechselrichter integriert</li><li>Was ist bereits dabei?</li></ul><h4>Installation</h4><ul><li>Batterie anschließen: Plus, Minus, Masse</li><li>Solar-Module verbinden</li><li>Verbraucher anschließen</li><li>Schritt-für-Schritt-Anleitung</li></ul><h4>Vorteile und Kosten</h4><ul><li>Keine Elektrik-Kenntnisse nötig</li><li>Keine Kurzschluss-Gefahr</li><li>Professionelle Absicherung</li><li>Kosten: ca. 500-1.500 € mehr als DIY</li></ul><hr><h4>Zielgruppe</h4><ul><li>Einsteiger ohne Elektrik-Kenntnisse</li><li>Selbstausbauer mit Kurzschluss-Angst</li><li>Alle, die auf Nummer sicher gehen wollen</li></ul>",
             "has_content": true
+        },
+        {
+            "id": "3149c964c82f8014aa79c1dbe4d60020",
+            "title": "Türkei",
+            "typ": "Roadtrip Girls.Hub",
+            "tag": "Sonntag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Foyer West/Atrium",
+            "beschreibung": "",
+            "datum_start": "2026-07-12T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "N.N.",
+            "referent_persons": [
+                {
+                    "id": "3149c964c82f80aea772f38040bc2d89",
+                    "name": "N.N."
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
+        },
+        {
+            "id": "84dcbbdd78f24e86b58d50506a1c048b",
+            "title": "Discover Bushcraft",
+            "typ": "Workshop",
+            "tag": "Sonntag",
+            "zeit": "15:00 – 16:00 Uhr",
+            "ort": "Wiese Freigelände West",
+            "beschreibung": "Angefragt",
+            "datum_start": "2026-07-12T15:00:00.000+02:00",
+            "kategorien": [],
+            "status": "Referent bestätigt",
+            "referent_firma": "",
+            "referent_person": "Simon Perks",
+            "referent_persons": [
+                {
+                    "id": "75f8c633204846669c4dd1252cfcd9c6",
+                    "name": "Simon Perks"
+                }
+            ],
+            "aussteller": [],
+            "content_html": "",
+            "has_content": false
         },
         {
             "id": "2fbd65884d034285980bd99d4c7137c8",

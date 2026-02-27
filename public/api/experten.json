@@ -1,7 +1,256 @@
 {
-    "generated": "2026-02-27T12:34:22+01:00",
-    "count": 11,
+    "generated": "2026-02-27T19:29:45+01:00",
+    "count": 33,
     "experten": [
+        {
+            "id": "3149c964c82f800895ade6f5e7931ea1",
+            "name": "N.N.",
+            "vorname": "",
+            "nachname": "",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "3149c964c82f80d386b4c429b9aaeefa",
+                    "title": "Solo Van Life",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "13:00 – 14:00 Uhr",
+                    "ort": "",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "3149c964c82f808ea6aefd6cd1a36d84",
+                    "title": "Digitales Nomadentum",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "13:30 – 14:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "3149c964c82f8051b8f3c20132be8c98",
+            "name": "N.N.",
+            "vorname": "",
+            "nachname": "",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Referenten"
+            ],
+            "workshops": [
+                {
+                    "id": "3149c964c82f80fdb1b9e10ce7fa852a",
+                    "title": "Alleinreisen und die Angst im Gepäck",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "16:00 – 17:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [
+                        "Referenten"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "3149c964c82f8063ae1de64ec7f90bc3",
+            "name": "N.N.",
+            "vorname": "",
+            "nachname": "",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Referenten"
+            ],
+            "workshops": [
+                {
+                    "id": "3149c964c82f80368d1ccdfa0ec19ad3",
+                    "title": "Mentales Training",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "14:00 – 15:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [
+                        "Referenten"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "3149c964c82f80aea772f38040bc2d89",
+            "name": "N.N.",
+            "vorname": "",
+            "nachname": "",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "3149c964c82f8014aa79c1dbe4d60020",
+                    "title": "Türkei",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "4a5c221a20d446b2af5217138ad968ff",
+            "name": "Marika & Sandra",
+            "vorname": "Marika & Sandra",
+            "nachname": "",
+            "foto": "",
+            "bio": "Wir – Marika und Sandra – haben 2022 unsere gemeinsame Leidenschaft für Camping, Freiheit und bewusstes Reisen im Van zum Business gemacht. Marika bringt über 20 Jahre Erfahrung in der Eventbranche mit. Sandra kommt aus dem Vertrieb und begeistert seit über zwei Jahrzehnten Menschen. Seit 2023 bauen wir online eine wachsende Community rund um Camping und Vanlife auf. Mit inspirierenden Reisevorträgen, einem erlebbaren Messestand und nachhaltigen Campingprodukten verbinden wir Information, Emotion und Community.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "3f5473466b38457eb095c5f08db678e8",
+                    "title": "Vanlife in der Schweiz – Highlights, Regeln & warum es nicht immer teuer sein muss",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "13:00 – 14:00 Uhr",
+                    "ort": "Raum Österreich (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "34b1555789334e959ecbfc837b5a0dc2",
+                    "title": "Mit dem Camper durch Finnland zum Nordkap",
+                    "typ": "Vortrag",
+                    "tag": "Sonntag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Raum Österreich (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "97405dc2c2b34c5ab6aaa7701a2bd565",
+            "name": "Annika & Flo",
+            "vorname": "Annika & Flo",
+            "nachname": "",
+            "foto": "",
+            "bio": "Annika & Flo reisen seit mehreren Jahren mit ihrem selbst ausgebauten Unimog durch Europa und Nordafrika. Was als Idee begann, wurde schnell zu einer Lebensweise: langsam reisen, Wege abseits der Hauptrouten suchen und sich auf das Unbekannte einlassen. Neben Reisen auf dem Balkan waren sie 2022 als Adventure-Scouts für die Pistenkuh in Griechenland unterwegs und in den letzten Jahren mehrfach in der tunesischen Sahara. Ihre Vorträge leben von Authentizität – ehrlich, nahbar und inspirierend.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "5af507c6754d4d4f88c08b224ac82c19",
+                    "title": "Abenteuer Sahara – mit dem Unimog durch die Wüste Tunesiens",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 12:15 Uhr",
+                    "ort": "Raum Österreich (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "71fd04fc3d6e4f56af9ac5df955e879a",
+            "name": "Ursula Büch",
+            "vorname": "Ursula",
+            "nachname": "Büch",
+            "foto": "",
+            "bio": "Notorische Wildcamperin und Alleinreisende – zu Fuß, per Kajak, Fahrrad oder motorisiert mit Ape 50 und MB Vario 614 D. Ein Jahr lang bereiste sie die iberische Halbinsel zu Fuß, paddelte auf dem Atlantik die portugiesische Südküste ab und baute unterwegs eine Ape 50 zum Minicamper um. Als Kampfkunst-Sportlerin mit 9 Jahren Erfahrung vermittelt sie Sicherheitsthemen und Selbstverteidigung in Workshops – reisespezifisch, für Alleinreisende, Frauen und Betroffene.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "de0ed0b772a74f1f8b6eaf63738a5ebb",
+                    "title": "Sicherheit für Alleinreisende – die besten Tipps & Tricks",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "6776fe6a42514ef587209cf01d30f908",
+                    "title": "Selbstverteidigung für Alleinreisende – lernen & üben",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "15:30 – 17:00 Uhr",
+                    "ort": "Foyer West/Empore",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "7a9af27e296f45fbae856d932e5d1076",
+            "name": "Tina Degenkolb",
+            "vorname": "Tina",
+            "nachname": "Degenkolb",
+            "foto": "",
+            "bio": "Ich lebe & arbeite seit Anfang 2024 in meinem selbst ausgebauten Minicamper Tuesday, einem Citroen Berlingo. Am liebsten bin ich in Deutschland unterwegs und entdecke schöne Kleinstädte, Fachwerk, Burgen, Schlösser, Gärten. Meine Erlebnisse zeige ich auf meinem YouTube Kanal, im Blog, auf Instagram oder verarbeite sie zu Reiseführern.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "a21b22a46a814fdb8dd2b41ba89a3423",
+                    "title": "Starthilfe zum Vanlife im Minicamper",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "11:30 – 12:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
         {
             "id": "22b8373fd98e43e08e9e593fa0494233",
             "name": "Dennis Dietmair",
@@ -29,6 +278,32 @@
                         "Zulassung & TÜV",
                         "Fahrzeugausbau"
                     ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "06dcfc2e5a894725b1faa9f7ccd64349",
+            "name": "Ulrich Dolde",
+            "vorname": "Ulrich",
+            "nachname": "Dolde",
+            "foto": "",
+            "bio": "Uli Dolde ist ein erfahrener Fernreisender und ausgewiesener Experte für den Selbstausbau von Wohnmobilen. Zusammen mit seiner Frau Edith bereist er seit 17 Jahren Marokko in ihrem Sternchen, einem selbst ausgebauten Mercedes 917 Allrad-Fernreisemobil. Mit über zwei Jahren kumulierter Reisezeit verfügt er über tiefgreifende Ortskenntnisse. Er hat den Ausbau seines Expeditionsmobils in einem Buch dokumentiert, veranstaltet Webinare und betreibt www.wohnmobil-selbstausbau.com.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "7a04a0995ac6428b9e65221546c39fc2",
+                    "title": "Best of Marocco",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "14:30 – 15:30 Uhr",
+                    "ort": "Raum Österreich (Foyer West)",
+                    "kategorien": [],
                     "status": "Referent bestätigt",
                     "aussteller": []
                 }
@@ -81,6 +356,150 @@
             ]
         },
         {
+            "id": "3da42b4303e0450f96200491a0f4cda4",
+            "name": "Susanne Flachmann",
+            "vorname": "Susanne",
+            "nachname": "Flachmann",
+            "foto": "",
+            "bio": "Seit über 13 Jahren cruise ich als „Genießende Alleinreisende\" monatelang über möglichst rumpelige Pisten. Mich zieht es stets Richtung Osten – der Balkan, Georgien, die Türkei bis Iran, Zentralasien bis Tadschikistan und der Norden Indiens ziehen mich immer wieder magisch an. Ich lebe meine Liebe zu Roadtrips – im Van und auf dem Motorrad, in meinen Büchern und mit meiner Marke.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "4f1791d5221c4563834395a34159e1f4",
+                    "title": "Mut zum Alleinreisen",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "11:30 – 12:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "44b4e8adebf34a86aedba5c1f16042e6",
+                    "title": "meet & greet / RoadtripGirls Ratsch",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "17:00 – 18:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "689cbce559414c0fab7fcc61b33a708b",
+                    "title": "Auf einen Kaffee",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "10:00 – 10:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "92465b73445240f3b010ae3eb0976519",
+                    "title": "Allein im UAZ Buchanka bis zum Pamir Highway (und zurück)",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "16:00 – 17:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "ff1c8ae522d84ba28547f5ee3041d1f4",
+                    "title": "meet & greet / RoadtripGirls Ratsch",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "17:00 – 18:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "7bdb6ae8b9324cf8aa69db60cb0fc098",
+                    "title": "Auf einen Kaffee",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "10:00 – 10:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "f83de0153979402eb9d78e523bcbd74b",
+                    "title": "Frag mich alle Fragen, die Du schon immer fragen wolltest",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "10:45 – 11:45 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "2fbd65884d034285980bd99d4c7137c8",
+                    "title": "Happy End Abschlussfeier",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "16:00 – 17:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "f0800e993cd04890b40c5146830bcae2",
+            "name": "Sarah Glöckner",
+            "vorname": "Sarah",
+            "nachname": "Glöckner",
+            "foto": "",
+            "bio": "Podcasterin – Moderatorin von „the female traveller\"",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Referenten"
+            ],
+            "workshops": [
+                {
+                    "id": "f47782e2949e482aa8c5d470fd383f70",
+                    "title": "Live Podcast",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Freitag",
+                    "zeit": "10:30 – 11:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "3149c964c82f80169372dde5f429c6f9",
+                    "title": "Live Podcast",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "10:30 – 11:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [
+                        "Referenten"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
             "id": "827c57f2938a4fdea32ffa27ec3c1611",
             "name": "Michael Hoffmann",
             "vorname": "Michael",
@@ -123,42 +542,128 @@
             ]
         },
         {
-            "id": "893d5c93385f4e1ea1c37587c9ef5efe",
-            "name": "Manuel Lemke",
-            "vorname": "Manuel",
-            "nachname": "Lemke",
-            "foto": "/img/experten/893d5c93385f4e1ea1c37587c9ef5efe.webp",
-            "bio": "Inhaber und Gründer von SCHALLDOSE ON TOUR und Busbastler. Autor des Busbastler Handbuchs (ISBN 978-3734310645) – praktischer Ratgeber für Camper-Selbstausbau mit Tipps aus jahrelanger Erfahrung. Betreibt YouTube-Kanal (33.6K Abonnenten) und Busbastler Podcast. Organisiert Busbastler Basecamp Events seit 2018. Referent auf Messen (CMT, f.re.e München). Konzept: Hilfe zur Selbsthilfe für Selbstausbauer.",
-            "funktion": "Inhaber",
+            "id": "8d4eb3a3b19e4538901b3de41c61fbe4",
+            "name": "Karin Intveen",
+            "vorname": "Karin",
+            "nachname": "Intveen",
+            "foto": "",
+            "bio": "Seit 9 Jahren lebe ich Vollzeit mit kurzen Pausen im Van, seit 6 Jahren solo und 4 davon in Georgien. Ich mag es minimalistisch, reise extrem langsam und tauche dabei gerne tief in die Kultur eines Landes ein.",
+            "funktion": "",
             "kategorie": "",
-            "website": "busbastler.de",
+            "website": "",
             "firma": "",
-            "kategorien": [
-                "Heizung & Klima"
-            ],
+            "kategorien": [],
             "workshops": [
                 {
-                    "id": "a30973dfa4c249d791be43bce8b4de97",
-                    "title": "DIY-Standheizungen – Von Autotherm bis China-Böller",
-                    "typ": "Expertpanel",
-                    "tag": "Freitag",
-                    "zeit": "11:00 – 11:45 Uhr",
-                    "ort": "Selbstausbau Academy Bühne",
-                    "kategorien": [
-                        "Heizung & Klima"
-                    ],
+                    "id": "3ed1672465eb4ef6b6e7d5afaed9040c",
+                    "title": "Innere Sicherheit verstehen: Wie Dein Nervensystem funktioniert und was Dir hilft, wieder ruhiger zu werden",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
                     "status": "Referent bestätigt",
-                    "aussteller": [
-                        {
-                            "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
-                            "firma": "Reisch-Tech GmbH",
-                            "stand": "FG-808",
-                            "stand_x": 38.2,
-                            "stand_y": 27.5,
-                            "stand_w": null,
-                            "stand_h": null
-                        }
-                    ]
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "589401b410024eab8f6be744899e49b1",
+            "name": "Dagmar Kinter",
+            "vorname": "Dagmar",
+            "nachname": "Kinter",
+            "foto": "",
+            "bio": "Unternehmerin, lebt Vollzeit im Van. Führt zwei Unternehmen ortsunabhängig. Bewusste Entscheidung für ein Leben, das Freiheit, Verantwortung und Selbständigkeit verbindet. Instagram: @lassdraussenspielen",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "65fb2d2d345e4cdd8d172b3bf6ac9190",
+                    "title": "Solo-Touren nach Bosnien & Sardinien",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "12:00 – 13:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "0b9a373dd6ba4904a1394406cc667fa1",
+            "name": "Isabel Kühnl",
+            "vorname": "Isabel",
+            "nachname": "Kühnl",
+            "foto": "",
+            "bio": "Seit Mai 2023 lebe ich in meinem Van „Villa\". Nach dem Auszug meiner drei Kinder hat es mich in die ortsunabhängige Freiheit gezogen. Sehr viel in Deutschland unterwegs. Neben dem Remote-Job selbständige Schwimmlehrerin mit mobiler Schwimmschule „Schwimmsternchen\". Instagram: @auszeit_mit_spirit",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "e32090afa5574c91bec50ddc722ec6cc",
+                    "title": "Vollzeit Vanlife: Freuden und Herausforderungen",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "10:30 – 11:30 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "410283f211464e1587e034461a0e599b",
+            "name": "Manuel Mohorovic",
+            "vorname": "Manuel",
+            "nachname": "Mohorovic",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "22af1cc20b2541a4b424323b5ced2f37",
+                    "title": "Reisefotografie",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "12:30 – 13:30 Uhr",
+                    "ort": "Raum Liechtenstein (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "a640f0edd33d497093c9668f978b0e27",
+                    "title": "Overland und Offroad-Fotografie mit Handy",
+                    "typ": "Workshop",
+                    "tag": "Samstag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "e48b47bf97ac4090bd509c17584f0508",
+                    "title": "Overland und Offroad-Fotografie mit Kamera",
+                    "typ": "Workshop",
+                    "tag": "Sonntag",
+                    "zeit": "12:30 – 15:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
                 }
             ]
         },
@@ -193,6 +698,208 @@
                     ],
                     "status": "Referent bestätigt",
                     "aussteller": []
+                },
+                {
+                    "id": "336abcf46f054a95986d3dec66a86b92",
+                    "title": "Südamerika",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Raum Schweiz (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "25baf725d936477fa06e0a053f76105a",
+                    "title": "Zentralamerika",
+                    "typ": "Vortrag",
+                    "tag": "Sonntag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Raum Schweiz (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "31eaca54f26842509785b4409082ac84",
+            "name": "Anja Müller",
+            "vorname": "Anja",
+            "nachname": "Müller",
+            "foto": "",
+            "bio": "Ich lebe seit 2017 im Camper und verbinde unterwegs Reisen und Arbeiten – und irgendwann ist daraus einfach mein ganz normaler Alltag geworden. Mit CAMP & WORK und dem VANLIFE CAMPUS unterstütze ich Menschen dabei, ihren eigenen Weg ins Arbeiten unterwegs zu finden.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "80ab5440953740c5a85d849d570c2110",
+                    "title": "Arbeiten auf Reisen – wie funktioniert das im Alltag?",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "12:00 – 13:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "8f006c7d221d4382b3f480b1df015d31",
+                    "title": "Dein Einstieg ins Arbeiten unterwegs",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Sonntag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Foyer West/Empore",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "75f8c633204846669c4dd1252cfcd9c6",
+            "name": "Simon Perks",
+            "vorname": "Simon",
+            "nachname": "Perks",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "792ce758df5143af85acdf9c1d17d225",
+                    "title": "Navigation & Orientierung",
+                    "typ": "Workshop",
+                    "tag": "Freitag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "88d0f87f9714455ab7eb35ecfbbcf0bc",
+                    "title": "Discover Bushcraft",
+                    "typ": "Workshop",
+                    "tag": "Freitag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "9bd6cd74268c4591ba503bbd26df929f",
+                    "title": "Navigation & Orientierung",
+                    "typ": "Workshop",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "af20522f795a49d38e124fc0900fe607",
+                    "title": "Navigation & Orientierung",
+                    "typ": "Workshop",
+                    "tag": "Samstag",
+                    "zeit": "12:30 – 13:30 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "69363f7ba03d449782b75eb662718b25",
+                    "title": "Discover Bushcraft",
+                    "typ": "Workshop",
+                    "tag": "Samstag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "62452b123c1e491294bcc7de22418f38",
+                    "title": "Discover Bushcraft",
+                    "typ": "Workshop",
+                    "tag": "Samstag",
+                    "zeit": "17:00 – 18:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "c03ca2bc48414237b06ee54d327f5055",
+                    "title": "Navigation & Orientierung",
+                    "typ": "Workshop",
+                    "tag": "Sonntag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "84dcbbdd78f24e86b58d50506a1c048b",
+                    "title": "Discover Bushcraft",
+                    "typ": "Workshop",
+                    "tag": "Sonntag",
+                    "zeit": "15:00 – 16:00 Uhr",
+                    "ort": "Wiese Freigelände West",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "17a1d4c3f6184a38bde2df69f0c5c59e",
+            "name": "Mareike Puschban",
+            "vorname": "Mareike",
+            "nachname": "Puschban",
+            "foto": "",
+            "bio": "Hat 2021 ein altes, holländisches Plattbodenschiff gekauft und zum Wohnboot umgebaut. Seit 2022 ohne dauerhafte Wohnung – 1,5 Jahre im selbst ausgebauten Van gelebt, lebt mittlerweile ganzjährig auf Booten. Arbeitet remote als Selbständige (Webdesign, SEO, Texterstellung) und seit Januar als Online-Marketing-Managerin für die TDH-Shops (Isolierhandel24). Kann sowohl aus privater als auch beruflicher Perspektive über Camper-Isolierung sprechen und darüber, was sie heute anders machen würde.",
+            "funktion": "Freelance Wordpress Webdesign & Online-Marketing-Managerin (TDH-Shops / Isolierhandel24)",
+            "kategorie": "",
+            "website": "https://mareikepuschban.de",
+            "firma": "",
+            "kategorien": [
+                "Isolierung"
+            ],
+            "workshops": [
+                {
+                    "id": "4c486889d2ff4f21b1b9afd430ac10a6",
+                    "title": "Dämmung done right: Armaflex/XPS vs. Hanf & Schafwolle",
+                    "typ": "Expertpanel",
+                    "tag": "Sonntag",
+                    "zeit": "12:15 – 13:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
+                    "kategorien": [
+                        "Isolierung"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": [
+                        {
+                            "id": "552cffd3082b438d8c8b6a8df2bd002f",
+                            "firma": "Isolierhandel24",
+                            "stand": "A6-101",
+                            "stand_x": null,
+                            "stand_y": null,
+                            "stand_w": null,
+                            "stand_h": null
+                        }
+                    ]
                 }
             ]
         },
@@ -279,6 +986,69 @@
             ]
         },
         {
+            "id": "9528f0e980e54ebca9818bb24cfdb2eb",
+            "name": "Manuela Rethberg",
+            "vorname": "Manuela",
+            "nachname": "Rethberg",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "30c0f6a88b7847fbbcad01eb25360414",
+                    "title": "Freilernen – ein anderer Weg des Lernens - Mutter & Kind berichten",
+                    "typ": "Vortrag",
+                    "tag": "Freitag",
+                    "zeit": "12:30 – 14:00 Uhr",
+                    "ort": "Raum Liechtenstein (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "5c0d470cd047497ea77a191b3ee23669",
+                    "title": "Freilernen – ein anderer Weg des Lernens - Mutter & Kind berichten",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "14:30 – 16:00 Uhr",
+                    "ort": "Raum Liechtenstein (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "aaa5ef6f26a0476c9b1e8f820a983402",
+            "name": "Diana Rottluff",
+            "vorname": "Diana",
+            "nachname": "Rottluff",
+            "foto": "",
+            "bio": "Infos folgen",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "57349e8446a046ea8ba57359d7efa9c6",
+                    "title": "Allein als Frau? Durch Afrika!",
+                    "typ": "Roadtrip Girls.Hub",
+                    "tag": "Samstag",
+                    "zeit": "14:00 – 15:00 Uhr",
+                    "ort": "Foyer West/Atrium",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
             "id": "8b3a29a8eab948e0a948308b66a8dd05",
             "name": "Erik Schmitt",
             "vorname": "Erik",
@@ -296,6 +1066,17 @@
             ],
             "workshops": [
                 {
+                    "id": "829d37d79f604f1192115a3d4240dff3",
+                    "title": "Geschichten aus Zentralasien",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "11:00 – 12:00 Uhr",
+                    "ort": "Raum Schweiz (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
                     "id": "1f174d779dcb4d3fb1e9f347e60e64ee",
                     "title": "Vom Basisfahrzeug zur Weltreise",
                     "typ": "Vortrag",
@@ -307,6 +1088,62 @@
                         "Kabinen (Pickup & LKW)",
                         "Innenausbau & Module"
                     ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "1330b2bfc14449f99317b2cabf07b931",
+            "name": "Frank Schneider",
+            "vorname": "Frank",
+            "nachname": "Schneider",
+            "foto": "",
+            "bio": "Referent für Fahrzeugtechnik und Dienstleistungsinnovationen beim TÜV-Verband. Mobilitätsexperte und offizieller Sprecher zu Wohnmobil-Zulassung, Selbstausbau und technischen Vorschriften. Federführend bei TÜV-Verband Merkblättern (MB 740 Wohnmobile, MB 769 Photovoltaik). Regelmäßig zitiert in Fachmedien wie promobil, CHIP, NABU und TÜV-Publikationen.",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [
+                "Zulassung & TÜV"
+            ],
+            "workshops": [
+                {
+                    "id": "9159f495f81e47278689f2a55e96f39f",
+                    "title": "Bestanden! Insider-Tipps von echten Prüfingenieuren",
+                    "typ": "Expertpanel",
+                    "tag": "Samstag",
+                    "zeit": "17:15 – 18:00 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
+                    "kategorien": [
+                        "Zulassung & TÜV"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
+            "id": "06e2d73021c94f7f9e61a34d3c54365a",
+            "name": "David Schröder",
+            "vorname": "David",
+            "nachname": "Schröder",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "77005f1943f04d7895c3fe24ed4dedd9",
+                    "title": "Filmpremiere",
+                    "typ": "Vortrag",
+                    "tag": "Samstag",
+                    "zeit": "16:00 – 17:30 Uhr",
+                    "ort": "Raum Österreich (Foyer West)",
+                    "kategorien": [],
                     "status": "Referent bestätigt",
                     "aussteller": []
                 }
@@ -381,6 +1218,43 @@
                             "stand_h": null
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "id": "68db6f97bad34adba99faba497d63543",
+            "name": "Stefan Tschumi",
+            "vorname": "Stefan",
+            "nachname": "Tschumi",
+            "foto": "",
+            "bio": "",
+            "funktion": "",
+            "kategorie": "",
+            "website": "",
+            "firma": "",
+            "kategorien": [],
+            "workshops": [
+                {
+                    "id": "6e4ab11980b242d1b72d19b8cc06ef54",
+                    "title": "Videographie",
+                    "typ": "Workshop",
+                    "tag": "Freitag",
+                    "zeit": "16:00 – 17:00 Uhr",
+                    "ort": "Raum Liechtenstein (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                },
+                {
+                    "id": "1ce25a902e2447c18e5a9c9d52015a1d",
+                    "title": "Videographie",
+                    "typ": "Workshop",
+                    "tag": "Sonntag",
+                    "zeit": "14:00 – 15:00 Uhr",
+                    "ort": "Raum Liechtenstein (Foyer West)",
+                    "kategorien": [],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
                 }
             ]
         },

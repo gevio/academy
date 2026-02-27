@@ -185,6 +185,9 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
             $foto = $f['file']['url'] ?? $f['external']['url'] ?? '';
         }
 
+        // Checkbox "Du" – true = informelles Du, false/nicht gesetzt = formelles Sie
+        $duzen = (bool) ($props['Du']['checkbox'] ?? false);
+
         return [
             'id'        => $pageId,
             'vorname'   => $this->extractRichText($props['Vorname'] ?? []),
@@ -195,6 +198,7 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
             'funktion'  => $this->extractRichText($props['Funktion'] ?? []),
             'website'   => $props['Website']['url'] ?? '',
             'foto'      => $foto,
+            'duzen'     => $duzen,
         ];
     }
 
@@ -234,6 +238,27 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
      */
     public function createReviewPage(array $workshop, array $referents, array $firma, string $deadline): ?array
     {
+        // HTML-Entities in Textfeldern dekodieren (z. B. &amp; → &)
+        $decode = fn(string $s): string => html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        foreach (['title', 'beschreibung', 'typ', 'tag', 'zeit', 'ort'] as $k) {
+            if (isset($workshop[$k]) && is_string($workshop[$k])) {
+                $workshop[$k] = $decode($workshop[$k]);
+            }
+        }
+        foreach ($referents as &$ref) {
+            foreach (['name', 'funktion', 'bio', 'website'] as $k) {
+                if (isset($ref[$k]) && is_string($ref[$k])) {
+                    $ref[$k] = $decode($ref[$k]);
+                }
+            }
+        }
+        unset($ref);
+        foreach (['firma', 'beschreibung', 'website'] as $k) {
+            if (isset($firma[$k]) && is_string($firma[$k])) {
+                $firma[$k] = $decode($firma[$k]);
+            }
+        }
+
         $reviewTitel = 'Review – ' . $workshop['title'];
 
         // Alle E-Mails sammeln (für Property – Notion email-Feld nimmt nur 1 Adresse,
@@ -273,16 +298,33 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
         // ── Page Body (Blöcke nach Template) ──
         $blocks = [];
 
+        // Du/Sie: wenn mindestens ein Referent "Sie" bevorzugt, formelle Form nutzen
+        $duzen = !empty(array_filter($referents, fn($r) => !empty($r['duzen'])));
+        // Falls ALLE Referenten duzen=false → Sie-Form; gemischt → Du (sicherer)
+        $alleSiezen = empty(array_filter($referents, fn($r) => !empty($r['duzen'])));
+
         // 1) Kurz-Anleitung
         $blocks[] = self::h3('1) Kurz-Anleitung für den Referenten');
-        $blocks[] = self::paragraph('Bitte prüfe die Inhalte in den Abschnitten unten.');
-        $blocks[] = self::paragraph('**Feedback geben:**');
-        $blocks[] = self::bullet('Schreibe Kommentare direkt an die Textstellen.');
-        $blocks[] = self::bullet('Wenn du Text ändern möchtest: bitte **kommentieren** (nicht überschreiben), damit wir es sauber in unsere Datenbank übernehmen.');
-        $blocks[] = self::bullet('Einfach an der betreffenden Zeile rechts auf das Icon klicken');
-        $blocks[] = self::paragraph('**Bilder hochladen:**');
-        $blocks[] = self::bullet('**Dein Foto:** Ziehe dein Bild in den Abschnitt „Referent – Foto".');
-        $blocks[] = self::bullet('**Firmenlogo:** Ziehe das Logo in den Abschnitt „Firma – Logo".');
+        if ($alleSiezen) {
+            $blocks[] = self::paragraph('Bitte prüfen Sie die Inhalte in den Abschnitten unten.');
+            $blocks[] = self::paragraph('**Feedback geben:**');
+            $blocks[] = self::bullet('Schreiben Sie Kommentare direkt an die Textstellen.');
+            $blocks[] = self::bullet('Wenn Sie Text ändern möchten: bitte **kommentieren** (nicht überschreiben), damit wir es sauber in unsere Datenbank übernehmen.');
+            $blocks[] = self::bullet('Einfach an der betreffenden Zeile rechts auf das Icon klicken');
+            $blocks[] = self::paragraph('**Bilder hochladen:**');
+            $blocks[] = self::bullet('**Ihr Foto:** Ziehen Sie Ihr Bild in den Abschnitt „Referent – Foto".');
+            $blocks[] = self::bullet('**Firmenlogo:** Ziehen Sie das Logo in den Abschnitt „Firma – Logo".');
+        } else {
+            $blocks[] = self::paragraph('Bitte prüfe die Inhalte in den Abschnitten unten.');
+            $blocks[] = self::paragraph('**Feedback geben:**');
+            $blocks[] = self::bullet('Schreibe Kommentare direkt an die Textstellen.');
+            $blocks[] = self::bullet('Wenn du Text ändern möchtest: bitte **kommentieren** (nicht überschreiben), damit wir es sauber in unsere Datenbank übernehmen.');
+            $blocks[] = self::bullet('Einfach an der betreffenden Zeile rechts auf das Icon klicken');
+            $blocks[] = self::paragraph('**Bilder hochladen:**');
+            $blocks[] = self::bullet('**Dein Foto:** Ziehe dein Bild in den Abschnitt „Referent – Foto".');
+            $blocks[] = self::bullet('**Firmenlogo:** Ziehe das Logo in den Abschnitt „Firma – Logo".');
+        }
+        $blocks[] = self::paragraph('**Wichtig**: Ich bestätige, dass ich über alle Rechte an den hochgeladenen Inhalten verfüge. Ich räume der Rough Road Events GmbH sowie von ihr beauftragten Dritten (z. B. Agenturen, Freelancer, Dienstleister) das zeitlich, räumlich und inhaltlich unbeschränkte Recht ein, dieses Material für redaktionelle und werbliche Zwecke (z. B. Social Media, Website, Printmedien) zu nutzen, zu vervielfältigen, zu veröffentlichen sowie zu bearbeiten oder umzugestalten. Die Zustimmung erfolgt unwiderruflich.');
 
         // 2) Status & Deadlines
         $blocks[] = self::h3('2) Status & Deadlines');
@@ -371,11 +413,13 @@ public function createQuestion(string $workshopPageId, string $frage, string $de
         string $betreff,
         string $toAdresse,
         string $vorname,
+        string $nachname,
         string $reviewUrl,
-        string $deadline
+        string $deadline,
+        bool $duzen = true
     ): ?array {
-        // Template-Text mit Platzhaltern
-        $templateText = <<<'TPL'
+        // Template-Text: Du-Form (informell)
+        $templateDu = <<<'TPL'
 Hi {VORNAME},
 
 Danke als erstes für deine Unterstützung und die Bereitschaft einen Workshop zu halten! 🙌
@@ -401,13 +445,42 @@ Viele Grüße
 Pete
 TPL;
 
+        // Template-Text: Sie-Form (formell)
+        $templateSie = <<<'TPL'
+Liebe/r {VORNAME} {NACHNAME},
+
+vielen Dank für Ihre Unterstützung und die Bereitschaft, einen Workshop zu halten! 🙌
+
+Für Ihren Beitrag zur Selbstausbauer Academy @ Adventure Southside 2026 habe ich ein kompaktes Review-Dokument erstellt. Bitte schauen Sie es sich kurz an und geben Sie mir Feedback direkt als Kommentar im Dokument (bitte nichts überschreiben).
+
+👉 Review-Link: {REVIEW_LINK}
+
+Bitte prüfen / freigeben:
+- Titel & Kurzbeschreibung
+- Bulletpoints (Was Sie erwartet)
+- Referenten-Bio (kurz)
+- Termin / Dauer / Ort (falls angegeben)
+
+Bitte hochladen:
+- 1 Foto von Ihnen (Portrait, gerne quadratisch oder Hochformat - PNG bevorzugt, transparenter Hintergrund wenn möglich)
+- Firmenlogo (PNG bevorzugt, transparenter Hintergrund wenn möglich)
+
+Deadline: {DEADLINE}
+
+Vielen Dank!
+Mit freundlichen Grüßen
+Pete
+TPL;
+
+        $templateText = $duzen ? $templateDu : $templateSie;
+
         // Deadline als deutsches Datum formatieren
         $deadlineDe = $this->formatDeadlineDe($deadline);
 
         // Platzhalter ersetzen
         $emailText = str_replace(
-            ['{VORNAME}', '{REVIEW_LINK}', '{DEADLINE}'],
-            [$vorname, $reviewUrl, $deadlineDe],
+            ['{VORNAME}', '{NACHNAME}', '{REVIEW_LINK}', '{DEADLINE}'],
+            [$vorname, $nachname, $reviewUrl, $deadlineDe],
             $templateText
         );
 
@@ -576,7 +649,9 @@ TPL;
         // ✓-Zeilen extrahieren: nach > oder Zeilenanfang
         preg_match_all('/(?:^|>)\s*[✓✔]\s*([^<]+)/u', $section, $matches);
         if (!empty($matches[1])) {
-            return array_values(array_filter(array_map('trim', $matches[1])));
+            return array_values(array_filter(array_map(function($s) {
+                return html_entity_decode(trim($s), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            }, $matches[1])));
         }
         return [];
     }

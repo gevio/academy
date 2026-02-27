@@ -101,7 +101,15 @@ if ($startRaw) {
 } else {
     $feedbackActive = true;
 }
-
+// Kalender-Funktion aktiv ab 01.06.2026 ──────────────┤
+$calendarActive = false;
+try {
+    $now = new DateTime('now', new DateTimeZone('Europe/Berlin'));
+    $releaseDate = new DateTime('2026-06-01 00:00:00', new DateTimeZone('Europe/Berlin'));
+    $calendarActive = ($now >= $releaseDate);
+} catch (Exception $e) {
+    $calendarActive = false;
+}
 // Preview-Override: ?preview=1 erzwingt Freischaltung
 if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     $feedbackActive = true;
@@ -197,13 +205,22 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                 </div>
             <?php endif; ?>
 
-            <!-- Kalender-Download -->
-            <a href="/w/<?= $id ?>/ical" class="action-card">
-                <span class="action-icon">📅</span>
-                <span class="action-label">Zum Kalender</span>
-                <span class="action-desc">Termin in deinen Kalender eintragen</span>
-            </a>
-
+            <!-- Kalender-Download (ab 01.06.2026) -->
+            <?php if ($calendarActive): ?>
+                <a href="/w/<?= $id ?>/ical" class="action-card">
+                    <span class="action-icon">📅</span>
+                    <span class="action-label">Zum Kalender</span>
+                    <span class="action-desc">Termin in deinen Kalender eintragen</span>
+                </a>
+            <?php else: ?>
+                <div class="action-card card-locked">
+                    <span class="action-icon">🔒</span>
+                    <span class="action-label">Zum Kalender</span>
+                    <span class="action-desc">
+                        Wird freigeschaltet ab 01.06.2026
+                    </span>
+                </div>
+            <?php endif; ?>
 
         </nav>
 
