@@ -175,7 +175,7 @@
                 const resp = await fetch(API_URL);
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const data = await resp.json();
-                allExperten = shuffleArray(data.experten || []);
+                allExperten = shuffleArray((data.experten || []).filter(e => e.name !== 'N.N.'));
                 populateKatFilter();
                 renderList();
             } catch (err) {
