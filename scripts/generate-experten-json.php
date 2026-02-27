@@ -79,7 +79,10 @@ if (!NOTION_REFERENTEN_DB) {
 }
 
 // ── 0) Workshops-Index laden (ID → Kurzinfo) ──
+//    Zusätzlich: Reverse-Lookup Person-ID → Workshop-IDs
+//    Führend ist die Workshop-DB (referent_persons), NICHT die Referenten-DB-Relation.
 $workshopIndex = [];
+$personToWorkshops = []; // person_id (ohne Bindestriche) → [workshop_id, ...]
 if (file_exists($wsFile)) {
     $wsData = json_decode(file_get_contents($wsFile), true);
     foreach (($wsData['workshops'] ?? []) as $ws) {
@@ -94,8 +97,16 @@ if (file_exists($wsFile)) {
             'status'     => $ws['status'] ?? '',
             'aussteller' => $ws['aussteller'] ?? [],
         ];
+        // Reverse-Lookup: welche Personen sind als Referent im Workshop eingetragen?
+        foreach ($ws['referent_persons'] ?? [] as $person) {
+            $personId = str_replace('-', '', $person['id'] ?? '');
+            if ($personId) {
+                $personToWorkshops[$personId][] = $ws['id'];
+            }
+        }
     }
-    echo "📋 " . count($workshopIndex) . " Workshops als Lookup geladen.\n\n";
+    echo "📋 " . count($workshopIndex) . " Workshops als Lookup geladen.\n";
+    echo "📋 " . count($personToWorkshops) . " Personen↔Workshop-Zuordnungen (aus Workshop-DB).\n\n";
 } else {
     echo "⚠ workshops.json nicht gefunden. Workshop-Verknüpfung wird übersprungen.\n\n";
 }
@@ -116,13 +127,15 @@ $result = [];
 $skipped = 0;
 
 foreach ($referenten as $ref) {
-    // Workshop-IDs aus Relation → gegen workshopIndex matchen
-    // Nur Workshops mit Status "Referent bestätigt" einbeziehen
+    // Workshop-Zuordnung über Reverse-Lookup aus der Workshop-DB (referent_persons).
+    // Die Workshop-DB ist führend – NICHT die Relation in der Referenten-DB,
+    // da diese auch inverse/bidirektionale Relationen enthalten kann.
     $workshops = [];
-    foreach ($ref['workshop_ids'] as $wsPageId) {
-        $cleanId = str_replace('-', '', $wsPageId);
-        if (isset($workshopIndex[$cleanId])) {
-            $wsEntry = $workshopIndex[$cleanId];
+    $refCleanId = $ref['id']; // bereits ohne Bindestriche
+    $allowedWsIds = $personToWorkshops[$refCleanId] ?? [];
+    foreach ($allowedWsIds as $wsId) {
+        if (isset($workshopIndex[$wsId])) {
+            $wsEntry = $workshopIndex[$wsId];
             if (($wsEntry['status'] ?? '') === 'Referent bestätigt') {
                 $workshops[] = $wsEntry;
             }
