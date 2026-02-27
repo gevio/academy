@@ -187,10 +187,13 @@
                 ${renderReferentFirma(ws)}
             </div>`;
 
+            // Kalender-Funktion aktiv ab 01.06.2026
+            const calendarActive = new Date() >= new Date('2026-06-01T00:00:00+02:00');
+
             // Action Buttons
             html += `<div class="detail-actions">
                 <a href="/w/${ws.id}/qa" class="btn btn-primary">💬 Frage stellen</a>
-                <a href="/w/${ws.id}/ical" class="btn btn-secondary">📅 Kalender</a>
+                ${calendarActive ? `<a href="/w/${ws.id}/ical" class="btn btn-secondary">📅 Kalender</a>` : ''}
                 <button class="btn btn-secondary fav-toggle" id="fav-toggle" data-id="${ws.id}">
                     ${isFav ? '❤️ Gemerkt' : '🤍 Merken'}
                 </button>
