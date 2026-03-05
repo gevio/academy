@@ -221,10 +221,10 @@
             if (ws.has_content && ws.content_html) {
                 // Wenn Content nicht mit einer Überschrift beginnt, Standard-Heading einfügen
                 const startsWithHeading = /^\s*<h[1-6]\b/i.test(ws.content_html);
-                const heading = startsWithHeading ? '' : '<h2>Über diesen Vortrag</h2>';
+                const heading = startsWithHeading ? '' : '<h3>Über diesen Vortrag</h3>';
                 html += '<div class="detail-body">' + heading + ws.content_html + '</div>';
             } else if (ws.beschreibung) {
-                html += '<div class="detail-body"><h2>Über diesen Vortrag</h2><p>' + escapeHtml(ws.beschreibung) + '</p></div>';
+                html += '<div class="detail-body"><h3>Über diesen Vortrag</h3><p>' + escapeHtml(ws.beschreibung) + '</p></div>';
             } else {
                 html += '<div class="empty">Keine weiteren Details verfügbar.</div>';
             }
