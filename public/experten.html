@@ -28,9 +28,11 @@
             <input type="search" class="search-input" id="search-input" placeholder="Experte suchen…" autocomplete="off">
         </div>
 
-        <!-- Kategorie-Filter -->
-        <div class="kat-filters" id="kat-filters">
-            <button class="kat-filter-btn active" data-kat="all">Alle</button>
+        <!-- Kategorie-Filter (Dropdown) -->
+        <div class="filter-bar-experten">
+            <select id="kat-filter" class="kat-select">
+                <option value="all">Alle Kategorien</option>
+            </select>
         </div>
 
         <!-- Zähler -->
@@ -145,7 +147,7 @@
         }
 
         function populateKatFilter() {
-            const container = document.getElementById('kat-filters');
+            const select = document.getElementById('kat-filter');
             // Sammle Referent-Kategorie + Workshop-Kategorien
             const katSet = new Set();
             allExperten.forEach(e => {
@@ -154,11 +156,10 @@
             });
             const kats = [...katSet].sort();
             kats.forEach(k => {
-                const btn = document.createElement('button');
-                btn.className = 'kat-filter-btn';
-                btn.dataset.kat = k;
-                btn.textContent = k;
-                container.appendChild(btn);
+                const opt = document.createElement('option');
+                opt.value = k;
+                opt.textContent = k;
+                select.appendChild(opt);
             });
         }
 
@@ -191,12 +192,8 @@
             renderList();
         });
 
-        document.getElementById('kat-filters').addEventListener('click', (e) => {
-            const btn = e.target.closest('.kat-filter-btn');
-            if (!btn) return;
-            document.querySelectorAll('.kat-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentKat = btn.dataset.kat;
+        document.getElementById('kat-filter').addEventListener('change', (e) => {
+            currentKat = e.target.value;
             renderList();
         });
 
