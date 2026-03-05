@@ -350,6 +350,17 @@
     padding: .7rem 1rem;
 }
 
+/* ── Detail Body (Workshop-Content) ── */
+.detail-body {
+    margin-top: 1.5rem;
+    line-height: 1.7;
+}
+.detail-body h2 {
+    font-size: 1.1rem;
+    margin: 0 0 .6rem;
+    color: var(--text);
+}
+
 /* ── Empty State ── */
 .workshop-list .empty {
     text-align: center;
