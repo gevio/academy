@@ -104,6 +104,9 @@
          * Firma ist anklickbar wenn der Aussteller existiert → öffnet Standplan.
          */
         function renderReferentFirma(ws) {
+            // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
+            if (ws.status !== 'Referent bestätigt') return '';
+
             const persons = ws.referent_persons || [];
             const firmaText = ws.referent_firma || '';
             const aussteller = ws.aussteller || [];

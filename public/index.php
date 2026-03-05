@@ -40,10 +40,14 @@ if (file_exists($jsonFile)) {
     foreach (($jsonData['workshops'] ?? []) as $jws) {
         if ($jws['id'] === $cleanId) {
             $kategorien = $jws['kategorien'] ?? [];
-            $referentFirma = $jws['referent_firma'] ?? '';
-            $referentPerson = $jws['referent_person'] ?? '';
-            $referentPersons = $jws['referent_persons'] ?? [];
-            $aussteller = $jws['aussteller'] ?? [];
+            $wsStatus = $jws['status'] ?? '';
+            // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
+            if ($wsStatus === 'Referent bestätigt') {
+                $referentFirma = $jws['referent_firma'] ?? '';
+                $referentPerson = $jws['referent_person'] ?? '';
+                $referentPersons = $jws['referent_persons'] ?? [];
+                $aussteller = $jws['aussteller'] ?? [];
+            }
             break;
         }
     }

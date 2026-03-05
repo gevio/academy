@@ -106,7 +106,8 @@
   // ── Kategorie Filter ──
 
   function populateKatFilter() {
-    const container = document.getElementById('tag-filters');
+    const select = document.getElementById('kat-filter');
+    if (!select) return;
     // Sammle Aussteller-Kategorie + Workshop-Kategorien
     const katSet = new Set();
     allAussteller.forEach(a => {
@@ -116,26 +117,10 @@
     const kats = [...katSet].sort();
 
     kats.forEach(kat => {
-      const btn = document.createElement('button');
-      btn.className = 'tag-btn';
-      btn.dataset.tag = kat;
-      btn.textContent = kat;
-      btn.addEventListener('click', () => {
-        currentKat = currentKat === kat ? 'all' : kat;
-        updateKatUI();
-        renderList();
-      });
-      container.appendChild(btn);
-    });
-  }
-
-  function updateKatUI() {
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-      if (btn.dataset.tag === 'all') {
-        btn.classList.toggle('active', currentKat === 'all');
-      } else {
-        btn.classList.toggle('active', btn.dataset.tag === currentKat);
-      }
+      const opt = document.createElement('option');
+      opt.value = kat;
+      opt.textContent = kat;
+      select.appendChild(opt);
     });
   }
 
@@ -150,13 +135,20 @@
     }
 
     if (currentSearch) {
-      const q = currentSearch.toLowerCase();
-      list = list.filter(a =>
-        a.firma.toLowerCase().includes(q) ||
-        (a.stand || '').toLowerCase().includes(q) ||
-        (a.beschreibung || '').toLowerCase().includes(q) ||
-        (a.kategorien || []).some(k => k.toLowerCase().includes(q))
-      );
+      const q = currentSearch.trim();
+      // Regex mit Wortgrenze für präzisere Treffer
+      const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp('\\b' + escaped, 'i');
+
+      list = list.filter(a => {
+        // Firma und Stand immer durchsuchen
+        if (re.test(a.firma)) return true;
+        if (re.test(a.stand || '')) return true;
+        if ((a.kategorien || []).some(k => re.test(k))) return true;
+        // Beschreibung nur bei >= 3 Zeichen durchsuchen
+        if (q.length >= 3 && re.test(a.beschreibung || '')) return true;
+        return false;
+      });
     }
 
     return list;
@@ -464,15 +456,13 @@
     });
   }
 
-  function initKatFilters() {
-    const allBtn = document.querySelector('.tag-btn[data-tag="all"]');
-    if (allBtn) {
-      allBtn.addEventListener('click', () => {
-        currentKat = 'all';
-        updateKatUI();
-        renderList();
-      });
-    }
+  function initKatFilter() {
+    const select = document.getElementById('kat-filter');
+    if (!select) return;
+    select.addEventListener('change', () => {
+      currentKat = select.value;
+      renderList();
+    });
   }
 
   function initMapClose() {
@@ -486,7 +476,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     initSearch();
-    initKatFilters();
+    initKatFilter();
     initMapClose();
     loadData().then(() => {
       // Deep-Link: #id=xxx beim Laden auswerten

@@ -242,6 +242,9 @@
   }
 
   function formatReferent(ws) {
+    // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
+    if (ws.status !== 'Referent bestätigt') return '';
+
     const persons = ws.referent_persons || [];
     const firma = ws.referent_firma || '';
     const aussteller = ws.aussteller || [];
@@ -284,7 +287,8 @@
     </div>`;
 
     // Meta-Zeile: Zeit, Ort, Referent
-    const referentHtml = `<span class="meta-item">🎤 ${formatReferent(ws)}</span>`;
+    const referentStr = formatReferent(ws);
+    const referentHtml = referentStr ? `<span class="meta-item">🎤 ${referentStr}</span>` : '';
 
     return `
       <div class="prog-card" data-id="${ws.id}">
