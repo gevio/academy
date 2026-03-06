@@ -78,7 +78,6 @@ $msg = htmlspecialchars($_GET['msg'] ?? '');
     </header>
     <div class="logo-bar">
         <a href="/"><img src="/img/logo-southside.png" alt="Adventure Southside"></a>
-        <a href="/"><img src="/img/logo-academy.png" alt="Selbstausbauer Academy"></a>
     </div>
     <main>
         <h1>💬 <?= $title ?></h1>

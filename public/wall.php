@@ -43,7 +43,6 @@ $openQuestions = array_filter($questions, fn($q) => $q['status'] === 'Offen');
 <body>
     <div class="logo-bar">
         <img src="/img/logo-southside.png" alt="Adventure Southside">
-        <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
     </div>
     <div class="wall-header">
         <h1>💬 <?= $title ?></h1>

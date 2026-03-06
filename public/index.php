@@ -145,7 +145,6 @@ if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET,
     <div class="hero">
         <a href="/" class="hero-top">
             <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
-            <img src="/img/logo-academy.png" alt="Selbstausbauer Academy" class="hero-logo">
         </a>
         <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
     </div>
