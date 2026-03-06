@@ -172,6 +172,7 @@ foreach ($workshops as $ws) {
         'aussteller'   => resolveAussteller($ws['aussteller_ids'] ?? [], $ausstellerIndex),
         'content_html' => $contentHtml,
         'has_content'  => $hasContent,
+        'qa_enabled'   => $ws['qa_enabled'] ?? false,
     ];
 
     echo($hasContent ? "✓" : "○") . " (" . strlen($contentHtml) . " bytes)\n";

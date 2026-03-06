@@ -80,7 +80,9 @@ public function createFeedback(
     int $organisation,
     int $gesamt,
     string $kommentar = '',
-    string $deviceId = ''
+    string $deviceId = '',
+    int $appBewertung = 0,
+    string $appKommentar = ''
 ): ?array {
     $now = (new DateTime())->format('c');
     $properties = [
@@ -105,6 +107,13 @@ public function createFeedback(
     if ($deviceId) {
         $properties['Device-ID'] = [
             'rich_text' => [['text' => ['content' => $deviceId]]],
+        ];
+    }
+
+    if ($appBewertung > 0) {
+        $properties['App-Bewertung'] = ['number' => $appBewertung];
+        $properties['App-Kommentar'] = [
+            'rich_text' => [['text' => ['content' => $appKommentar]]],
         ];
     }
 
@@ -711,6 +720,7 @@ TPL;
                     'referent_firma_ids'  => array_column($props['Referenten (Firma)']['relation'] ?? [], 'id'),
                     'referent_person_ids' => array_column($props['Referent (Person)']['relation'] ?? [], 'id'),
                     'aussteller_ids'      => array_column($props['Aussteller (AS26)']['relation'] ?? [], 'id'),
+                    'qa_enabled'          => ($props['Fragen erlauben?']['checkbox'] ?? false) === true,
                 ];
             }
 

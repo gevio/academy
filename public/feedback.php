@@ -36,6 +36,10 @@ if ($startRaw) {
 if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     $feedbackActive = true;
 }
+// Admin-Override: ?secret=ADMIN_SECRET erzwingt Freischaltung
+if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET, $_GET['secret'])) {
+    $feedbackActive = true;
+}
 
 // ── POST: Feedback absenden ──
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -70,8 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $gesamt        = max(1, min(5, (int)($_POST['gesamt'] ?? 0)));
         $kommentar     = mb_substr(trim($_POST['kommentar'] ?? ''), 0, 500);
 
+        // App-Feedback (optional, 0 = nicht ausgefüllt)
+        $appBewertung  = max(0, min(5, (int)($_POST['app_bewertung'] ?? 0)));
+        $appKommentar  = mb_substr(trim($_POST['app_kommentar'] ?? ''), 0, 300);
+
         // Webhook-First mit Device-ID
-        $webhookOk = postToWebhook(N8N_FEEDBACK_WEBHOOK, [
+        $webhookPayload = [
             'workshop_id'   => $id,
             'inhalt'        => $inhalt,
             'praesentation' => $praesentation,
@@ -79,12 +87,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'gesamt'        => $gesamt,
             'kommentar'     => $kommentar,
             'device_id'     => $deviceId,
-        ]);
+        ];
+        if ($appBewertung > 0) {
+            $webhookPayload['app_bewertung'] = $appBewertung;
+            $webhookPayload['app_kommentar'] = $appKommentar;
+        }
+        $webhookOk = postToWebhook(N8N_FEEDBACK_WEBHOOK, $webhookPayload);
 
         // Fallback: direkte Notion API
         if (!$webhookOk) {
             $result = $notion->createFeedback(
-                $id, $inhalt, $praesentation, $organisation, $gesamt, $kommentar, $deviceId
+                $id, $inhalt, $praesentation, $organisation, $gesamt, $kommentar, $deviceId,
+                $appBewertung, $appKommentar
             );
             $success = $result !== null;
         } else {
@@ -171,8 +185,40 @@ $title = htmlspecialchars($workshop['title'] ?? 'Workshop');
                               maxlength="500" placeholder="Was hat dir gefallen? Was können wir besser machen?"></textarea>
                 </div>
 
+                <!-- App-Feedback (nur 1x pro Gerät) -->
+                <div id="app-feedback-section" style="display:none;margin-top:1.5rem;padding-top:1.2rem;border-top:2px solid var(--border,#e0d8d3)">
+                    <p style="font-size:.9rem;font-weight:700;color:var(--as-braun-dark,#372F2C);margin-bottom:.6rem">📱 Kurze Frage zur App</p>
+                    <div class="rating-group">
+                        <label>Wie gefällt dir die AS26 Live App?</label>
+                        <div class="stars" data-name="app_bewertung"></div>
+                        <input type="hidden" name="app_bewertung" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="app_kommentar">Was können wir an der App verbessern? (optional)</label>
+                        <textarea name="app_kommentar" id="app_kommentar" rows="2"
+                                  maxlength="300" placeholder="z. B. Funktionen, Navigation, Design…"></textarea>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-block">Feedback absenden</button>
             </form>
+            <script>
+            // App-Feedback nur anzeigen wenn noch nicht abgegeben
+            (function() {
+                if (!localStorage.getItem('asa_app_feedback_done')) {
+                    document.getElementById('app-feedback-section').style.display = '';
+                }
+                var form = document.getElementById('feedback-form');
+                if (form) {
+                    form.addEventListener('submit', function() {
+                        var appVal = form.querySelector('[name="app_bewertung"]').value;
+                        if (appVal && appVal !== '0') {
+                            localStorage.setItem('asa_app_feedback_done', '1');
+                        }
+                    });
+                }
+            })();
+            </script>
         <?php endif; ?>
     </main>
     <script src="/js/app.js"></script>

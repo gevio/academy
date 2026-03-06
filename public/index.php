@@ -32,6 +32,7 @@ $kategorien = [];
 $referentFirma = '';
 $referentPerson = '';
 $aussteller = [];
+$qaEnabled = false;
 $cleanId = str_replace('-', '', $id);
 
 $jsonFile = __DIR__ . '/api/workshops.json';
@@ -41,6 +42,7 @@ if (file_exists($jsonFile)) {
         if ($jws['id'] === $cleanId) {
             $kategorien = $jws['kategorien'] ?? [];
             $wsStatus = $jws['status'] ?? '';
+            $qaEnabled = $jws['qa_enabled'] ?? false;
             // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
             if ($wsStatus === 'Referent bestätigt') {
                 $referentFirma = $jws['referent_firma'] ?? '';
@@ -118,6 +120,10 @@ try {
 if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     $feedbackActive = true;
 }
+// Admin-Override: ?secret=ADMIN_SECRET erzwingt Freischaltung
+if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET, $_GET['secret'])) {
+    $feedbackActive = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -182,12 +188,14 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
                 <span class="action-desc">Ausführliche Workshop-Infos</span>
             </a>
 
-            <!-- Q&A: immer aktiv (Fragen auch vorab möglich) -->
+            <!-- Q&A: nur wenn "Fragen erlauben?" aktiv -->
+            <?php if ($qaEnabled): ?>
             <a href="/w/<?= $id ?>/qa" class="action-card">
                 <span class="action-icon">💬</span>
                 <span class="action-label">Frage stellen</span>
                 <span class="action-desc">Stelle vorab oder live eine Frage</span>
             </a>
+            <?php endif; ?>
 
             <!-- Feedback: erst ab Workshop-Start -->
             <?php if ($feedbackActive): ?>
@@ -238,7 +246,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
         <p>Adventure Southside 2026</p>
         <div class="footer-cta-row">
             <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn">🎫 Ticket sichern</a>
-            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten & Standplan – alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Referenten & Standplan – alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
         </div>
         <p>
             <a href="/impressum.html">Impressum & Datenschutz</a>
@@ -250,6 +258,18 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/service-worker.js');
     }
+
+    // ── Admin: Feedback-Link mit Secret versehen ──
+    (function() {
+        var secret = sessionStorage.getItem('asa_admin_secret');
+        if (secret) {
+            document.querySelectorAll('a[href*="/feedback"]').forEach(function(a) {
+                var url = new URL(a.href, location.origin);
+                url.searchParams.set('secret', secret);
+                a.href = url.pathname + url.search;
+            });
+        }
+    })();
 
     // ── Back-Link mit Filter-State ──
     (function() {

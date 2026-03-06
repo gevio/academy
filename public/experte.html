@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#372F2C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Experte – AS26 Live</title>
+    <title>Referent – AS26 Live</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
     <link rel="apple-touch-icon" href="/img/icon-192.png">
@@ -35,7 +35,7 @@
         <p>Adventure Southside 2026</p>
         <div class="footer-cta-row">
             <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn">🎫 Ticket sichern</a>
-            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Experten & Standplan – alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Referenten & Standplan – alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
         </div>
         <p>
             <a href="/impressum.html">Impressum & Datenschutz</a>
@@ -128,7 +128,7 @@
 
             // Zurück-Buttons
             html += `<div style="max-width:600px;margin:1.5rem auto;text-align:center;padding:0 1.25rem 2rem">
-                <a href="/experten.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem">← Alle Experten</a>
+                <a href="/experten.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem">← Alle Referenten</a>
                 <a href="/programm.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem;margin-left:.5rem">📋 Programm</a>
             </div>`;
 
@@ -143,7 +143,7 @@
         async function load() {
             const id = getExperteId();
             if (!id) {
-                showError('Kein Experte ausgewählt. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                showError('Kein Referent ausgewählt. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
                 return;
             }
 
@@ -154,7 +154,7 @@
                 const exp = (data.experten || []).find(e => e.id === id);
 
                 if (!exp) {
-                    showError('Experte nicht gefunden. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                    showError('Referent nicht gefunden. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
                     return;
                 }
 
