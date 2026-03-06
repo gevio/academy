@@ -1,6 +1,6 @@
 {
-    "generated": "2026-02-27T14:30:46+01:00",
-    "count": 162,
+    "generated": "2026-03-06T12:59:07+01:00",
+    "count": 194,
     "aussteller": [
         {
             "id": "32c779c65cfd42c982f0a46a2b02c94c",
@@ -69,7 +69,7 @@
             "stand": "A5-12",
             "beschreibung": "ADAC-Vertriebsagentur mit Präsenz auf Messen und Events in Süddeutschland. Informiert Besucher über ADAC-Leistungen und bietet Mitmach-Aktionen wie Fahrsimulatoren und Aktionsgeräte.",
             "kategorien": [
-                "Sonstiges"
+                "Club/Verein/IG"
             ],
             "website": "https://novoselgmbh.de",
             "domain": "novoselgmbh.de",
@@ -140,13 +140,71 @@
             "stand_h": null
         },
         {
+            "id": "2e020cdbbe9344afb7178a2cd7f00745",
+            "page_id": "2e020cdb-be93-44af-b717-8a2cd7f00745",
+            "firma": "AFRIKASIA.DE",
+            "stand": "A3-14",
+            "beschreibung": "Onlineshop für handgefertigten Silber- und Tuaregschmuck sowie Kunsthandwerk aus Afrika und Asien. Über 30 Jahre Erfahrung im fairen Direkteinkauf bei Kunsthandwerker-Familien vor Ort.",
+            "kategorien": [
+                "Bekleidung/Taschen/Accessoires"
+            ],
+            "website": "https://afrikasia.de",
+            "domain": "afrikasia.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.afrikasia.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/2e020cdbbe9344afb7178a2cd7f00745.webp",
+            "stand_x": 28.9,
+            "stand_y": 7.2,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80da8000f0998a2768d4",
+            "page_id": "3189c964-c82f-80da-8000-f0998a2768d4",
+            "firma": "Airpathsolutions",
+            "stand": "A5-120",
+            "beschreibung": "Air Path Solutions ist Ihr Experte für hochwertige Warmluftweichen. Mit unserer innovativen Technologie können Camper ihre Standheizungen effizient steuern und die Luftströmung gezielt lenken. Unser Ziel ist es, Komfort und Funktionalität für Campingbegeisterte zu maximieren, indem wir eine optimale Luftzirkulation in verschiedenen Bereichen schaffen.",
+            "kategorien": [
+                "Heizung & Klima"
+            ],
+            "website": "https://www.airpathsolutions.de",
+            "domain": "airpathsolutions.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.airpathsolutions.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80da8000f0998a2768d4.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80f79001c06590de9778",
+            "page_id": "3189c964-c82f-80f7-9001-c06590de9778",
+            "firma": "Allrad Keba",
+            "stand": "A4-314",
+            "beschreibung": "Allrad KEBA ist seit über 30 Jahren Ihr Spezialist rund um den Toyota Landcruiser.",
+            "kategorien": [
+                "Offroad-Zubehör",
+                "Werkstatt"
+            ],
+            "website": "http://www.allrad-keba.de",
+            "domain": "allrad-keba.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.allrad-keba.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80f79001c06590de9778.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "0701739f61a3464d843953ddffcd3819",
             "page_id": "0701739f-61a3-464d-8439-53ddffcd3819",
             "firma": "Arturs Gourmet",
             "stand": "A3-8",
             "beschreibung": "Catering-Service mit Gourmet-Küche für Events und Veranstaltungen.",
             "kategorien": [
-                "Catering"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "",
             "domain": "",
@@ -184,14 +242,33 @@
             "stand": "A5-16",
             "beschreibung": "Australien-Shop mit breitem Sortiment an Outdoor-Bekleidung, Lederhüten, Wachsjacken, Stiefeln sowie australischen Lebensmitteln und Souvenirs. Ladengeschäft und Onlineversand aus Münster.",
             "kategorien": [
-                "Outdoor & Bushcraft",
-                "Bekleidung & Accessoires"
+                "Outdoor Gear",
+                "Bekleidung/Taschen/Accessoires"
             ],
             "website": "https://australien-lifestyle.de",
             "domain": "australien-lifestyle.de",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.australien-lifestyle.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/063b07661d13493686d1fafff74cfccd.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f806b9cdbd3aa6703c9e6",
+            "page_id": "3189c964-c82f-806b-9cdb-d3aa6703c9e6",
+            "firma": "Autohaus Gratzke GmbH",
+            "stand": "FG-1012",
+            "beschreibung": "Verlässlich, fair und kompetent – Wir sind Ihr Partner für die Marke MITSUBISHI MOTORS in und um Stuttgart. Profitieren Sie von unserer langjährigen Erfahrung und unserem Fachwissen.",
+            "kategorien": [
+                "Kabinen (Pickup & LKW)"
+            ],
+            "website": "https://www.gratzke-autohaus.de",
+            "domain": "gratzke-autohaus.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.gratzke-autohaus.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f806b9cdbd3aa6703c9e6.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -220,7 +297,7 @@
         {
             "id": "c7b0e99404fd4f52ab38bb9ff30018fe",
             "page_id": "c7b0e994-04fd-4f52-ab38-bb9ff30018fe",
-            "firma": "be.overland",
+            "firma": "be.overland s.r.o.",
             "stand": "A5-900",
             "beschreibung": "Handgefertigte Outdoor-Accessoires aus hochwertigem Edelstahl – Grills, Feuerstellen und nützliches Zubehör für Camping und Overlanding. Manufaktur aus der Slowakei.",
             "kategorien": [
@@ -244,7 +321,8 @@
             "stand": "A3-407",
             "beschreibung": "Spezialist für belgische Naturschleifsteine aus den Ardennen – hochwertige Wetzsteine zum Schärfen von Messern und Werkzeugen, handgefertigt seit 1625.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Outdoor Gear",
+                "Kochen und Grillen"
             ],
             "website": "http://www.belgischerbrocken.com",
             "domain": "belgischerbrocken.com",
@@ -257,11 +335,68 @@
             "stand_h": null
         },
         {
+            "id": "5dc61a79d7114c9f958fbc5f4458983a",
+            "page_id": "5dc61a79-d711-4c9f-958f-bc5f4458983a",
+            "firma": "BENT",
+            "stand": "FW-209",
+            "beschreibung": "BENT – verbindbare Sonnensegel mit Reißverschluss-System, Fahrzeugadapter und stylische Outdoor-Chill-Areas. Leicht aufgebaut, für alle Fahrzeugtypen.",
+            "kategorien": [
+                "Camping & Zubehör"
+            ],
+            "website": "http://www.bent-club.com",
+            "domain": "bent-club.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.bent-club.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/5dc61a79d7114c9f958fbc5f4458983a.webp",
+            "stand_x": 72.2,
+            "stand_y": 59.2,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80568cdfddbc8e7d0ee0",
+            "page_id": "3189c964-c82f-8056-8cdf-ddbc8e7d0ee0",
+            "firma": "BerlinBox UG",
+            "stand": "A4-317",
+            "beschreibung": "Wir sind Carlen & Alex und seit über 25 Jahren ein Team. Seit Ende der 90er bereisen wir Nordafrika im Allrad Van. Die Wüsten der Welt habe es uns angetan.",
+            "kategorien": [
+                "Touren"
+            ],
+            "website": "https://www.meeralssand.de",
+            "domain": "meeralssand.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.meeralssand.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80568cdfddbc8e7d0ee0.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f801c9520ec10ac0329da",
+            "page_id": "3189c964-c82f-801c-9520-ec10ac0329da",
+            "firma": "Billys Composite",
+            "stand": "A3-225",
+            "beschreibung": "Billys Composite ist eine abnehmbare Wohnkabine, die auf der Ladefläche von Pick-ups montiert werden kann, egal ob es sich um Doppelkabinen- oder verlängerte Kabinenmodelle handelt. Sie ist in zwei Längen erhältlich: 2,10 m für Doppelkabinen und 2,40 m für Crew Cabs.",
+            "kategorien": [
+                "Kabinen (Pickup & LKW)"
+            ],
+            "website": "https://cellulepickup.fr",
+            "domain": "cellulepickup.fr",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.cellulepickup.fr?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f801c9520ec10ac0329da.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "3119c964c82f80728246cc4c39b07b52",
             "page_id": "3119c964-c82f-8072-8246-cc4c39b07b52",
             "firma": "Boxmanufaktur",
-            "stand": "",
-            "beschreibung": "",
+            "stand": "A5-435",
+            "beschreibung": "Mit großer Liebe zum Detail planen, konstruieren und fertigen wir seit fast 4 Jahrzehnten individuelle Leerkabinen und Expeditionsmobile ohne Kompromisse.",
             "kategorien": [
                 "Kabinen (Pickup & LKW)"
             ],
@@ -296,6 +431,27 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f809db264d60782b1b258",
+            "page_id": "3189c964-c82f-809d-b264-d60782b1b258",
+            "firma": "Bushcraft Spain",
+            "stand": "FG-1006",
+            "beschreibung": "Bushcraft is more than just a set of skills for living in the forest – it’s a way of life. At Bushcraft Spain, we embrace the romance of classic camping and expeditions, where people tested their resourcefulness and ingenuity. Like our grandparents before us, we believe in living comfortably while respecting the natural environment.",
+            "kategorien": [
+                "Bekleidung/Taschen/Accessoires",
+                "Camping & Zubehör",
+                "Outdoor Gear"
+            ],
+            "website": "https://bushcraftspain.es",
+            "domain": "bushcraftspain.es",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.bushcraftspain.es?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f809db264d60782b1b258.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "dca54c85c5924ea9bda79781dc3d0454",
             "page_id": "dca54c85-c592-4ea9-bda7-9781dc3d0454",
             "firma": "Campdesign",
@@ -303,7 +459,7 @@
             "beschreibung": "Hersteller innovativer Campingmöbel – Eurobox-Tische mit Magnetfunktion für optimale Ordnung im Camper. Clevere Lösungen für Küche und Stauraum im Fahrzeugausbau.",
             "kategorien": [
                 "Fahrzeugausbau",
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "http://www.campdesign.de",
             "domain": "campdesign.de",
@@ -322,7 +478,7 @@
             "stand": "A5-8",
             "beschreibung": "Shop für Van-Selbstausbauer – innovative Markisen, Dachträgersysteme, Innenausbau-Zubehör und clevere Camping-Lösungen. Eigenentwicklungen wie die freitragende Camper & Go Markise.",
             "kategorien": [
-                "Campervans & Kastenwagen",
+                "Campervans",
                 "Vermietung"
             ],
             "website": "http://www.camper-and-go.com",
@@ -349,7 +505,7 @@
             "domain": "azalai.ch",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.azalai.ch?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
+            "logo_local": "/img/aussteller/95ceaa5517b048019baf932142424f2d.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -358,7 +514,7 @@
         {
             "id": "aed2446426ef46199c0827142ffc7b16",
             "page_id": "aed24464-26ef-4619-9c08-27142ffc7b16",
-            "firma": "Camping Revolution 3",
+            "firma": "Camping Revolution",
             "stand": "A5-105",
             "beschreibung": "Anbieter von Camping-Zubehör und innovativen Produkten für Outdoor- und Campingbegeisterte.",
             "kategorien": [
@@ -401,7 +557,7 @@
             "stand": "A3-20",
             "beschreibung": "Erfinderin des CAROSMART® Rucksacks – ein patentierter Laptop-Rucksack mit integriertem Sitzhocker und Arbeitsfläche. Nachhaltig produziert aus bluesign®-zertifiziertem Material.",
             "kategorien": [
-                "Zubehör"
+                "Bekleidung/Taschen/Accessoires"
             ],
             "website": "http://www.carosmart.de",
             "domain": "carosmart.de",
@@ -420,7 +576,7 @@
             "stand": "FGO-10",
             "beschreibung": "Bio-Eismanufaktur aus Weisenheim – handgefertigtes Premium-Eis aus 100 % bio-zertifizierten Zutaten ohne Farbstoffe, Aromen oder Ei. Kreative Sorten wie Salz-Karamell mit Mandel. Auch mit mobilem Eiswagen verfügbar.",
             "kategorien": [
-                "Catering"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "https://www.charme-du-sud.de/eismanufaktur/",
             "domain": "charme-du-sud.de",
@@ -433,52 +589,13 @@
             "stand_h": null
         },
         {
-            "id": "2e020cdbbe9344afb7178a2cd7f00745",
-            "page_id": "2e020cdb-be93-44af-b717-8a2cd7f00745",
-            "firma": "Christine Zimmermann",
-            "stand": "A3-14",
-            "beschreibung": "Onlineshop für handgefertigten Silber- und Tuaregschmuck sowie Kunsthandwerk aus Afrika und Asien. Über 30 Jahre Erfahrung im fairen Direkteinkauf bei Kunsthandwerker-Familien vor Ort.",
-            "kategorien": [
-                "Touren",
-                "Media"
-            ],
-            "website": "https://afrikasia.de",
-            "domain": "afrikasia.de",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.afrikasia.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 28.9,
-            "stand_y": 7.2,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
-            "id": "a2992910a3a04c7aa812718e3d4fbf57",
-            "page_id": "a2992910-a3a0-4c7a-a812-718e3d4fbf57",
-            "firma": "cmpny one GmbH",
-            "stand": "FG-1008",
-            "beschreibung": "Unternehmensgruppe für mobiles Arbeiten und Leben – offizieller Autoterm-Premiumpartner mit europaweitem Servicenetz. Produkte: Luft-Standheizungen, mobile Boiler, Warmwassersysteme (Warmduscher-Sets) und Zubehör für Campervans und Caravans.",
-            "kategorien": [
-                "Wassersysteme & Hygiene"
-            ],
-            "website": "https://www.pundmann.de",
-            "domain": "pundmann.de",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.pundmann.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 50,
-            "stand_y": 28.2,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
             "id": "b77aec68d3aa48c9b518ae9cb6b12b57",
             "page_id": "b77aec68-d3aa-48c9-b518-ae9cb6b12b57",
             "firma": "Cobber Kühlschal",
             "stand": "A3-23",
             "beschreibung": "Der originale Cobber Kühlschal – preisgekrönter Gewinner der Hitzestress-Challenge für Klimaadaptation. Einfach anfeuchten und tragen für stundenlange Abkühlung bei Outdoor-Aktivitäten. Vertrieb über Vuursteker BV (Niederlande).",
             "kategorien": [
-                "Bekleidung & Accessoires"
+                "Bekleidung/Taschen/Accessoires"
             ],
             "website": "https://vuursteker.nl",
             "domain": "vuursteker.nl",
@@ -497,12 +614,12 @@
             "stand": "A4-414",
             "beschreibung": "Hersteller von hochwertigen Matratzen mit RG40-Kaltschaum – speziell für Campingfahrzeuge, Wohnmobile und Vans. Komfortable Schlaflösungen für unterwegs nach Maß.",
             "kategorien": [
-                "Matratzen"
+                "Bekleidung/Taschen/Accessoires"
             ],
-            "website": "",
-            "domain": "",
+            "website": "https://comfortline.shop",
+            "domain": "comfortline.shop",
             "instagram": "",
-            "logo_url": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.comfortline.shop?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/4639d87bf2404321a375473fa287781b.webp",
             "stand_x": null,
             "stand_y": null,
@@ -531,17 +648,36 @@
         {
             "id": "494efc85e41c43eea176491dd22c3c66",
             "page_id": "494efc85-e41c-43ee-a176-491dd22c3c66",
-            "firma": "Cser Adventures",
+            "firma": "Cser Bags",
             "stand": "A4-214",
             "beschreibung": "Anbieter von geführten Abenteuer- und Offroad-Touren für Entdecker und Outdoor-Enthusiasten.",
             "kategorien": [
-                "Touren"
+                "Bekleidung/Taschen/Accessoires"
             ],
-            "website": "",
-            "domain": "",
+            "website": "https://cser-bags.hu",
+            "domain": "cser-bags.hu",
             "instagram": "",
-            "logo_url": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.cser-bags.hu?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/494efc85e41c43eea176491dd22c3c66.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80e0892bf5fc2aaa1fb5",
+            "page_id": "3189c964-c82f-80e0-892b-f5fc2aaa1fb5",
+            "firma": "CUBE4LIFE GmbH",
+            "stand": "A4-142",
+            "beschreibung": "CUBE4LIFE steht für modularen Stauraum, flexible Campinglösungen und Möbel, die sich an dich und dein Leben anpassen. Inspiriert vom Lego-Prinzip kannst du unsere Camping Module beliebig kombinieren, umbauen und erweitern – so, wie du es gerade brauchst. Ob Abenteuer im Van, Roadtrip mit Hund oder Ordnung zuhause – unsere Cubes sind dein langlebiger Begleiter.",
+            "kategorien": [
+                "Innenausbau & Module"
+            ],
+            "website": "https://www.cube4life.com/en",
+            "domain": "cube4life.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.cube4life.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80e0892bf5fc2aaa1fb5.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -556,10 +692,10 @@
             "kategorien": [
                 "Dachzelte & Markisen"
             ],
-            "website": "",
-            "domain": "",
+            "website": "https://obsthof-moll.de",
+            "domain": "obsthof-moll.de",
             "instagram": "",
-            "logo_url": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.obsthof-moll.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/ad5b6242b2c44bfb84961c460c0ee7a6.webp",
             "stand_x": null,
             "stand_y": null,
@@ -573,7 +709,8 @@
             "stand": "A5-133",
             "beschreibung": "Niederländischer Hersteller robuster Dachzelte aus TenCate-Baumwollmischgewebe – wasserresistent, langlebig und in 30 Sekunden bis 5 Minuten aufgebaut. Modelle von der kompakten 140L bis zur Queensize 180L Deluxe.",
             "kategorien": [
-                "Dachzelte & Markisen"
+                "Dachzelte & Markisen",
+                "Kochen und Grillen"
             ],
             "website": "https://www.dtbdoutdoor.eu",
             "domain": "dtbdoutdoor.eu",
@@ -592,7 +729,7 @@
             "stand": "A6-14",
             "beschreibung": "Spezialist für professionelles Kleben und Dichten seit über 100 Jahren – hochwertige Kleb- und Dichtstoffe für Caravaning, Fahrzeugausbau und Selbstausbauer. Eigenes Handbuch „Klebt nicht, gibt’s nicht!“ und Akademie-Schulungen.",
             "kategorien": [
-                "Fahrzeugausbau"
+                "Innenausbau & Module"
             ],
             "website": "https://dekalin.de",
             "domain": "dekalin.de",
@@ -611,7 +748,7 @@
             "stand": "A4-424",
             "beschreibung": "Branchenführer für Teleskopschienen und Schwerlastauszüge mit über 35 Jahren Erfahrung – Traglasten von 15 bis 225 kg. Besonders beliebt für Heckauszüge und Küchenmodule im Camper-Ausbau. Über 50.000 zufriedene Kunden.",
             "kategorien": [
-                "Innenausbau & Module"
+                "Trägersysteme"
             ],
             "website": "https://www.teleskopschienen-shop.de",
             "domain": "teleskopschienen-shop.de",
@@ -624,13 +761,32 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f80fcb199c0ebef4de583",
+            "page_id": "3189c964-c82f-80fc-b199-c0ebef4de583",
+            "firma": "Deutscher Land Rover Club e.V.",
+            "stand": "FG-302",
+            "beschreibung": "Abenteuer, Gemeinschaft, Fachsimpeleien, Urlaubs- und Randerfahrungen… sind nur eine kleine Auswahl an Argumenten, warum man sich entschließt, in den Deutschen Land Rover Club e.V. (DLRC) einzutreten. Seit 50 Jahren bietet der DLRC seinen über 1.300 Mitgliedern eine breite Fülle an Angeboten, Informationen und Freizeitaktivitäten.",
+            "kategorien": [
+                "Club/Verein/IG"
+            ],
+            "website": "https://www.dlrc.org",
+            "domain": "dlrc.org",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.dlrc.org?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80fcb199c0ebef4de583.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "c16cd248b2b7444695a3d818b4a3d076",
             "page_id": "c16cd248-b2b7-4446-95a3-d818b4a3d076",
             "firma": "DIE WEGGEFÄHRTEN - OUTDOOR / MARKETING / AUSRÜSTUNG",
             "stand": "A4-131",
             "beschreibung": "Kommunikationsagentur und Ausrüster für Offroad, Overlanding und Vanlife – Outdoor-Ausrüstung und Zubehör für Abenteuerlustige.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Sonstiges"
             ],
             "website": "https://www.dieweggefaehrten.de",
             "domain": "dieweggefaehrten.de",
@@ -687,7 +843,7 @@
             "stand": "A3-16",
             "beschreibung": "Premium-Messermanufaktur – handgefertigte Jagd-, Küchen- und Damastmesser von Ed Mahony, Izumi Ichiago, Katahiro und weiteren Künstlern. Hochwertige Klingen für Outdoor, Jagd und Küche.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Outdoor Gear"
             ],
             "website": "https://www.edmahony-knives.com/impressum",
             "domain": "edmahony-knives.com",
@@ -700,13 +856,32 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8070a6eada6d537f51fe",
+            "page_id": "3189c964-c82f-8070-a6ea-da6d537f51fe",
+            "firma": "Edge Overland",
+            "stand": "A4-337",
+            "beschreibung": "Qualität steht bei uns an erster Stelle. Unsere Dachzelte werden aus haltbaren, hochwertigen Materialiengefertigt, die selbst rauen Campingbedingungen standhalten. \nDie freistehenden Auto-Markisen bieten Schatten und Schutz vor den Elementen, Schutz vor den Elementen und einen komfortablen Ort zum Entspannen.",
+            "kategorien": [
+                "Dachzelte & Markisen"
+            ],
+            "website": "https://www.edge-overland.com",
+            "domain": "edge-overland.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.edge-overland.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8070a6eada6d537f51fe.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "e2cd370a7d6948fd993b9a22b8ce7d26",
             "page_id": "e2cd370a-7d69-48fd-993b-9a22b8ce7d26",
             "firma": "EMUK",
             "stand": "FW-105",
             "beschreibung": "Hersteller von Caravan-Zusatzspiegeln seit über 40 Jahren – fahrzeugspezifische Spezialspiegel und Universalspiegel für sichere Rücksicht beim Wohnwagen-Gespann. Dazu Air-Lift Drucklufthebekissen zum stufenlosen Ausnivellieren.",
             "kategorien": [
-                "Zubehör"
+                "Fahrzeug-Zubehör"
             ],
             "website": "https://www.emuk.com",
             "domain": "emuk.com",
@@ -725,7 +900,7 @@
             "stand": "A3-203",
             "beschreibung": "Leichtbau-Multiplexplatten aus nachhaltigem Albasia-Falcata-Holz – bis zu 50 % leichter als herkömmliche Platten. Ideal für Camper-Innenausbau: Wand-/Deckenverkleidung, Möbelbau, Bodenplatten. HPL- und Echtholzfurnier-Oberflächen verfügbar.",
             "kategorien": [
-                "Fahrzeugausbau"
+                "Innenausbau & Module"
             ],
             "website": "https://epicply.de",
             "domain": "epicply.de",
@@ -744,7 +919,7 @@
             "stand": "FG-406",
             "beschreibung": "Grills, Feuerschalen, Feuerplatten und Hobos – Made in Germany aus der Südpfalz. Kompakte, robuste Outdoor-Grills mit kleinem Packmaß, perfekt für Camping, Angeln und Vanlife. Nachhaltige Verpackung, plastikfrei.",
             "kategorien": [
-                "Camping & Zubehör"
+                "Kochen und Grillen"
             ],
             "website": "https://fennek-grill.de",
             "domain": "fennek-grill.de",
@@ -763,7 +938,7 @@
             "stand": "FG-506",
             "beschreibung": "Modularer Pickup-Camper Made in Germany – das Adventure Vehicle System verwandelt jeden Pickup in einen vollwertigen Offroad-Camper. Drei Module: Tray (Basis), Box (Wohnkabine, 320 kg leicht) und Tent (Schlafraum). Mehrfach prämiert, nur 3 Monate Lieferzeit.",
             "kategorien": [
-                "Trägersysteme"
+                "Kabinen (Pickup & LKW)"
             ],
             "website": "http://www.fiftyten.de",
             "domain": "fiftyten.de",
@@ -772,6 +947,27 @@
             "logo_local": "/img/aussteller/55b6b800ba644f0c9b41e0c37748438b.webp",
             "stand_x": 21,
             "stand_y": 42.7,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "d3cebb6d6e0a4f9c9e1b26005dbf6fed",
+            "page_id": "d3cebb6d-6e0a-4f9c-9e1b-26005dbf6fed",
+            "firma": "Fire-Q",
+            "stand": "FG-1506",
+            "beschreibung": "Hersteller der MARQ Absetz-Wohnkabinen – durchdachtes Design für Pickups und Transporter der mittleren Gewichtsklasse. Optimierter Schwerpunkt, GFK-Sandwichmaterial, Schlafplätze für bis zu 4 Personen. Aus der Investitionsgüter-Entwicklung kommend.",
+            "kategorien": [
+                "Kochen und Grillen",
+                "Outdoor Gear",
+                "Camping & Zubehör"
+            ],
+            "website": "https://www.marq-wohnkabinen.de",
+            "domain": "marq-wohnkabinen.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.marq-wohnkabinen.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/d3cebb6d6e0a4f9c9e1b26005dbf6fed.webp",
+            "stand_x": 74.9,
+            "stand_y": 42.9,
             "stand_w": null,
             "stand_h": null
         },
@@ -801,7 +997,7 @@
             "stand": "A5-100",
             "beschreibung": "KFZ-Mechanikermeister aus Lübeck – Hersteller der Beartrails Pickup-Wohnkabinen aus GFK-Sandwich. Leerkabinen ab 19.900 €, Vollausstattung ab 70.000 €. Individuelle Maße, DIY-Einbausets für Fenster, Möbel, Elektrik und Solar.",
             "kategorien": [
-                "Trägersysteme"
+                "Kabinen (Pickup & LKW)"
             ],
             "website": "https://www.fs-offroad.de",
             "domain": "fs-offroad.de",
@@ -858,7 +1054,7 @@
             "stand": "A3-101",
             "beschreibung": "Hersteller von Lichtlösungen und LED-Beleuchtungssystemen für Fahrzeug- und Camper-Ausbau. Sitz in Bingen-Hitzkofen.",
             "kategorien": [
-                "Elektrik & Beleuchtung"
+                "Expeditionsmobile"
             ],
             "website": "http://www.fuesslightline.de/kontakt.html",
             "domain": "fuesslightline.de",
@@ -871,13 +1067,34 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8068b6f2d9ce6787a1aa",
+            "page_id": "3189c964-c82f-8068-b6f2-d9ce6787a1aa",
+            "firma": "Fyreza UG",
+            "stand": "A3-2",
+            "beschreibung": "Unserehandgeschmiedeten Messer und Pfannen werdet ihr so kein zweites Mal finden. Handgefertigt nach 750 Jahre alter Schmiedekunst im Herzen von Bosnien, unter Verwendung von hochwertigsten Materialien in einem nachhaltigen Herstellungsprozess.",
+            "kategorien": [
+                "Outdoor Gear",
+                "Kochen und Grillen"
+            ],
+            "website": "https://fyreza.de",
+            "domain": "fyreza.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.fyreza.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8068b6f2d9ce6787a1aa.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "8f5062b4f7e44018a3dbe5765ffb5ba3",
             "page_id": "8f5062b4-f7e4-4018-a3db-e5765ffb5ba3",
             "firma": "Gäng-Case GmbH",
             "stand": "FW-103",
             "beschreibung": "Hersteller robuster Transport- und Schutzkoffer für empfindliche Ausrüstung – ideal für Offroad-, Expeditions- und Outdoor-Einsätze.",
             "kategorien": [
-                "Zubehör"
+                "Fahrzeug-Zubehör",
+                "Camping & Zubehör"
             ],
             "website": "http://www.gaeng-case.de",
             "domain": "gaeng-case.de",
@@ -896,7 +1113,7 @@
             "stand": "A3-303",
             "beschreibung": "Outdoor-Ausrüster und Anbieter von Geländefahrzeug-Zubehör für Offroad- und Overlanding-Enthusiasten.",
             "kategorien": [
-                "Offroad-Zubehör"
+                "Trailer"
             ],
             "website": "http://www.volker-lapp-outdoor.de",
             "domain": "volker-lapp-outdoor.de",
@@ -909,13 +1126,32 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8014819ad01ef63d2635",
+            "page_id": "3189c964-c82f-8014-819a-d01ef63d2635",
+            "firma": "Geiger Allrad- und Fernreisetechnik",
+            "stand": "FG-1600",
+            "beschreibung": "Offizieller Vertragshändler für Hillbil Mini Cars.",
+            "kategorien": [
+                "ATVs & Quads"
+            ],
+            "website": "https://www.geiger-allradtechnik.de",
+            "domain": "geiger-allradtechnik.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.geiger-allradtechnik.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8014819ad01ef63d2635.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "03ac71eb40154a688d3cfc6d1f3886f6",
             "page_id": "03ac71eb-4015-4a68-8d3c-fc6d1f3886f6",
             "firma": "GlobeGuard GmbH",
             "stand": "A4-20",
             "beschreibung": "Schweizer Hersteller von OBD-Fahrzeugdiagnosegeräten für Reisemobile und Fernreisende – online und offline Volldiagnose aller Steuergeräte. Fernwartungsfunktion für unterwegs, kompatibel mit über 85 Fahrzeugherstellern.",
             "kategorien": [
-                "Werkstatt"
+                "Elektrik & Beleuchtung"
             ],
             "website": "http://globeguard.ch",
             "domain": "globeguard.ch",
@@ -953,7 +1189,10 @@
             "stand": "A4-108",
             "beschreibung": "Onlineshop und Werkstatt für Offroad-Zubehör – Vertrieb und Einbau von STEDI-Beleuchtung, REDARC-Batteriemanagement, APEX-Druckluftsystemen, OME/ARB-Fahrwerken, Rhino-Rack-Dachträgern und RIVAL-Unterfahrschutz.",
             "kategorien": [
-                "Offroad-Zubehör"
+                "Offroad-Zubehör",
+                "Elektrik & Beleuchtung",
+                "Trägersysteme",
+                "Fahrwerk Reifen & Felgen"
             ],
             "website": "https://www.germanpickupcustoms.com",
             "domain": "germanpickupcustoms.com",
@@ -972,7 +1211,7 @@
             "stand": "A5-20",
             "beschreibung": "Weltweit führender Hersteller von Wasserreiniger-Trinkflaschen – per Knopfdruck werden Krankheitserreger, Chemikalien (inkl. PFAS), Pestizide und Schwermetalle entfernt. Modelle GeoPress und UltraPress, auch in Titan. Über 11.000 5-Sterne-Bewertungen.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Outdoor Gear"
             ],
             "website": "https://www.thegrayl.eu/de",
             "domain": "thegrayl.eu",
@@ -985,19 +1224,77 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f80569822cfa2a4192bce",
+            "page_id": "3189c964-c82f-8056-9822-cfa2a4192bce",
+            "firma": "Green Power LED KG",
+            "stand": "A5-418",
+            "beschreibung": "Lithium-Eisenphosphat Premium-Batteriesysteme und LED-Technik",
+            "kategorien": [
+                "Elektrik & Beleuchtung",
+                "Energie & Solartechnik"
+            ],
+            "website": "https://green-power-led.de",
+            "domain": "green-power-led.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.green-power-led.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80569822cfa2a4192bce.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80baa197f61cb8373c73",
+            "page_id": "3189c964-c82f-80ba-a197-f61cb8373c73",
+            "firma": "Grove Camping",
+            "stand": "A4-103",
+            "beschreibung": "Mit dem multifunktionalen Campingofen Horst bleibt die Küche auch auf Reisen vielseitig. Egal ob Brötchen zum Frühstück, Auflauf zum Mittag, vielleicht einen Kuchen am Nachmittag oder eine Tiefkühlpizza am Abend. Mit Horst ist das alles kein Problem mehr.",
+            "kategorien": [
+                "Kochen und Grillen"
+            ],
+            "website": "https://grove-camping.de",
+            "domain": "grove-camping.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.grove-camping.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80baa197f61cb8373c73.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "f32ab01a64764f3b976b0e1d5dd96d64",
             "page_id": "f32ab01a-6476-4f3b-976b-0e1d5dd96d64",
             "firma": "Heinr. Böker Baumwerk GmbH Solingen",
             "stand": "A4-310",
             "beschreibung": "Traditionsreiche Messermanufaktur aus Solingen mit über 150 Jahren Erfahrung – Jagdmesser, Outdoor-Messer, Küchenmesser und Damastmesser in höchster Qualität. Marken: Böker, Böker Plus, Böker Manufaktur.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Outdoor Gear"
             ],
             "website": "https://boker.de",
             "domain": "boker.de",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.boker.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/f32ab01a64764f3b976b0e1d5dd96d64.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "fff22e7575bc45879d7c82b4eee7c0f2",
+            "page_id": "fff22e75-75bc-4587-9d7c-82b4eee7c0f2",
+            "firma": "Helipott",
+            "stand": "A5-438",
+            "beschreibung": "HELIPOTT – erste automatische Trennkomposttoilette, Made in Germany. Kompakte Bauweise, langlebige Materialien, vollautomatisch oder manuell bedienbar.",
+            "kategorien": [
+                "Toiletten"
+            ],
+            "website": "https://helipott.com",
+            "domain": "helipott.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.helipott.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/fff22e7575bc45879d7c82b4eee7c0f2.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -1030,7 +1327,10 @@
             "beschreibung": "Österreichischer Spezialist für Camping- und Overlanding-Equipment seit fast 30 Jahren – Dachzelte, Markisen, Seilwinden, Dachträger, LED-Beleuchtung und Bergematerial. Über 30.000 zufriedene Kunden, 5 Jahre Garantie, Showrooms in D/A/CH.",
             "kategorien": [
                 "Dachzelte & Markisen",
-                "Offroad-Zubehör"
+                "Offroad-Zubehör",
+                "Camping & Zubehör",
+                "Trägersysteme",
+                "Bekleidung/Taschen/Accessoires"
             ],
             "website": "http://www.horntools.com",
             "domain": "horntools.com",
@@ -1049,7 +1349,10 @@
             "stand": "FG-1308",
             "beschreibung": "Anbieter von Fahrzeug- und Campingzubehör für den Outdoor- und Reisemobilbereich.",
             "kategorien": [
-                "Zubehör"
+                "Energie & Solartechnik",
+                "Campervans",
+                "Trägersysteme",
+                "Fenster/Türen/Klappen"
             ],
             "website": "http://www.huenerkopf.de",
             "domain": "huenerkopf.de",
@@ -1062,32 +1365,13 @@
             "stand_h": null
         },
         {
-            "id": "d3cebb6d6e0a4f9c9e1b26005dbf6fed",
-            "page_id": "d3cebb6d-6e0a-4f9c-9e1b-26005dbf6fed",
-            "firma": "IDHartmann GmbH",
-            "stand": "FG-1506",
-            "beschreibung": "Hersteller der MARQ Absetz-Wohnkabinen – durchdachtes Design für Pickups und Transporter der mittleren Gewichtsklasse. Optimierter Schwerpunkt, GFK-Sandwichmaterial, Schlafplätze für bis zu 4 Personen. Aus der Investitionsgüter-Entwicklung kommend.",
-            "kategorien": [
-                "Kabinen (Pickup & LKW)"
-            ],
-            "website": "https://www.marq-wohnkabinen.de",
-            "domain": "marq-wohnkabinen.de",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.marq-wohnkabinen.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "/img/aussteller/d3cebb6d6e0a4f9c9e1b26005dbf6fed.webp",
-            "stand_x": 74.9,
-            "stand_y": 42.9,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
             "id": "552cffd3082b438d8c8b6a8df2bd002f",
             "page_id": "552cffd3-082b-438d-8c8b-6a8df2bd002f",
             "firma": "Isolierhandel24",
             "stand": "A6-101",
             "beschreibung": "Fachhandel für technische Isolierung – Kautschuk-Dämmung (Armaflex & Alternativen), Mineralwolle-Rohrschalen und Zubehör. Speziell auch Camper-Isolierung mit Anleitungen und Beratung. Keine Mindestmengen, Versand innerhalb von 24h.",
             "kategorien": [
-                "Isolierung"
+                "Innenausbau & Module"
             ],
             "website": "https://isolierhandel24.de",
             "domain": "isolierhandel24.de",
@@ -1106,7 +1390,7 @@
             "stand": "FW-918",
             "beschreibung": "Outdoor-Marke für hochwertiges Camping-Kaffeezubehör – Edelstahl-Thermotassen und Handkaffeemühlen für unterwegs. Kompakt, langlebig und perfekt für Camper und Naturliebhaber.",
             "kategorien": [
-                "Küche"
+                "Kochen und Grillen"
             ],
             "website": "https://kenucamp.de",
             "domain": "kenucamp.de",
@@ -1125,7 +1409,7 @@
             "stand": "A4-233",
             "beschreibung": "Hersteller des Kissenbretts – ein innovativer Plissee- und Mückenschutzschutz für Camper-Fenster. Einfaches Einhaken ohne Kleben oder Bohren, schnell montiert und demontiert. Fenster und Plissees bleiben voll funktionsfähig.",
             "kategorien": [
-                "Fenster"
+                "Schlafen & Wohnen"
             ],
             "website": "https://kissenbrett.de",
             "domain": "kissenbrett.de",
@@ -1164,7 +1448,7 @@
             "stand": "A3-400",
             "beschreibung": "Aussteller auf der Adventure Southside 2026 im Bereich Fahrzeug- und Outdoor-Zubehör.",
             "kategorien": [
-                "Zubehör"
+                "Fahrwerk Reifen & Felgen"
             ],
             "website": "",
             "domain": "",
@@ -1202,7 +1486,7 @@
             "stand": "A3-10",
             "beschreibung": "Spirituosen- und Likörmarke mit unverwechselbarem Design – Liköre und Gin stilecht in der Glas-Öldose verpackt. Produkte: Eskalat Kräuterlikör, GINzilla London Dry Gin, Vodka und Limited Editions. Auch als Private-Label-Werbegeschenk erhältlich.",
             "kategorien": [
-                "Catering"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "http://www.kopfgetriebeoel.de",
             "domain": "kopfgetriebeoel.de",
@@ -1215,13 +1499,51 @@
             "stand_h": null
         },
         {
+            "id": "31a9c964c82f806e89afffed4db147c7",
+            "page_id": "31a9c964-c82f-806e-89af-ffed4db147c7",
+            "firma": "Kuckoo Camper GmbH",
+            "stand": "A5-420",
+            "beschreibung": "Ein quadratischer Mini-Wohnwagen aus Holz namens Bruno, gefertigt auf CNC-Maschinen. Er wurde von Campern für Camper entwickelt und gebaut, und nachhaltig und fair in Deutschland produziert.",
+            "kategorien": [
+                "Trailer"
+            ],
+            "website": "https://www.kuckoo-camper.de/",
+            "domain": "kuckoo-camper.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.kuckoo-camper.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31a9c964c82f806e89afffed4db147c7.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f8078a1dedce5cbd8af99",
+            "page_id": "3189c964-c82f-8078-a1de-dce5cbd8af99",
+            "firma": "Lagerfeuer-Kochschule Carsten Bothe",
+            "stand": "FG-101",
+            "beschreibung": "Carsten Bothe veranstaltet Workshops zum Kochen draußen, Wurstmachen und vielen anderen nützlichen Fähigkeiten rund ums (deftige) Essen.",
+            "kategorien": [
+                "Kochen und Grillen"
+            ],
+            "website": "https://www.carstenbothe.de",
+            "domain": "carstenbothe.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.carstenbothe.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8078a1dedce5cbd8af99.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "2c9d01839a1c4d85b5f5dcfc4d24bfe6",
             "page_id": "2c9d0183-9a1c-4d85-b5f5-dcfc4d24bfe6",
             "firma": "Lambda Coffee GmbH (Lambda Coffee)",
             "stand": "A4-221",
             "beschreibung": "Outdoor-Kaffeezubehör für Abenteurer und Entdecker – Edelstahl-French-Press (Caldera), Espressokocher (Vesuv), Handkaffeemühlen, Handfilter und Gaskocher. Über 120.000 ausgerüstete Kunden, 10 Jahre Unbreakable-Garantie.",
             "kategorien": [
-                "Küche"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "https://lambda-coffee.de",
             "domain": "lambda-coffee.de",
@@ -1259,7 +1581,7 @@
             "stand": "A4-428",
             "beschreibung": "Schwäbisches Start-up für innovative Teleskopleitern – verbesserte Sicherheit, Schonung empfindlicher Untergründe und größtmögliche Flexibilität. Speziell auch für Wohnmobile geeignet. Gegründet von vier Ingenieuren und Schlossern.",
             "kategorien": [
-                "Zubehör"
+                "Camping & Zubehör"
             ],
             "website": "https://www.leitertec.com",
             "domain": "leitertec.com",
@@ -1297,12 +1619,12 @@
             "stand": "FG-704",
             "beschreibung": "Eingetragener Meisterbetrieb (Metallbau & Tischlerei) aus Glashütte – Hersteller des PipiGuard, ein innovatives Camping- und Outdoor-Produkt. EMV-geprüft, Camping-Zubehör in Handarbeit.",
             "kategorien": [
-                "Zubehör"
+                "Toiletten"
             ],
-            "website": "https://www.manufaktur-claus.eu/impressum",
-            "domain": "manufaktur-claus.eu",
+            "website": "https://www.manufaktur-claus.de",
+            "domain": "manufaktur-claus.de",
             "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.manufaktur-claus.eu?c=1idixXyiHH3-_02_vkl",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.manufaktur-claus.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/e9004fae2edb4a34827de4cf7644f9a6.webp",
             "stand_x": 33.1,
             "stand_y": 35.2,
@@ -1336,8 +1658,8 @@
             "stand": "A5-401",
             "beschreibung": "Onlineshop für Camping- und Lifestyle-Produkte – stylische Edelstahl-Becher, Thermotassen, French Press, Trinkflaschen, Retro-Lampen, Hundenäpfe und Offroad-Zubehör (Hecktraverse, Bergeseile, Kraftstoffkanister). Auch Equipment für Hymer MLT.",
             "kategorien": [
-                "Zubehör",
-                "Küche"
+                "Kochen und Grillen",
+                "Camping & Zubehör"
             ],
             "website": "https://mawii.de",
             "domain": "mawii.de",
@@ -1356,13 +1678,32 @@
             "stand": "A5-224",
             "beschreibung": "Österreichischer Anbieter von Campervans und Reisemobilen.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://megamobil-campervans.at",
             "domain": "megamobil-campervans.at",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.megamobil-campervans.at?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/300dece4fb104b00bd92b3f84ea5bff0.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f8007b7dbe394c094f8a7",
+            "page_id": "3189c964-c82f-8007-b7db-e394c094f8a7",
+            "firma": "Meinbezug.de",
+            "stand": "A4-218",
+            "beschreibung": "Spannbettlaken und Kissenbezüge aus Doppel-Jersey\nin über 32 verschiedenen Farben.",
+            "kategorien": [
+                "Schlafen & Wohnen"
+            ],
+            "website": "https://meinbezug.de/de/",
+            "domain": "meinbezug.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.meinbezug.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8007b7dbe394c094f8a7.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -1381,7 +1722,26 @@
             "domain": "mb-offroad.com",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.mb-offroad.com?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
+            "logo_local": "/img/aussteller/157933367d3746ce8dfc6140c3e20b0f.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80059771ca0fd6c24d30",
+            "page_id": "3189c964-c82f-8005-9771-ca0fd6c24d30",
+            "firma": "Mindi GmbH",
+            "stand": "FW-930",
+            "beschreibung": "Innovative, durchdachte Camping-Lösungen mit hohem Qualitätsanspruch.",
+            "kategorien": [
+                "Camping & Zubehör"
+            ],
+            "website": "https://www.mindi-global.com",
+            "domain": "mindi-global.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.mindi-global.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80059771ca0fd6c24d30.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -1394,7 +1754,7 @@
             "stand": "FW-207",
             "beschreibung": "Hersteller von Fahrzeug- und Campingzubehör im Bereich Kunst und Design.",
             "kategorien": [
-                "Zubehör"
+                "Sonstiges"
             ],
             "website": "https://www.mira-art.de",
             "domain": "mira-art.de",
@@ -1413,7 +1773,7 @@
             "stand": "A4-109",
             "beschreibung": "Österreichische Matratzen-Manufaktur (Marke FLEXIMA) – maßgefertigte Matratzen für Wohnmobile, Boote und Zuhause. Patentiertes Federelement aus Kunststoff (metallfrei), 13 Liegezonen, nachträglich anpassbarer Härtegrad. Just-in-Time-Service: morgens vermessen, nachmittags fertig. 4,9 Sterne bei Google.",
             "kategorien": [
-                "Matratzen"
+                "Schlafen & Wohnen"
             ],
             "website": "https://www.flexima.com",
             "domain": "flexima.com",
@@ -1445,6 +1805,27 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8052b633f377b0b8a3ec",
+            "page_id": "3189c964-c82f-8052-b633-f377b0b8a3ec",
+            "firma": "MTR Shop Thomas Reichert",
+            "stand": "FG-812",
+            "beschreibung": "Der MTR Shop bietet ein breites Angebot in SachenCampingbedarf, Berufskleidung, Jagdausstattung und Militärausrüstung.",
+            "kategorien": [
+                "Bekleidung/Taschen/Accessoires",
+                "Camping & Zubehör",
+                "Outdoor Gear"
+            ],
+            "website": "https://miltec-mtr.de",
+            "domain": "miltec-mtr.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.miltec-mtr.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8052b633f377b0b8a3ec.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "6a3dacc5be6d4f48bb03dc0faade4f68",
             "page_id": "6a3dacc5-be6d-4f48-bb03-dc0faade4f68",
             "firma": "Multi 4 GmbH",
@@ -1470,7 +1851,7 @@
             "stand": "A4-136",
             "beschreibung": "Campervan-Ausbau auf Mercedes Sprinter unter 3,5 t. CNC-gefertigter Leichtbau, offizieller Mercedes-Benz VanPartner aus Österreich.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "http://www.multimobil.at",
             "domain": "multimobil.at",
@@ -1566,7 +1947,7 @@
             "stand": "A5-104",
             "beschreibung": "Wohnmobil-Händler am Bodensee mit Marken wie Mooveo, Robeta 4x4, Globe-Traveller und Rhön Camp. Beratung, Verkauf und Service.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://nautic-camper.de",
             "domain": "nautic-camper.de",
@@ -1623,15 +2004,36 @@
             "stand": "FG-1404",
             "beschreibung": "Aussteller auf der Adventure Southside 2026. Weitere Informationen zum Angebot folgen.",
             "kategorien": [
-                "Sonstiges"
+                "Dachzelte & Markisen",
+                "Kochen und Grillen",
+                "Camping & Zubehör"
             ],
-            "website": "https://nomadio.shop",
-            "domain": "nomadio.shop",
+            "website": "https://nomadia.shop",
+            "domain": "nomadia.shop",
             "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.nomadio.shop?c=1idixXyiHH3-_02_vkl",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.nomadia.shop?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/9c7ea5f5d4fe41179fa3fdf8b8412872.webp",
             "stand_x": 89.5,
             "stand_y": 35.2,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80308bfef9fba762b882",
+            "page_id": "3189c964-c82f-8030-8bfe-f9fba762b882",
+            "firma": "Nordic Expert",
+            "stand": "FG-1102",
+            "beschreibung": "Sachverständigenbüro für Gutachten.\nWir bieten Ihnen bei allen Schadensfällen und den damit verbundenen Angelegenheiten eine schnelle und kompetente Unterstützung. Vertrauen Sie auf unser Fachwissen und unsere Unabhängigkeit. Ob Camper, PKW, LKW, Motorrad oder andere Fahrzeugtypen – hier finden Sie die passende Lösung für ein Gutachten.",
+            "kategorien": [
+                "Gutachten & TÜV"
+            ],
+            "website": "https://nordic-expert.de",
+            "domain": "nordic-expert.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.nordic-expert.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80308bfef9fba762b882.webp",
+            "stand_x": null,
+            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -1642,7 +2044,9 @@
             "stand": "FG-306",
             "beschreibung": "Schweizer Allrad-Spezialist aus Wuppenau. Occasionen, Offroad-Umbauten, Subaru-Expertise, Dachzelte und Fahrwerkslösungen für Geländefahrzeuge.",
             "kategorien": [
-                "Offroad-Fahrzeuge"
+                "Offroad-Fahrzeuge",
+                "Dachzelte & Markisen",
+                "Fahrzeugausbau"
             ],
             "website": "https://4x4-wuppenau.ch",
             "domain": "4x4-wuppenau.ch",
@@ -1661,7 +2065,7 @@
             "stand": "A4-14",
             "beschreibung": "Mobiles Kamera-Equipment: Halterungen, Saugfüße, Stativhalter und Cages für Foto- und Videografen unterwegs.",
             "kategorien": [
-                "Media"
+                "Foto & Video"
             ],
             "website": "https://nutools.de",
             "domain": "nutools.de",
@@ -1680,7 +2084,7 @@
             "stand": "A3-24",
             "beschreibung": "Berliner Likör-Marke im kultigen Mason Jar. Seit 2014 mit Sorten wie Harte Nuss und Pralle Kirsche – handcrafted Moonshine mit Stil.",
             "kategorien": [
-                "Catering"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "https://odonnell.de",
             "domain": "odonnell.de",
@@ -1699,7 +2103,7 @@
             "stand": "FW-205",
             "beschreibung": "Aussteller auf der Adventure Southside 2026. Weitere Informationen zum Angebot folgen.",
             "kategorien": [
-                "Sonstiges"
+                "Dachzelte & Markisen"
             ],
             "website": "http://www.ocean-cross.de",
             "domain": "ocean-cross.de",
@@ -1714,11 +2118,11 @@
         {
             "id": "0d806252de5749f6b5e4a45217428f59",
             "page_id": "0d806252-de57-49f6-b5e4-a45217428f59",
-            "firma": "Oeventura Onlineshop",
+            "firma": "Oeventura",
             "stand": "FGO-100",
             "beschreibung": "Nordische Tipis (Tentipi), Outdoor-Ausrüstung, Feuerküche und Zeltöfen. Über 15 Jahre Erfahrung im Bereich naturnahes Camping und Bushcraft.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Outdoor Gear"
             ],
             "website": "https://oeventura.de",
             "domain": "oeventura.de",
@@ -1750,6 +2154,26 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f80f49d28e2c4599bced5",
+            "page_id": "3189c964-c82f-80f4-9d28-e2c4599bced5",
+            "firma": "Offrotie GmbH",
+            "stand": "FG-1104",
+            "beschreibung": "Nützliche Camping-Accessoires rund um das VanLife: Unsere Magnetlösungen mit UV-beständigen gummierten Neodym-Magneten eröffnen dir ein neues Level des nomadischen Lebens. Diese gummierten Magnete bieten hervorragenden Schutz vor Lackkratzern und sind mit folienbeschichteten Oberflächen kompatibel.",
+            "kategorien": [
+                "Innenausbau & Module",
+                "Camping & Zubehör"
+            ],
+            "website": "https://offrotie.com/en",
+            "domain": "offrotie.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.offrotie.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80f49d28e2c4599bced5.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "b425ba0da97d4997a68b3b0e36d43f3d",
             "page_id": "b425ba0d-a97d-4997-a68b-3b0e36d43f3d",
             "firma": "OLC Adventure",
@@ -1769,28 +2193,9 @@
             "stand_h": null
         },
         {
-            "id": "9e2da9eb56e947ceb38225764724e18b",
-            "page_id": "9e2da9eb-56e9-47ce-b382-25764724e18b",
-            "firma": "Oliver und Manuela Zimmermann GbR",
-            "stand": "A3-118",
-            "beschreibung": "VANRIDING – nachhaltige Stauraumlösungen für Camper und Vans. Z-Saggerl-System für smarte Mülltrennung und Ordnung unterwegs, regional gefertigt.",
-            "kategorien": [
-                "Camping & Zubehör"
-            ],
-            "website": "https://vanriding.de",
-            "domain": "vanriding.de",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.vanriding.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 83.8,
-            "stand_y": 59.7,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
             "id": "5aabffc6198a48b8b00f213fc2ebe0d5",
             "page_id": "5aabffc6-198a-48b8-b00f-213fc2ebe0d5",
-            "firma": "Optimal Expedition / OPTIMAL RADOSŁAW PRYBA",
+            "firma": "Optimal Expedition",
             "stand": "A4-123",
             "beschreibung": "Polnischer Hersteller von Fenstern, Dachluken, Rollos, Treppen und Verschlusssystemen für Expeditionsfahrzeuge und Camper.",
             "kategorien": [
@@ -1851,7 +2256,7 @@
             "stand": "FW-210",
             "beschreibung": "Europas führender Faltbootvertrieb mit Marken wie nortik, Triton advanced und Pakboats. Falt- und Packrafts für Freizeit, Touring und Expedition.",
             "kategorien": [
-                "Wassersport & Freizeit"
+                "Wassersport"
             ],
             "website": "https://www.faltboot.de",
             "domain": "faltboot.de",
@@ -1860,6 +2265,25 @@
             "logo_local": "/img/aussteller/cd273317ce554c98912dc12bbc3f3c84.webp",
             "stand_x": 84.9,
             "stand_y": 39.5,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80558b50cb5621a20c69",
+            "page_id": "3189c964-c82f-8055-8b50-cb5621a20c69",
+            "firma": "outbound motorhome products",
+            "stand": "A5-250",
+            "beschreibung": "Unsere Fenster, Dachfenster, Türen und Klappen wurden speziell für Expeditionsfahrzeuge, Camper und andere Spezialfahrzeuge entwickelt. Sie sind formschön, hochwertig verarbeitet und bestehen aus langlebigen Materialien. Alle unsere Produkte sind so konzipiert, dass sie maximales Licht, Sicht und Raum bieten und dabei den hohen Anforderungen von Expeditionsfahrzeugen gerecht werden. Sie machen jedes Fahrzeug funktional und komfortabel.",
+            "kategorien": [
+                "Fenster/Türen/Klappen"
+            ],
+            "website": "https://www.outbound.eu/de/",
+            "domain": "outbound.eu",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.outbound.eu?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80558b50cb5621a20c69.webp",
+            "stand_x": null,
+            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -1902,13 +2326,34 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8091a0a7deea26a935d1",
+            "page_id": "3189c964-c82f-8091-a0a7-deea26a935d1",
+            "firma": "Paul Farmer",
+            "stand": "A3-1",
+            "beschreibung": "Military Outlet",
+            "kategorien": [
+                "Bekleidung/Taschen/Accessoires",
+                "Outdoor Gear"
+            ],
+            "website": "",
+            "domain": "",
+            "instagram": "",
+            "logo_url": "",
+            "logo_local": "/img/aussteller/3189c964c82f8091a0a7deea26a935d1.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "43bcb653163e4e79ac72fb74118f52fd",
             "page_id": "43bcb653-163e-4e79-ac72-fb74118f52fd",
             "firma": "Perfect Van GmbH",
             "stand": "A4-327",
             "beschreibung": "Trenntoiletten und Camperzubehör aus Besigheim. Patentiertes Ablaufsystem, Waschbeckenerweiterungen und Spüleinsätze für Wohnmobile.",
             "kategorien": [
-                "Camping & Zubehör"
+                "Innenausbau & Module",
+                "Toiletten"
             ],
             "website": "https://www.perfect-van.de",
             "domain": "perfect-van.de",
@@ -1927,7 +2372,7 @@
             "stand": "A3-229",
             "beschreibung": "Aquila Adventure – 4x4-Campervan-Ausbauten auf Iveco Daily, Mercedes Sprinter und VW Crafter. Ultraleicht unter 3,5 t, für Expedition und Offroad.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://aquila-adventure.com",
             "domain": "aquila-adventure.com",
@@ -1936,25 +2381,6 @@
             "logo_local": "/img/aussteller/50b755d54c894daf862f3e111c4728d4.webp",
             "stand_x": 45.4,
             "stand_y": 75,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
-            "id": "fff22e7575bc45879d7c82b4eee7c0f2",
-            "page_id": "fff22e75-75bc-4587-9d7c-82b4eee7c0f2",
-            "firma": "Philipp GmbH",
-            "stand": "A5-438",
-            "beschreibung": "HELIPOTT – erste automatische Trennkomposttoilette, Made in Germany. Kompakte Bauweise, langlebige Materialien, vollautomatisch oder manuell bedienbar.",
-            "kategorien": [
-                "Camping & Zubehör"
-            ],
-            "website": "https://helipott.com",
-            "domain": "helipott.com",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.helipott.com?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": null,
-            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -1984,7 +2410,7 @@
             "stand": "A5-340",
             "beschreibung": "Reiseblog und Shop von Sabine & Burkhard Koch. Berichte von Weltreisen mit Allrad-Expeditionsfahrzeugen, Offroad-Atlanten und Reise-Know-how.",
             "kategorien": [
-                "Touren"
+                "Sonstiges"
             ],
             "website": "http://www.pistenkuh.de",
             "domain": "pistenkuh.de",
@@ -2003,7 +2429,7 @@
             "stand": "FW-910",
             "beschreibung": "Anbieter von Seilen, Gurten und Befestigungslösungen für Outdoor- und Fahrzeuganwendungen.",
             "kategorien": [
-                "Sonstiges"
+                "Offroad-Zubehör"
             ],
             "website": "https://www.seile.online",
             "domain": "seile.online",
@@ -2016,6 +2442,25 @@
             "stand_h": null
         },
         {
+            "id": "a2992910a3a04c7aa812718e3d4fbf57",
+            "page_id": "a2992910-a3a0-4c7a-a812-718e3d4fbf57",
+            "firma": "Pundmann",
+            "stand": "FG-1008",
+            "beschreibung": "Unternehmensgruppe für mobiles Arbeiten und Leben – offizieller Autoterm-Premiumpartner mit europaweitem Servicenetz. Produkte: Luft-Standheizungen, mobile Boiler, Warmwassersysteme (Warmduscher-Sets) und Zubehör für Campervans und Caravans.",
+            "kategorien": [
+                "Wassersysteme & Hygiene"
+            ],
+            "website": "https://www.pundmann.de",
+            "domain": "pundmann.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.pundmann.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/a2992910a3a04c7aa812718e3d4fbf57.webp",
+            "stand_x": 50,
+            "stand_y": 28.2,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "e1e78cb4d51343549810b16338bb7726",
             "page_id": "e1e78cb4-d513-4354-9810-b16338bb7726",
             "firma": "PWS Offroad GmbH",
@@ -2023,13 +2468,36 @@
             "beschreibung": "Offroad-Spezialist mit Werkstatt, Shop und Bike-Bereich. 4x4-Zubehör, Fahrzeugumbauten und autorisierter Ineos Grenadier Partner.",
             "kategorien": [
                 "Offroad-Zubehör",
-                "Werkstatt"
+                "Werkstatt",
+                "Offroad-Fahrzeuge",
+                "Bikes & Scooter"
             ],
             "website": "http://www.pws-offroad.com",
             "domain": "pws-offroad.com",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.pws-offroad.com?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/e1e78cb4d51343549810b16338bb7726.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f808f8460f98dba824dd5",
+            "page_id": "3189c964-c82f-808f-8460-f98dba824dd5",
+            "firma": "Q-adventuregear",
+            "stand": "FG-1506",
+            "beschreibung": "Ausrüstung für Abenteuer, Camping und Grillen",
+            "kategorien": [
+                "Camping & Zubehör",
+                "Kochen und Grillen",
+                "Outdoor Gear"
+            ],
+            "website": "https://www.q-adventuregear.de",
+            "domain": "q-adventuregear.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.q-adventuregear.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f808f8460f98dba824dd5.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -2061,7 +2529,8 @@
             "stand": "A4-318",
             "beschreibung": "Anbieter von geführten Offroad-Reisen, 4x4-Trainings und Technik-Workshops. Touren in Europa, Afrika und den USA in kleinen Gruppen.",
             "kategorien": [
-                "Touren"
+                "Touren",
+                "Kochen und Grillen"
             ],
             "website": "http://www.redrockadventures.de",
             "domain": "redrockadventures.de",
@@ -2074,32 +2543,14 @@
             "stand_h": null
         },
         {
-            "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
-            "page_id": "1c9c419c-1b34-4d93-bdba-a9eb7ff76dca",
-            "firma": "Reisch-Tech GmbH",
-            "stand": "FG-808",
-            "beschreibung": "Stellplatz-Infrastruktur: Strom-, Wasser- und Entsorgungssysteme für Wohnmobil-Stellplätze. Dazu Timberline Mehrzonenheizungen für Fahrzeuge.",
-            "kategorien": [
-                "Sonstiges"
-            ],
-            "website": "http://reisch-tech.de",
-            "domain": "reisch-tech.de",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.reisch-tech.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 38.2,
-            "stand_y": 27.5,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
             "id": "9d278cd32bfe45d4ba2e79dfffe7fb96",
             "page_id": "9d278cd3-2bfe-45d4-ba2e-79dfffe7fb96",
             "firma": "Restar Automotive Trade & Industry Co.",
             "stand": "A3-318",
             "beschreibung": "Türkischer Hersteller mit den Marken Hotomobil (Wohnmobile), Urban Badger (Outdoor-Ausrüstung) und Retech (Projektlösungen).",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans",
+                "Kabinen (Pickup & LKW)"
             ],
             "website": "https://www.restarglobal.com",
             "domain": "restarglobal.com",
@@ -2137,7 +2588,10 @@
             "stand": "A4-100",
             "beschreibung": "Online-Shop für Offroad-Zubehör: Airline-Schienen, Sandbleche, Bergeboards, LED-Scheinwerfer und Outdoor-Equipment.",
             "kategorien": [
-                "Offroad-Zubehör"
+                "Offroad-Zubehör",
+                "Camping & Zubehör",
+                "Elektrik & Beleuchtung",
+                "Kochen und Grillen"
             ],
             "website": "http://rockfoxx.com",
             "domain": "rockfoxx.com",
@@ -2156,7 +2610,8 @@
             "stand": "A5-541",
             "beschreibung": "Modulare Dachträgersysteme – flach, begehbar und Made in Bavaria. Passend für Defender, VW, Mercedes, Ineos und viele weitere Fahrzeuge.",
             "kategorien": [
-                "Trägersysteme"
+                "Trägersysteme",
+                "Dachzelte & Markisen"
             ],
             "website": "https://www.rolling-space.de",
             "domain": "rolling-space.de",
@@ -2207,13 +2662,35 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8038b424e5459c38f132",
+            "page_id": "3189c964-c82f-8038-b424-e5459c38f132",
+            "firma": "S3 Industries GmbH",
+            "stand": "A3-109",
+            "beschreibung": "Die S3 Expeditions vereinen kompakte S3 Camper, modulare Traveler Cabins und leistungsstarke Expedition Trucks zu einem durchdachten Gesamtkonzept für mobiles Reisen.",
+            "kategorien": [
+                "Campervans",
+                "Expeditionsmobile",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "website": "https://s3-industries.com/expedition/",
+            "domain": "s3-industries.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.s3-industries.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8038b424e5459c38f132.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "58f4278dc44d41ad8d65c9f3a8fded91",
             "page_id": "58f4278d-c44d-41ad-8d65-c9f3a8fded91",
             "firma": "Sam the Van GmbH",
             "stand": "A3-317",
             "beschreibung": "Aussteller auf der Adventure Southside 2026. Weitere Informationen zum Angebot folgen.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans",
+                "Expeditionsmobile"
             ],
             "website": "https://samthevan.com",
             "domain": "samthevan.com",
@@ -2234,10 +2711,10 @@
             "kategorien": [
                 "Offroad-Zubehör"
             ],
-            "website": "",
+            "website": "sandladder.net",
             "domain": "",
             "instagram": "",
-            "logo_url": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.sandladder.net?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/8e9da975d1d446f7915c57d9dbcf7657.webp",
             "stand_x": null,
             "stand_y": null,
@@ -2251,7 +2728,7 @@
             "stand": "A3-309",
             "beschreibung": "Schaumstoffe, Polster und Matratzen nach Maß für Camper, Wohnmobile und Boote. Eigene Näherei und Polsterei mit über 6.000 Bezugsstoffen.",
             "kategorien": [
-                "Matratzen"
+                "Schlafen & Wohnen"
             ],
             "website": "https://www.schaumstoffcenter-schomerus.de",
             "domain": "schaumstoffcenter-schomerus.de",
@@ -2308,7 +2785,7 @@
             "stand": "A3-412",
             "beschreibung": "Familienbrennerei aus Karlsruhe – handgefertigte Destillate, Gin, Whisky und Liköre. Tastings vor Ort und auf Messen, mehrfach prämiert.",
             "kategorien": [
-                "Catering"
+                "Nahrungsmittel/Getränke"
             ],
             "website": "https://www.scriptor-brennerei.de",
             "domain": "scriptor-brennerei.de",
@@ -2321,13 +2798,32 @@
             "stand_h": null
         },
         {
+            "id": "31a9c964c82f8090b478cebc1ad906b6",
+            "page_id": "31a9c964-c82f-8090-b478-cebc1ad906b6",
+            "firma": "SeaSucker B.V.",
+            "stand": "FG-301",
+            "beschreibung": "Trägersysteme für Fahrräder, Ski, Snowboard made in Florida/USA",
+            "kategorien": [
+                "Trägersysteme"
+            ],
+            "website": "https://seasucker.eu",
+            "domain": "seasucker.eu",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.seasucker.eu?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31a9c964c82f8090b478cebc1ad906b6.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "13138aebe69b4878b22aca3b01e9db12",
             "page_id": "13138aeb-e69b-4878-b22a-ca3b01e9db12",
             "firma": "SETRENLO e.U.",
             "stand": "A6-18",
             "beschreibung": "Nachhaltige Trenntoiletten und DIY-Komponenten aus Österreich. Geruchsfrei, ohne Wasser, Chemie oder Streu – mit nachfüllbarer Aktivkohlefiltration.",
             "kategorien": [
-                "Camping & Zubehör"
+                "Toiletten"
             ],
             "website": "https://www.setrenlo.com",
             "domain": "setrenlo.com",
@@ -2359,21 +2855,21 @@
             "stand_h": null
         },
         {
-            "id": "5dc61a79d7114c9f958fbc5f4458983a",
-            "page_id": "5dc61a79-d711-4c9f-958f-bc5f4458983a",
-            "firma": "Simex Outdoor International GmbH",
-            "stand": "FW-209",
-            "beschreibung": "BENT – verbindbare Sonnensegel mit Reißverschluss-System, Fahrzeugadapter und stylische Outdoor-Chill-Areas. Leicht aufgebaut, für alle Fahrzeugtypen.",
+            "id": "3189c964c82f804db1cbfe260c79a85d",
+            "page_id": "3189c964-c82f-804d-b1cb-fe260c79a85d",
+            "firma": "Silberform AG",
+            "stand": "A5-128",
+            "beschreibung": "High-End Soundtechniken für Fahrzeuge",
             "kategorien": [
-                "Camping & Zubehör"
+                "Sonstiges"
             ],
-            "website": "http://www.bent-club.com",
-            "domain": "bent-club.com",
+            "website": "https://silberform-dynamics.com",
+            "domain": "silberform-dynamics.com",
             "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.bent-club.com?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 72.2,
-            "stand_y": 59.2,
+            "logo_url": "https://cdn.brandfetch.io/domain/www.silberform-dynamics.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f804db1cbfe260c79a85d.webp",
+            "stand_x": null,
+            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -2422,7 +2918,7 @@
             "stand": "A3-100",
             "beschreibung": "Vertrieb von LotusGrill – dem rauchfreien Holzkohlegrill für Camping und Outdoor. Kompakte Grills in verschiedenen Größen inkl. Zubehör.",
             "kategorien": [
-                "Küche"
+                "Kochen und Grillen"
             ],
             "website": "http://www.simplybest-gmbh.de",
             "domain": "simplybest-gmbh.de",
@@ -2441,7 +2937,11 @@
             "stand": "A4-128",
             "beschreibung": "Individuelle Schlaf- und Campingausbauten für Offroad-Fahrzeuge. Spezialist für Jeep Wrangler JK/JL mit weiteren Modellen in Entwicklung.",
             "kategorien": [
-                "Innenausbau & Module"
+                "Innenausbau & Module",
+                "Elektrik & Beleuchtung",
+                "Schlafen & Wohnen",
+                "Trägersysteme",
+                "Dachzelte & Markisen"
             ],
             "website": "https://sleepn4x4.de",
             "domain": "sleepn4x4.de",
@@ -2454,32 +2954,13 @@
             "stand_h": null
         },
         {
-            "id": "99431cec7b36432186cda0e2a1b06d33",
-            "page_id": "99431cec-7b36-4321-86cd-a0e2a1b06d33",
-            "firma": "Smart Adventure GmbH",
-            "stand": "A4-106",
-            "beschreibung": "VANYX – handgefertigte 3,5t Offroad-Camper für bis zu 4 Personen. Made in Germany, mit Carbon-Hochdach, 4x4-Antrieb und autarker Ausstattung.",
-            "kategorien": [
-                "Expeditionsmobile"
-            ],
-            "website": "http://www.vanyx.io",
-            "domain": "vanyx.io",
-            "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.vanyx.io?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": null,
-            "stand_y": null,
-            "stand_w": null,
-            "stand_h": null
-        },
-        {
             "id": "3860f632010e402e8f75b2e5f4262078",
             "page_id": "3860f632-010e-402e-8f75-b2e5f4262078",
             "firma": "Staukasten4You GmbH & Co. KG",
             "stand": "A4-227",
             "beschreibung": "Staukästen und Werkzeugboxen aus Edelstahl, Aluminium und Kunststoff für LKW, Transporter und Wohnmobile. Maßanfertigungen möglich, 25 Jahre Erfahrung.",
             "kategorien": [
-                "Zubehör"
+                "Fahrzeug-Zubehör"
             ],
             "website": "https://www.staukasten4you.de",
             "domain": "staukasten4you.de",
@@ -2498,7 +2979,8 @@
             "stand": "A5-18",
             "beschreibung": "Handgefertigte multifunktionale Schlafsäcke aus Italien – 3-in-1-Design für Indoor und Outdoor. Individuell gestaltet mit künstlerischem Anspruch.",
             "kategorien": [
-                "Outdoor & Bushcraft"
+                "Bekleidung/Taschen/Accessoires",
+                "Camping & Zubehör"
             ],
             "website": "https://www.studiototipotente.com",
             "domain": "studiototipotente.com",
@@ -2517,7 +2999,7 @@
             "stand": "A5-404",
             "beschreibung": "Kompakte mobile Outdoor-Küche mit Gaskocher, Schubladensystem und Equipment für 4 Personen. Handgefertigt in Österreich aus Aluminium, nur 26 kg.",
             "kategorien": [
-                "Küche"
+                "Kochen und Grillen"
             ],
             "website": "https://www.sturm-mobilekitchen.com/impressum",
             "domain": "sturm-mobilekitchen.com",
@@ -2557,7 +3039,7 @@
             "kategorien": [
                 "Touren"
             ],
-            "website": "https://tabdifferent.com/events/",
+            "website": "https://tabdifferent.com",
             "domain": "tabdifferent.com",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.tabdifferent.com?c=1idixXyiHH3-_02_vkl",
@@ -2593,7 +3075,7 @@
             "stand": "A3-116",
             "beschreibung": "Niederländischer Reiseveranstalter mit Fokus auf Abenteuer- und Safari-Reisen. Weitere Informationen folgen.",
             "kategorien": [
-                "Touren"
+                "Expeditionsmobile"
             ],
             "website": "",
             "domain": "",
@@ -2664,13 +3146,52 @@
             "stand_h": null
         },
         {
+            "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
+            "page_id": "1c9c419c-1b34-4d93-bdba-a9eb7ff76dca",
+            "firma": "Timberline",
+            "stand": "FG-808",
+            "beschreibung": "Stellplatz-Infrastruktur: Strom-, Wasser- und Entsorgungssysteme für Wohnmobil-Stellplätze. Dazu Timberline Mehrzonenheizungen für Fahrzeuge.",
+            "kategorien": [
+                "Wassersysteme & Hygiene",
+                "Heizung & Klima"
+            ],
+            "website": "http://reisch-tech.de",
+            "domain": "reisch-tech.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.reisch-tech.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/1c9c419c1b344d93bdbaa9eb7ff76dca.webp",
+            "stand_x": 38.2,
+            "stand_y": 27.5,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f8042b6bbc3790080e05a",
+            "page_id": "3189c964-c82f-8042-b6bb-c3790080e05a",
+            "firma": "Tiny Stove",
+            "stand": "A3-102",
+            "beschreibung": "Mit viel Leidenschaft entwickle und vertreibe ich Mini-Holzöfen für anspruchsvolle Feuerliebhabende. Meine TINY STOVEs werden von mir von A-Z in Handarbeit in der Schweiz gefertigt. Als junge Firma habe ich das Ziel die allerbesten Mini-Holzöfen zu bauen. Die wohlige Wärme, die züngelnden Flammen, das Knistern des Holzes – das alles in der eigenen Wohlfühloase – «Froid am Füürle» überall.",
+            "kategorien": [
+                "Heizung & Klima"
+            ],
+            "website": "https://www.tiny-stove.com",
+            "domain": "tiny-stove.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.tiny-stove.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8042b6bbc3790080e05a.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "12471389450145a39a087cd53eafb5be",
             "page_id": "12471389-4501-45a3-9a08-7cd53eafb5be",
             "firma": "tjuub Dagmar Kinter",
             "stand": "A4-12",
             "beschreibung": "Upcycling-Taschen und Accessoires aus LKW-Plane und Fahrradschlauch. Handgefertigt in Deutschland – robust, nachhaltig und jedes Stück ein Unikat.",
             "kategorien": [
-                "Bekleidung & Accessoires"
+                "Bekleidung/Taschen/Accessoires"
             ],
             "website": "https://tjuub.de",
             "domain": "tjuub.de",
@@ -2708,13 +3229,13 @@
             "stand": "FW-928",
             "beschreibung": "Aussteller auf der Adventure Southside 2026. Weitere Informationen zum Angebot folgen.",
             "kategorien": [
-                "Sonstiges"
+                "Campervans"
             ],
             "website": "",
             "domain": "",
             "instagram": "",
             "logo_url": "",
-            "logo_local": "",
+            "logo_local": "/img/aussteller/a51ffd952d4842f9a7a294706006454b.webp",
             "stand_x": 82.8,
             "stand_y": 75.9,
             "stand_w": null,
@@ -2727,7 +3248,8 @@
             "stand": "A5-303",
             "beschreibung": "Exklusiver Europa-Distributor für Nature's Head und OGO Komposttoiletten. Geruchsfreie Trenntoiletten für Wohnmobile, Boote und Tiny Houses.",
             "kategorien": [
-                "Camping & Zubehör"
+                "Toiletten",
+                "Innenausbau & Module"
             ],
             "website": "http://www.tomtur.de",
             "domain": "tomtur.de",
@@ -2740,13 +3262,32 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f8073bc8bf9d2baf3c25c",
+            "page_id": "3189c964-c82f-8073-bc8b-f9d2baf3c25c",
+            "firma": "TORAX",
+            "stand": "A5-200",
+            "beschreibung": "Hersteller von Expeditionsmobilen",
+            "kategorien": [
+                "Expeditionsmobile"
+            ],
+            "website": "https://toraxtrucks.com",
+            "domain": "toraxtrucks.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.toraxtrucks.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f8073bc8bf9d2baf3c25c.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "ffe1ee08aad742afa2c8f07ba878c53e",
             "page_id": "ffe1ee08-aad7-42af-a2c8-f07ba878c53e",
             "firma": "Total Cool LTD",
             "stand": "A5-131",
             "beschreibung": "Tragbare Verdunstungskühler, Kompressor-Kühlboxen und Kühltaschen aus den Niederlanden. Betrieb mit 12V, 24V und Netzstrom für Camping und Outdoor.",
             "kategorien": [
-                "Heizung & Klima"
+                "Camping & Zubehör"
             ],
             "website": "https://totalcool.nl",
             "domain": "totalcool.nl",
@@ -2772,6 +3313,26 @@
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.travel-lighting.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/c083957a03354f51b85e104378662e39.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "31b9c964c82f80fbaed3e47a3dba2f47",
+            "page_id": "31b9c964-c82f-80fb-aed3-e47a3dba2f47",
+            "firma": "Travelboxx-Seventhinxx UG",
+            "stand": "A5-411",
+            "beschreibung": "Die Pickupboxx ist die innovative Absetzkabine, die mit nur 430 kg Gewicht neue Maßstäbe setzt. Hochwertig ausgestattet und kompatibel mit fast jedem Pickup.\nDer Mini Camper Max ist der clevere, leichte Anhänger im coolen Squaredrop-Design. Perfekt für spontane Ausflüge und alle, die das Wesentliche lieben. Konfigurierbar oder als DIY-Basis.",
+            "kategorien": [
+                "Kabinen (Pickup & LKW)",
+                "Trailer"
+            ],
+            "website": "https://travelboxx.eu",
+            "domain": "travelboxx.eu",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.travelboxx.eu?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31b9c964c82f80fbaed3e47a3dba2f47.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -2816,19 +3377,99 @@
             "stand_h": null
         },
         {
+            "id": "3189c964c82f809da4b9f23c2a89eaaa",
+            "page_id": "3189c964-c82f-809d-a4b9-f23c2a89eaaa",
+            "firma": "UNSINN Fahrzeugtechnik GmbH",
+            "stand": "A4-210",
+            "beschreibung": "Hersteller von Anhängern für verschiedenste Einsatzgebiete",
+            "kategorien": [
+                "Trailer"
+            ],
+            "website": "https://www.unsinn.de",
+            "domain": "unsinn.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.unsinn.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f809da4b9f23c2a89eaaa.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "1ce4050f65ab489ea6b2771e81a03fbb",
             "page_id": "1ce4050f-65ab-489e-a6b2-771e81a03fbb",
             "firma": "Vannado Schweiz c/o LIVEcomm GmbH",
             "stand": "A4-134",
             "beschreibung": "Vannado aus der Schweiz – Details zum Produktportfolio waren bei Redaktionsschluss nicht verfügbar.",
             "kategorien": [
-                "Sonstiges"
+                "Campervans"
             ],
             "website": "https://www.vannado.ch",
             "domain": "vannado.ch",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.vannado.ch?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/1ce4050f65ab489ea6b2771e81a03fbb.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "9e2da9eb56e947ceb38225764724e18b",
+            "page_id": "9e2da9eb-56e9-47ce-b382-25764724e18b",
+            "firma": "VANRIDING",
+            "stand": "A3-118",
+            "beschreibung": "VANRIDING – nachhaltige Stauraumlösungen für Camper und Vans. Z-Saggerl-System für smarte Mülltrennung und Ordnung unterwegs, regional gefertigt.",
+            "kategorien": [
+                "Camping & Zubehör",
+                "Bekleidung/Taschen/Accessoires",
+                "Innenausbau & Module"
+            ],
+            "website": "https://vanriding.de",
+            "domain": "vanriding.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.vanriding.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/9e2da9eb56e947ceb38225764724e18b.webp",
+            "stand_x": 83.8,
+            "stand_y": 59.7,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "99431cec7b36432186cda0e2a1b06d33",
+            "page_id": "99431cec-7b36-4321-86cd-a0e2a1b06d33",
+            "firma": "VANYX",
+            "stand": "A4-106",
+            "beschreibung": "VANYX – handgefertigte 3,5t Offroad-Camper für bis zu 4 Personen. Made in Germany, mit Carbon-Hochdach, 4x4-Antrieb und autarker Ausstattung.",
+            "kategorien": [
+                "Expeditionsmobile",
+                "Campervans"
+            ],
+            "website": "http://www.vanyx.io",
+            "domain": "vanyx.io",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.vanyx.io?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/99431cec7b36432186cda0e2a1b06d33.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f800b9d3efd58c0f853de",
+            "page_id": "3189c964-c82f-800b-9d3e-fd58c0f853de",
+            "firma": "Wasserziege",
+            "stand": "FG-804",
+            "beschreibung": "Schweizer Armee Wassersäcke, Solarduschen & Outdoor-Equipment",
+            "kategorien": [
+                "Wassersysteme & Hygiene",
+                "Outdoor Gear"
+            ],
+            "website": "https://www.wasserziege.ch",
+            "domain": "wasserziege.ch",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.wasserziege.ch?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f800b9d3efd58c0f853de.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -2860,7 +3501,7 @@
             "stand": "A5-426",
             "beschreibung": "Wenatex entwickelt orthopädische Schlafsysteme – Matratzen, Lattenroste und Kissen. Über 30 Jahre Erfahrung, Made in Austria, für erholsamen Schlaf unterwegs.",
             "kategorien": [
-                "Matratzen"
+                "Schlafen & Wohnen"
             ],
             "website": "https://www.wenatex.com/de/de/",
             "domain": "wenatex.com",
@@ -2873,21 +3514,21 @@
             "stand_h": null
         },
         {
-            "id": "823abef4ab3c4d4893415b6613e8b9ce",
-            "page_id": "823abef4-ab3c-4d48-9341-5b6613e8b9ce",
-            "firma": "Winch Industry GmbH",
-            "stand": "A3-300",
-            "beschreibung": "Winch Industry (seilwinden-direkt.de) bietet Seilwinden, Hebetechnik, Generatoren und Dachträger. Mit der Eigenmarke ANTWINCH – Spezialist für Berge- und Offroad-Ausrüstung.",
+            "id": "3189c964c82f80a6a7e9e9732e163ac6",
+            "page_id": "3189c964-c82f-80a6-a7e9-e9732e163ac6",
+            "firma": "Werbegrafik Thomas Gerlach",
+            "stand": "A4-305",
+            "beschreibung": "Werbeartikel, die vor Ort bedruckt werden.",
             "kategorien": [
-                "Offroad-Zubehör"
+                "Sonstiges"
             ],
-            "website": "http://www.seilwinden-direkt.de",
-            "domain": "seilwinden-direkt.de",
+            "website": "https://werbegrafik-gerlach.de",
+            "domain": "werbegrafik-gerlach.de",
             "instagram": "",
-            "logo_url": "https://cdn.brandfetch.io/domain/www.seilwinden-direkt.de?c=1idixXyiHH3-_02_vkl",
-            "logo_local": "",
-            "stand_x": 29.2,
-            "stand_y": 17.4,
+            "logo_url": "https://cdn.brandfetch.io/domain/www.werbegrafik-gerlach.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80a6a7e9e9732e163ac6.webp",
+            "stand_x": null,
+            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -2936,7 +3577,7 @@
             "stand": "FW-101",
             "beschreibung": "Wohnmobilcenter Wehle baut die Magic Line Reisemobile im Allgäu. Campervans auf VW T6/T7, Sprinter und Crafter – individuell konfigurierbar und hochwertig verarbeitet.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://magicline-wehle.de",
             "domain": "magicline-wehle.de",
@@ -2955,7 +3596,7 @@
             "stand": "FG-304",
             "beschreibung": "Wohnmobilcenter Wehle baut die Magic Line Reisemobile im Allgäu. Campervans auf VW T6/T7, Sprinter und Crafter – individuell konfigurierbar und hochwertig verarbeitet.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://magicline-wehle.de",
             "domain": "magicline-wehle.de",
@@ -2974,13 +3615,33 @@
             "stand": "A4-325",
             "beschreibung": "WOLFBOARD fertigt Schneide- und Arbeitsbretter aus Eichenholz, passend für Frontrunner Wolf Pack Boxen. Perfekt für die Outdoor-Küche und Campingküche unterwegs.",
             "kategorien": [
-                "Küche"
+                "Kochen und Grillen"
             ],
             "website": "https://wolfboard.info",
             "domain": "wolfboard.info",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.wolfboard.info?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/0001b613145940178ef6ff0d1887ce8c.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "3189c964c82f80c0a897d7583d008953",
+            "page_id": "3189c964-c82f-80c0-a897-d7583d008953",
+            "firma": "womo4you NOVICO GmbH",
+            "stand": "A3-308",
+            "beschreibung": "Wir haben ständig 8-10 Wohnkabinen neu und gebraucht auch von weiteren Herstellern wie z. B. Geocamper, Revolux, Thoki etc vor Ort sowie 5-6 der relevanten Pick Ups Ford Ranger, Isuzu Dmax, VW Amarok, VW Doka T 6.1 Pritsche und Toyota Hilux mit diversen Fahrwerksvarianten. Weiterhin bieten wir ihnen gerne ein Gesamtpaket aus Wohnkabine mit Basisfahrzeug und individuellem Umbau/Auflastung an. ",
+            "kategorien": [
+                "Campervans",
+                "Kabinen (Pickup & LKW)"
+            ],
+            "website": "https://www.womo4you.de",
+            "domain": "womo4you.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.womo4you.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/3189c964c82f80c0a897d7583d008953.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -3012,7 +3673,7 @@
             "stand": "FW-111",
             "beschreibung": "WSR Camper ist eine Reisemobil-Manufaktur auf Basis VW T6.1 und T7. Aufstelldächer, Möbelzeilen und individuelle Ausbauten – handgefertigt in Deutschland.",
             "kategorien": [
-                "Campervans & Kastenwagen"
+                "Campervans"
             ],
             "website": "https://wsr-camper.de",
             "domain": "wsr-camper.de",

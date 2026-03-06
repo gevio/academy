@@ -267,10 +267,24 @@ if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET,
     (function() {
         var secret = sessionStorage.getItem('asa_admin_secret');
         if (secret) {
+            // Bereits aktive Feedback-Links mit Secret versehen
             document.querySelectorAll('a[href*="/feedback"]').forEach(function(a) {
                 var url = new URL(a.href, location.origin);
                 url.searchParams.set('secret', secret);
                 a.href = url.pathname + url.search;
+            });
+            // Gesperrte Feedback-Karte durch aktiven Link ersetzen
+            document.querySelectorAll('.card-locked').forEach(function(div) {
+                var label = div.querySelector('.action-label');
+                if (label && label.textContent.trim() === 'Feedback geben') {
+                    var a = document.createElement('a');
+                    a.href = '/w/<?= $id ?>/feedback?secret=' + encodeURIComponent(secret);
+                    a.className = 'action-card';
+                    a.innerHTML = '<span class="action-icon">⭐</span>'
+                        + '<span class="action-label">Feedback geben</span>'
+                        + '<span class="action-desc">Bewerte diesen Vortrag mit Sternen</span>';
+                    div.replaceWith(a);
+                }
             });
         }
     })();
