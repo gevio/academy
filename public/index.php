@@ -253,7 +253,7 @@ if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET,
             <a href="/faq.html">FAQ & Hilfe</a>
         </p>
         <div class="footer-partners">
-            <a href="https://adventuresouthside.com/test-selbstausbau/" target="_blank" rel="noopener"><img src="/img/logo-academy.png" alt="Selbstausbauer Academy"></a>
+            <a href="https://adventuresouthside.com/selbstausbau-academy/" target="_blank" rel="noopener"><img src="/img/logo-academy.png" alt="Selbstausbauer Academy"></a>
             <a href="https://adventuresouthside.com/programm-adventure-southside/" target="_blank" rel="noopener"><img src="/img/logo-ecamper.png" alt="E-Mobility &amp; Friends"></a>
             <a href="https://adventuresouthside.com/roadtrip-girls/" target="_blank" rel="noopener"><img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls"></a>
         </div>
