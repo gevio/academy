@@ -22,10 +22,28 @@ if (!$workshop) {
 }
 
 $title = htmlspecialchars($workshop['title']);
-$typ   = htmlspecialchars($workshop['typ']);
+$typRaw = trim((string)($workshop['typ'] ?? ''));
+$typ   = htmlspecialchars($typRaw);
 $tag   = htmlspecialchars($workshop['tag']);
 $zeit  = htmlspecialchars($workshop['zeit']);
 $ort   = htmlspecialchars($workshop['ort']);
+
+// Details-Text kontextabhaengig am Veranstaltungsformat ausrichten.
+$detailsDescByType = [
+    'Workshop' => 'Ausfuehrliche Workshop-Infos',
+    'Vortrag' => 'Ausfuehrliche Vortrags-Infos',
+    'Expertpanel' => 'Ausfuehrliche Panel-Infos',
+    'Roadtrip Girls.Hub' => 'Ausfuehrliche Roadtrip Girls.Hub-Infos',
+    'Interview' => 'Ausfuehrliche Interview-Infos',
+    'eCamper' => 'Ausfuehrliche eCamper-Infos',
+    'Reisebericht' => 'Ausfuehrliche Reisebericht-Infos',
+    'Demo' => 'Ausfuehrliche Demo-Infos',
+];
+
+$detailsDesc = $detailsDescByType[$typRaw] ?? 'Ausfuehrliche Veranstaltungs-Infos';
+if ($typRaw !== '' && !isset($detailsDescByType[$typRaw])) {
+    $detailsDesc = 'Ausfuehrliche Infos: ' . $typRaw;
+}
 
 // ── Enriched-Daten aus workshops.json (Kategorien, Referent) ──
 $kategorien = [];
@@ -184,7 +202,7 @@ if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET,
             <a href="/w/<?= $id ?>/details?back=<?= urlencode('/w/' . $id) ?>" class="action-card">
                 <span class="action-icon">📋</span>
                 <span class="action-label">Details anzeigen</span>
-                <span class="action-desc">Ausführliche Workshop-Infos</span>
+                <span class="action-desc"><?= htmlspecialchars($detailsDesc) ?></span>
             </a>
 
             <!-- Q&A: nur wenn "Fragen erlauben?" aktiv -->
