@@ -437,6 +437,7 @@
     btn.addEventListener('click', () => {
       isOpen = !isOpen;
       panel.classList.toggle('open', isOpen);
+      btn.style.display = isOpen ? 'none' : '';
       document.getElementById('as-chat-badge').style.display = 'none';
       if (isOpen) {
         showGreeting();
@@ -446,6 +447,7 @@
     closeBtn.addEventListener('click', () => {
       isOpen = false;
       panel.classList.remove('open');
+      btn.style.display = '';
     });
 
     // Input
@@ -467,6 +469,7 @@
     if (prefill) {
       isOpen = true;
       panel.classList.add('open');
+      btn.style.display = 'none';
       showGreeting();
       setTimeout(() => sendMessage(decodeURIComponent(prefill)), 800);
     }
