@@ -1,5 +1,5 @@
 {
-    "generated": "2026-03-06T12:56:18+01:00",
+    "generated": "2026-03-10T17:02:26+01:00",
     "count": 83,
     "workshops": [
         {
@@ -79,7 +79,7 @@
             "aussteller": [
                 {
                     "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
-                    "firma": "Reisch-Tech GmbH",
+                    "firma": "Timberline",
                     "stand": "FG-808",
                     "stand_x": 38.2,
                     "stand_y": 27.5,
@@ -291,8 +291,8 @@
             "referent_person": "",
             "referent_persons": [],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>4x4 ist nicht nur „höher + grobe Reifen“.</strong> Wer einen Sprinter, Crafter oder TGE offroad-tauglich machen will, greift oft zu Lift-Kit, AT-Reifen, Unterfahrschutz und Dachträger – und wundert sich später über Vibrationen, schlechtes Fahrverhalten, zu hohe Achslasten oder Stress bei der Eintragung.</p><p>In diesem Vortrag bekommst du einen klaren Praxis-Überblick, <strong>welche Upgrades wirklich Sinn machen</strong> , in welcher Reihenfolge, und wo die typischen Geldverbrennungs-Fehler lauern.</p><p><strong>Was dich erwartet:</strong></p><p>✓ 2WD, AWD/4Motion, 4x4-Umbau: Was passt zu welchem Reisestil?</p><p>✓ Fahrwerk &amp; Lift: Stabilität, Schwerpunkt, Dämpfer-Abstimmung</p><p>✓ Reifen/Felgen: Größe, Traglast, Abrollumfang, Reifendruck-Setup</p><p>✓ Unterfahrschutz, Rockslider, Recovery: Was schützt wirklich?</p><p>✓ Dokumentation &amp; Eintragung: Wie du Probleme bei Abnahme/Versicherung vermeidest</p><p>Für alle, die ihren Van <strong>geländetauglich</strong> machen wollen, ohne Alltagstauglichkeit und Legalität zu verlieren.</p><hr><h4>Referent/Experte</h4><p><strong>9ed Noch offen</strong></p><p><strong>Hintergrund (Wunschprofil):</strong></p><ul><li>4x4-Umbau-/Offroad-Werkstatt oder Overland-Ausbau-Profi</li><li>Erfahrung mit Sprinter/Crafter/TGE Plattformen</li><li>Praxis: Fahrwerk, Reifen, Schutz &amp; Eintragung</li></ul><p><strong>Vortrags-Themen:</strong></p><ul><li>Upgrade-Prioritäten und sinnvolle Setups</li><li>Häufigste Fehler und Folgekosten</li><li>Dokumentation/Abnahme pragmatisch vorbereiten</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Antrieb &amp; Plattform: Erwartungsmanagement</h4><ul><li>AWD vs. „echter“ 4x4: Traktion, Gelände, Wartung, Kosten</li><li>Differentialsperre/LSD: Wann es mehr bringt als noch mehr Lift</li><li>Realistische Grenzen: Radstand, Überhang, Böschungswinkel</li></ul><h4>2) Fahrwerk richtig (statt nur höher)</h4><ul><li>Lift-Kits: Was sie können, was sie kaputt machen können</li><li>Dämpfer/Federn: Beladung, Wankneigung, Bremsverhalten</li><li>Schwerpunkt und Dachlast: „hoch bauen“ ist Offroad oft der Gegner</li><li>Typische Fehler: zu hart, zu weich, falsche Federrate für Ausbaugewicht</li></ul><h4>3) Reifen, Felgen, Luftdruck: Das größte Leistungs-Upgrade</h4><ul><li>AT vs. MT: Geräusch, Verbrauch, Nässe, Schnee</li><li>Traglastindex und Geschwindigkeit: nicht verhandelbar</li><li>Abrollumfang/Übersetzung: Tacho, Assistenzsysteme, Schaltpunkte</li><li>Reifendruck: Kompressor, Ventile, Druckmanagement unterwegs</li></ul><h4>4) Schutz &amp; Recovery: sinnvoll statt Show</h4><ul><li>Unterfahrschutz: Motor, Getriebe, Tank, AdBlue – Prioritäten</li><li>Rockslider/Seitenschutz: schützt Karosse und Schweller</li><li>Bergepunkte, Schäkel, Gurt, Sandbleche: was in den Van gehört</li><li>Typische Fehler: falsche Bergepunkte, zu schweres Zubehör ohne Nutzen</li></ul><h4>5) Legalität, Eintragung &amp; Alltag</h4><ul><li>Dokumentations-Checkliste: Teile, Gutachten, Fotos, Wiegeprotokoll</li><li>Achslasten/zul. Gesamtgewicht: Upgrade vs. Nachweis</li><li>Versicherung: Umbauten sauber deklarieren (sonst Ärger im Schadenfall)</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit Sprinter/Crafter/TGE (2WD/AWD/4x4)</li><li>Overland- und Offroad-Einsteiger, die eine robuste Basis wollen</li><li>Alle, die zwischen „Instagram-Offroad“ und echtem Nutzen entscheiden müssen</li></ul>",
-            "has_content": true,
+            "content_html": "",
+            "has_content": false,
             "qa_enabled": true
         },
         {
@@ -322,8 +322,8 @@
                     "stand_h": null
                 }
             ],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>700Ah+ unter dem Beifahrersitz klingt nach Superpower – und ist es auch.</strong> Aber mit dieser neuen „Untersitz-Dimension“ kommen neue Fehlerbilder: überlastete Lichtmaschinen, zu dünne Kabel, falsch gesetzte Sicherungen, BMS-Limits, Hitze- und Frost-Themen oder schlicht chaotische Systemarchitektur.</p><p>In diesem Expertpanel zeigen wir, wie du ein großes LiFePO4-Setup <strong>sicher, effizient und langlebig</strong> aufbaust – von der mechanischen Integration bis zum letzten Sicherungsplatz.</p><p><strong>Was dich erwartet:</strong></p><p>✓ System-Design: 12V vs. 24V, ein großer Akku vs. mehrere Module, Skalierung ohne Chaos</p><p>✓ BMS &amp; Schutzfunktionen: Stromlimits, Balancing, Temperaturabschaltungen, Kommunikation</p><p>✓ Kabel &amp; Absicherung: Querschnitt, Leitungslängen, Sicherungen „schützen das Kabel“</p><p>✓ Laden richtig: Ladebooster vs. Direktladung über Lima, Solar/MPPT, Landstrom, Ladeprofile</p><p>✓ Thermik &amp; Sicherheit: Belüftung, Montage unter dem Sitz, Brandschutz, Servicezugang</p><hr><h4>Referent/Experte</h4><p><strong>Liontron / (Batterie- und Elektrik-Profis) + Praxis aus High-Power-Vans</strong></p><p><strong>Hintergrund:</strong></p><ul><li>Erfahrung aus großen LiFePO4-Installationen (Untersitz- und Unterflur-Lösungen)</li><li>Fokus: sichere Verkabelung, Schutzkonzepte, Lade-Architektur, Fehlersuche</li></ul><p><strong>Panel-Themen:</strong></p><ul><li>High-Capacity-Systemdesign (700Ah+)</li><li>BMS, Absicherung, Thermomanagement</li><li>Lade-Setup aus Lima, Solar und Landstrom</li></ul><hr><h4>Themen-Schwerpunkte</h4><h4>1) Architektur: Was bedeutet „700Ah+“ wirklich?</h4><ul><li>Verbrauchsprofil vs. „Haben-wollen“-Kapazität: Autarkie realistisch planen</li><li>12V vs. 24V: Wann 24V bei großen Leistungen Sinn ergibt (Ströme senken)</li><li>Ein Akku vs. mehrere: Redundanz, Service, Balancing, Platz und Kabelwege</li><li>Typische Stolperfallen: zu viele „Einzellösungen“, kein sauberer Verteiler, keine Messpunkte</li></ul><h4>2) Untersitz-Integration: Mechanik, Service, Thermik</h4><ul><li>Platz/Abmessungen: Sitzkonsole, Durchführungen, Scheuerschutz</li><li>Servicezugang: Sicherungen, Hauptschalter, BMS-Reset, Messpunkte erreichbar machen</li><li>Wärme: hohe Ströme → Wärme entsteht (Kontaktstellen, Verteiler, Sicherungen)</li><li>Belüftung: warum „eingekapselt“ schnell zum Problem wird</li></ul><h4>3) BMS verstehen (und nicht gegen das BMS arbeiten)</h4><ul><li>BMS-Stromlimit vs. Wechselrichter-/Lastspitzen: was wirklich begrenzt</li><li>Balancing: warum es bei großen Packs wichtiger wird, „gesund“ zu laden</li><li>Temperaturgrenzen: Laden bei Frost (0°C-Regel), Entladen bei Kälte, BMS-Abschaltungen</li><li>Monitoring: Bluetooth/CAN, Alarmwerte, Logik für „Warum ging alles aus?“</li></ul><h4>4) Kabel &amp; Absicherung (die häufigste Gefahrenquelle)</h4><ul><li>Grundprinzip: <strong>Sicherung schützt das Kabel, nicht das Gerät</strong></li><li>Querschnitt vs. Länge vs. Strom: Spannungsabfall als unsichtbarer Fehler (Hitze + Ausfälle)</li><li>Absicherung nah an der Batterie: Hauptsicherung, Abgänge, Verteilerkonzept</li><li>Crimps, Presskabelschuhe, Kontaktflächen: Übergangswiderstände als Wärmeerzeuger</li><li>Masseführung: Rückleiter, Karosseriemasse vs. eigener Minus-Busbar</li></ul><h4>5) Laden aus der Fahrzeug-Lima (ohne sie zu grillen)</h4><ul><li>Ladebooster (B2B) vs. Direktladung: wann welcher Ansatz sinnvoll ist</li><li>Strombegrenzung: warum „maximal“ nicht „optimal“ ist</li><li>Temperatur- und Spannungsmanagement: stabile Ladung statt sporadischer Spitzen</li><li>Parallele Ladequellen: Solar + Lima + Landstrom sauber priorisieren</li></ul><h4>6) Solar/MPPT, Landstrom, Ladeprofile</h4><ul><li>Solar bringt Ruhe ins System: „Erhaltungsladung“ und Tagesleistung realistisch kalkulieren</li><li>MPPT korrekt dimensionieren und absichern</li><li>Landstrom: Ladegerät auf LiFePO4-Profil einstellen, Float/Storage sinnvoll setzen</li><li>Typische Fehler: falsches Ladeprofil (Blei), Dauer-Vollladung, fehlende Abschaltlogik</li></ul><h4>7) Sicherheit &amp; Praxis-Checks</h4><ul><li>Not-Aus / Hauptschalter: wie du das System in 2 Sekunden spannungsfrei bekommst</li><li>Brandschutz „realistisch“: saubere Installation statt Mythen</li><li>CO-/Rauchmelder-Logik im Kontext von Elektrik (Früherkennung)</li><li>Checkliste vor dem ersten großen Trip: Temperatur, Spannungsabfall, Sicherungswerte, Schraubnachzug</li></ul><hr><h4>Zielgruppe</h4><ul><li>Selbstausbauer mit großem Strombedarf (Induktion, große Wechselrichter, „gasfrei“)</li><li>Vans mit Untersitz-Batterie-Konzepten und wenig Bauraum</li><li>Alle, die 400Ah „durchgespielt“ haben und jetzt auf 700Ah+ skalieren wollen</li><li>Alle, die System- und Sicherheitsthemen (BMS, Kabel, Absicherung, Laden) wirklich verstehen möchten</li></ul>",
-            "has_content": true,
+            "content_html": "",
+            "has_content": false,
             "qa_enabled": true
         },
         {
@@ -346,8 +346,8 @@
                 }
             ],
             "aussteller": [],
-            "content_html": "<p>Infos folgen</p>",
-            "has_content": true,
+            "content_html": "",
+            "has_content": false,
             "qa_enabled": false
         },
         {
@@ -362,13 +362,18 @@
             "kategorien": [
                 "Sonstiges"
             ],
-            "status": "Planung",
+            "status": "Referent bestätigt",
             "referent_firma": "",
-            "referent_person": "",
-            "referent_persons": [],
+            "referent_person": "German Höffner",
+            "referent_persons": [
+                {
+                    "id": "a2bd11db140947b584bb018ceca3f0b6",
+                    "name": "German Höffner"
+                }
+            ],
             "aussteller": [],
-            "content_html": "<h4>Ankündigungstext</h4><p><strong>Digital Nomads aufgepasst: Arbeiten von überall – mit Highspeed-Internet im rollenden Büro!</strong></p><p>Fest installierte, flache Satelliten-Antennen (Flat High Performance) auf dem Dach bieten Internet auch während der Fahrt.</p><p><strong>Was dich erwartet:</strong></p><p>✓ Satelliten-Systeme für Camper kennenlernen</p><p>✓ Flat High Performance Antenne installieren</p><p>✓ Internet während der Fahrt nutzen</p><p>✓ Kosten, Tarife und Verfügbarkeit</p><p>✓ Praktische Integration in den Camper</p><p>Für alle, die unterwegs online bleiben wollen!</p><hr><h4>Themen-Schwerpunkte</h4><h4>Starlink-Systeme</h4><ul><li>Flat High Performance vs. Standard</li><li>Internet während der Fahrt</li><li>Abdeckung und Verfügbarkeit</li></ul><h4>Installation</h4><ul><li>Dachmontage der Antenne</li><li>Verkabelung und Stromversorgung</li><li>Router und WLAN im Camper</li></ul><h4>Kosten &amp; Tarife</h4><ul><li>Hardware-Kosten</li><li>Monatliche Tarife</li><li>Roaming in Europa und weltweit</li></ul><hr><h4>Zielgruppe</h4><ul><li>Digital Nomads und Remote Worker</li><li>Langzeitreisende mit Internet-Bedarf</li><li>Alle, die unterwegs online arbeiten wollen</li></ul>",
-            "has_content": true,
+            "content_html": "",
+            "has_content": false,
             "qa_enabled": true
         },
         {
@@ -2044,7 +2049,7 @@
             "aussteller": [
                 {
                     "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
-                    "firma": "Reisch-Tech GmbH",
+                    "firma": "Timberline",
                     "stand": "FG-808",
                     "stand_x": 38.2,
                     "stand_y": 27.5,

@@ -1,6 +1,6 @@
 {
-    "generated": "2026-03-06T12:59:55+01:00",
-    "count": 32,
+    "generated": "2026-03-10T17:02:34+01:00",
+    "count": 33,
     "experten": [
         {
             "id": "3149c964c82f8063ae1de64ec7f90bc3",
@@ -496,6 +496,36 @@
             ]
         },
         {
+            "id": "a2bd11db140947b584bb018ceca3f0b6",
+            "name": "German Höffner",
+            "vorname": "German",
+            "nachname": "Höffner",
+            "foto": "",
+            "bio": "Gründer und Geschäftsführer der performeon GmbH und der Marke LinkGear. Über 10 Jahre Erfahrung in IT-Infrastruktur, Netzwerktechnik und E-Commerce. Fachinformatiker für Systemintegration. Spezialisiert auf mobile Starlink- und Connectivity-Lösungen für Campervans, Wohnmobile und Expeditionsfahrzeuge. Hat LinkGear als E-Commerce-Marke für Starlink-Zubehör aufgebaut (2.000+ Bestellungen, 5.000+ verkaufte Produkte). Starke B2B-Partnerschaften mit Campervan-Werkstätten und Ausbau-Unternehmen. Weitere Kompetenzen: Hardware-Entwicklung, PWA-Entwicklung, Videoproduktion und Drohnensteuerung.",
+            "funktion": "Geschäftsführer",
+            "kategorie": "",
+            "website": "https://linkgear.net",
+            "firma": "",
+            "kategorien": [
+                "Sonstiges"
+            ],
+            "workshops": [
+                {
+                    "id": "4378834b5ffd42ac91002393017b3103",
+                    "title": "Mobiles Internet - Starlink, Leo und Co",
+                    "typ": "Workshop",
+                    "tag": "Freitag",
+                    "zeit": "14:45 – 15:30 Uhr",
+                    "ort": "Selbstausbau Academy Bühne",
+                    "kategorien": [
+                        "Sonstiges"
+                    ],
+                    "status": "Referent bestätigt",
+                    "aussteller": []
+                }
+            ]
+        },
+        {
             "id": "8d4eb3a3b19e4538901b3de41c61fbe4",
             "name": "Karin Intveen",
             "vorname": "Karin",
@@ -948,7 +978,7 @@
                     "aussteller": [
                         {
                             "id": "1c9c419c1b344d93bdbaa9eb7ff76dca",
-                            "firma": "Reisch-Tech GmbH",
+                            "firma": "Timberline",
                             "stand": "FG-808",
                             "stand_x": 38.2,
                             "stand_y": 27.5,

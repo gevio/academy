@@ -1,6 +1,6 @@
 {
-    "generated": "2026-03-06T12:59:07+01:00",
-    "count": 194,
+    "generated": "2026-03-10T17:02:33+01:00",
+    "count": 201,
     "aussteller": [
         {
             "id": "32c779c65cfd42c982f0a46a2b02c94c",
@@ -269,6 +269,25 @@
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.gratzke-autohaus.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/3189c964c82f806b9cdbd3aa6703c9e6.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "31e9c964c82f80dcb4f2dd02643799bd",
+            "page_id": "31e9c964-c82f-80dc-b4f2-dd02643799bd",
+            "firma": "Basisfahrzeuge",
+            "stand": "A5-337",
+            "beschreibung": "BASISFAHRZEUGE.CH ist Ihre kompetente Anlaufstelle, wenn es um robuste und zuverlässige LKW-Fahrgestelle für Expeditionsfahrzeuge und Allrad Wohnmobile geht. Sorgfältig ausgesuchte Fahrzeuge (z.B Feuerwehrfahrzeuge) werden für Sie fachmännisch aufbereitet.",
+            "kategorien": [
+                "Expeditionsmobile"
+            ],
+            "website": "https://www.basisfahrzeuge.ch",
+            "domain": "basisfahrzeuge.ch",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.basisfahrzeuge.ch?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31e9c964c82f80dcb4f2dd02643799bd.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -723,6 +742,25 @@
             "stand_h": null
         },
         {
+            "id": "31e9c964c82f80e7aacfdebbe46153f7",
+            "page_id": "31e9c964-c82f-80e7-aacf-debbe46153f7",
+            "firma": "DauerShower",
+            "stand": "A4-16",
+            "beschreibung": "Die DauerShower revolutioniert die Art, wie du unterwegs duschst.Ihr intelligentes Kreislaufsystem erwärmt, filtert und bereitet dein Duschwasser in Echtzeit wieder auf. So genießt du den Komfort einer langen, entspannenden Dusche – und verbrauchst dabei nur wenige Liter Frischwasser.",
+            "kategorien": [
+                "Wassersysteme & Hygiene"
+            ],
+            "website": "https://dauershower.com",
+            "domain": "dauershower.com",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.dauershower.com?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31e9c964c82f80e7aacfdebbe46153f7.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "dec145b55a784b08bae6c6663175cfed",
             "page_id": "dec145b5-5a78-4b08-bae6-c6663175cfed",
             "firma": "DEKA Kleben & Dichten GmbH",
@@ -987,6 +1025,25 @@
             "logo_local": "/img/aussteller/80d667a2796241639a196767e56fa5b0.webp",
             "stand_x": 73,
             "stand_y": 76,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "31e9c964c82f80c18374e579c3542958",
+            "page_id": "31e9c964-c82f-80c1-8374-e579c3542958",
+            "firma": "FOOTBAAG GmbH",
+            "stand": "A3-304",
+            "beschreibung": "Schlafen wie zuhause. Die erste Wohnmobil-Schlafdecke mit integrierter Fußtasche und zahlreichen Features.",
+            "kategorien": [
+                "Schlafen & Wohnen"
+            ],
+            "website": "https://footbaag.de",
+            "domain": "footbaag.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.footbaag.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31e9c964c82f80c18374e579c3542958.webp",
+            "stand_x": null,
+            "stand_y": null,
             "stand_w": null,
             "stand_h": null
         },
@@ -2288,6 +2345,27 @@
             "stand_h": null
         },
         {
+            "id": "31e9c964c82f802baa4dc42b41d550fa",
+            "page_id": "31e9c964-c82f-802b-aa4d-c42b41d550fa",
+            "firma": "outdoor and more",
+            "stand": "A3-104",
+            "beschreibung": "Outdoor and more verkauft Outdoor-Artikel vom Messer bis zum Rucksack. Kaum ein Kunde, der hier nicht fündig wird.",
+            "kategorien": [
+                "Bekleidung/Taschen/Accessoires",
+                "Camping & Zubehör",
+                "Outdoor Gear"
+            ],
+            "website": "",
+            "domain": "",
+            "instagram": "",
+            "logo_url": "",
+            "logo_local": "",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "71295849106c4447a66fdbcf26cae10a",
             "page_id": "71295849-106c-4447-a66f-dbcf26cae10a",
             "firma": "OVERLANDTRUCKS",
@@ -3001,11 +3079,30 @@
             "kategorien": [
                 "Kochen und Grillen"
             ],
-            "website": "https://www.sturm-mobilekitchen.com/impressum",
+            "website": "https://www.sturm-mobilekitchen.com",
             "domain": "sturm-mobilekitchen.com",
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.sturm-mobilekitchen.com?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/5029d793b19145ed86aa9f57b3271e49.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "31e9c964c82f801bb0e5ff55a7be559e",
+            "page_id": "31e9c964-c82f-801b-b0e5-ff55a7be559e",
+            "firma": "Style your Face Sport- & Sonnenbrillen",
+            "stand": "FG-1301",
+            "beschreibung": "Ob mit oder ohne Sehstärke, bei uns findest du den perfekten Schutz für deine (Freizeit-) Aktivitäten. Unser vielfältiges Markensortiment reicht von Oakley über Gloryfy, Ray-Ban, Bliz & WileyX. Wir verfügen über ein breit gefächertes Sortiment an Sportbrillen und Sonnenbrillen für jeden Typ.",
+            "kategorien": [
+                "Sonstiges"
+            ],
+            "website": "https://www.styleyourface.de",
+            "domain": "styleyourface.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.styleyourface.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31e9c964c82f801bb0e5ff55a7be559e.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,
@@ -3396,6 +3493,26 @@
             "stand_h": null
         },
         {
+            "id": "31f9c964c82f8048aeaaf570c9d2fddb",
+            "page_id": "31f9c964-c82f-8048-aeaa-f570c9d2fddb",
+            "firma": "VANBASE",
+            "stand": "A4-211",
+            "beschreibung": "Ob massgeschneiderter Komplettausbau oder funktionale Lösungen für Solar- und Sanitäranlagen – VanBase bringt deinen Van auf das nächste Level.\n🔧 Offroad-Umbauten? Kein Problem.\nMit robusten Fahrwerken, Seilwinden, Unterfahrschutz und mehr bereiten wir dein Fahrzeug optimal für jedes Terrain vor – sicher, zuverlässig und nach deinen Bedürfnissen.\n📦 Von der Bereitstellung bis zur Montageanweisung bekommst du alles aus einer Hand – damit dein Ausbauprojekt nicht nur gut aussieht, sondern auch funktioniert.\n🛠️ Vanbase – dein Ansprechpartner für Vanlife, Technik & Abenteuer",
+            "kategorien": [
+                "Fahrzeugausbau",
+                "Innenausbau & Module"
+            ],
+            "website": "https://www.vanbase.ch",
+            "domain": "vanbase.ch",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.vanbase.ch?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31f9c964c82f8048aeaaf570c9d2fddb.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
             "id": "1ce4050f65ab489ea6b2771e81a03fbb",
             "page_id": "1ce4050f-65ab-489e-a6b2-771e81a03fbb",
             "firma": "Vannado Schweiz c/o LIVEcomm GmbH",
@@ -3527,6 +3644,25 @@
             "instagram": "",
             "logo_url": "https://cdn.brandfetch.io/domain/www.werbegrafik-gerlach.de?c=1idixXyiHH3-_02_vkl",
             "logo_local": "/img/aussteller/3189c964c82f80a6a7e9e9732e163ac6.webp",
+            "stand_x": null,
+            "stand_y": null,
+            "stand_w": null,
+            "stand_h": null
+        },
+        {
+            "id": "31b9c964c82f80aebdd1c55856fe2437",
+            "page_id": "31b9c964-c82f-80ae-bdd1-c55856fe2437",
+            "firma": "Wildport",
+            "stand": "A3-335",
+            "beschreibung": "Wildport zeigt Kabinen und Hardtops für Pickup-Fahrzeuge",
+            "kategorien": [
+                "Kabinen (Pickup & LKW)"
+            ],
+            "website": "https://www.wildport.de",
+            "domain": "wildport.de",
+            "instagram": "",
+            "logo_url": "https://cdn.brandfetch.io/domain/www.wildport.de?c=1idixXyiHH3-_02_vkl",
+            "logo_local": "/img/aussteller/31b9c964c82f80aebdd1c55856fe2437.webp",
             "stand_x": null,
             "stand_y": null,
             "stand_w": null,

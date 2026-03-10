@@ -50,6 +50,7 @@
         'use strict';
 
         const API_URL = '/api/workshops.json';
+        const AUSSTELLER_URL = '/api/aussteller.json';
         const STORAGE_KEY = 'asa_favorites';
         const ADMIN_KEY = 'asa_admin_secret';
         let backUrl = null;
@@ -157,25 +158,90 @@
             document.getElementById('back-link').href = backUrl || ('/w/' + wsId);
 
             try {
-                const resp = await fetch(API_URL + '?t=' + Date.now());
-                if (!resp.ok) throw new Error('HTTP ' + resp.status);
-                const data = await resp.json();
-                const ws = (data.workshops || []).find(w => w.id === wsId);
+                const ts = '?t=' + Date.now();
+                const [wsData, ausData] = await Promise.all([
+                    fetch(API_URL + ts).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+                    fetch(AUSSTELLER_URL + ts).then(r => r.ok ? r.json() : { aussteller: [] }).catch(() => ({ aussteller: [] }))
+                ]);
+                const ws = (wsData.workshops || []).find(w => w.id === wsId);
 
                 if (!ws) {
-                    showError('Workshop nicht gefunden (ID: ' + wsId + ', Count: ' + (data.workshops||[]).length + ').');
+                    showError('Workshop nicht gefunden (ID: ' + wsId + ', Count: ' + (wsData.workshops||[]).length + ').');
                     return;
                 }
 
                 document.title = ws.title + ' – AS26 Live';
-                renderDetails(ws);
+                renderDetails(ws, wsData.workshops || [], ausData.aussteller || []);
             } catch (err) {
                 console.error('Details-Fehler:', err);
                 showError('Details konnten nicht geladen werden.<br><small>' + err.message + '</small>');
             }
         }
 
-        function renderDetails(ws) {
+        function renderAehnlicheVeranstaltungen(ws, allWorkshops) {
+            const meineKats = new Set(ws.kategorien || []);
+            if (meineKats.size === 0) return '';
+
+            const scored = allWorkshops
+                .filter(w => w.id !== ws.id)
+                .map(w => {
+                    const score = (w.kategorien || []).filter(k => meineKats.has(k)).length;
+                    return { w, score };
+                })
+                .filter(x => x.score > 0)
+                .sort((a, b) => b.score - a.score || (a.w.tag === ws.tag ? -1 : 1));
+
+            if (scored.length === 0) return '';
+
+            const top = scored.slice(0, 3);
+            let html = '<section class="cross-link-section">';
+            html += '<h3>Das könnte dich auch interessieren</h3>';
+            html += '<div class="cross-link-scroll-wrap"><div class="cross-link-row">';
+            top.forEach(({ w }) => {
+                html += `<a href="/w/${escapeHtml(w.id)}/details" class="cross-link-card">
+                    <span class="typ-badge" data-typ="${escapeHtml(w.typ)}">${escapeHtml(w.typ)}</span>
+                    <strong>${escapeHtml(w.title)}</strong>
+                    <span>${escapeHtml(w.tag)} · ${escapeHtml(w.zeit)}</span>
+                </a>`;
+            });
+            html += '</div></div></section>';
+            return html;
+        }
+
+        function renderPassendeAussteller(ws, alleAussteller) {
+            const meineKats = new Set(ws.kategorien || []);
+            if (meineKats.size === 0) return '';
+
+            const bereitsVerlinkt = new Set((ws.aussteller || []).map(a => a.id));
+
+            const scored = alleAussteller
+                .filter(a => !bereitsVerlinkt.has(a.id))
+                .map(a => {
+                    const score = (a.kategorien || []).filter(k => meineKats.has(k)).length;
+                    return { a, score };
+                })
+                .filter(x => x.score > 0)
+                .sort((a, b) => b.score - a.score);
+
+            if (scored.length === 0) return '';
+
+            const top = scored.slice(0, 4);
+            let html = '<section class="cross-link-section cross-link-aussteller">';
+            html += '<h3>Andere Aussteller zum Thema</h3>';
+            html += '<div class="cross-link-scroll-wrap"><div class="cross-link-row">';
+            top.forEach(({ a }) => {
+                const standInfo = a.stand ? ` · Stand ${escapeHtml(a.stand)}` : '';
+                html += `<a href="/aussteller.html#id=${escapeHtml(a.id)}" class="cross-link-card">
+                    ${a.logo_local ? `<img src="${escapeHtml(a.logo_local)}" alt="" class="cross-link-logo">` : ''}
+                    <strong>${escapeHtml(a.firma)}</strong>
+                    <span>${escapeHtml((a.kategorien || []).slice(0, 2).join(', '))}${standInfo}</span>
+                </a>`;
+            });
+            html += '</div></div></section>';
+            return html;
+        }
+
+        function renderDetails(ws, allWorkshops, allAussteller) {
             const container = document.getElementById('detail-content');
             const favs = getFavorites();
             const isFav = favs.includes(ws.id);
@@ -234,6 +300,10 @@
             }
 
             // (Referent + Firma wird jetzt im Workshop-Card via renderReferentFirma() gerendert)
+
+            // Cross-Linking: Ähnliche Veranstaltungen + Passende Aussteller
+            html += renderAehnlicheVeranstaltungen(ws, allWorkshops);
+            html += renderPassendeAussteller(ws, allAussteller);
 
             // Zurück-Buttons
             html += `<div style="margin-top:2rem;text-align:center">

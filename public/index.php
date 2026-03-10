@@ -51,11 +51,13 @@ $referentFirma = '';
 $referentPerson = '';
 $aussteller = [];
 $qaEnabled = false;
+$allWorkshops = [];
 $cleanId = str_replace('-', '', $id);
 
 $jsonFile = __DIR__ . '/api/workshops.json';
 if (file_exists($jsonFile)) {
     $jsonData = json_decode(file_get_contents($jsonFile), true);
+    $allWorkshops = $jsonData['workshops'] ?? [];
     foreach (($jsonData['workshops'] ?? []) as $jws) {
         if ($jws['id'] === $cleanId) {
             $kategorien = $jws['kategorien'] ?? [];
@@ -141,6 +143,109 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
 // Admin-Override: ?secret=ADMIN_SECRET erzwingt Freischaltung
 if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET, $_GET['secret'])) {
     $feedbackActive = true;
+}
+
+// ── Waiting-Links: vor Messe-Start dezente Empfehlungen ───────────────────
+$eventStarted = false;
+$relatedWorkshops = [];
+$relatedAussteller = [];
+
+try {
+    $now = new DateTime('now', new DateTimeZone('Europe/Berlin'));
+    $eventStart = new DateTime('2026-07-10 00:00:00', new DateTimeZone('Europe/Berlin'));
+    $eventStarted = ($now >= $eventStart);
+} catch (Exception $e) {
+    $eventStarted = true;
+}
+
+if (!$eventStarted && !empty($kategorien)) {
+    // Aehnliche Veranstaltungen aus workshops.json ableiten.
+    $scoredWorkshops = [];
+    foreach ($allWorkshops as $candidate) {
+        $candidateId = $candidate['id'] ?? '';
+        if ($candidateId === '' || $candidateId === $cleanId) {
+            continue;
+        }
+
+        $candidateKats = $candidate['kategorien'] ?? [];
+        if (!is_array($candidateKats)) {
+            $candidateKats = [];
+        }
+
+        $score = count(array_intersect($kategorien, $candidateKats));
+        if ($score <= 0) {
+            continue;
+        }
+
+        $sameDay = (($candidate['tag'] ?? '') === ($workshop['tag'] ?? '')) ? 1 : 0;
+        $sameType = (($candidate['typ'] ?? '') === ($workshop['typ'] ?? '')) ? 1 : 0;
+
+        $scoredWorkshops[] = [
+            'w' => $candidate,
+            'score' => $score,
+            'same_day' => $sameDay,
+            'same_type' => $sameType,
+        ];
+    }
+
+    usort($scoredWorkshops, function($a, $b) {
+        if ($a['score'] !== $b['score']) {
+            return $b['score'] <=> $a['score'];
+        }
+        if ($a['same_day'] !== $b['same_day']) {
+            return $b['same_day'] <=> $a['same_day'];
+        }
+        return $b['same_type'] <=> $a['same_type'];
+    });
+
+    $relatedWorkshops = array_slice(array_map(function($entry) {
+        return $entry['w'];
+    }, $scoredWorkshops), 0, 3);
+
+    // Passende Aussteller ueber Kategorien (ohne bereits direkt verlinkte).
+    $directAusstellerIds = [];
+    foreach ($aussteller as $a) {
+        if (!empty($a['id'])) {
+            $directAusstellerIds[$a['id']] = true;
+        }
+    }
+
+    $ausstellerFile = __DIR__ . '/api/aussteller.json';
+    if (file_exists($ausstellerFile)) {
+        $ausstellerData = json_decode(file_get_contents($ausstellerFile), true);
+        $allAussteller = $ausstellerData['aussteller'] ?? [];
+        $scoredAussteller = [];
+
+        foreach ($allAussteller as $candidate) {
+            $candidateId = $candidate['id'] ?? '';
+            if ($candidateId === '' || isset($directAusstellerIds[$candidateId])) {
+                continue;
+            }
+
+            $candidateKats = $candidate['kategorien'] ?? [];
+            if (!is_array($candidateKats)) {
+                $candidateKats = [];
+            }
+
+            $score = count(array_intersect($kategorien, $candidateKats));
+            if ($score <= 0) {
+                continue;
+            }
+
+            $scoredAussteller[] = [
+                'a' => $candidate,
+                'score' => $score,
+            ];
+        }
+
+        usort($scoredAussteller, function($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+
+        $relatedAussteller = array_slice(array_map(function($entry) {
+            return $entry['a'];
+        }, $scoredAussteller), 0, 4);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -252,6 +357,33 @@ if (!empty($_GET['secret']) && !empty(ADMIN_SECRET) && hash_equals(ADMIN_SECRET,
             <?php endif; ?>
 
         </nav>
+
+        <?php if (!$eventStarted && (!empty($relatedWorkshops) || !empty($relatedAussteller))): ?>
+        <section class="wait-links" aria-label="Empfehlungen vor Messe-Start">
+            <p class="wait-links-line">
+                <span class="wait-prefix">Während du wartest, bis die Messe startet:</span>
+                <?php if (!empty($relatedWorkshops)): ?>
+                    <span class="wait-topic">Ähnliche Vorträge</span>
+                    <span class="wait-link-list">
+                        <?php $wsTotal = count($relatedWorkshops); foreach ($relatedWorkshops as $i => $rw): ?>
+                            <a class="wait-link" href="/w/<?= htmlspecialchars($rw['id'] ?? '') ?>/details?back=<?= urlencode('/w/' . $id) ?>"><?= htmlspecialchars($rw['title'] ?? 'Veranstaltung') ?></a><?php if ($i < $wsTotal - 1): ?><span class="wait-sep">·</span><?php endif; ?>
+                        <?php endforeach; ?>
+                    </span>
+                <?php endif; ?>
+                <?php if (!empty($relatedWorkshops) && !empty($relatedAussteller)): ?>
+                    <span class="wait-divider">•</span>
+                <?php endif; ?>
+                <?php if (!empty($relatedAussteller)): ?>
+                    <span class="wait-topic">Passende Aussteller</span>
+                    <span class="wait-link-list">
+                        <?php $aTotal = count($relatedAussteller); foreach ($relatedAussteller as $i => $ra): ?>
+                            <a class="wait-link" href="/aussteller.html#id=<?= htmlspecialchars($ra['id'] ?? '') ?>"><?= htmlspecialchars($ra['firma'] ?? 'Aussteller') ?></a><?php if ($i < $aTotal - 1): ?><span class="wait-sep">·</span><?php endif; ?>
+                        <?php endforeach; ?>
+                    </span>
+                <?php endif; ?>
+            </p>
+        </section>
+        <?php endif; ?>
 
         <a href="/programm.html" class="programm-banner" id="programm-back-link">
             📋 Zurück zum Programm
