@@ -45,6 +45,7 @@
         </div>
     </footer>
 
+    <script src="/js/sw-update-notice.js"></script>
     <script>
     (function() {
         'use strict';
@@ -408,9 +409,6 @@
 
         document.addEventListener('DOMContentLoaded', loadDetails);
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
-        }
     })();
     </script>
 </body>

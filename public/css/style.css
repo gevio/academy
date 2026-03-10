@@ -275,6 +275,56 @@ footer a:hover{color:var(--as-rot)}
   color: var(--as-orange);
 }
 
+/* ═══ SW UPDATE NOTICE ═══ */
+.sw-update-notice {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: min(92vw, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem;
+  padding: .55rem .65rem .55rem .8rem;
+  border: 1px solid color-mix(in srgb, var(--as-beige) 75%, white);
+  border-radius: 12px;
+  background: rgba(55,47,44,.92);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  backdrop-filter: blur(5px);
+}
+.sw-update-text {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--as-hellbeige);
+}
+.sw-update-actions {
+  display: inline-flex;
+  gap: .35rem;
+}
+.sw-update-actions button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: .3rem .55rem;
+  font-size: .72rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.sw-update-later {
+  background: transparent;
+  color: var(--as-beige);
+  border-color: rgba(191,183,175,.45) !important;
+}
+.sw-update-refresh {
+  background: var(--as-rot);
+  color: #fff;
+}
+.sw-update-refresh:hover { background: var(--as-dunkelrot); }
+
 /* ═══ WALL (Beamer) ═══ */
 body.wall{background:var(--as-braun-dark)}
 .wall .logo-bar{background:transparent;border-bottom:none;padding:1.5rem}

@@ -408,11 +408,8 @@ if (!$eventStarted && !empty($kategorien)) {
             <a href="https://adventuresouthside.com/roadtrip-girls/" target="_blank" rel="noopener"><img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls"></a>
         </div>
     </footer>
+    <script src="/js/sw-update-notice.js"></script>
     <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-    }
-
     // ── Admin: Feedback-Link mit Secret versehen ──
     (function() {
         var secret = sessionStorage.getItem('asa_admin_secret');

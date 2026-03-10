@@ -322,6 +322,7 @@
         </p>
     </div>
 
+    <script src="/js/sw-update-notice.js"></script>
     <script>
     // ── A2HS Install Prompt ──────────────────────────────
     const installBanner = document.getElementById('install-banner');
@@ -435,10 +436,6 @@
         }
     })();
 
-    // ── Service Worker ──
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-    }
     </script>
 </body>
 </html>
