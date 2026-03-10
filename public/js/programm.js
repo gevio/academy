@@ -92,6 +92,7 @@
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       const data = await resp.json();
       allWorkshops = data.workshops || [];
+      window._as26Workshops = allWorkshops; // für Chat-Assistent
       populateTypFilter();
       populateOrtFilter();
       populateKatFilter();

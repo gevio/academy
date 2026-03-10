@@ -74,6 +74,7 @@
       if (!ausResp.ok) throw new Error('Aussteller HTTP ' + ausResp.status);
       const data = await ausResp.json();
       allAussteller = data.aussteller || [];
+      window._as26Aussteller = allAussteller; // für Chat-Assistent
 
       // Workshop-Daten speichern + Kategorien pro Aussteller mappen
       if (wsResp && wsResp.ok) {
