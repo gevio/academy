@@ -3,7 +3,8 @@
  *
  * Strategien:
  *   Precache:      Alle Shell-Assets beim Install vorab laden
- *   Cache-First:   Statische Assets (CSS/JS/Img) – schnell, offline-fähig
+ *   Cache-First:   Bilder/Icons – schnell, offline-fähig
+ *   Network-First: CSS/JS/Manifest – sofort frische Version nach Deploy
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
@@ -82,20 +83,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // ── 2) Statische Assets → Stale-While-Revalidate ──
-  //     Sofort aus Cache liefern, im Hintergrund frische Version holen
-  if (isStaticAsset(url.pathname)) {
+  // ── 2) CSS/JS/Manifest → Network-First (no-store) ──
+  //     Verhindert "erst nach STRG+R" bei Deploy-Updates.
+  if (isStyleOrScriptAsset(url.pathname) || url.pathname === '/manifest.json') {
+    event.respondWith(networkFirstNoStore(request));
+    return;
+  }
+
+  // ── 3) Bilder/Icons → Stale-While-Revalidate ──
+  if (isImageAsset(url.pathname)) {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
-  // ── 3) HTML/Navigation → Network-First + Offline-Fallback ──
+  // ── 4) HTML/Navigation → Network-First + Offline-Fallback ──
   if (request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(networkFirstWithOffline(request));
     return;
   }
 
-  // ── 4) Alles andere → Network mit Cache-Fallback ──
+  // ── 5) Alles andere → Network mit Cache-Fallback ──
   event.respondWith(networkFirst(request));
 });
 
@@ -152,6 +159,21 @@ async function networkFirst(request) {
   }
 }
 
+/** Network-First ohne Browser-HTTP-Cache, bei Fehler aus Cache */
+async function networkFirstNoStore(request) {
+  try {
+    const response = await fetch(request, { cache: 'no-store' });
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    const cached = await caches.match(request);
+    return cached || new Response('Offline', { status: 503 });
+  }
+}
+
 /** Network-First für HTML – bei Offline → offline.html */
 async function networkFirstWithOffline(request) {
   try {
@@ -170,9 +192,10 @@ async function networkFirstWithOffline(request) {
 }
 
 /** Prüft ob ein Pfad ein statisches Asset ist */
-function isStaticAsset(pathname) {
-  return pathname.startsWith('/css/') ||
-         pathname.startsWith('/js/') ||
-         pathname.startsWith('/img/') ||
-         pathname === '/manifest.json';
+function isStyleOrScriptAsset(pathname) {
+  return pathname.startsWith('/css/') || pathname.startsWith('/js/');
+}
+
+function isImageAsset(pathname) {
+  return pathname.startsWith('/img/');
 }
