@@ -5,10 +5,23 @@
  * Lädt alle Aussteller aus der Notion DB "AS26_Aussteller"
  * und schreibt /public/api/aussteller.json.
  *
- * Usage:  php scripts/generate-aussteller-json.php
+ * Usage:
+ *   php scripts/generate-aussteller-json.php
+ *   php scripts/generate-aussteller-json.php --skip-images
+ *   php scripts/generate-aussteller-json.php --refresh-images
  */
 
 $t0 = microtime(true);
+$args = $argv ?? [];
+$skipImages = in_array('--skip-images', $args, true);
+$refreshImages = in_array('--refresh-images', $args, true);
+
+if ($skipImages && $refreshImages) {
+    // Expliziter Refresh hat Vorrang.
+    $skipImages = false;
+}
+
+$downloadImages = !$skipImages;
 
 require_once __DIR__ . '/../config/bootstrap.php';
 require_once __DIR__ . '/../src/NotionClient.php';
@@ -84,6 +97,12 @@ function downloadLogo(string $notionUrl, string $id, string $imgDir, string $img
 
 if (!defined('NOTION_AUSSTELLER_DB') || empty(NOTION_AUSSTELLER_DB)) {
     die("❌ NOTION_AUSSTELLER_DB nicht gesetzt. Bitte in .env konfigurieren.\n");
+}
+
+if ($downloadImages) {
+    echo "🖼 Bilder: Refresh aktiv\n";
+} else {
+    echo "🖼 Bilder: Skip (nutze vorhandene lokale Dateien)\n";
 }
 
 // ── 1) Alle Aussteller laden ──
@@ -174,7 +193,12 @@ do {
         // Logo lokal herunterladen (nur wenn Logo-Feld in Notion gefüllt)
         $logoLocal = '';
         if ($logoNotionUrl) {
-            $logoLocal = downloadLogo($logoNotionUrl, $id, $imgDir, $imgUrl);
+            if ($downloadImages) {
+                $logoLocal = downloadLogo($logoNotionUrl, $id, $imgDir, $imgUrl);
+            } else {
+                $localFile = $imgDir . '/' . $id . '.webp';
+                $logoLocal = file_exists($localFile) ? ($imgUrl . '/' . $id . '.webp') : '';
+            }
         }
 
         $entry = [

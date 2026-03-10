@@ -5,10 +5,23 @@
  * Lädt alle Referenten/Experten aus Notion, verknüpft sie mit den Workshops
  * aus workshops.json und schreibt /public/api/experten.json.
  *
- * Usage:  php scripts/generate-experten-json.php
+ * Usage:
+ *   php scripts/generate-experten-json.php
+ *   php scripts/generate-experten-json.php --skip-images
+ *   php scripts/generate-experten-json.php --refresh-images
  */
 
 $t0 = microtime(true);
+$args = $argv ?? [];
+$skipImages = in_array('--skip-images', $args, true);
+$refreshImages = in_array('--refresh-images', $args, true);
+
+if ($skipImages && $refreshImages) {
+    // Expliziter Refresh hat Vorrang.
+    $skipImages = false;
+}
+
+$downloadImages = !$skipImages;
 
 require_once __DIR__ . '/../config/bootstrap.php';
 require_once __DIR__ . '/../src/NotionClient.php';
@@ -76,6 +89,12 @@ function downloadFoto(string $notionUrl, string $id, string $imgDir, string $img
 
 if (!NOTION_REFERENTEN_DB) {
     die("❌ NOTION_REFERENTEN_DB nicht gesetzt. Bitte in .env eintragen.\n");
+}
+
+if ($downloadImages) {
+    echo "📸 Bilder: Refresh aktiv\n";
+} else {
+    echo "📸 Bilder: Skip (nutze vorhandene lokale Dateien)\n";
 }
 
 // ── 0) Workshops-Index laden (ID → Kurzinfo) ──
@@ -165,7 +184,12 @@ foreach ($referenten as $ref) {
     $firma = '';
 
     // Foto lokal herunterladen (Notion-S3-URLs sind temporär ~1h)
-    $fotoLocal = downloadFoto($ref['foto'], $ref['id'], $imgDir, $imgUrl);
+    if ($downloadImages) {
+        $fotoLocal = downloadFoto($ref['foto'], $ref['id'], $imgDir, $imgUrl);
+    } else {
+        $localFile = $imgDir . '/' . $ref['id'] . '.webp';
+        $fotoLocal = file_exists($localFile) ? ($imgUrl . '/' . $ref['id'] . '.webp') : '';
+    }
 
     $result[] = [
         'id'        => $ref['id'],

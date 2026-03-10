@@ -6,11 +6,35 @@
  *  - Lock-Datei verhindert parallele Läufe
  *  - Timestamp-Logging für Nachvollziehbarkeit
  *  - Führt alle drei Generatoren nacheinander aus
+ *  - Unterstützt Bild-Modi per CLI-Flag
  *  - Exit-Code wird weitergegeben
  *
  * Crontab (stündlich):
- *   0 * * * * cd /var/www/as26.cool-camp.site && php cli/generate-json.php >> /var/log/as26-json.log 2>&1
+ *   0 * * * * cd /var/www/as26.cool-camp.site && php cli/generate-json.php --skip-images >> /var/log/as26-json.log 2>&1
+ *
+ * Crontab (nächtlicher Bild-Refresh):
+ *   30 2 * * * cd /var/www/as26.cool-camp.site && php cli/generate-json.php --refresh-images >> /var/log/as26-json.log 2>&1
  */
+
+$args = $argv ?? [];
+$skipImages = in_array('--skip-images', $args, true);
+$refreshImages = in_array('--refresh-images', $args, true);
+
+if ($skipImages && $refreshImages) {
+    // Expliziter Refresh hat Vorrang, damit der Aufruf eindeutig ist.
+    echo date('[Y-m-d H:i:s]') . " WARN – Beide Flags gesetzt; nutze --refresh-images.\n";
+    $skipImages = false;
+}
+
+$childImageFlag = '';
+$modeLabel = 'default';
+if ($skipImages) {
+    $childImageFlag = ' --skip-images';
+    $modeLabel = 'skip-images';
+} elseif ($refreshImages) {
+    $childImageFlag = ' --refresh-images';
+    $modeLabel = 'refresh-images';
+}
 
 $lockFile = __DIR__ . '/../storage/generate-json.lock';
 $storageDir = dirname($lockFile);
@@ -40,6 +64,7 @@ file_put_contents($lockFile, getmypid());
 $t0 = microtime(true);
 $exitCode = 0;
 $results = [];
+echo date('[Y-m-d H:i:s]') . " MODE {$modeLabel}\n";
 
 // Liste der Generatoren
 $generators = [
@@ -53,9 +78,14 @@ foreach ($generators as $name => $script) {
     $gt0 = microtime(true);
 
     // Jeder Generator läuft als Sub-Prozess (isolierter Scope)
-    $cmd = 'php ' . escapeshellarg($script) . ' 2>&1';
+    $cmd = 'php ' . escapeshellarg($script);
+    if ($childImageFlag !== '' && ($name === 'aussteller' || $name === 'experten')) {
+        $cmd .= $childImageFlag;
+    }
+    $cmd .= ' 2>&1';
     $output = '';
     $rc = 0;
+    $lines = [];
     exec($cmd, $lines, $rc);
     $output = implode("\n", $lines);
 
