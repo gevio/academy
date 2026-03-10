@@ -141,6 +141,26 @@
       }
       .asc-qr-btn:hover { background: var(--as-rot, #CF3628); color: #fff; }
 
+      /* ── Day Picker ── */
+      .asc-day-picker { margin-top: .6rem; }
+      .asc-day-checkboxes { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .5rem; }
+      .asc-day-label {
+        display: flex; align-items: center; gap: .35rem;
+        background: #fff; border: 1.5px solid #d0c9c2; border-radius: 20px;
+        padding: .35rem .85rem; font-size: .83rem; font-weight: 700;
+        cursor: pointer; transition: all .15s; user-select: none;
+      }
+      .asc-day-label:has(input:checked) {
+        border-color: var(--as-rot, #CF3628); background: #fdf1f0; color: var(--as-rot, #CF3628);
+      }
+      .asc-day-label input { display: none; }
+      .asc-day-confirm {
+        background: var(--as-rot, #CF3628); color: #fff; border: none;
+        border-radius: 20px; padding: .4rem 1.1rem; font-size: .83rem;
+        font-weight: 700; cursor: pointer; font-family: inherit; transition: opacity .15s;
+      }
+      .asc-day-confirm:disabled { opacity: .35; cursor: not-allowed; }
+
       /* ── Typing Indicator ── */
       .asc-typing { display: flex; gap: 5px; align-items: center; padding: .5rem 0; }
       .asc-typing span {
@@ -267,21 +287,61 @@
       bubble.appendChild(cardWrap);
     }
 
-    // Quick Replies
+    // Quick Replies – bei Tagesauswahl als Checkboxen, sonst als Buttons
     if (quickReplies && quickReplies.length) {
-      const qrWrap = document.createElement('div');
-      qrWrap.className = 'asc-quick-replies';
-      quickReplies.forEach(label => {
-        const b = document.createElement('button');
-        b.className = 'asc-qr-btn';
-        b.textContent = label;
-        b.addEventListener('click', () => {
-          qrWrap.remove();
-          sendMessage(label);
+      const DAYS = ['Freitag', 'Samstag', 'Sonntag'];
+      const dayHits = quickReplies.filter(qr =>
+        DAYS.some(d => qr.toLowerCase().includes(d.toLowerCase()))
+      ).length;
+      const isDayPicker = dayHits >= 2;
+
+      if (isDayPicker) {
+        const dp = document.createElement('div');
+        dp.className = 'asc-day-picker';
+        const boxes = document.createElement('div');
+        boxes.className = 'asc-day-checkboxes';
+        DAYS.forEach(day => {
+          const lbl = document.createElement('label');
+          lbl.className = 'asc-day-label';
+          const cb = document.createElement('input');
+          cb.type = 'checkbox'; cb.value = day;
+          lbl.appendChild(cb);
+          lbl.appendChild(document.createTextNode(day));
+          boxes.appendChild(lbl);
         });
-        qrWrap.appendChild(b);
-      });
-      bubble.appendChild(qrWrap);
+        const confirm = document.createElement('button');
+        confirm.className = 'asc-day-confirm';
+        confirm.textContent = 'Bestätigen';
+        confirm.disabled = true;
+        boxes.querySelectorAll && boxes.addEventListener('change', () => {
+          confirm.disabled = !boxes.querySelector('input:checked');
+        });
+        confirm.addEventListener('click', () => {
+          const sel = [...boxes.querySelectorAll('input:checked')].map(c => c.value);
+          dp.remove();
+          const msg = sel.length === 3
+            ? 'Ich komme alle drei Tage (Freitag, Samstag und Sonntag).'
+            : 'Ich komme am ' + sel.join(' und ') + '.';
+          sendMessage(msg);
+        });
+        dp.appendChild(boxes);
+        dp.appendChild(confirm);
+        bubble.appendChild(dp);
+      } else {
+        const qrWrap = document.createElement('div');
+        qrWrap.className = 'asc-quick-replies';
+        quickReplies.forEach(label => {
+          const b = document.createElement('button');
+          b.className = 'asc-qr-btn';
+          b.textContent = label;
+          b.addEventListener('click', () => {
+            qrWrap.remove();
+            sendMessage(label);
+          });
+          qrWrap.appendChild(b);
+        });
+        bubble.appendChild(qrWrap);
+      }
     }
 
     msgs.appendChild(bubble);
