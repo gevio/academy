@@ -5,16 +5,17 @@
   'use strict';
 
   // ── Konfiguration ──────────────────────────────────────────────────
-  const API_URL        = '/api/chat.php';
-  const STORAGE_KEY    = 'as26_chat';   // history + sessionId im localStorage
-  const PROFILE_KEY    = 'as26_chat_profile';
-  const MAX_HISTORY    = 20;            // max. Nachrichten im localStorage
-  const GREETING       = 'Hallo! Ich bin dein AS26-Assistent. 👋\nWas interessiert dich auf der Adventure Southside? Erzähl mir etwas über dich und ich helfe dir, das passende Programm zu finden!';
-  const QUICK_START    = ['Solar & Elektrik', 'Innenausbau', 'Heizung & Klima', 'Alle Themen zeigen'];
+  const API_URL     = '/api/chat.php';
+  const STORAGE_KEY = 'as26_chat';      // history + sessionId (localStorage, für KI-Kontext)
+  const PROFILE_KEY = 'as26_chat_profile';
+  const MSG_KEY     = 'as26_chat_msgs'; // gerenderte Nachrichten (sessionStorage, Browser-Session)
+  const MAX_HISTORY = 20;
+  const GREETING    = 'Hey! Ich bin dein persönlicher Messe-Guide für die AS26. 👋\nSag mir, was dich interessiert – ich finde die passenden Workshops und Aussteller für dich!';
 
   // ── State ──────────────────────────────────────────────────────────
   let isOpen    = false;
   let isLoading = false;
+  let _msgHistory = []; // In-Memory-Spiegel der sessionStorage-Nachrichten
 
   function loadState() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
@@ -27,11 +28,34 @@
   }
   function saveProfile(update) {
     const p = { ...loadProfile(), ...update };
-    // Leere Werte nicht speichern
     if (!p.tage?.length)  delete p.tage;
     if (!p.fahrzeug)      delete p.fahrzeug;
     if (!p.level)         delete p.level;
     try { localStorage.setItem(PROFILE_KEY, JSON.stringify(p)); } catch {}
+  }
+
+  // Nachrichten für diese Browser-Session speichern (sessionStorage)
+  function loadSessionMsgs() {
+    try { return JSON.parse(sessionStorage.getItem(MSG_KEY) || '[]'); } catch { return []; }
+  }
+  function saveSessionMsgs() {
+    try { sessionStorage.setItem(MSG_KEY, JSON.stringify(_msgHistory.slice(-30))); } catch {}
+  }
+
+  // ── JSON-Daten prefetchen (für Card-Anreicherung) ──────────────────
+  async function prefetchData() {
+    try {
+      const [ws, aus, exp] = await Promise.all([
+        fetch('/api/workshops.json').then(r => r.json()),
+        fetch('/api/aussteller.json').then(r => r.json()),
+        fetch('/api/experten.json').then(r => r.json()),
+      ]);
+      window._as26Workshops  = ws.workshops   || [];
+      window._as26Aussteller = aus.aussteller  || [];
+      window._as26Experten   = exp.experten    || [];
+    } catch (_) {
+      // silently fail – Cards zeigen dann nur IDs
+    }
   }
 
   // ── DOM aufbauen ───────────────────────────────────────────────────
@@ -112,23 +136,27 @@
         background: var(--as-rot, #CF3628); color: #fff;
         border-radius: 14px 4px 14px 14px; align-self: flex-end;
       }
+      .asc-bubble p { margin: 0; }
+      .asc-bubble ul { margin: .3rem 0 .3rem 1.1rem; padding: 0; }
+      .asc-bubble li { margin: .1rem 0; }
+      .asc-bubble strong { font-weight: 700; }
 
       /* ── Cards ── */
-      .asc-cards { display: flex; flex-direction: column; gap: .4rem; margin-top: .4rem; }
+      .asc-cards { display: flex; flex-direction: column; gap: .4rem; margin-top: .5rem; }
       .asc-card {
         background: #fff; border: 1.5px solid var(--as-hellbeige, #D7D2CB);
         border-radius: 10px; padding: .6rem .8rem;
         text-decoration: none; color: inherit; display: block;
-        transition: border-color .15s, box-shadow .15s;
+        transition: border-color .15s, box-shadow .15s; cursor: pointer;
       }
       .asc-card:hover { border-color: var(--as-rot, #CF3628); box-shadow: 0 2px 8px rgba(207,54,40,.12); }
-      .asc-card-title { font-weight: 700; font-size: .88rem; color: var(--as-braun-dark, #372F2C); }
-      .asc-card-meta { font-size: .78rem; color: var(--as-warmgrau, #6E6159); margin-top: .15rem; }
       .asc-card-tag {
-        display: inline-block; font-size: .72rem; font-weight: 700;
-        padding: .15rem .45rem; border-radius: 4px; margin-right: .3rem;
+        display: inline-block; font-size: .7rem; font-weight: 700;
+        padding: .1rem .4rem; border-radius: 4px; margin-bottom: .25rem;
         background: var(--as-pfirsich, #FAC8B1); color: var(--as-braun, #652D23);
       }
+      .asc-card-title { font-weight: 700; font-size: .88rem; color: var(--as-braun-dark, #372F2C); }
+      .asc-card-meta { font-size: .77rem; color: var(--as-warmgrau, #6E6159); margin-top: .15rem; }
 
       /* ── Quick Replies ── */
       .asc-quick-replies { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
@@ -172,14 +200,14 @@
       .asc-typing span:nth-child(3) { animation-delay: .4s; }
       @keyframes asc-bounce {
         0%,80%,100% { transform: translateY(0); opacity:.5; }
-        40%         { transform: translateY(-6px); opacity:1; }
+        40%          { transform: translateY(-6px); opacity:1; }
       }
 
       /* ── Input ── */
       .asc-input-area {
         padding: .75rem 1rem; border-top: 1px solid var(--as-hellbeige, #D7D2CB);
         display: flex; gap: .5rem; align-items: flex-end; flex-shrink: 0;
-        background: #fff; border-radius: 0 0 0 0;
+        background: #fff;
       }
       .asc-textarea {
         flex: 1; border: 1.5px solid var(--as-beige, #BFB7AF); border-radius: 10px;
@@ -257,17 +285,51 @@
     return { btn, panel };
   }
 
+  // ── Einfaches Markdown-Rendering ──────────────────────────────────
+  function renderMarkdown(text) {
+    // 1. HTML escapen
+    let s = String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+
+    // 2. Bold: **text**
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+    // 3. Bullet-Listen: Zeilen mit "- " oder "• "
+    const lines = s.split('\n');
+    let inList = false;
+    const out = [];
+    for (const line of lines) {
+      const m = line.match(/^[-•]\s+(.+)/);
+      if (m) {
+        if (!inList) { out.push('<ul>'); inList = true; }
+        out.push(`<li>${m[1]}</li>`);
+      } else {
+        if (inList) { out.push('</ul>'); inList = false; }
+        out.push(line);
+      }
+    }
+    if (inList) out.push('</ul>');
+
+    // 4. Zeilenumbrüche (außer vor/nach Block-Tags)
+    return out.join('\n')
+      .replace(/\n(?!<\/?[uo]l>|<li>)/g, '<br>')
+      .replace(/<br>(?=<\/?[uo]l>|<li>)/g, '');
+  }
+
   // ── Nachricht rendern ──────────────────────────────────────────────
-  function renderMessage(role, text, cards, quickReplies) {
+  // persist=false beim Wiederherstellen aus sessionStorage
+  function renderMessage(role, text, cards, quickReplies, persist) {
+    if (persist === undefined) persist = true;
     const msgs = document.getElementById('asc-messages');
 
     const bubble = document.createElement('div');
     bubble.className = `asc-bubble ${role}`;
 
-    // Text (einfaches Whitespace-zu-<br>)
     const p = document.createElement('p');
-    p.style.margin = '0';
-    p.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
+    p.innerHTML = renderMarkdown(text);
     bubble.appendChild(p);
 
     // Workshop/Aussteller/Experten-Cards
@@ -278,10 +340,22 @@
         const a = document.createElement('a');
         a.className = 'asc-card';
         a.href = c.url;
-        a.innerHTML = `
-          <div class="asc-card-title">${escapeHtml(c.title || c.firma || c.name || c.id)}</div>
-          ${c.meta ? `<div class="asc-card-meta">${escapeHtml(c.meta)}</div>` : ''}
-        `;
+        if (c.tag) {
+          const tag = document.createElement('div');
+          tag.className = 'asc-card-tag';
+          tag.textContent = c.tag;
+          a.appendChild(tag);
+        }
+        const title = document.createElement('div');
+        title.className = 'asc-card-title';
+        title.textContent = c.title;
+        a.appendChild(title);
+        if (c.meta) {
+          const meta = document.createElement('div');
+          meta.className = 'asc-card-meta';
+          meta.textContent = c.meta;
+          a.appendChild(meta);
+        }
         cardWrap.appendChild(a);
       });
       bubble.appendChild(cardWrap);
@@ -293,9 +367,8 @@
       const dayHits = quickReplies.filter(qr =>
         DAYS.some(d => qr.toLowerCase().includes(d.toLowerCase()))
       ).length;
-      const isDayPicker = dayHits >= 2;
 
-      if (isDayPicker) {
+      if (dayHits >= 2) {
         const dp = document.createElement('div');
         dp.className = 'asc-day-picker';
         const boxes = document.createElement('div');
@@ -313,7 +386,7 @@
         confirm.className = 'asc-day-confirm';
         confirm.textContent = 'Bestätigen';
         confirm.disabled = true;
-        boxes.querySelectorAll && boxes.addEventListener('change', () => {
+        boxes.addEventListener('change', () => {
           confirm.disabled = !boxes.querySelector('input:checked');
         });
         confirm.addEventListener('click', () => {
@@ -346,6 +419,13 @@
 
     msgs.appendChild(bubble);
     msgs.scrollTop = msgs.scrollHeight;
+
+    // In Session-History speichern (ohne quickReplies – die sind einmalige Aktionen)
+    if (persist) {
+      _msgHistory.push({ role, text, cards: cards || null });
+      saveSessionMsgs();
+    }
+
     return bubble;
   }
 
@@ -357,14 +437,6 @@
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
     return div;
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
   }
 
   // ── Nachricht senden ───────────────────────────────────────────────
@@ -407,24 +479,22 @@
         return;
       }
 
-      // Profil aktualisieren wenn Bot neue Infos erkannt hat
+      // Profil aktualisieren
       if (data.profile_update && Object.keys(data.profile_update).length) {
         saveProfile(data.profile_update);
       }
 
-      // Session-ID merken
-      const newState = {
+      // KI-Kontext in localStorage
+      saveState({
         sessionId: data.sessionId || state.sessionId,
         history: [
           ...history,
-          { role: 'user',      content: text           },
-          { role: 'assistant', content: data.message   },
+          { role: 'user',      content: text         },
+          { role: 'assistant', content: data.message },
         ].slice(-MAX_HISTORY),
-      };
-      saveState(newState);
+      });
 
-      // Daten für Cards aufbereiten
-      // IDs mit Titeln aus den gecachten JSON-Daten anreichern (falls verfügbar)
+      // Cards anreichern
       const wsCards  = buildCards(data.workshops,  'workshop');
       const ausCards = buildCards(data.aussteller, 'aussteller');
       const expCards = buildCards(data.experten,   'experte');
@@ -432,7 +502,7 @@
 
       renderMessage('bot', data.message, allCards, data.quick_replies);
 
-    } catch (err) {
+    } catch (_) {
       typingEl.remove();
       renderMessage('bot', 'Verbindungsproblem. Bitte überprüfe deine Internetverbindung.');
     } finally {
@@ -443,40 +513,65 @@
   }
 
   // ── Cards mit Titeln anreichern ────────────────────────────────────
-  // Liest aus den global gecachten JSON-Daten (falls im Window-Scope verfügbar)
   function buildCards(items, type) {
     if (!items || !items.length) return [];
-
     return items.map(item => {
       const id  = item.id  || item;
       const url = item.url || `/${type === 'workshop' ? 'programm' : type === 'aussteller' ? 'aussteller' : 'experte'}.html#${id}`;
 
-      // Versuche Titel aus gecachten Daten zu holen
-      let title = id, meta = '';
+      let title = '', meta = '', tag = '';
 
       if (type === 'workshop' && window._as26Workshops) {
         const w = window._as26Workshops.find(x => x.id === id);
-        if (w) { title = w.title; meta = `${w.tag} · ${w.zeit} · ${w.ort}`; }
+        if (w) {
+          title = w.title;
+          meta  = [w.tag, w.zeit, w.ort].filter(Boolean).join(' · ');
+          tag   = w.typ || '';
+        }
       }
       if (type === 'aussteller' && window._as26Aussteller) {
         const a = window._as26Aussteller.find(x => x.id === id);
-        if (a) { title = a.firma; meta = `Stand ${a.stand}`; }
+        if (a) { title = a.firma; meta = a.stand ? `Stand ${a.stand}` : ''; tag = 'Aussteller'; }
       }
       if (type === 'experte' && window._as26Experten) {
         const e = window._as26Experten.find(x => x.id === id);
-        if (e) { title = e.name || e.vorname + ' ' + e.nachname; meta = e.funktion || ''; }
+        if (e) {
+          title = e.name || [e.vorname, e.nachname].filter(Boolean).join(' ');
+          meta  = e.funktion || '';
+          tag   = 'Experte';
+        }
       }
 
-      return { id, url, title, meta };
+      // Fallback: ID als Titel wenn Daten noch nicht geladen
+      if (!title) title = id;
+
+      return { id, url, title, meta, tag };
     });
   }
 
-  // ── Begrüßung beim ersten Öffnen ───────────────────────────────────
-  function showGreeting() {
+  // ── Panel öffnen (mit History-Restore) ────────────────────────────
+  function openPanel(input) {
+    isOpen = true;
+    const panel = document.getElementById('as-chat-panel');
+    const btn   = document.getElementById('as-chat-btn');
+    panel.classList.add('open');
+    btn.style.display = 'none';
+    document.getElementById('as-chat-badge').style.display = 'none';
+
     const msgs = document.getElementById('asc-messages');
-    if (msgs && msgs.children.length === 0) {
-      renderMessage('bot', GREETING, null, QUICK_START);
+    if (msgs.children.length === 0) {
+      // Vorherige Nachrichten aus sessionStorage wiederherstellen
+      const saved = loadSessionMsgs();
+      if (saved.length > 0) {
+        _msgHistory = saved;
+        saved.forEach(m => renderMessage(m.role, m.text, m.cards || null, null, false));
+      } else {
+        // Begrüßung (kein Quick-Start)
+        renderMessage('bot', GREETING);
+      }
     }
+
+    setTimeout(() => input?.focus(), 350);
   }
 
   // ── Textarea auto-resize ───────────────────────────────────────────
@@ -489,21 +584,15 @@
   function init() {
     const { btn, panel } = buildUI();
 
-    const input   = document.getElementById('asc-input');
-    const sendBtn = document.getElementById('asc-send-btn');
+    const input    = document.getElementById('asc-input');
+    const sendBtn  = document.getElementById('asc-send-btn');
     const closeBtn = document.getElementById('asc-close-btn');
 
+    // Daten im Hintergrund laden (sofort, nicht erst beim Öffnen)
+    prefetchData();
+
     // Panel öffnen/schließen
-    btn.addEventListener('click', () => {
-      isOpen = !isOpen;
-      panel.classList.toggle('open', isOpen);
-      btn.style.display = isOpen ? 'none' : '';
-      document.getElementById('as-chat-badge').style.display = 'none';
-      if (isOpen) {
-        showGreeting();
-        setTimeout(() => input?.focus(), 350);
-      }
-    });
+    btn.addEventListener('click', () => openPanel(input));
     closeBtn.addEventListener('click', () => {
       isOpen = false;
       panel.classList.remove('open');
@@ -523,14 +612,10 @@
     });
     sendBtn.addEventListener('click', () => sendMessage(input.value));
 
-    // Wenn von einer Seite mit ?frage=... aufgerufen wird (Deeplink)
-    const urlParams = new URLSearchParams(location.search);
-    const prefill = urlParams.get('frage');
+    // Deeplink: ?frage=...
+    const prefill = new URLSearchParams(location.search).get('frage');
     if (prefill) {
-      isOpen = true;
-      panel.classList.add('open');
-      btn.style.display = 'none';
-      showGreeting();
+      openPanel(input);
       setTimeout(() => sendMessage(decodeURIComponent(prefill)), 800);
     }
   }
@@ -541,11 +626,10 @@
     init();
   }
 
-  // Öffentliche API für Kontext-Links
+  // Öffentliche API
   window.AS26Chat = {
-    open:    (prefill) => {
-      const btn = document.getElementById('as-chat-btn');
-      if (btn) btn.click();
+    open: (prefill) => {
+      openPanel(document.getElementById('asc-input'));
       if (prefill) setTimeout(() => sendMessage(prefill), 400);
     },
     prefill: (text) => {
