@@ -220,6 +220,16 @@
       .asc-card-title { font-weight: 700; font-size: .88rem; color: var(--as-braun-dark, #372F2C); }
       .asc-card-meta { font-size: .77rem; color: var(--as-warmgrau, #6E6159); margin-top: .15rem; }
 
+      /* ── Favoriten-Link ── */
+      .asc-fav-link {
+        display: inline-block; margin-top: .5rem;
+        background: var(--as-rot, #CF3628); color: #fff;
+        border-radius: 20px; padding: .4rem 1rem;
+        font-size: .85rem; font-weight: 700;
+        text-decoration: none; transition: background .15s;
+      }
+      .asc-fav-link:hover { background: var(--as-dunkelrot, #9E3323); }
+
       /* ── Quick Replies ── */
       .asc-quick-replies { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
       .asc-qr-btn {
@@ -609,20 +619,21 @@
 
   // ── Mein Programm anzeigen ────────────────────────────────────────
   function showMyProgram() {
-    const favIds = getFavorites();
-    if (!favIds.length) {
+    const count = getFavorites().length;
+    if (!count) {
       renderMessage('bot', 'Du hast noch keine Favoriten gespeichert.\nKlick auf das 🤍 bei einer Veranstaltung!', null, null, false);
       return;
     }
-    // Nur Workshops (programm.js speichert nur Workshop-IDs)
-    const all = window._as26Workshops || [];
-    const ids  = favIds.filter(id => all.some(w => w.id === id));
-    if (!ids.length) {
-      renderMessage('bot', 'Deine gespeicherten Favoriten konnten nicht geladen werden.', null, null, false);
-      return;
-    }
-    const favCards = buildCards(ids, 'workshop');
-    renderMessage('bot', `**Dein Programm** (${favCards.length} Veranstaltung${favCards.length !== 1 ? 'en' : ''})`, favCards, null, false);
+    const msgs = document.getElementById('asc-messages');
+    const bubble = document.createElement('div');
+    bubble.className = 'asc-bubble bot';
+    bubble.innerHTML = `
+      <p>${count} Veranstaltung${count !== 1 ? 'en' : ''} in deinem Programm</p>
+      <a href="/programm.html?tab=favoriten" class="asc-fav-link">
+        ❤️ Mein Programm öffnen
+      </a>`;
+    msgs.appendChild(bubble);
+    msgs.scrollTop = msgs.scrollHeight;
   }
 
   // ── Nachricht senden ───────────────────────────────────────────────
