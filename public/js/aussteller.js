@@ -485,20 +485,22 @@
 
   // ── Init ──
 
+  function openFromHash() {
+    const match = window.location.hash.match(/^#id=([a-f0-9]{32})$/);
+    if (match) {
+      const aussteller = allAussteller.find(a => a.id === match[1]);
+      if (aussteller) openMap(aussteller);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initKatFilters();
     initMapClose();
-    loadData().then(() => {
-      // Deep-Link: #id=xxx beim Laden auswerten
-      const hash = window.location.hash;
-      const match = hash.match(/^#id=([a-f0-9]{32})$/);
-      if (match) {
-        const aussteller = allAussteller.find(a => a.id === match[1]);
-        if (aussteller) openMap(aussteller);
-      }
-    });
+    loadData().then(() => openFromHash());
   });
+
+  window.addEventListener('hashchange', openFromHash);
 
   // ── Globale Logo-Fallback-Funktionen ──
   // Müssen global sein wegen inline onerror/onload
