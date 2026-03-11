@@ -190,17 +190,26 @@
       .asc-day-confirm:disabled { opacity: .35; cursor: not-allowed; }
 
       /* ── Typing Indicator ── */
-      .asc-typing { display: flex; gap: 5px; align-items: center; padding: .5rem 0; }
-      .asc-typing span {
-        width: 8px; height: 8px; border-radius: 50%;
+      .asc-typing { display: flex; flex-direction: column; gap: .35rem; padding: .3rem 0; }
+      .asc-typing-dots { display: flex; gap: 5px; align-items: center; }
+      .asc-typing-dots span {
+        width: 7px; height: 7px; border-radius: 50%;
         background: var(--as-warmgrau, #6E6159); display: block;
         animation: asc-bounce .9s infinite;
       }
-      .asc-typing span:nth-child(2) { animation-delay: .2s; }
-      .asc-typing span:nth-child(3) { animation-delay: .4s; }
+      .asc-typing-dots span:nth-child(2) { animation-delay: .2s; }
+      .asc-typing-dots span:nth-child(3) { animation-delay: .4s; }
+      .asc-typing-status {
+        font-size: .76rem; color: var(--as-warmgrau, #6E6159);
+        font-style: italic; min-height: 1em;
+        animation: asc-fade-in .3s ease;
+      }
       @keyframes asc-bounce {
         0%,80%,100% { transform: translateY(0); opacity:.5; }
         40%          { transform: translateY(-6px); opacity:1; }
+      }
+      @keyframes asc-fade-in {
+        from { opacity: 0; } to { opacity: 1; }
       }
 
       /* ── Input ── */
@@ -429,13 +438,39 @@
     return bubble;
   }
 
+  const TYPING_MSGS = [
+    'Suche passende Workshops…',
+    'Analysiere das Programm…',
+    'Finde passende Aussteller…',
+    'Schaue nach Experten…',
+    'Fast fertig…',
+  ];
+
   function renderTyping() {
     const msgs = document.getElementById('asc-messages');
     const div = document.createElement('div');
     div.className = 'asc-bubble bot';
-    div.innerHTML = '<div class="asc-typing"><span></span><span></span><span></span></div>';
+    div.innerHTML = `
+      <div class="asc-typing">
+        <div class="asc-typing-dots"><span></span><span></span><span></span></div>
+        <div class="asc-typing-status">${TYPING_MSGS[0]}</div>
+      </div>`;
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
+
+    // Nachrichten rotieren
+    let i = 1;
+    const statusEl = div.querySelector('.asc-typing-status');
+    const interval = setInterval(() => {
+      if (!div.isConnected) { clearInterval(interval); return; }
+      statusEl.style.animation = 'none';
+      statusEl.offsetHeight; // reflow für Animation-Reset
+      statusEl.style.animation = '';
+      statusEl.textContent = TYPING_MSGS[Math.min(i, TYPING_MSGS.length - 1)];
+      i++;
+    }, 2500);
+
+    div._stopTyping = () => clearInterval(interval);
     return div;
   }
 
@@ -472,6 +507,7 @@
       });
 
       const data = await res.json();
+      typingEl._stopTyping?.();
       typingEl.remove();
 
       if (!res.ok || !data.ok) {
@@ -503,6 +539,7 @@
       renderMessage('bot', data.message, allCards, data.quick_replies);
 
     } catch (_) {
+      typingEl._stopTyping?.();
       typingEl.remove();
       renderMessage('bot', 'Verbindungsproblem. Bitte überprüfe deine Internetverbindung.');
     } finally {
