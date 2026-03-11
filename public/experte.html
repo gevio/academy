@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#372F2C">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Experte – AS26 Live</title>
+    <title>Referent – AS26 Live</title>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
     <link rel="apple-touch-icon" href="/img/icon-192.png">
@@ -128,7 +128,7 @@
 
             // Zurück-Buttons
             html += `<div style="max-width:600px;margin:1.5rem auto;text-align:center;padding:0 1.25rem 2rem">
-                <a href="/experten.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem">← Alle Experten</a>
+                <a href="/experten.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem">← Alle Referenten</a>
                 <a href="/programm.html" class="btn btn-secondary" style="display:inline-block;padding:.6rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:.85rem;margin-left:.5rem">📋 Programm</a>
             </div>`;
 
@@ -143,7 +143,7 @@
         async function load() {
             const id = getExperteId();
             if (!id) {
-                showError('Kein Experte ausgewählt. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                showError('Kein Referent ausgewählt. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
                 return;
             }
 
@@ -154,7 +154,7 @@
                 const exp = (data.experten || []).find(e => e.id === id);
 
                 if (!exp) {
-                    showError('Experte nicht gefunden. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
+                    showError('Referent nicht gefunden. <a href="/experten.html" style="color:var(--as-rot)">Zur Übersicht →</a>');
                     return;
                 }
 

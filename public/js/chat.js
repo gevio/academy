@@ -745,11 +745,11 @@
         }
       }
 
-      // Fallback: ID als Titel wenn Daten noch nicht geladen
-      if (!title) title = id;
+      // Unbekannte ID (KI-Halluzination) → Card überspringen
+      if (!title) return null;
 
       return { id, url, title, meta, tag, type };
-    });
+    }).filter(Boolean);
   }
 
   // ── Panel öffnen (mit History-Restore) ────────────────────────────
