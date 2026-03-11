@@ -140,6 +140,13 @@
       }
       .asc-fav-btn:hover { background: rgba(255,255,255,.3); }
       .asc-fav-btn.hidden { display: none; }
+      .asc-new-chat-btn {
+        background: none; border: none; color: #fff; cursor: pointer;
+        padding: .25rem; border-radius: 6px; display: flex;
+        opacity: .6; transition: opacity .15s;
+      }
+      .asc-new-chat-btn:hover { opacity: 1; }
+      .asc-new-chat-btn svg { width: 18px; height: 18px; }
       .asc-header-close {
         background: none; border: none; color: #fff; cursor: pointer;
         padding: .25rem; border-radius: 6px; display: flex;
@@ -330,6 +337,12 @@
         </div>
         <button class="asc-fav-btn hidden" id="asc-fav-btn" aria-label="Mein Programm anzeigen">
           ❤️ <span id="asc-fav-count">0</span>
+        </button>
+        <button class="asc-new-chat-btn" id="asc-new-chat-btn" aria-label="Neuer Chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="10" y1="11" x2="14" y2="11"/>
+          </svg>
         </button>
         <button class="asc-header-close" id="asc-close-btn" aria-label="Schließen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -583,6 +596,17 @@
     return div;
   }
 
+  // ── Chat zurücksetzen ─────────────────────────────────────────────
+  function resetChat() {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(PROFILE_KEY);
+    sessionStorage.removeItem(MSG_KEY);
+    _msgHistory = [];
+    const msgs = document.getElementById('asc-messages');
+    if (msgs) { msgs.innerHTML = ''; }
+    renderMessage('bot', GREETING);
+  }
+
   // ── Mein Programm anzeigen ────────────────────────────────────────
   function showMyProgram() {
     const favIds = getFavorites();
@@ -757,7 +781,8 @@
     const input    = document.getElementById('asc-input');
     const sendBtn  = document.getElementById('asc-send-btn');
     const closeBtn = document.getElementById('asc-close-btn');
-    const favBtn   = document.getElementById('asc-fav-btn');
+    const favBtn      = document.getElementById('asc-fav-btn');
+    const newChatBtn  = document.getElementById('asc-new-chat-btn');
 
     // Daten im Hintergrund laden (sofort, nicht erst beim Öffnen)
     prefetchData();
@@ -765,6 +790,7 @@
     // Fav-Button initialisieren
     updateFavBtn();
     if (favBtn) favBtn.addEventListener('click', showMyProgram);
+    if (newChatBtn) newChatBtn.addEventListener('click', resetChat);
 
     // Panel öffnen/schließen
     btn.addEventListener('click', () => openPanel(input));
