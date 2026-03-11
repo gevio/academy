@@ -130,6 +130,7 @@ if (isset($_GET['preview']) && $_GET['preview'] === '1') {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/programm.css">
     <script src="/js/ortmap.js" defer></script>
+    <script src="/js/chat.js" defer></script>
 </head>
 <body>
     <div class="hero">
