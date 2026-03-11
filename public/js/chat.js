@@ -429,7 +429,7 @@
 
       // Typen ermitteln und Reihenfolge festlegen
       const ORDER = ['workshop', 'aussteller', 'experte'];
-      const LABELS = { workshop: 'Veranstaltungen', aussteller: 'Aussteller', experte: 'Experten' };
+      const LABELS = { workshop: 'Veranstaltungen', aussteller: 'Aussteller', experte: 'Referenten' };
       const groups = {};
       cards.forEach(c => {
         const t = c.type || 'workshop';
@@ -719,7 +719,7 @@
       // programm.html nutzt ?focus=id (nicht #hash)
       const url = type === 'workshop'
         ? `/programm.html?focus=${id}`
-        : type === 'aussteller' ? `/aussteller.html#id=${id}` : `/experte.html#${id}`;
+        : type === 'aussteller' ? `/aussteller.html#id=${id}` : `/experte.html#id=${id}`;
 
       let title = '', meta = '', tag = '';
 
@@ -727,7 +727,8 @@
         const w = window._as26Workshops.find(x => x.id === id);
         if (w) {
           title = w.title;
-          meta  = [w.tag, w.zeit, w.ort].filter(Boolean).join(' · ');
+          const refs = (w.referent_persons || []).map(r => r.name).join(', ');
+          meta  = [w.tag, w.zeit, w.ort, refs].filter(Boolean).join(' · ');
           tag   = w.typ || '';
         }
       }
@@ -740,7 +741,7 @@
         if (e) {
           title = e.name || [e.vorname, e.nachname].filter(Boolean).join(' ');
           meta  = e.funktion || '';
-          tag   = 'Experte';
+          tag   = 'Referent';
         }
       }
 
