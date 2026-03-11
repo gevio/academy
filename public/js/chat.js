@@ -43,19 +43,22 @@
   }
 
   // ── JSON-Daten prefetchen (für Card-Anreicherung) ──────────────────
-  async function prefetchData() {
-    try {
-      const [ws, aus, exp] = await Promise.all([
-        fetch('/api/workshops.json').then(r => r.json()),
-        fetch('/api/aussteller.json').then(r => r.json()),
-        fetch('/api/experten.json').then(r => r.json()),
-      ]);
+  // Promise wird global gespeichert – sendMessage awaitet ihn
+  let _dataReadyPromise = null;
+
+  function prefetchData() {
+    _dataReadyPromise = Promise.all([
+      fetch('/api/workshops.json').then(r => r.json()),
+      fetch('/api/aussteller.json').then(r => r.json()),
+      fetch('/api/experten.json').then(r => r.json()),
+    ]).then(([ws, aus, exp]) => {
       window._as26Workshops  = ws.workshops   || [];
       window._as26Aussteller = aus.aussteller  || [];
       window._as26Experten   = exp.experten    || [];
-    } catch (_) {
+    }).catch(() => {
       // silently fail – Cards zeigen dann nur IDs
-    }
+    });
+    return _dataReadyPromise;
   }
 
   // ── DOM aufbauen ───────────────────────────────────────────────────
@@ -506,7 +509,7 @@
         }),
       });
 
-      const data = await res.json();
+      const [data] = await Promise.all([res.json(), _dataReadyPromise]);
       typingEl._stopTyping?.();
       typingEl.remove();
 
@@ -554,7 +557,10 @@
     if (!items || !items.length) return [];
     return items.map(item => {
       const id  = item.id  || item;
-      const url = item.url || `/${type === 'workshop' ? 'programm' : type === 'aussteller' ? 'aussteller' : 'experte'}.html#${id}`;
+      // programm.html nutzt ?focus=id (nicht #hash)
+      const url = type === 'workshop'
+        ? `/programm.html?focus=${id}`
+        : type === 'aussteller' ? `/aussteller.html#${id}` : `/experte.html#${id}`;
 
       let title = '', meta = '', tag = '';
 
