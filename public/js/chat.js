@@ -9,8 +9,9 @@
   const STORAGE_KEY = 'as26_chat';      // history + sessionId (localStorage, für KI-Kontext)
   const PROFILE_KEY = 'as26_chat_profile';
   const MSG_KEY     = 'as26_chat_msgs'; // gerenderte Nachrichten (sessionStorage, Browser-Session)
+  const FAV_KEY     = 'asa_favorites';  // Workshop-Favoriten (localStorage, geteilt mit programm.js)
   const MAX_HISTORY = 20;
-  const GREETING    = 'Hey! Ich bin dein persönlicher Messe-Guide für die AS26. 👋\nSag mir, was dich interessiert – ich finde die passenden Workshops und Aussteller für dich!';
+  const GREETING    = 'Hey! Ich bin dein persönlicher Messe-Guide für die AS26. 👋\nSag mir, was dich interessiert – ich finde die passenden Veranstaltungen und Aussteller für dich!';
 
   // ── State ──────────────────────────────────────────────────────────
   let isOpen    = false;
@@ -40,6 +41,26 @@
   }
   function saveSessionMsgs() {
     try { sessionStorage.setItem(MSG_KEY, JSON.stringify(_msgHistory.slice(-30))); } catch {}
+  }
+
+  // ── Favoriten (geteilt mit programm.js via asa_favorites) ─────────
+  function getFavorites() {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch { return []; }
+  }
+  function toggleFavorite(id) {
+    const favs = getFavorites();
+    const i = favs.indexOf(id);
+    if (i >= 0) favs.splice(i, 1); else favs.push(id);
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); } catch {}
+    return i < 0; // true = hinzugefügt, false = entfernt
+  }
+  function updateFavBtn() {
+    const btn = document.getElementById('asc-fav-btn');
+    if (!btn) return;
+    const count = getFavorites().length;
+    const span = document.getElementById('asc-fav-count');
+    if (span) span.textContent = count;
+    btn.classList.toggle('hidden', count === 0);
   }
 
   // ── JSON-Daten prefetchen (für Card-Anreicherung) ──────────────────
@@ -111,6 +132,14 @@
       .asc-header-info { flex: 1; }
       .asc-header-title { font-weight: 700; font-size: 1rem; }
       .asc-header-sub { font-size: .78rem; opacity: .75; }
+      .asc-fav-btn {
+        background: rgba(255,255,255,.18); border: none; color: #fff;
+        border-radius: 8px; padding: .3rem .6rem; font-size: .82rem;
+        font-weight: 700; cursor: pointer; display: flex; align-items: center;
+        gap: .2rem; transition: background .15s; white-space: nowrap; flex-shrink: 0;
+      }
+      .asc-fav-btn:hover { background: rgba(255,255,255,.3); }
+      .asc-fav-btn.hidden { display: none; }
       .asc-header-close {
         background: none; border: none; color: #fff; cursor: pointer;
         padding: .25rem; border-radius: 6px; display: flex;
@@ -146,13 +175,36 @@
 
       /* ── Cards ── */
       .asc-cards { display: flex; flex-direction: column; gap: .4rem; margin-top: .5rem; }
+      .asc-section-label {
+        font-size: .72rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: .05em; color: var(--as-warmgrau, #6E6159);
+        padding: .4rem 0 .1rem; margin-top: .1rem;
+      }
+      .asc-card-wrap { position: relative; }
       .asc-card {
+        background: #fff; border: 1.5px solid var(--as-hellbeige, #D7D2CB);
+        border-radius: 10px; padding: .6rem 2rem .6rem .8rem;
+        text-decoration: none; color: inherit; display: block;
+        transition: border-color .15s, box-shadow .15s; cursor: pointer;
+      }
+      .asc-card-wrap .asc-card { padding-right: 2.2rem; }
+      .asc-card-plain {
         background: #fff; border: 1.5px solid var(--as-hellbeige, #D7D2CB);
         border-radius: 10px; padding: .6rem .8rem;
         text-decoration: none; color: inherit; display: block;
         transition: border-color .15s, box-shadow .15s; cursor: pointer;
       }
-      .asc-card:hover { border-color: var(--as-rot, #CF3628); box-shadow: 0 2px 8px rgba(207,54,40,.12); }
+      .asc-card:hover, .asc-card-plain:hover {
+        border-color: var(--as-rot, #CF3628); box-shadow: 0 2px 8px rgba(207,54,40,.12);
+      }
+      .asc-card-fav {
+        position: absolute; top: .35rem; right: .35rem;
+        background: none; border: none; cursor: pointer;
+        font-size: 1rem; line-height: 1; padding: .2rem;
+        opacity: .6; transition: opacity .15s, transform .15s;
+      }
+      .asc-card-fav:hover { opacity: 1; transform: scale(1.25); }
+      .asc-card-fav.active { opacity: 1; }
       .asc-card-tag {
         display: inline-block; font-size: .7rem; font-weight: 700;
         padding: .1rem .4rem; border-radius: 4px; margin-bottom: .25rem;
@@ -276,6 +328,9 @@
           <div class="asc-header-title">AS26-Assistent</div>
           <div class="asc-header-sub">Adventure Southside 2026</div>
         </div>
+        <button class="asc-fav-btn hidden" id="asc-fav-btn" aria-label="Mein Programm anzeigen">
+          ❤️ <span id="asc-fav-count">0</span>
+        </button>
         <button class="asc-header-close" id="asc-close-btn" aria-label="Schließen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -344,32 +399,83 @@
     p.innerHTML = renderMarkdown(text);
     bubble.appendChild(p);
 
-    // Workshop/Aussteller/Experten-Cards
+    // Cards – gruppiert nach Typ, mit Abschnittsüberschriften und Fav-Buttons
     if (cards && cards.length) {
       const cardWrap = document.createElement('div');
       cardWrap.className = 'asc-cards';
+
+      // Typen ermitteln und Reihenfolge festlegen
+      const ORDER = ['workshop', 'aussteller', 'experte'];
+      const LABELS = { workshop: 'Veranstaltungen', aussteller: 'Aussteller', experte: 'Experten' };
+      const groups = {};
       cards.forEach(c => {
-        const a = document.createElement('a');
-        a.className = 'asc-card';
-        a.href = c.url;
-        if (c.tag) {
-          const tag = document.createElement('div');
-          tag.className = 'asc-card-tag';
-          tag.textContent = c.tag;
-          a.appendChild(tag);
-        }
-        const title = document.createElement('div');
-        title.className = 'asc-card-title';
-        title.textContent = c.title;
-        a.appendChild(title);
-        if (c.meta) {
-          const meta = document.createElement('div');
-          meta.className = 'asc-card-meta';
-          meta.textContent = c.meta;
-          a.appendChild(meta);
-        }
-        cardWrap.appendChild(a);
+        const t = c.type || 'workshop';
+        if (!groups[t]) groups[t] = [];
+        groups[t].push(c);
       });
+      const activeTypes = ORDER.filter(t => groups[t]?.length);
+      const showLabels  = activeTypes.length > 1;
+
+      activeTypes.forEach(type => {
+        if (showLabels) {
+          const lbl = document.createElement('div');
+          lbl.className = 'asc-section-label';
+          lbl.textContent = LABELS[type];
+          cardWrap.appendChild(lbl);
+        }
+
+        groups[type].forEach(c => {
+          const isFav    = getFavorites().includes(c.id);
+          const showFav  = type === 'workshop';
+
+          // Wrapper für Fav-Button (nur bei Veranstaltungen)
+          const container = showFav ? document.createElement('div') : null;
+          if (container) container.className = 'asc-card-wrap';
+
+          const a = document.createElement('a');
+          a.className = showFav ? 'asc-card' : 'asc-card-plain';
+          a.href = c.url;
+
+          if (c.tag) {
+            const tag = document.createElement('div');
+            tag.className = 'asc-card-tag';
+            tag.textContent = c.tag;
+            a.appendChild(tag);
+          }
+          const title = document.createElement('div');
+          title.className = 'asc-card-title';
+          title.textContent = c.title;
+          a.appendChild(title);
+          if (c.meta) {
+            const meta = document.createElement('div');
+            meta.className = 'asc-card-meta';
+            meta.textContent = c.meta;
+            a.appendChild(meta);
+          }
+
+          if (showFav) {
+            const favBtn = document.createElement('button');
+            favBtn.className = 'asc-card-fav' + (isFav ? ' active' : '');
+            favBtn.setAttribute('aria-label', isFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+            favBtn.textContent = isFav ? '❤️' : '🤍';
+            favBtn.addEventListener('click', e => {
+              e.preventDefault();
+              e.stopPropagation();
+              const nowFav = toggleFavorite(c.id);
+              favBtn.textContent = nowFav ? '❤️' : '🤍';
+              favBtn.classList.toggle('active', nowFav);
+              favBtn.setAttribute('aria-label', nowFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+              updateFavBtn();
+            });
+            container.appendChild(a);
+            container.appendChild(favBtn);
+            cardWrap.appendChild(container);
+          } else {
+            cardWrap.appendChild(a);
+          }
+        });
+      });
+
       bubble.appendChild(cardWrap);
     }
 
@@ -442,7 +548,7 @@
   }
 
   const TYPING_MSGS = [
-    'Suche passende Workshops…',
+    'Suche passende Veranstaltungen…',
     'Analysiere das Programm…',
     'Finde passende Aussteller…',
     'Schaue nach Experten…',
@@ -475,6 +581,24 @@
 
     div._stopTyping = () => clearInterval(interval);
     return div;
+  }
+
+  // ── Mein Programm anzeigen ────────────────────────────────────────
+  function showMyProgram() {
+    const favIds = getFavorites();
+    if (!favIds.length) {
+      renderMessage('bot', 'Du hast noch keine Favoriten gespeichert.\nKlick auf das 🤍 bei einer Veranstaltung!', null, null, false);
+      return;
+    }
+    // Nur Workshops (programm.js speichert nur Workshop-IDs)
+    const all = window._as26Workshops || [];
+    const ids  = favIds.filter(id => all.some(w => w.id === id));
+    if (!ids.length) {
+      renderMessage('bot', 'Deine gespeicherten Favoriten konnten nicht geladen werden.', null, null, false);
+      return;
+    }
+    const favCards = buildCards(ids, 'workshop');
+    renderMessage('bot', `**Dein Programm** (${favCards.length} Veranstaltung${favCards.length !== 1 ? 'en' : ''})`, favCards, null, false);
   }
 
   // ── Nachricht senden ───────────────────────────────────────────────
@@ -588,7 +712,7 @@
       // Fallback: ID als Titel wenn Daten noch nicht geladen
       if (!title) title = id;
 
-      return { id, url, title, meta, tag };
+      return { id, url, title, meta, tag, type };
     });
   }
 
@@ -600,6 +724,9 @@
     panel.classList.add('open');
     btn.style.display = 'none';
     document.getElementById('as-chat-badge').style.display = 'none';
+
+    // Fav-Button aktualisieren (Favoriten können auf programm.html geändert worden sein)
+    updateFavBtn();
 
     const msgs = document.getElementById('asc-messages');
     if (msgs.children.length === 0) {
@@ -630,9 +757,14 @@
     const input    = document.getElementById('asc-input');
     const sendBtn  = document.getElementById('asc-send-btn');
     const closeBtn = document.getElementById('asc-close-btn');
+    const favBtn   = document.getElementById('asc-fav-btn');
 
     // Daten im Hintergrund laden (sofort, nicht erst beim Öffnen)
     prefetchData();
+
+    // Fav-Button initialisieren
+    updateFavBtn();
+    if (favBtn) favBtn.addEventListener('click', showMyProgram);
 
     // Panel öffnen/schließen
     btn.addEventListener('click', () => openPanel(input));
