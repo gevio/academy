@@ -719,7 +719,7 @@
       // programm.html nutzt ?focus=id (nicht #hash)
       const url = type === 'workshop'
         ? `/programm.html?focus=${id}`
-        : type === 'aussteller' ? `/aussteller.html#${id}` : `/experte.html#${id}`;
+        : type === 'aussteller' ? `/aussteller.html#id=${id}` : `/experte.html#${id}`;
 
       let title = '', meta = '', tag = '';
 
