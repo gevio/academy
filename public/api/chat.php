@@ -178,7 +178,7 @@ if (!is_array($response) || !isset($response['ok'])) {
         echo json_encode(array_merge(['ok' => true], $response));
     } else {
         http_response_code(502);
-        echo json_encode(['ok' => false, 'error' => 'Ungültige Antwort vom Assistenten']);
+        echo json_encode(['ok' => false, 'error' => 'Ungültige Antwort vom Assistenten. Bitte versuche es später noch einmal oder schicke eine E-Mail an unser Team (siehe FAQ & Hilfe).']);
     }
     exit;
 }
