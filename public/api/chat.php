@@ -146,7 +146,7 @@ curl_setopt_array($ch, [
         'Content-Length: ' . strlen($payload),
     ],
     CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 35,           // LLM braucht bis zu 30s
+    CURLOPT_TIMEOUT        => 120,          // LLM Cold Start kann bis zu 120s dauern
     CURLOPT_CONNECTTIMEOUT => 5,
 ]);
 
@@ -159,7 +159,7 @@ curl_close($ch);
 if ($curlErr !== '') {
     error_log("AS26 Chat cURL error: $curlErr | webhook: $webhookUrl");
     http_response_code(502);
-    echo json_encode(['ok' => false, 'error' => 'Verbindungsproblem – bitte erneut versuchen']);
+    echo json_encode(['ok' => false, 'error' => 'Verbindungsproblem – bitte versuche es später noch einmal oder schicke eine E-Mail an unser Team (siehe FAQ & Hilfe).']);
     exit;
 }
 
