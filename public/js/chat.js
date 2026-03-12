@@ -159,8 +159,21 @@
       .asc-messages {
         flex: 1; overflow-y: auto; padding: 1rem;
         display: flex; flex-direction: column; gap: .75rem;
-        scroll-behavior: smooth;
+        scroll-behavior: smooth; min-height: 0;
       }
+
+      /* ── Neue-Antwort-Badge ── */
+      #asc-new-msg-badge {
+        position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%);
+        background: var(--as-rot, #CF3628); color: #fff;
+        border: none; border-radius: 20px; padding: .35rem .9rem;
+        font-size: .82rem; font-weight: 700; cursor: pointer;
+        box-shadow: 0 2px 10px rgba(207,54,40,.4);
+        display: none; align-items: center; gap: .3rem;
+        font-family: 'PT Sans', sans-serif; z-index: 10;
+        animation: asc-fade-in .2s ease;
+      }
+      #asc-new-msg-badge.visible { display: flex; }
 
       /* ── Bubble ── */
       .asc-bubble {
@@ -360,7 +373,10 @@
           </svg>
         </button>
       </div>
-      <div class="asc-messages" id="asc-messages"></div>
+      <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column">
+        <div class="asc-messages" id="asc-messages"></div>
+        <button id="asc-new-msg-badge" aria-label="Zur neuen Antwort scrollen">↓ Neue Antwort</button>
+      </div>
       <div class="asc-input-area">
         <textarea class="asc-textarea" id="asc-input" placeholder="Frag mich etwas…" rows="1" aria-label="Nachricht eingeben"></textarea>
         <button class="asc-send-btn" id="asc-send-btn" aria-label="Senden" disabled>
@@ -373,6 +389,19 @@
     document.body.appendChild(panel);
 
     return { btn, panel };
+  }
+
+  // ── Smart Scroll ──────────────────────────────────────────────────
+  function isAtBottom(el) {
+    return el.scrollHeight - el.scrollTop - el.clientHeight < 60;
+  }
+  function showNewMsgBadge() {
+    const badge = document.getElementById('asc-new-msg-badge');
+    if (badge) badge.classList.add('visible');
+  }
+  function hideNewMsgBadge() {
+    const badge = document.getElementById('asc-new-msg-badge');
+    if (badge) badge.classList.remove('visible');
   }
 
   // ── Einfaches Markdown-Rendering ──────────────────────────────────
@@ -559,7 +588,12 @@
     }
 
     msgs.appendChild(bubble);
-    msgs.scrollTop = msgs.scrollHeight;
+    if (role === 'user' || isAtBottom(msgs)) {
+      msgs.scrollTop = msgs.scrollHeight;
+      hideNewMsgBadge();
+    } else {
+      showNewMsgBadge();
+    }
 
     // In Session-History speichern (ohne quickReplies – die sind einmalige Aktionen)
     if (persist) {
@@ -798,6 +832,20 @@
 
     // Daten im Hintergrund laden (sofort, nicht erst beim Öffnen)
     prefetchData();
+
+    // Neue-Antwort-Badge
+    const newMsgBadge = document.getElementById('asc-new-msg-badge');
+    if (newMsgBadge) {
+      newMsgBadge.addEventListener('click', () => {
+        const msgs = document.getElementById('asc-messages');
+        msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' });
+        hideNewMsgBadge();
+      });
+    }
+    // Badge ausblenden wenn User selbst scrollt
+    document.getElementById('asc-messages')?.addEventListener('scroll', () => {
+      if (isAtBottom(document.getElementById('asc-messages'))) hideNewMsgBadge();
+    }, { passive: true });
 
     // Fav-Button initialisieren
     updateFavBtn();

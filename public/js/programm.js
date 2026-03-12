@@ -7,9 +7,23 @@
   'use strict';
 
   const STORAGE_KEY = 'asa_favorites';
+  const AUS_FAV_KEY = 'as26_fav_aussteller';
   const API_URL = '/api/workshops.json';
 
+  // Hallen-Mapping für Aussteller-Gruppierung (identisch zu aussteller.js)
+  const HALLEN = {
+    FW:  'Foyer West',
+    AT:  'Foyer West (Atrium)',
+    FG:  'Freigelände West',
+    FGO: 'Freigelände Ost',
+    A3:  'Halle A3',
+    A4:  'Halle A4',
+    A5:  'Halle A5',
+    A6:  'Halle A6',
+  };
+
   let allWorkshops = [];
+  let allAussteller = [];
   let currentDay = 'all';
   let currentTyp = 'all';
   let currentOrt = 'all';
@@ -69,6 +83,64 @@
     updateFavCount();
   }
 
+  // ── Aussteller-Favoriten ──
+
+  function getAusstellerFavorites() {
+    try { return JSON.parse(localStorage.getItem(AUS_FAV_KEY) || '[]'); } catch { return []; }
+  }
+
+  // ── Konflikt-Erkennung ──
+
+  function parseTimeRange(ws) {
+    if (!ws.tag || !ws.zeit) return null;
+    const m = ws.zeit.match(/(\d{1,2}):(\d{2})[–\-](\d{1,2}):(\d{2})/);
+    if (!m) return null;
+    return {
+      tag: ws.tag,
+      start: parseInt(m[1]) * 60 + parseInt(m[2]),
+      end:   parseInt(m[3]) * 60 + parseInt(m[4]),
+    };
+  }
+
+  function findConflicts(newWs) {
+    const favIds = getFavorites();
+    const newRange = parseTimeRange(newWs);
+    if (!newRange) return [];
+    return favIds
+      .map(id => allWorkshops.find(w => w.id === id))
+      .filter(Boolean)
+      .filter(ws => ws.id !== newWs.id)
+      .filter(ws => {
+        const r = parseTimeRange(ws);
+        return r && r.tag === newRange.tag && newRange.start < r.end && newRange.end > r.start;
+      });
+  }
+
+  let _toastTimer = null;
+  function showToast(msg, type) {
+    let toast = document.getElementById('prog-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'prog-toast';
+      toast.style.cssText = [
+        'position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%)',
+        'max-width:90vw;padding:.65rem 1.1rem',
+        'border-radius:10px;font-size:.87rem;font-weight:700',
+        'box-shadow:0 3px 16px rgba(0,0,0,.22)',
+        'z-index:9999;pointer-events:none',
+        'transition:opacity .25s',
+        "font-family:'PT Sans',sans-serif",
+      ].join(';');
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.background = type === 'warn' ? '#F18864' : '#372F2C';
+    toast.style.color = '#fff';
+    toast.style.opacity = '1';
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => { toast.style.opacity = '0'; }, 3500);
+  }
+
   function toggleFavorite(id) {
     const favs = getFavorites();
     const idx = favs.indexOf(id);
@@ -88,11 +160,18 @@
 
   async function loadWorkshops() {
     try {
-      const resp = await fetch(API_URL);
+      const [resp, ausResp] = await Promise.all([
+        fetch(API_URL),
+        fetch('/api/aussteller.json').catch(() => null),
+      ]);
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       const data = await resp.json();
       allWorkshops = data.workshops || [];
       window._as26Workshops = allWorkshops; // für Chat-Assistent
+      if (ausResp && ausResp.ok) {
+        const ausData = await ausResp.json();
+        allAussteller = ausData.aussteller || [];
+      }
       populateTypFilter();
       populateOrtFilter();
       populateKatFilter();
@@ -269,6 +348,15 @@
     return 'N.N.';
   }
 
+  function renderAusstellerFavCard(a) {
+    return `
+      <a href="/aussteller.html#id=${a.id}" class="aus-fav-card">
+        <div class="aus-fav-card-firma">${escapeHtml(a.firma)}</div>
+        ${a.stand ? `<div class="aus-fav-card-stand">Stand ${escapeHtml(a.stand)}</div>` : ''}
+        <span class="aussteller-card-arrow">›</span>
+      </a>`;
+  }
+
   function renderCard(ws) {
     const favs = getFavorites();
     const isFav = favs.includes(ws.id);
@@ -343,21 +431,56 @@
       const favs = getFavorites();
       const favWorkshops = allWorkshops.filter(w => favs.includes(w.id));
 
-      if (favWorkshops.length === 0) {
-        favContainer.innerHTML = '<div class="empty">Noch keine Favoriten gespeichert.<br>Tippe auf 🤍 um Workshops zu merken.</div>';
-        return;
+      updateResultSummary(0);
+
+      // ── Workshop-Favoriten ──
+      let html = '';
+      if (favWorkshops.length > 0) {
+        html += `<div class="fav-section-header">📋 Mein Programm (${favWorkshops.length})</div>`;
+        let lastDay = '';
+        favWorkshops.forEach(ws => {
+          if (ws.tag !== lastDay) {
+            html += `<div class="day-divider">${escapeHtml(ws.tag)}</div>`;
+            lastDay = ws.tag;
+          }
+          html += renderCard(ws);
+        });
       }
 
-      updateResultSummary(0);
-      let html = `<div class="result-count">${favWorkshops.length} Favorit${favWorkshops.length !== 1 ? 'en' : ''}</div>`;
-      let lastDay = '';
-      favWorkshops.forEach(ws => {
-        if (ws.tag !== lastDay) {
-          html += `<div class="day-divider">${escapeHtml(ws.tag)}</div>`;
-          lastDay = ws.tag;
-        }
-        html += renderCard(ws);
-      });
+      // ── Aussteller-Favoriten ──
+      const ausFavIds = getAusstellerFavorites();
+      const favAussteller = allAussteller.filter(a => ausFavIds.includes(a.id));
+      if (favAussteller.length > 0) {
+        html += `<div class="fav-section-header" style="margin-top:${favWorkshops.length ? '1.5rem' : '0'}">🏪 Aussteller besuchen (${favAussteller.length})</div>`;
+
+        // Nach Halle gruppieren
+        const hallenGroups = {};
+        const NO_HALLE = '__other__';
+        favAussteller.forEach(a => {
+          const stand = a.stand || '';
+          const prefix = stand.includes('-') ? stand.split('-')[0] : '';
+          const hallenKey = (prefix && HALLEN[prefix]) ? prefix : NO_HALLE;
+          if (!hallenGroups[hallenKey]) hallenGroups[hallenKey] = [];
+          hallenGroups[hallenKey].push(a);
+        });
+
+        // Reihenfolge: definierte Hallen in HALLEN-Reihenfolge, dann "Sonstige"
+        const hallenOrder = [...Object.keys(HALLEN), NO_HALLE];
+        hallenOrder.forEach(key => {
+          const group = hallenGroups[key];
+          if (!group || group.length === 0) return;
+          const label = key === NO_HALLE ? 'Standort offen' : HALLEN[key];
+          html += `<div class="day-divider">${escapeHtml(label)}</div>`;
+          group.forEach(a => {
+            html += renderAusstellerFavCard(a);
+          });
+        });
+      }
+
+      if (!html) {
+        html = '<div class="empty">Noch keine Favoriten gespeichert.<br>Tippe auf 🤍 (Workshops) oder 🔖 (Aussteller) um sie zu merken.</div>';
+      }
+
       favContainer.innerHTML = html;
     }
 
@@ -374,6 +497,16 @@
         const isNowFav = toggleFavorite(id);
         btn.classList.toggle('active', isNowFav);
         btn.textContent = isNowFav ? '❤️' : '🤍';
+        if (isNowFav) {
+          const ws = allWorkshops.find(w => w.id === id);
+          if (ws) {
+            const conflicts = findConflicts(ws);
+            if (conflicts.length > 0) {
+              const names = conflicts.map(c => c.title).join(', ');
+              showToast(`⚠️ Zeitüberschneidung mit: ${names}`, 'warn');
+            }
+          }
+        }
         // Bei Favoriten-Tab: Liste neu rendern
         if (currentTab === 'favoriten') {
           renderList();

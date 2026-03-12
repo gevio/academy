@@ -389,3 +389,35 @@
     border-color: var(--as-rot);
     animation: focus-glow 1.5s ease-out;
 }
+
+
+/* ── Aussteller-Favoriten im Favoriten-Tab ── */
+.fav-section-header {
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--as-warmgrau, #6E6159);
+    padding: .75rem 1.25rem .25rem;
+}
+.aus-fav-card {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1rem .75rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    background: #fff;
+    transition: background .12s;
+}
+.aus-fav-card:hover { background: var(--as-sand, #F5F0EB); }
+.aus-fav-card-firma { font-weight: 700; font-size: .92rem; flex: 1; }
+.aus-fav-card-stand {
+    font-size: .78rem;
+    color: var(--text-light);
+    background: var(--as-hellbeige, #EDE8E3);
+    padding: .15rem .5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
