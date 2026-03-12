@@ -719,9 +719,13 @@
     const typingEl = renderTyping();
 
     try {
+      const controller = new AbortController();
+      const timeoutId  = setTimeout(() => controller.abort(), 120000);   // 120s Timeout
+
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           message:   text,
           sessionId: state.sessionId || '',
@@ -729,6 +733,7 @@
           profile,
         }),
       });
+      clearTimeout(timeoutId);
 
       const [data] = await Promise.all([res.json(), _dataReadyPromise]);
       typingEl._stopTyping?.();
@@ -765,7 +770,10 @@
     } catch (_) {
       typingEl._stopTyping?.();
       typingEl.remove();
-      renderMessage('bot', 'Verbindungsproblem. Bitte überprüfe deine Internetverbindung.');
+      const errMsg = _.name === 'AbortError'
+        ? 'Der Assistent braucht gerade etwas länger. Bitte versuche es in einer Minute erneut.'
+        : 'Verbindungsproblem – bitte versuche es später noch einmal oder schicke eine E-Mail an unser Team (siehe FAQ & Hilfe).';
+      renderMessage('bot', errMsg);
     } finally {
       isLoading = false;
       if (sendBtn) sendBtn.disabled = false;
