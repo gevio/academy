@@ -9,7 +9,8 @@
   const STORAGE_KEY = 'as26_chat';      // history + sessionId (localStorage, für KI-Kontext)
   const PROFILE_KEY = 'as26_chat_profile';
   const MSG_KEY     = 'as26_chat_msgs'; // gerenderte Nachrichten (sessionStorage, Browser-Session)
-  const FAV_KEY     = 'asa_favorites';  // Workshop-Favoriten (localStorage, geteilt mit programm.js)
+  const FAV_KEY     = 'asa_favorites';      // Workshop-Favoriten (localStorage, geteilt mit programm.js)
+  const AUS_FAV_KEY = 'as26_fav_aussteller'; // Aussteller-Favoriten (geteilt mit aussteller.js)
   const MAX_HISTORY = 20;
   const GREETING    = 'Hey! Ich bin dein persönlicher Messe-Guide für die AS26. 👋\nSag mir, was dich interessiert – ich finde die passenden Veranstaltungen und Aussteller für dich!';
 
@@ -53,6 +54,16 @@
     if (i >= 0) favs.splice(i, 1); else favs.push(id);
     try { localStorage.setItem(FAV_KEY, JSON.stringify(favs)); } catch {}
     return i < 0; // true = hinzugefügt, false = entfernt
+  }
+  function getAusstellerFavorites() {
+    try { return JSON.parse(localStorage.getItem(AUS_FAV_KEY) || '[]'); } catch { return []; }
+  }
+  function toggleAusstellerFavorite(id) {
+    const favs = getAusstellerFavorites();
+    const i = favs.indexOf(id);
+    if (i >= 0) favs.splice(i, 1); else favs.push(id);
+    try { localStorage.setItem(AUS_FAV_KEY, JSON.stringify(favs)); } catch {}
+    return i < 0;
   }
   function updateFavBtn() {
     const btn = document.getElementById('asc-fav-btn');
@@ -477,10 +488,12 @@
         }
 
         groups[type].forEach(c => {
-          const isFav    = getFavorites().includes(c.id);
-          const showFav  = type === 'workshop';
+          const isFav    = type === 'workshop'
+            ? getFavorites().includes(c.id)
+            : type === 'aussteller' ? getAusstellerFavorites().includes(c.id) : false;
+          const showFav  = type === 'workshop' || type === 'aussteller';
 
-          // Wrapper für Fav-Button (nur bei Veranstaltungen)
+          // Wrapper für Fav-Button (Workshops + Aussteller)
           const container = showFav ? document.createElement('div') : null;
           if (container) container.className = 'asc-card-wrap';
 
@@ -508,16 +521,31 @@
           if (showFav) {
             const favBtn = document.createElement('button');
             favBtn.className = 'asc-card-fav' + (isFav ? ' active' : '');
-            favBtn.setAttribute('aria-label', isFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
-            favBtn.textContent = isFav ? '❤️' : '🤍';
+            const isAus = type === 'aussteller';
+            // Workshops: ❤️/🤍  |  Aussteller: Bookmark-SVG
+            const BOOKMARK_ON  = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+            const BOOKMARK_OFF = '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+            favBtn.setAttribute('aria-label', isFav ? (isAus ? 'Aus Merkliste entfernen' : 'Aus Favoriten entfernen') : (isAus ? 'Besuchen merken' : 'Zu Favoriten hinzufügen'));
+            if (isAus) {
+              favBtn.innerHTML = isFav ? BOOKMARK_ON : BOOKMARK_OFF;
+            } else {
+              favBtn.textContent = isFav ? '❤️' : '🤍';
+            }
             favBtn.addEventListener('click', e => {
               e.preventDefault();
               e.stopPropagation();
-              const nowFav = toggleFavorite(c.id);
-              favBtn.textContent = nowFav ? '❤️' : '🤍';
+              let nowFav;
+              if (isAus) {
+                nowFav = toggleAusstellerFavorite(c.id);
+                favBtn.innerHTML = nowFav ? BOOKMARK_ON : BOOKMARK_OFF;
+                favBtn.setAttribute('aria-label', nowFav ? 'Aus Merkliste entfernen' : 'Besuchen merken');
+              } else {
+                nowFav = toggleFavorite(c.id);
+                favBtn.textContent = nowFav ? '❤️' : '🤍';
+                favBtn.setAttribute('aria-label', nowFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+                updateFavBtn();
+              }
               favBtn.classList.toggle('active', nowFav);
-              favBtn.setAttribute('aria-label', nowFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
-              updateFavBtn();
             });
             container.appendChild(a);
             container.appendChild(favBtn);
