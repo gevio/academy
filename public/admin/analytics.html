@@ -146,6 +146,7 @@
 
     var secret = '';
     var data = { daily: [], live: null };
+    var pageNames = {};
 
     // ── Auth ─────────────────────────────────────────────────────────
     function doLogin() {
@@ -193,10 +194,9 @@
     // ── Daten laden ──────────────────────────────────────────────────
     window.loadData = loadData;
     // ── Seitennamen-Lookup (Workshop-IDs → Titel) ─────────────────
-    var pageNames = {};
 
     function loadPageNames() {
-        if (Object.keys(pageNames).length > 0) return Promise.resolve();
+        if (pageNames && Object.keys(pageNames).length > 0) return Promise.resolve();
         return Promise.all([
             fetch('/api/workshops.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
             fetch('/api/aussteller.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
