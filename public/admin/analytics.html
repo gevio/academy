@@ -192,6 +192,56 @@
 
     // ── Daten laden ──────────────────────────────────────────────────
     window.loadData = loadData;
+    // ── Seitennamen-Lookup (Workshop-IDs → Titel) ─────────────────
+    var pageNames = {};
+
+    function loadPageNames() {
+        if (Object.keys(pageNames).length > 0) return Promise.resolve();
+        return Promise.all([
+            fetch('/api/workshops.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+            fetch('/api/aussteller.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+        ]).then(function (results) {
+            var ws = results[0];
+            var aus = results[1];
+            if (ws && ws.workshops) {
+                ws.workshops.forEach(function (w) {
+                    pageNames['/w/' + w.id] = w.title;
+                });
+            }
+            if (aus && aus.aussteller) {
+                aus.aussteller.forEach(function (a) {
+                    pageNames['#id=' + a.id] = a.firma;
+                });
+            }
+        });
+    }
+
+    function resolvePageName(path) {
+        // Exakter Match: /w/<id>
+        if (pageNames[path]) return pageNames[path];
+        // Sub-Pfade: /w/<id>/feedback, /w/<id>/qa etc.
+        var m = path.match(/^\/w\/([a-f0-9\-]{32,36})(\/.*)?$/);
+        if (m) {
+            var base = '/w/' + m[1];
+            var suffix = m[2] || '';
+            var label = pageNames[base] || m[1].substring(0, 8) + '…';
+            if (suffix === '/feedback') return label + ' (Feedback)';
+            if (suffix === '/qa')       return label + ' (Q&A)';
+            if (suffix === '/wall')     return label + ' (Wall)';
+            return label;
+        }
+        // Bekannte statische Seiten
+        var staticNames = {
+            '/': 'Startseite',
+            '/programm': 'Programm', '/programm.html': 'Programm',
+            '/aussteller': 'Aussteller', '/aussteller.html': 'Aussteller',
+            '/experten': 'Experten', '/experten.html': 'Experten',
+            '/faq': 'FAQ', '/faq.html': 'FAQ',
+            '/impressum': 'Impressum', '/impressum.html': 'Impressum',
+        };
+        return staticNames[path] || path;
+    }
+
     function loadData() {
         var preset = document.getElementById('range-preset').value;
         var from, to;
@@ -210,12 +260,14 @@
         var url = '/api/analytics-data.php?secret=' + encodeURIComponent(secret)
             + '&from=' + from + '&to=' + to + '&live=1';
 
-        fetch(url)
-            .then(function (r) {
+        Promise.all([
+            fetch(url).then(function (r) {
                 if (r.status === 403) { alert('Ungültiges Secret'); return null; }
                 return r.json();
-            })
-            .then(function (d) {
+            }),
+            loadPageNames(),
+        ]).then(function (results) {
+                var d = results[0];
                 if (!d || !d.ok) return;
                 data = d;
                 render();
@@ -367,7 +419,11 @@
 
         var tbody = document.querySelector('#top-pages-table tbody');
         tbody.innerHTML = sorted.map(function (p) {
-            return '<tr><td>' + esc(p.page) + '</td><td>' + p.cnt + '</td></tr>';
+            var name = resolvePageName(p.page);
+            var display = name !== p.page
+                ? esc(name) + ' <small style="color:#999">' + esc(p.page) + '</small>'
+                : esc(p.page);
+            return '<tr><td>' + display + '</td><td>' + p.cnt + '</td></tr>';
         }).join('') || '<tr><td colspan="2" style="color:#999;">Keine Daten</td></tr>';
     }
 
