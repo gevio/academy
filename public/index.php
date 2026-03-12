@@ -263,6 +263,7 @@ if (!$eventStarted && !empty($kategorien)) {
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/programm.css">
     <script src="/js/ortmap.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
     <script src="/js/chat.js" defer></script>
 </head>
 <body>

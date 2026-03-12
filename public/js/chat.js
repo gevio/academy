@@ -500,6 +500,9 @@
           const a = document.createElement('a');
           a.className = showFav ? 'asc-card' : 'asc-card-plain';
           a.href = c.url;
+          a.addEventListener('click', () => {
+            if (window.as26Analytics) as26Analytics.track('chat_card_click', { feature: c.type, payload: { id: c.id } });
+          });
 
           if (c.tag) {
             const tag = document.createElement('div');
@@ -546,6 +549,7 @@
                 updateFavBtn();
               }
               favBtn.classList.toggle('active', nowFav);
+              if (nowFav && window.as26Analytics) as26Analytics.track('chat_favorite_added', { feature: isAus ? 'aussteller' : 'workshop', payload: { id: c.id } });
             });
             container.appendChild(a);
             container.appendChild(favBtn);
@@ -606,6 +610,7 @@
           b.className = 'asc-qr-btn';
           b.textContent = label;
           b.addEventListener('click', () => {
+            if (window.as26Analytics) as26Analytics.track('chat_quick_reply_used', { payload: { label: label } });
             qrWrap.remove();
             sendMessage(label);
           });
@@ -670,6 +675,7 @@
 
   // ── Chat zurücksetzen ─────────────────────────────────────────────
   function resetChat() {
+    if (window.as26Analytics) as26Analytics.track('chat_new_conversation');
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(PROFILE_KEY);
     sessionStorage.removeItem(MSG_KEY);
@@ -708,6 +714,7 @@
     text = text.trim();
     if (input) { input.value = ''; input.style.height = 'auto'; }
     if (sendBtn) sendBtn.disabled = true;
+    if (window.as26Analytics) as26Analytics.track('chat_message_sent');
 
     renderMessage('user', text);
 
@@ -764,6 +771,7 @@
       const ausCards = buildCards(data.aussteller, 'aussteller');
       const expCards = buildCards(data.experten,   'experte');
       const allCards = [...wsCards, ...ausCards, ...expCards];
+      if (window.as26Analytics) as26Analytics.track('chat_response_received', { payload: { cards: allCards.length } });
 
       renderMessage('bot', data.message, allCards, data.quick_replies);
 
@@ -829,6 +837,7 @@
     const btn   = document.getElementById('as-chat-btn');
     panel.classList.add('open');
     btn.style.display = 'none';
+    if (window.as26Analytics) as26Analytics.track('chat_open');
     document.getElementById('as-chat-badge').style.display = 'none';
 
     // Fav-Button aktualisieren (Favoriten können auf programm.html geändert worden sein)

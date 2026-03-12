@@ -20,6 +20,15 @@ Funktioniert auf jeder Seite, z. B.:
 Das Secret wird per JavaScript in `sessionStorage` gespeichert und sofort aus der URL entfernt.  
 Ein neues Tab erfordert erneute Eingabe.
 
+Admin Dashboard: https://dev.as26.cool-camp.site/admin/analytics.html (Login mit Admin-Secret)
+
+Secret manuell eingeben im Formular
+?admin=as26-review-2026 als URL-Parameter (wie überall sonst)
+Automatisch wenn schon auf einer anderen Seite mit ?admin=... angemeldet (sessionStorage)
+
+
+
+
 ---
 
 ## 2. QR-Codes erzeugen
