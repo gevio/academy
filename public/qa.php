@@ -117,6 +117,7 @@ $msg = htmlspecialchars($_GET['msg'] ?? '');
             </div>
         <?php endif; ?>
     </main>
+    <script src="/js/analytics.js" defer></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

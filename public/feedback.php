@@ -220,6 +220,7 @@ $title = htmlspecialchars($workshop['title'] ?? 'Workshop');
             </script>
         <?php endif; ?>
     </main>
+    <script src="/js/analytics.js" defer></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

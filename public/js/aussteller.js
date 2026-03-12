@@ -248,6 +248,9 @@
         btn.title = isNowFav ? 'Aus Merkliste entfernen' : 'Besuchen merken';
         const svg = btn.querySelector('svg');
         if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+        if (isNowFav && window.as26Analytics) {
+          window.as26Analytics.track('feature_use', { feature: 'favorite_exhibitor', payload: { id: id } });
+        }
       });
     });
   }
@@ -401,6 +404,9 @@
       profileFavBtn.addEventListener('click', () => {
         const id = profileFavBtn.dataset.id;
         const isNowFav = toggleAusstellerFavorite(id);
+        if (isNowFav && window.as26Analytics) {
+          window.as26Analytics.track('feature_use', { feature: 'favorite_exhibitor', payload: { id: id } });
+        }
         profileFavBtn.classList.toggle('active', isNowFav);
         const svg = profileFavBtn.querySelector('svg');
         if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
@@ -424,6 +430,9 @@
         const title = shareBtn.dataset.title + ' \u2013 Adventure Southside 2026';
         const url = shareBtn.dataset.url;
         const shareData = { title: title, text: shareBtn.dataset.title + ' auf der Adventure Southside 2026', url: url };
+        if (window.as26Analytics) {
+          window.as26Analytics.track('feature_use', { feature: 'share_exhibitor', payload: { id: shareBtn.dataset.id || '' } });
+        }
         if (navigator.share) {
           navigator.share(shareData).catch(() => {});
         } else {

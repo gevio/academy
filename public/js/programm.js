@@ -501,6 +501,9 @@
         const isNowFav = toggleFavorite(id);
         btn.classList.toggle('active', isNowFav);
         btn.textContent = isNowFav ? '❤️' : '🤍';
+        if (isNowFav && window.as26Analytics) {
+          window.as26Analytics.track('feature_use', { feature: 'favorite_workshop', payload: { id: id } });
+        }
         if (isNowFav) {
           const ws = allWorkshops.find(w => w.id === id);
           if (ws) {
@@ -526,6 +529,9 @@
         const title = btn.dataset.title;
         const url = location.origin + '/w/' + id;
         const shareData = { title: title + ' – AS26 Live', text: title, url: url };
+        if (window.as26Analytics) {
+          window.as26Analytics.track('feature_use', { feature: 'share_workshop', payload: { id: id } });
+        }
         if (navigator.share) {
           navigator.share(shareData).catch(() => {});
         } else {

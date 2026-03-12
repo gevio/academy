@@ -56,6 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!allRated) {
                 e.preventDefault();
                 alert('Bitte bewerte alle Kategorien mit mindestens einem Stern.');
+            } else if (window.as26Analytics) {
+                window.as26Analytics.track('feature_use', { feature: 'feedback_submitted' });
+                window.as26Analytics.flush();
+            }
+        });
+    }
+
+    // ── Q&A Form: Track question submission ──
+    const qaForm = document.querySelector('.qa-form');
+    if (qaForm) {
+        qaForm.addEventListener('submit', () => {
+            if (window.as26Analytics) {
+                window.as26Analytics.track('feature_use', { feature: 'qa_question_asked' });
+                window.as26Analytics.flush();
             }
         });
     }
@@ -106,6 +120,10 @@ document.querySelectorAll('.upvote-btn').forEach(btn => {
         const upvoted = getUpvoted();
         upvoted.push(qId);
         saveUpvoted(upvoted);
+
+        if (window.as26Analytics) {
+            window.as26Analytics.track('feature_use', { feature: 'qa_upvote' });
+        }
 
         // ── Async POST (kein Page-Reload!) ──
         try {

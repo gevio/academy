@@ -256,6 +256,14 @@
     } else {
       showConsentBanner();
     }
+
+    // ── Delegated tracking for footer share buttons ──
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.share-btn');
+      if (btn && hasConsent()) {
+        track('feature_use', { feature: 'share_app' });
+      }
+    });
   }
 
 })();
