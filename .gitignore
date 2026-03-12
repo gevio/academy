@@ -7,6 +7,17 @@ vendor/
 # Generierte QR-Codes
 public/qr/*.png
 
+# Generierte API-Daten (per Cron aus Notion)
+public/api/workshops.json
+public/api/aussteller.json
+public/api/experten.json
+public/api/standplan.json
+public/api/veranstaltungsorte.json
+
+# Generierte Bilder (per Cron aus Notion)
+public/img/aussteller/
+public/img/experten/
+
 # OS / IDE
 .DS_Store
 Thumbs.db

@@ -9,6 +9,7 @@
 
   const AUSSTELLER_URL = '/api/aussteller.json';
   const WORKSHOPS_URL = '/api/workshops.json';
+  const AUS_FAV_KEY = 'as26_fav_aussteller';
 
   // Statisches Hallen-Mapping (Prefix → Bild + Label)
   const HALLEN = {
@@ -26,6 +27,20 @@
   let allWorkshops = [];
   let currentSearch = '';
   let currentKat = 'all';
+
+  // ── Aussteller-Favoriten ──
+
+  function getAusstellerFavorites() {
+    try { return JSON.parse(localStorage.getItem(AUS_FAV_KEY) || '[]'); } catch { return []; }
+  }
+
+  function toggleAusstellerFavorite(id) {
+    const favs = getAusstellerFavorites();
+    const i = favs.indexOf(id);
+    if (i >= 0) favs.splice(i, 1); else favs.push(id);
+    try { localStorage.setItem(AUS_FAV_KEY, JSON.stringify(favs)); } catch {}
+    return i < 0; // true = hinzugefügt
+  }
 
   // Share-Icon SVG (YouTube-style curved arrow)
   const SHARE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>';
@@ -74,6 +89,7 @@
       if (!ausResp.ok) throw new Error('Aussteller HTTP ' + ausResp.status);
       const data = await ausResp.json();
       allAussteller = data.aussteller || [];
+      window._as26Aussteller = allAussteller; // für Chat-Assistent
 
       // Workshop-Daten speichern + Kategorien pro Aussteller mappen
       if (wsResp && wsResp.ok) {
@@ -163,6 +179,7 @@
   }
 
   function renderCard(a) {
+    const isFav = getAusstellerFavorites().includes(a.id);
     const katHtml = (a.kategorien || [])
       .map(k => `<span class="aussteller-tag">${escapeHtml(k)}</span>`)
       .join('');
@@ -186,7 +203,9 @@
           ${a.beschreibung ? `<div class="aussteller-card-desc">${escapeHtml(a.beschreibung)}</div>` : ''}
           ${(katHtml || wsKatHtml) ? `<div class="aussteller-tags">${katHtml}${wsKatHtml}</div>` : ''}
         </div>
-        <span class="aussteller-card-arrow">\u203A</span>
+        <button class="aus-fav-btn${isFav ? ' active' : ''}" data-id="${a.id}" title="${isFav ? 'Aus Merkliste entfernen' : 'Besuchen merken'}" aria-label="Merken">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="${isFav ? 'currentColor' : 'none'}"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
       </div>`;
   }
 
@@ -216,6 +235,19 @@
         const id = card.dataset.id;
         const aussteller = allAussteller.find(a => a.id === id);
         if (aussteller) openMap(aussteller);
+      });
+    });
+
+    // Fav-Button Handler
+    container.querySelectorAll('.aus-fav-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        const isNowFav = toggleAusstellerFavorite(id);
+        btn.classList.toggle('active', isNowFav);
+        btn.title = isNowFav ? 'Aus Merkliste entfernen' : 'Besuchen merken';
+        const svg = btn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
       });
     });
   }
@@ -335,9 +367,14 @@
       </div>`;
     }
 
-    // Share
+    // Fav + Share
+    const isFav = getAusstellerFavorites().includes(a.id);
     const shareUrl = location.origin + '/aussteller.html#id=' + a.id;
     const shareHtml = `<div class="map-profile-actions">
+      <button class="map-profile-fav${isFav ? ' active' : ''}" id="profile-fav" data-id="${a.id}">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="${isFav ? 'currentColor' : 'none'}"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        ${isFav ? 'Gemerkt' : 'Besuchen merken'}
+      </button>
       <button class="map-profile-share" id="profile-share" data-title="${escapeHtml(a.firma)}" data-url="${escapeHtml(shareUrl)}">
         ${SHARE_SVG} Teilen
       </button>
@@ -357,6 +394,27 @@
       ${wsHtml}
       ${shareHtml}
     `;
+
+    // Profile Fav click handler
+    const profileFavBtn = document.getElementById('profile-fav');
+    if (profileFavBtn) {
+      profileFavBtn.addEventListener('click', () => {
+        const id = profileFavBtn.dataset.id;
+        const isNowFav = toggleAusstellerFavorite(id);
+        profileFavBtn.classList.toggle('active', isNowFav);
+        const svg = profileFavBtn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+        profileFavBtn.childNodes[profileFavBtn.childNodes.length - 1].textContent =
+          isNowFav ? ' Gemerkt' : ' Besuchen merken';
+        // Auch die Card-Liste aktualisieren
+        const card = document.querySelector(`.aussteller-card[data-id="${id}"] .aus-fav-btn`);
+        if (card) {
+          card.classList.toggle('active', isNowFav);
+          const cSvg = card.querySelector('svg');
+          if (cSvg) cSvg.setAttribute('fill', isNowFav ? 'currentColor' : 'none');
+        }
+      });
+    }
 
     // Share click handler
     const shareBtn = document.getElementById('profile-share');
@@ -474,20 +532,22 @@
 
   // ── Init ──
 
+  function openFromHash() {
+    const match = window.location.hash.match(/^#id=([a-f0-9]{32})$/);
+    if (match) {
+      const aussteller = allAussteller.find(a => a.id === match[1]);
+      if (aussteller) openMap(aussteller);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initKatFilter();
     initMapClose();
-    loadData().then(() => {
-      // Deep-Link: #id=xxx beim Laden auswerten
-      const hash = window.location.hash;
-      const match = hash.match(/^#id=([a-f0-9]{32})$/);
-      if (match) {
-        const aussteller = allAussteller.find(a => a.id === match[1]);
-        if (aussteller) openMap(aussteller);
-      }
-    });
+    loadData().then(() => openFromHash());
   });
+
+  window.addEventListener('hashchange', openFromHash);
 
   // ── Globale Logo-Fallback-Funktionen ──
   // Müssen global sein wegen inline onerror/onload

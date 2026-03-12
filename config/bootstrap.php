@@ -19,6 +19,7 @@ define('ADMIN_SECRET',        getenv('ADMIN_SECRET') ?: '');
 define('N8N_FEEDBACK_WEBHOOK', getenv('N8N_FEEDBACK_WEBHOOK') ?: '');
 define('N8N_QA_WEBHOOK',       getenv('N8N_QA_WEBHOOK') ?: '');
 define('N8N_UPVOTE_WEBHOOK',   getenv('N8N_UPVOTE_WEBHOOK') ?: '');
+define('N8N_CHAT_WEBHOOK',     getenv('N8N_CHAT_WEBHOOK') ?: '');
 define('SITE_URL',           getenv('SITE_URL'));
 
 /**

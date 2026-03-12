@@ -165,6 +165,22 @@
     align-self: center;
 }
 
+/* ── Aussteller Merken-Button (Card) ── */
+.aus-fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--as-beige, #BFB7AF);
+    flex-shrink: 0;
+    align-self: center;
+    padding: .3rem;
+    border-radius: 6px;
+    display: flex;
+    transition: color .15s, transform .15s;
+}
+.aus-fav-btn:hover { color: var(--as-orange, #F18864); transform: scale(1.15); }
+.aus-fav-btn.active { color: var(--as-orange, #F18864); }
+
 /* ── Result Count ── */
 .aussteller-count {
     text-align: center;
@@ -528,6 +544,22 @@
 }
 .map-profile-share:hover { border-color: var(--as-rot); color: var(--as-rot); }
 .map-profile-share svg { flex-shrink: 0; }
+.map-profile-fav {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    background: none;
+    border: 2px solid var(--as-beige);
+    color: var(--text-light);
+    padding: .45rem .9rem;
+    border-radius: 8px;
+    font-size: .8rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color .15s, color .15s;
+}
+.map-profile-fav:hover { border-color: var(--as-orange); color: var(--as-orange); }
+.map-profile-fav.active { border-color: var(--as-orange); color: var(--as-orange); }
 
 /* Zoom hint */
 .zoom-hint {
