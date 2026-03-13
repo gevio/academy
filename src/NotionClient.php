@@ -931,4 +931,77 @@ TPL;
 
         return json_decode($response, true);
     }
+
+    // ── APP-FEEDBACK ─────────────────────────────────────
+
+    public function createAppFeedback(
+        int    $appBewertung,
+        int    $navigation,
+        int    $ladegeschwindigkeit,
+        int    $nuetzlichkeit,
+        int    $nps,
+        string $verbesserung  = '',
+        string $featureWunsch = '',
+        string $plattform     = 'Browser',
+        string $appVersion    = '',
+        string $deviceId      = ''
+    ): ?array {
+        $now   = (new DateTime('now', new DateTimeZone('Europe/Berlin')))->format('c');
+        $title = 'AS26-' . date('Y-m-d') . '-' . substr(bin2hex(random_bytes(2)), 0, 4);
+
+        $properties = [
+            'Titel'              => ['title'     => [['text' => ['content' => $title]]]],
+            'Event'              => ['select'    => ['name' => 'AS26']],
+            'App-Bewertung'      => ['number'    => $appBewertung],
+            'Navigation'         => ['number'    => $navigation],
+            'Ladegeschwindigkeit'=> ['number'    => $ladegeschwindigkeit],
+            'Nützlichkeit'       => ['number'    => $nuetzlichkeit],
+            'NPS'                => ['number'    => $nps],
+            'Plattform'          => ['select'    => ['name' => $plattform]],
+            'Zeitstempel'        => ['date'      => ['start' => $now]],
+        ];
+
+        if ($verbesserung !== '') {
+            $properties['Verbesserungsvorschlag'] = [
+                'rich_text' => [['text' => ['content' => mb_substr($verbesserung, 0, 2000)]]],
+            ];
+        }
+        if ($featureWunsch !== '') {
+            $properties['Feature-Wunsch'] = [
+                'rich_text' => [['text' => ['content' => mb_substr($featureWunsch, 0, 2000)]]],
+            ];
+        }
+        if ($appVersion !== '') {
+            $properties['App-Version'] = [
+                'rich_text' => [['text' => ['content' => $appVersion]]],
+            ];
+        }
+        if ($deviceId !== '') {
+            $properties['Device-ID'] = [
+                'rich_text' => [['text' => ['content' => $deviceId]]],
+            ];
+        }
+
+        return $this->request('POST', '/pages', [
+            'parent'     => ['database_id' => NOTION_APP_FEEDBACK_DB],
+            'properties' => $properties,
+        ]);
+    }
+
+    public function hasAppFeedbackToday(string $deviceId): bool
+    {
+        if (empty(NOTION_APP_FEEDBACK_DB)) return false;
+        $today = (new DateTime('today', new DateTimeZone('Europe/Berlin')))->format('c');
+
+        $result = $this->queryDatabase(NOTION_APP_FEEDBACK_DB, [
+            'filter'    => [
+                'and' => [
+                    ['property' => 'Device-ID',   'rich_text' => ['equals' => $deviceId]],
+                    ['property' => 'Zeitstempel',  'date'      => ['on_or_after' => $today]],
+                ],
+            ],
+            'page_size' => 1,
+        ]);
+        return !empty($result['results']);
+    }
 }

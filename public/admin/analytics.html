@@ -124,6 +124,12 @@
             <div class="kpi-grid" id="chat-kpis"></div>
         </div>
 
+        <!-- App-Feedback -->
+        <div class="adm-section">
+            <h2>⭐ App-Feedback</h2>
+            <div class="kpi-grid" id="app-feedback-kpis"></div>
+        </div>
+
         <!-- Top Pages -->
         <div class="adm-section">
             <h2>Top-Seiten</h2>
@@ -283,6 +289,7 @@
         renderBars('browser-chart', aggregateField('browser_'));
         renderBars('os-chart', aggregateField('os_'));
         renderChatKPIs();
+        renderAppFeedbackKPIs();
         renderTopPages();
     }
 
@@ -322,6 +329,17 @@
         ];
 
         document.getElementById('chat-kpis').innerHTML = kpis.map(function (k) {
+            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + k.label + '</div></div>';
+        }).join('');
+    }
+
+    // ── App-Feedback-KPIs ────────────────────────────────────────────────
+    function renderAppFeedbackKPIs() {
+        var total = sumFields(['app_feedback_submitted']).app_feedback_submitted || 0;
+        var kpis = [
+            { val: total, label: 'Feedbacks gesamt' },
+        ];
+        document.getElementById('app-feedback-kpis').innerHTML = kpis.map(function (k) {
             return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + k.label + '</div></div>';
         }).join('');
     }

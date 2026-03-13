@@ -150,6 +150,7 @@ if ($today >= $from && $today <= $to) {
         'chat_messages'                 => $countEvent('chat_message_sent'),
         'chat_card_clicks'              => $countEvent('chat_card_click'),
         'chat_favorites_added'          => $countEvent('chat_favorite_added'),
+        'app_feedback_submitted'        => $countEvent('app_feedback_submitted'),
         'top_pages'                     => $topPages,
         'top_features'                  => [],
     ];

@@ -7,8 +7,9 @@ $dotenv->load();
 
 define('NOTION_TOKEN',       getenv('NOTION_TOKEN'));
 define('NOTION_WORKSHOP_DB', getenv('NOTION_WORKSHOP_DB'));
-define('NOTION_FEEDBACK_DB', getenv('NOTION_FEEDBACK_DB'));
-define('NOTION_QA_DB',       getenv('NOTION_QA_DB'));
+define('NOTION_FEEDBACK_DB',     getenv('NOTION_FEEDBACK_DB'));
+define('NOTION_APP_FEEDBACK_DB', getenv('NOTION_APP_FEEDBACK_DB') ?: '');
+define('NOTION_QA_DB',           getenv('NOTION_QA_DB'));
 define('NOTION_AUSSTELLER_DB', getenv('NOTION_AUSSTELLER_DB') ?: '');
 define('NOTION_REFERENTEN_DB', getenv('NOTION_REFERENTEN_DB') ?: '');
 define('NOTION_REVIEW_DB',    getenv('NOTION_REVIEW_DB') ?: '');
@@ -19,8 +20,10 @@ define('ADMIN_SECRET',        getenv('ADMIN_SECRET') ?: '');
 define('N8N_FEEDBACK_WEBHOOK', getenv('N8N_FEEDBACK_WEBHOOK') ?: '');
 define('N8N_QA_WEBHOOK',       getenv('N8N_QA_WEBHOOK') ?: '');
 define('N8N_UPVOTE_WEBHOOK',   getenv('N8N_UPVOTE_WEBHOOK') ?: '');
-define('N8N_CHAT_WEBHOOK',     getenv('N8N_CHAT_WEBHOOK') ?: '');
-define('SITE_URL',           getenv('SITE_URL'));
+define('N8N_CHAT_WEBHOOK',         getenv('N8N_CHAT_WEBHOOK') ?: '');
+define('N8N_APP_FEEDBACK_WEBHOOK', getenv('N8N_APP_FEEDBACK_WEBHOOK') ?: '');
+define('APP_VERSION',              getenv('APP_VERSION') ?: '1.0.0');
+define('SITE_URL',                 getenv('SITE_URL'));
 
 /**
  * Webhook-First Helper: POST JSON an n8n Webhook.
