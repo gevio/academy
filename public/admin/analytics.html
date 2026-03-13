@@ -595,8 +595,8 @@
         data.daily.forEach(function (d) {
             (d.top_pages || []).forEach(function (p) {
                 var key = p.page || '?';
-                // /w/<id>/details und /w/<id> zusammenführen
-                key = key.replace(/^(\/w\/[a-f0-9\-]{32,36})\/details$/, '$1');
+                // /w/<id>/details, /w/<id>/feedback, etc. zusammenführen
+                key = key.replace(/^(\/w\/[a-f0-9\-]{32,36})\/.+$/, '$1');
                 // /home.html → /
                 if (key === '/home.html') key = '/';
                 merged[key] = (merged[key] || 0) + parseInt(p.cnt || 0, 10);
