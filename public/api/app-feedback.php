@@ -58,11 +58,12 @@ $deviceId = getOrCreateDeviceId();
 
 // ── Rate-Limit: 1 Feedback pro Device pro Tag ─────────────────────────────
 $notion = new NotionClient(NOTION_TOKEN);
-if ($notion->hasAppFeedbackToday($deviceId)) {
-    http_response_code(429);
-    echo json_encode(['ok' => false, 'error' => 'Du hast heute bereits App-Feedback gegeben. Danke! 🙏']);
-    exit;
-}
+// TEMP: Rate-Limit deaktiviert zum Testen – wieder aktivieren nach Test!
+// if ($notion->hasAppFeedbackToday($deviceId)) {
+//     http_response_code(429);
+//     echo json_encode(['ok' => false, 'error' => 'Du hast heute bereits App-Feedback gegeben. Danke! 🙏']);
+//     exit;
+// }
 
 // ── Webhook-First ─────────────────────────────────────────────────────────
 $payload = [
