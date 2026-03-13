@@ -360,95 +360,114 @@
     var afbLoaded = false;
 
     function renderAppFeedbackKPIs() {
-        // Notion-Daten beim ersten Render laden
-        if (!afbLoaded) fetchFeedbackData(null);
+        if (!afbLoaded) {
+            afbLoaded = true; // Guard against double-fetch on re-render
+            afbLoadData(null);
+        }
     }
 
     window.loadMoreFeedback = function () {
-        if (afbHasMore && afbCursor) fetchFeedbackData(afbCursor);
+        if (afbHasMore && afbCursor) afbLoadData(afbCursor);
     };
 
-    function fetchFeedbackData(cursor) {
+    function afbLoadData(cursor) {
         var url = '/api/app-feedback-data.php?secret=' + encodeURIComponent(secret);
         if (cursor) url += '&cursor=' + encodeURIComponent(cursor);
 
         fetch(url)
             .then(function (r) { return r.json(); })
             .then(function (d) {
-                if (!d.ok) { document.getElementById('app-feedback-kpis').innerHTML = '<div class="kpi"><div class="kpi-val" style="font-size:.85rem;color:#999">Fehler</div></div>'; return; }
-                afbLoaded = true;
+                if (!d || !d.ok) {
+                    afbSetKpis([{ val: '–', label: 'Laden fehlgeschlagen' }]);
+                    return;
+                }
                 afbData = afbData.concat(d.items || []);
                 afbCursor = d.next_cursor || null;
                 afbHasMore = !!(d.has_more && afbCursor);
-                renderAfbKPIs();
-                renderAfbComments();
+                afbRenderKpis();
+                afbRenderComments();
             })
-            .catch(function () {
-                document.getElementById('app-feedback-kpis').innerHTML = '<div class="kpi"><div class="kpi-val" style="font-size:.85rem;color:#999">–</div><div class="kpi-label">Keine Verbindung</div></div>';
+            .catch(function (e) {
+                console.error('app-feedback-data fetch failed:', e);
+                afbSetKpis([{ val: '–', label: 'Keine Verbindung' }]);
             });
     }
 
-    function afbAvg(field) {
-        var vals = afbData.map(function (fb) { return fb[field]; }).filter(function (v) { return v !== null && v !== undefined; });
-        if (!vals.length) return null;
-        return vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
-    }
-
-    function fmtAvg(v) {
-        if (v === null) return '–';
-        return v.toFixed(1);
-    }
-
-    function starsAvg(v) {
-        if (v === null) return '–';
-        var full = Math.round(v);
-        return '<span class="afb-stars">' + '★'.repeat(full) + '<span style="color:#ddd">' + '★'.repeat(5 - full) + '</span></span> ' +
-               '<small style="color:#888">' + v.toFixed(1) + '</small>';
-    }
-
-    function renderAfbKPIs() {
-        var total = afbData.length;
-        var avgApp  = afbAvg('app_bewertung');
-        var avgNav  = afbAvg('navigation');
-        var avgSpd  = afbAvg('ladegeschwindigkeit');
-        var avgNtz  = afbAvg('nuetzlichkeit');
-        var avgNps  = afbAvg('nps');
-
-        var kpis = [
-            { val: total, label: 'Feedbacks gesamt' },
-            { val: starsAvg(avgApp),  label: 'App gesamt' },
-            { val: starsAvg(avgNav),  label: 'Navigation' },
-            { val: starsAvg(avgSpd),  label: 'Ladezeit' },
-            { val: starsAvg(avgNtz),  label: 'Nützlichkeit' },
-            { val: fmtAvg(avgNps),    label: 'Ø NPS (0–10)' },
-        ];
-
-        document.getElementById('app-feedback-kpis').innerHTML = kpis.map(function (k) {
-            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + k.label + '</div></div>';
+    function afbSetKpis(kpis) {
+        var el = document.getElementById('app-feedback-kpis');
+        if (!el) return;
+        el.innerHTML = kpis.map(function (k) {
+            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + esc(k.label) + '</div></div>';
         }).join('');
     }
 
-    function renderAfbComments() {
-        var withText = afbData.filter(function (fb) { return fb.verbesserung || fb.feature_wunsch; });
-        var commentsDiv = document.getElementById('app-feedback-comments');
-
-        if (!withText.length) {
-            commentsDiv.style.display = 'none';
-            return;
+    function afbAvg(field) {
+        var vals = [];
+        for (var i = 0; i < afbData.length; i++) {
+            var v = afbData[i][field];
+            if (v !== null && v !== undefined && !isNaN(v)) vals.push(Number(v));
         }
+        if (!vals.length) return null;
+        var sum = 0;
+        for (var j = 0; j < vals.length; j++) sum += vals[j];
+        return sum / vals.length;
+    }
+
+    function afbStars(v) {
+        if (v === null || v === undefined) return '–';
+        var full = Math.min(5, Math.max(0, Math.round(v)));
+        var empty = 5 - full;
+        var stars = '';
+        for (var i = 0; i < full; i++) stars += '★';
+        var grey = '';
+        for (var j = 0; j < empty; j++) grey += '★';
+        return '<span class="afb-stars">' + stars + '<span style="color:#ddd">' + grey + '</span></span> <small style="color:#888">' + v.toFixed(1) + '</small>';
+    }
+
+    function afbRenderKpis() {
+        var total  = afbData.length;
+        var avgApp = afbAvg('app_bewertung');
+        var avgNav = afbAvg('navigation');
+        var avgSpd = afbAvg('ladegeschwindigkeit');
+        var avgNtz = afbAvg('nuetzlichkeit');
+        var avgNps = afbAvg('nps');
+
+        afbSetKpis([
+            { val: total,                                      label: 'Feedbacks gesamt' },
+            { val: afbStars(avgApp),                          label: 'App gesamt' },
+            { val: afbStars(avgNav),                          label: 'Navigation' },
+            { val: afbStars(avgSpd),                          label: 'Ladezeit' },
+            { val: afbStars(avgNtz),                          label: 'Nützlichkeit' },
+            { val: avgNps !== null ? avgNps.toFixed(1) : '–', label: 'Ø NPS (0–10)' },
+        ]);
+    }
+
+    function afbRenderComments() {
+        var withText = [];
+        for (var i = 0; i < afbData.length; i++) {
+            if (afbData[i].verbesserung || afbData[i].feature_wunsch) withText.push(afbData[i]);
+        }
+        var commentsDiv = document.getElementById('app-feedback-comments');
+        if (!commentsDiv) return;
+
+        if (!withText.length) { commentsDiv.style.display = 'none'; return; }
         commentsDiv.style.display = '';
 
-        var tbody = document.getElementById('app-feedback-comments-tbody');
-        tbody.innerHTML = withText.map(function (fb) {
-            var date = fb.zeitstempel ? fb.zeitstempel.substring(0, 10) : '–';
-            return '<tr>' +
-                '<td style="white-space:nowrap;font-size:.82rem;vertical-align:top">' + date + '</td>' +
+        var rows = '';
+        for (var k = 0; k < withText.length; k++) {
+            var fb = withText[k];
+            var date = (fb.zeitstempel || '').substring(0, 10) || '–';
+            rows += '<tr>' +
+                '<td style="white-space:nowrap;font-size:.82rem;vertical-align:top">' + esc(date) + '</td>' +
                 '<td style="font-size:.85rem;vertical-align:top">' + (fb.verbesserung ? esc(fb.verbesserung) : '<span style="color:#ccc">–</span>') + '</td>' +
                 '<td style="font-size:.85rem;vertical-align:top">' + (fb.feature_wunsch ? esc(fb.feature_wunsch) : '<span style="color:#ccc">–</span>') + '</td>' +
                 '</tr>';
-        }).join('');
+        }
+        var tbody = document.getElementById('app-feedback-comments-tbody');
+        if (tbody) tbody.innerHTML = rows;
 
-        document.getElementById('app-feedback-load-more').style.display = afbHasMore ? '' : 'none';
+        var loadMoreEl = document.getElementById('app-feedback-load-more');
+        if (loadMoreEl) loadMoreEl.style.display = afbHasMore ? '' : 'none';
     }
 
     // ── Trend-Chart (Canvas) ─────────────────────────────────────────
