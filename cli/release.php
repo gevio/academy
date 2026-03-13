@@ -63,11 +63,30 @@ function updateEnvVersion(string $baseDir, string $version): bool
     $content = file_get_contents($envFile);
     $updated = preg_replace('/^APP_VERSION=.*$/m', 'APP_VERSION=' . $version, $content, 1, $count);
     if ($count === 0) {
-        // Zeile hinzufügen, falls nicht vorhanden
         $updated = rtrim($content) . "\nAPP_VERSION={$version}\n";
     }
     file_put_contents($envFile, $updated);
     return true;
+}
+
+function updateManifestVersion(string $baseDir, string $version): bool
+{
+    $file = $baseDir . '/public/manifest.json';
+    if (!file_exists($file)) return false;
+    $content = file_get_contents($file);
+    $updated = preg_replace('/"version"\s*:\s*"[^"]*"/', '"version": "' . $version . '"', $content, 1, $count);
+    if ($count > 0) file_put_contents($file, $updated);
+    return $count > 0;
+}
+
+function updateSwNoticeVersion(string $baseDir, string $version): bool
+{
+    $file = $baseDir . '/public/js/sw-update-notice.js';
+    if (!file_exists($file)) return false;
+    $content = file_get_contents($file);
+    $updated = preg_replace("/var APP_VERSION = '[^']*'/", "var APP_VERSION = '" . $version . "'", $content, 1, $count);
+    if ($count > 0) file_put_contents($file, $updated);
+    return $count > 0;
 }
 
 function printTable(array $rows): void
@@ -212,9 +231,11 @@ switch ($command) {
 
         // .env aktualisieren
         updateEnvVersion($baseDir, $version);
+        updateManifestVersion($baseDir, $version);
+        updateSwNoticeVersion($baseDir, $version);
 
         echo "✔ Release {$version} eingetragen (Hash: {$gitHash})\n";
-        echo "✔ APP_VERSION in config/.env → {$version}\n";
+        echo "✔ APP_VERSION → {$version} (config/.env, manifest.json, sw-update-notice.js)\n";
         if (!empty($commits)) {
             echo "\nÄnderungen seit letztem Release:\n";
             foreach ($commits as $c) {

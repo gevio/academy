@@ -196,7 +196,7 @@ footer a{color:var(--text-light);text-decoration:none;transition:color .15s}
 footer a:hover{color:var(--as-rot)}
 .footer-partners{display:flex;justify-content:center;align-items:center;gap:2rem;margin:1.2rem -1.5rem -2rem;padding:1rem 1.5rem;background:rgba(0,0,0,.06);border-radius:0 0 0 0}
 .footer-partners img{height:52px;width:auto;opacity:.7;transition:opacity .2s}
-.footer-partners a:hover img{opacity:1}
+.footer-partners a:hover img{opacity:1}\n.app-version{color:var(--text-light,#999);font-size:.65rem;opacity:.5;margin:.25rem 0 0;text-align:center}
 /* Footer CTA row */
 .footer-cta-row{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin:1.2rem 0 .8rem}
 .ticket-btn{display:inline-flex;align-items:center;gap:.4rem;
