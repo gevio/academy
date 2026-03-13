@@ -23,3 +23,19 @@
 - For "deploy to prod" requests, first run:
   - `cd /var/www/as26.cool-camp.site && git pull`
 - If pull is blocked by local changes, report exact blockers and ask whether to `stash`, `commit`, or clean files before retrying.
+
+## Release Management
+
+- Release-DB: `storage/releases/releases.sqlite` (SQLite, gitignored – wird pro Umgebung separat geführt)
+- CLI-Tool: `php cli/release.php`
+  - `init` – DB initialisieren (einmalig pro Umgebung)
+  - `current` – Aktuelle Version anzeigen
+  - `log [--limit=N]` – Changelog anzeigen
+  - `release <X.Y.Z> "<Beschreibung>"` – Neues Release eintragen, aktualisiert automatisch `APP_VERSION` in `config/.env`
+- Nach jeder abgeschlossenen Aufgabe: Version hochzählen mit `php cli/release.php release X.Y.Z "Beschreibung"`
+- Semantic Versioning: MAJOR.MINOR.PATCH (z.B. 1.1.0 für neue Features, 1.0.1 für Bugfixes)
+- Bei Deployment auf Prod:
+  1. `cd /var/www/as26.cool-camp.site && git pull`
+  2. `php cli/release.php init` (falls DB noch nicht existiert)
+  3. `php cli/release.php release <X.Y.Z> "<Beschreibung>"` (gleiche Version wie auf Dev)
+
