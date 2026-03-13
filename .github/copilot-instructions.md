@@ -32,8 +32,23 @@
   - `current` – Aktuelle Version anzeigen
   - `log [--limit=N]` – Changelog anzeigen
   - `release <X.Y.Z> "<Beschreibung>"` – Neues Release eintragen, aktualisiert automatisch `APP_VERSION` in `config/.env`
-- Nach jeder abgeschlossenen Aufgabe: Version hochzählen mit `php cli/release.php release X.Y.Z "Beschreibung"`
-- Semantic Versioning: MAJOR.MINOR.PATCH (z.B. 1.1.0 für neue Features, 1.0.1 für Bugfixes)
+
+### PFLICHT: Release-Version bei jedem Commit
+
+> **WICHTIG – IMMER EINHALTEN:**
+> Nach JEDER abgeschlossenen Aufgabe (Feature, Bugfix, Refactoring) MUSS vor oder direkt nach dem Git-Commit ein neues Release eingetragen werden:
+>
+> ```bash
+> php cli/release.php release <X.Y.Z> "<Kurzbeschreibung>"
+> ```
+>
+> **Ohne diesen Schritt ist die Aufgabe NICHT abgeschlossen.**
+> Die Version wird automatisch in `config/.env` (APP_VERSION) aktualisiert.
+
+- Semantic Versioning: MAJOR.MINOR.PATCH
+  - **PATCH** (z.B. 1.0.1): Bugfixes, kleine Korrekturen
+  - **MINOR** (z.B. 1.1.0): Neue Features, Erweiterungen
+  - **MAJOR** (z.B. 2.0.0): Breaking Changes
 - Bei Deployment auf Prod:
   1. `cd /var/www/as26.cool-camp.site && git pull`
   2. `php cli/release.php init` (falls DB noch nicht existiert)
