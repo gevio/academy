@@ -138,12 +138,19 @@
         <div class="adm-section">
             <h2>⭐ App-Feedback</h2>
             <div id="afb-count" style="font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#aaa;">wird geladen…</div>
-            <table class="adm-table" id="afb-ratings" style="display:none;margin-bottom:1rem;">
-                <thead><tr><th style="width:130px">Kategorie</th><th>Bewertung</th><th style="width:60px;text-align:right">Ø</th><th style="width:110px;text-align:right">Anzahl</th></tr></thead>
-                <tbody id="afb-ratings-tbody"></tbody>
-            </table>
-            <div id="afb-comments" style="display:none;margin-top:.75rem;">
-                <div style="font-size:.82rem;font-weight:600;color:#888;margin-bottom:.4rem;">💬 Freitext-Kommentare</div>
+            <div id="afb-toggle-ratings" style="display:none;margin-bottom:.3rem;">
+                <button onclick="afbToggle('ratings')" style="background:none;border:none;cursor:pointer;font-size:.85rem;color:var(--as-rot,#c0392b);font-weight:600;padding:0;">📊 Bewertungen <span id="afb-arrow-ratings">▸</span></button>
+            </div>
+            <div id="afb-ratings-wrap" style="display:none;margin-bottom:1rem;">
+                <table class="adm-table" id="afb-ratings">
+                    <thead><tr><th style="width:130px">Kategorie</th><th>Bewertung</th><th style="width:60px;text-align:right">Ø</th><th style="width:110px;text-align:right">Anzahl</th></tr></thead>
+                    <tbody id="afb-ratings-tbody"></tbody>
+                </table>
+            </div>
+            <div id="afb-toggle-comments" style="display:none;margin-bottom:.3rem;">
+                <button onclick="afbToggle('comments')" style="background:none;border:none;cursor:pointer;font-size:.85rem;color:var(--as-rot,#c0392b);font-weight:600;padding:0;">💬 Freitext-Kommentare <span id="afb-arrow-comments">▸</span></button>
+            </div>
+            <div id="afb-comments-wrap" style="display:none;">
                 <table class="adm-table">
                     <thead><tr><th style="width:90px">Datum</th><th>Kommentar</th></tr></thead>
                     <tbody id="afb-comments-tbody"></tbody>
@@ -454,10 +461,11 @@
                 '<td style="text-align:right;font-size:.8rem;color:#888">' + countStr + '</td>' +
                 '</tr>';
         }
-        var rTbl = document.getElementById('afb-ratings');
         var rBody = document.getElementById('afb-ratings-tbody');
         if (rBody) rBody.innerHTML = rows;
-        if (rTbl) rTbl.style.display = total > 0 ? '' : 'none';
+        // Toggle-Button für Ratings anzeigen wenn Daten da
+        var rToggle = document.getElementById('afb-toggle-ratings');
+        if (rToggle) rToggle.style.display = total > 0 ? '' : 'none';
 
         // Freitext-Kommentare
         var withText = [];
@@ -466,11 +474,13 @@
             if (fb.verbesserung || fb.feature_wunsch) withText.push(fb);
         }
 
-        var cDiv = document.getElementById('afb-comments');
-        if (!cDiv) return;
+        var cToggle = document.getElementById('afb-toggle-comments');
 
-        if (!withText.length) { cDiv.style.display = 'none'; return; }
-        cDiv.style.display = '';
+        if (!withText.length) {
+            if (cToggle) cToggle.style.display = 'none';
+            return;
+        }
+        if (cToggle) cToggle.style.display = '';
 
         var cRows = '';
         for (var k = 0; k < withText.length; k++) {
@@ -490,6 +500,16 @@
         var loadMore = document.getElementById('afb-load-more');
         if (loadMore) loadMore.style.display = afbHasMore ? '' : 'none';
     }
+
+    // Toggle-Funktion für klappbare Sektionen
+    window.afbToggle = function (section) {
+        var wrap = document.getElementById('afb-' + section + '-wrap');
+        var arrow = document.getElementById('afb-arrow-' + section);
+        if (!wrap) return;
+        var isOpen = wrap.style.display !== 'none';
+        wrap.style.display = isOpen ? 'none' : '';
+        if (arrow) arrow.textContent = isOpen ? '▸' : '▾';
+    };
 
     // ── Trend-Chart (Canvas) ─────────────────────────────────────────
     function renderTrend() {
