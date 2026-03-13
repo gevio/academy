@@ -94,4 +94,26 @@ if (!$webhookOk) {
     }
 }
 
+// ── Analytics-Event server-seitig schreiben (unabhängig von Client-Consent) ──
+$analyticsDb = __DIR__ . '/../../storage/analytics/analytics.sqlite';
+if (file_exists($analyticsDb)) {
+    try {
+        $adb = new PDO('sqlite:' . $analyticsDb);
+        $adb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $adb->exec('PRAGMA busy_timeout=2000');
+        $adb->exec("CREATE TABLE IF NOT EXISTS analytics_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%S','now')),
+            event_name TEXT NOT NULL,
+            session_id TEXT NOT NULL,
+            page TEXT, feature TEXT, device_type TEXT, os_family TEXT,
+            browser_family TEXT, display_mode TEXT, locale TEXT, screen_bucket TEXT, payload_json TEXT
+        )");
+        $s = $adb->prepare("INSERT INTO analytics_events (event_name, session_id, payload_json) VALUES ('app_feedback_submitted', 'server', :p)");
+        $s->execute([':p' => json_encode(['plattform' => $plattform, 'app_version' => $appVersion])]);
+    } catch (PDOException $e) {
+        // Analytics-Fehler ignorieren – Feedback wurde bereits gespeichert
+    }
+}
+
 echo json_encode(['ok' => true]);

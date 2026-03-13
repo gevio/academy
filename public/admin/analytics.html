@@ -53,6 +53,16 @@
     .adm-export button { background: none; border: 1px solid #ccc; border-radius: 6px; padding: .3rem .7rem; cursor: pointer; font-size: .82rem; color: #555; }
     .adm-export button:hover { background: #f5f0eb; }
 
+    /* ── App-Feedback Detail ── */
+    .kpi.clickable { cursor: pointer; transition: box-shadow .15s; }
+    .kpi.clickable:hover { box-shadow: 0 2px 12px rgba(207,54,40,.2); }
+    .afb-stars { color: var(--as-orange, #F18864); font-size: .9rem; }
+    .afb-comment { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .8rem; color: #555; }
+    .afb-nps-badge { display: inline-block; padding: .1rem .4rem; border-radius: 4px; font-size: .8rem; font-weight: 700; }
+    .afb-nps-promo { background: #d4edda; color: #155724; }
+    .afb-nps-pass  { background: #fff3cd; color: #856404; }
+    .afb-nps-detract { background: #f8d7da; color: #721c24; }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
         .kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -128,6 +138,24 @@
         <div class="adm-section">
             <h2>⭐ App-Feedback</h2>
             <div class="kpi-grid" id="app-feedback-kpis"></div>
+            <div id="app-feedback-detail" style="display:none;margin-top:.75rem;">
+                <table class="adm-table" id="app-feedback-table">
+                    <thead><tr>
+                        <th>Datum</th>
+                        <th>App ★</th>
+                        <th>Nav</th>
+                        <th>Speed</th>
+                        <th>Nutzen</th>
+                        <th>NPS</th>
+                        <th>Plattform</th>
+                        <th>Kommentar</th>
+                    </tr></thead>
+                    <tbody id="app-feedback-tbody"></tbody>
+                </table>
+                <div id="app-feedback-load-more" style="display:none;text-align:center;margin-top:.5rem;">
+                    <button onclick="loadMoreFeedback()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.82rem;color:#555;">Mehr laden</button>
+                </div>
+            </div>
         </div>
 
         <!-- Top Pages -->
@@ -334,14 +362,85 @@
     }
 
     // ── App-Feedback-KPIs ────────────────────────────────────────────────
+    var afbData = [];         // geladene Notion-Einträge
+    var afbCursor = null;     // Pagination-Cursor
+    var afbHasMore = false;
+    var afbLoaded = false;
+
     function renderAppFeedbackKPIs() {
         var total = sumFields(['app_feedback_submitted']).app_feedback_submitted || 0;
         var kpis = [
-            { val: total, label: 'Feedbacks gesamt' },
+            { val: total, label: 'Feedbacks (Analytics)', click: toggleFeedbackDetail },
         ];
         document.getElementById('app-feedback-kpis').innerHTML = kpis.map(function (k) {
-            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + k.label + '</div></div>';
+            return '<div class="kpi clickable" onclick="' + (k.click ? 'toggleFeedbackDetail()' : '') + '">' +
+                '<div class="kpi-val">' + k.val + '</div>' +
+                '<div class="kpi-label">' + k.label + '<br><small style="color:#aaa">Details anzeigen ▾</small></div>' +
+                '</div>';
         }).join('');
+    }
+
+    window.toggleFeedbackDetail = function () {
+        var detail = document.getElementById('app-feedback-detail');
+        if (detail.style.display === 'none') {
+            detail.style.display = '';
+            if (!afbLoaded) fetchFeedbackData(null);
+        } else {
+            detail.style.display = 'none';
+        }
+    };
+
+    window.loadMoreFeedback = function () {
+        if (afbHasMore && afbCursor) fetchFeedbackData(afbCursor);
+    };
+
+    function fetchFeedbackData(cursor) {
+        var url = '/api/app-feedback-data.php?secret=' + encodeURIComponent(secret);
+        if (cursor) url += '&cursor=' + encodeURIComponent(cursor);
+
+        fetch(url)
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                if (!d.ok) { alert('Fehler beim Laden der Feedbacks'); return; }
+                afbLoaded = true;
+                afbData = afbData.concat(d.items || []);
+                afbCursor = d.next_cursor || null;
+                afbHasMore = !!(d.has_more && afbCursor);
+                renderFeedbackTable();
+            })
+            .catch(function () { alert('Verbindungsfehler'); });
+    }
+
+    function renderFeedbackTable() {
+        var tbody = document.getElementById('app-feedback-tbody');
+        tbody.innerHTML = afbData.map(function (fb) {
+            var date = fb.zeitstempel ? fb.zeitstempel.substring(0, 10) : '–';
+            var stars = function (n) {
+                if (n === null || n === undefined) return '<span style="color:#ccc">–</span>';
+                return '<span class="afb-stars">' + '★'.repeat(n) + '<span style="color:#ddd">' + '★'.repeat(5 - n) + '</span></span>';
+            };
+            var npsClass = fb.nps >= 9 ? 'afb-nps-promo' : fb.nps >= 7 ? 'afb-nps-pass' : 'afb-nps-detract';
+            var npsVal = fb.nps !== null ? '<span class="afb-nps-badge ' + npsClass + '">' + fb.nps + '</span>' : '–';
+            var comment = '';
+            if (fb.verbesserung) comment += esc(fb.verbesserung);
+            if (fb.feature_wunsch) comment += (comment ? ' / ' : '') + esc(fb.feature_wunsch);
+            var commentCell = comment
+                ? '<div class="afb-comment" title="' + esc(fb.verbesserung) + (fb.feature_wunsch ? '\n\n' + esc(fb.feature_wunsch) : '') + '">' + comment + '</div>'
+                : '<span style="color:#ccc">–</span>';
+
+            return '<tr>' +
+                '<td style="white-space:nowrap;font-size:.82rem">' + date + '</td>' +
+                '<td>' + stars(fb.app_bewertung) + '</td>' +
+                '<td>' + stars(fb.navigation) + '</td>' +
+                '<td>' + stars(fb.ladegeschwindigkeit) + '</td>' +
+                '<td>' + stars(fb.nuetzlichkeit) + '</td>' +
+                '<td>' + npsVal + '</td>' +
+                '<td style="font-size:.8rem">' + esc(fb.plattform || '–') + '</td>' +
+                '<td>' + commentCell + '</td>' +
+                '</tr>';
+        }).join('') || '<tr><td colspan="8" style="color:#999;text-align:center">Keine Einträge</td></tr>';
+
+        document.getElementById('app-feedback-load-more').style.display = afbHasMore ? '' : 'none';
     }
 
     // ── Trend-Chart (Canvas) ─────────────────────────────────────────

@@ -40,6 +40,7 @@ $ALLOWED_EVENTS = [
     'chat_favorite_added',
     'chat_quick_reply_used',
     'chat_new_conversation',
+    'app_feedback_submitted',
 ];
 
 // ── Input lesen ─────────────────────────────────────────────────────
