@@ -137,20 +137,12 @@
         <!-- App-Feedback -->
         <div class="adm-section">
             <h2>⭐ App-Feedback</h2>
-            <div class="kpi-grid" id="app-feedback-kpis"></div>
-            <div id="app-feedback-detail" style="display:none;margin-top:.75rem;">
-                <table class="adm-table" id="app-feedback-table">
-                    <thead><tr>
-                        <th>Datum</th>
-                        <th>App ★</th>
-                        <th>Nav</th>
-                        <th>Speed</th>
-                        <th>Nutzen</th>
-                        <th>NPS</th>
-                        <th>Plattform</th>
-                        <th>Kommentar</th>
-                    </tr></thead>
-                    <tbody id="app-feedback-tbody"></tbody>
+            <div class="kpi-grid" id="app-feedback-kpis"><div class="kpi"><div class="kpi-val" style="font-size:1rem;color:#aaa">…</div><div class="kpi-label">wird geladen</div></div></div>
+            <div id="app-feedback-comments" style="display:none;margin-top:.75rem;">
+                <div style="font-size:.82rem;font-weight:600;color:#888;margin-bottom:.4rem;">Freitext-Kommentare</div>
+                <table class="adm-table">
+                    <thead><tr><th>Datum</th><th>Verbesserung</th><th>Feature-Wunsch</th></tr></thead>
+                    <tbody id="app-feedback-comments-tbody"></tbody>
                 </table>
                 <div id="app-feedback-load-more" style="display:none;text-align:center;margin-top:.5rem;">
                     <button onclick="loadMoreFeedback()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.82rem;color:#555;">Mehr laden</button>
@@ -361,34 +353,16 @@
         }).join('');
     }
 
-    // ── App-Feedback-KPIs ────────────────────────────────────────────────
-    var afbData = [];         // geladene Notion-Einträge
-    var afbCursor = null;     // Pagination-Cursor
+    // ── App-Feedback ────────────────────────────────────────────────────
+    var afbData = [];
+    var afbCursor = null;
     var afbHasMore = false;
     var afbLoaded = false;
 
     function renderAppFeedbackKPIs() {
-        var total = sumFields(['app_feedback_submitted']).app_feedback_submitted || 0;
-        var kpis = [
-            { val: total, label: 'Feedbacks (Analytics)', click: toggleFeedbackDetail },
-        ];
-        document.getElementById('app-feedback-kpis').innerHTML = kpis.map(function (k) {
-            return '<div class="kpi clickable" onclick="' + (k.click ? 'toggleFeedbackDetail()' : '') + '">' +
-                '<div class="kpi-val">' + k.val + '</div>' +
-                '<div class="kpi-label">' + k.label + '<br><small style="color:#aaa">Details anzeigen ▾</small></div>' +
-                '</div>';
-        }).join('');
+        // Notion-Daten beim ersten Render laden
+        if (!afbLoaded) fetchFeedbackData(null);
     }
-
-    window.toggleFeedbackDetail = function () {
-        var detail = document.getElementById('app-feedback-detail');
-        if (detail.style.display === 'none') {
-            detail.style.display = '';
-            if (!afbLoaded) fetchFeedbackData(null);
-        } else {
-            detail.style.display = 'none';
-        }
-    };
 
     window.loadMoreFeedback = function () {
         if (afbHasMore && afbCursor) fetchFeedbackData(afbCursor);
@@ -401,44 +375,78 @@
         fetch(url)
             .then(function (r) { return r.json(); })
             .then(function (d) {
-                if (!d.ok) { alert('Fehler beim Laden der Feedbacks'); return; }
+                if (!d.ok) { document.getElementById('app-feedback-kpis').innerHTML = '<div class="kpi"><div class="kpi-val" style="font-size:.85rem;color:#999">Fehler</div></div>'; return; }
                 afbLoaded = true;
                 afbData = afbData.concat(d.items || []);
                 afbCursor = d.next_cursor || null;
                 afbHasMore = !!(d.has_more && afbCursor);
-                renderFeedbackTable();
+                renderAfbKPIs();
+                renderAfbComments();
             })
-            .catch(function () { alert('Verbindungsfehler'); });
+            .catch(function () {
+                document.getElementById('app-feedback-kpis').innerHTML = '<div class="kpi"><div class="kpi-val" style="font-size:.85rem;color:#999">–</div><div class="kpi-label">Keine Verbindung</div></div>';
+            });
     }
 
-    function renderFeedbackTable() {
-        var tbody = document.getElementById('app-feedback-tbody');
-        tbody.innerHTML = afbData.map(function (fb) {
-            var date = fb.zeitstempel ? fb.zeitstempel.substring(0, 10) : '–';
-            var stars = function (n) {
-                if (n === null || n === undefined) return '<span style="color:#ccc">–</span>';
-                return '<span class="afb-stars">' + '★'.repeat(n) + '<span style="color:#ddd">' + '★'.repeat(5 - n) + '</span></span>';
-            };
-            var npsClass = fb.nps >= 9 ? 'afb-nps-promo' : fb.nps >= 7 ? 'afb-nps-pass' : 'afb-nps-detract';
-            var npsVal = fb.nps !== null ? '<span class="afb-nps-badge ' + npsClass + '">' + fb.nps + '</span>' : '–';
-            var comment = '';
-            if (fb.verbesserung) comment += esc(fb.verbesserung);
-            if (fb.feature_wunsch) comment += (comment ? ' / ' : '') + esc(fb.feature_wunsch);
-            var commentCell = comment
-                ? '<div class="afb-comment" title="' + esc(fb.verbesserung) + (fb.feature_wunsch ? '\n\n' + esc(fb.feature_wunsch) : '') + '">' + comment + '</div>'
-                : '<span style="color:#ccc">–</span>';
+    function afbAvg(field) {
+        var vals = afbData.map(function (fb) { return fb[field]; }).filter(function (v) { return v !== null && v !== undefined; });
+        if (!vals.length) return null;
+        return vals.reduce(function (a, b) { return a + b; }, 0) / vals.length;
+    }
 
+    function fmtAvg(v) {
+        if (v === null) return '–';
+        return v.toFixed(1);
+    }
+
+    function starsAvg(v) {
+        if (v === null) return '–';
+        var full = Math.round(v);
+        return '<span class="afb-stars">' + '★'.repeat(full) + '<span style="color:#ddd">' + '★'.repeat(5 - full) + '</span></span> ' +
+               '<small style="color:#888">' + v.toFixed(1) + '</small>';
+    }
+
+    function renderAfbKPIs() {
+        var total = afbData.length;
+        var avgApp  = afbAvg('app_bewertung');
+        var avgNav  = afbAvg('navigation');
+        var avgSpd  = afbAvg('ladegeschwindigkeit');
+        var avgNtz  = afbAvg('nuetzlichkeit');
+        var avgNps  = afbAvg('nps');
+
+        var kpis = [
+            { val: total, label: 'Feedbacks gesamt' },
+            { val: starsAvg(avgApp),  label: 'App gesamt' },
+            { val: starsAvg(avgNav),  label: 'Navigation' },
+            { val: starsAvg(avgSpd),  label: 'Ladezeit' },
+            { val: starsAvg(avgNtz),  label: 'Nützlichkeit' },
+            { val: fmtAvg(avgNps),    label: 'Ø NPS (0–10)' },
+        ];
+
+        document.getElementById('app-feedback-kpis').innerHTML = kpis.map(function (k) {
+            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + k.label + '</div></div>';
+        }).join('');
+    }
+
+    function renderAfbComments() {
+        var withText = afbData.filter(function (fb) { return fb.verbesserung || fb.feature_wunsch; });
+        var commentsDiv = document.getElementById('app-feedback-comments');
+
+        if (!withText.length) {
+            commentsDiv.style.display = 'none';
+            return;
+        }
+        commentsDiv.style.display = '';
+
+        var tbody = document.getElementById('app-feedback-comments-tbody');
+        tbody.innerHTML = withText.map(function (fb) {
+            var date = fb.zeitstempel ? fb.zeitstempel.substring(0, 10) : '–';
             return '<tr>' +
-                '<td style="white-space:nowrap;font-size:.82rem">' + date + '</td>' +
-                '<td>' + stars(fb.app_bewertung) + '</td>' +
-                '<td>' + stars(fb.navigation) + '</td>' +
-                '<td>' + stars(fb.ladegeschwindigkeit) + '</td>' +
-                '<td>' + stars(fb.nuetzlichkeit) + '</td>' +
-                '<td>' + npsVal + '</td>' +
-                '<td style="font-size:.8rem">' + esc(fb.plattform || '–') + '</td>' +
-                '<td>' + commentCell + '</td>' +
+                '<td style="white-space:nowrap;font-size:.82rem;vertical-align:top">' + date + '</td>' +
+                '<td style="font-size:.85rem;vertical-align:top">' + (fb.verbesserung ? esc(fb.verbesserung) : '<span style="color:#ccc">–</span>') + '</td>' +
+                '<td style="font-size:.85rem;vertical-align:top">' + (fb.feature_wunsch ? esc(fb.feature_wunsch) : '<span style="color:#ccc">–</span>') + '</td>' +
                 '</tr>';
-        }).join('') || '<tr><td colspan="8" style="color:#999;text-align:center">Keine Einträge</td></tr>';
+        }).join('');
 
         document.getElementById('app-feedback-load-more').style.display = afbHasMore ? '' : 'none';
     }
