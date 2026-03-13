@@ -137,14 +137,18 @@
         <!-- App-Feedback -->
         <div class="adm-section">
             <h2>⭐ App-Feedback</h2>
-            <div class="kpi-grid" id="app-feedback-kpis"><div class="kpi"><div class="kpi-val" style="font-size:1rem;color:#aaa">…</div><div class="kpi-label">wird geladen</div></div></div>
-            <div id="app-feedback-comments" style="display:none;margin-top:.75rem;">
-                <div style="font-size:.82rem;font-weight:600;color:#888;margin-bottom:.4rem;">Freitext-Kommentare</div>
+            <div id="afb-count" style="font-size:1.1rem;font-weight:700;margin-bottom:.6rem;color:#aaa;">wird geladen…</div>
+            <table class="adm-table" id="afb-ratings" style="display:none;margin-bottom:1rem;">
+                <thead><tr><th style="width:130px">Kategorie</th><th>Bewertung</th><th style="width:60px;text-align:right">Ø</th><th style="width:110px;text-align:right">Anzahl</th></tr></thead>
+                <tbody id="afb-ratings-tbody"></tbody>
+            </table>
+            <div id="afb-comments" style="display:none;margin-top:.75rem;">
+                <div style="font-size:.82rem;font-weight:600;color:#888;margin-bottom:.4rem;">💬 Freitext-Kommentare</div>
                 <table class="adm-table">
-                    <thead><tr><th>Datum</th><th>Verbesserung</th><th>Feature-Wunsch</th></tr></thead>
-                    <tbody id="app-feedback-comments-tbody"></tbody>
+                    <thead><tr><th style="width:90px">Datum</th><th>Kommentar</th></tr></thead>
+                    <tbody id="afb-comments-tbody"></tbody>
                 </table>
-                <div id="app-feedback-load-more" style="display:none;text-align:center;margin-top:.5rem;">
+                <div id="afb-load-more" style="display:none;text-align:center;margin-top:.5rem;">
                     <button onclick="loadMoreFeedback()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.82rem;color:#555;">Mehr laden</button>
                 </div>
             </div>
@@ -361,7 +365,7 @@
 
     function renderAppFeedbackKPIs() {
         if (!afbLoaded) {
-            afbLoaded = true; // Guard against double-fetch on re-render
+            afbLoaded = true;
             afbLoadData(null);
         }
     }
@@ -378,96 +382,113 @@
             .then(function (r) { return r.json(); })
             .then(function (d) {
                 if (!d || !d.ok) {
-                    afbSetKpis([{ val: '–', label: 'Laden fehlgeschlagen' }]);
+                    document.getElementById('afb-count').textContent = 'Laden fehlgeschlagen';
                     return;
                 }
                 afbData = afbData.concat(d.items || []);
                 afbCursor = d.next_cursor || null;
                 afbHasMore = !!(d.has_more && afbCursor);
-                afbRenderKpis();
-                afbRenderComments();
+                afbRender();
             })
             .catch(function (e) {
-                console.error('app-feedback-data fetch failed:', e);
-                afbSetKpis([{ val: '–', label: 'Keine Verbindung' }]);
+                console.error('app-feedback fetch error:', e);
+                document.getElementById('afb-count').textContent = 'Keine Verbindung';
             });
     }
 
-    function afbSetKpis(kpis) {
-        var el = document.getElementById('app-feedback-kpis');
-        if (!el) return;
-        el.innerHTML = kpis.map(function (k) {
-            return '<div class="kpi"><div class="kpi-val">' + k.val + '</div><div class="kpi-label">' + esc(k.label) + '</div></div>';
-        }).join('');
-    }
-
-    function afbAvg(field) {
+    // Berechne Durchschnitt + Anzahl für ein Feld
+    function afbStat(field) {
         var vals = [];
         for (var i = 0; i < afbData.length; i++) {
             var v = afbData[i][field];
             if (v !== null && v !== undefined && !isNaN(v)) vals.push(Number(v));
         }
-        if (!vals.length) return null;
+        if (!vals.length) return { avg: null, count: 0 };
         var sum = 0;
         for (var j = 0; j < vals.length; j++) sum += vals[j];
-        return sum / vals.length;
+        return { avg: sum / vals.length, count: vals.length };
     }
 
-    function afbStars(v) {
-        if (v === null || v === undefined) return '–';
-        var full = Math.min(5, Math.max(0, Math.round(v)));
-        var empty = 5 - full;
-        var stars = '';
-        for (var i = 0; i < full; i++) stars += '★';
-        var grey = '';
-        for (var j = 0; j < empty; j++) grey += '★';
-        return '<span class="afb-stars">' + stars + '<span style="color:#ddd">' + grey + '</span></span> <small style="color:#888">' + v.toFixed(1) + '</small>';
-    }
-
-    function afbRenderKpis() {
-        var total  = afbData.length;
-        var avgApp = afbAvg('app_bewertung');
-        var avgNav = afbAvg('navigation');
-        var avgSpd = afbAvg('ladegeschwindigkeit');
-        var avgNtz = afbAvg('nuetzlichkeit');
-        var avgNps = afbAvg('nps');
-
-        afbSetKpis([
-            { val: total,                                      label: 'Feedbacks gesamt' },
-            { val: afbStars(avgApp),                          label: 'App gesamt' },
-            { val: afbStars(avgNav),                          label: 'Navigation' },
-            { val: afbStars(avgSpd),                          label: 'Ladezeit' },
-            { val: afbStars(avgNtz),                          label: 'Nützlichkeit' },
-            { val: avgNps !== null ? avgNps.toFixed(1) : '–', label: 'Ø NPS (0–10)' },
-        ]);
-    }
-
-    function afbRenderComments() {
-        var withText = [];
-        for (var i = 0; i < afbData.length; i++) {
-            if (afbData[i].verbesserung || afbData[i].feature_wunsch) withText.push(afbData[i]);
+    // Sterne-HTML: ★★★★☆ 4.2
+    function afbStarsHTML(avg) {
+        if (avg === null) return '<span style="color:#ccc">–</span>';
+        var full = Math.min(5, Math.max(0, Math.round(avg)));
+        var s = '';
+        for (var i = 0; i < 5; i++) {
+            s += i < full
+                ? '<span style="color:var(--as-orange,#e8a735)">★</span>'
+                : '<span style="color:#ddd">★</span>';
         }
-        var commentsDiv = document.getElementById('app-feedback-comments');
-        if (!commentsDiv) return;
+        return s;
+    }
 
-        if (!withText.length) { commentsDiv.style.display = 'none'; return; }
-        commentsDiv.style.display = '';
+    function afbRender() {
+        var total = afbData.length;
+        var el = document.getElementById('afb-count');
+        if (el) {
+            el.innerHTML = '<span style="font-size:1.6rem;color:var(--as-rot,#c0392b)">' + total + '</span> <span style="color:#666">Feedbacks gesamt</span>';
+        }
+
+        // Ratings-Tabelle
+        var categories = [
+            { field: 'app_bewertung',      label: 'App gesamt',   stars: true },
+            { field: 'navigation',         label: 'Navigation',   stars: true },
+            { field: 'ladegeschwindigkeit', label: 'Ladezeit',     stars: true },
+            { field: 'nuetzlichkeit',      label: 'Nützlichkeit', stars: true },
+            { field: 'nps',                label: 'NPS (0–10)',   stars: false }
+        ];
 
         var rows = '';
-        for (var k = 0; k < withText.length; k++) {
-            var fb = withText[k];
-            var date = (fb.zeitstempel || '').substring(0, 10) || '–';
+        for (var c = 0; c < categories.length; c++) {
+            var cat = categories[c];
+            var st = afbStat(cat.field);
+            var avgStr = st.avg !== null ? st.avg.toFixed(1) : '–';
+            var starsCol = cat.stars ? afbStarsHTML(st.avg) : '';
+            var countStr = st.count > 0
+                ? '(bei ' + st.count + (st.count === 1 ? ' Bewertung' : ' Bewertungen') + ')'
+                : '<span style="color:#ccc">–</span>';
             rows += '<tr>' +
-                '<td style="white-space:nowrap;font-size:.82rem;vertical-align:top">' + esc(date) + '</td>' +
-                '<td style="font-size:.85rem;vertical-align:top">' + (fb.verbesserung ? esc(fb.verbesserung) : '<span style="color:#ccc">–</span>') + '</td>' +
-                '<td style="font-size:.85rem;vertical-align:top">' + (fb.feature_wunsch ? esc(fb.feature_wunsch) : '<span style="color:#ccc">–</span>') + '</td>' +
+                '<td style="font-weight:600;font-size:.85rem">' + esc(cat.label) + '</td>' +
+                '<td style="font-size:1rem;letter-spacing:1px">' + starsCol + '</td>' +
+                '<td style="text-align:right;font-weight:600;font-size:.95rem">' + avgStr + '</td>' +
+                '<td style="text-align:right;font-size:.8rem;color:#888">' + countStr + '</td>' +
                 '</tr>';
         }
-        var tbody = document.getElementById('app-feedback-comments-tbody');
-        if (tbody) tbody.innerHTML = rows;
+        var rTbl = document.getElementById('afb-ratings');
+        var rBody = document.getElementById('afb-ratings-tbody');
+        if (rBody) rBody.innerHTML = rows;
+        if (rTbl) rTbl.style.display = total > 0 ? '' : 'none';
 
-        var loadMoreEl = document.getElementById('app-feedback-load-more');
-        if (loadMoreEl) loadMoreEl.style.display = afbHasMore ? '' : 'none';
+        // Freitext-Kommentare
+        var withText = [];
+        for (var i = 0; i < afbData.length; i++) {
+            var fb = afbData[i];
+            if (fb.verbesserung || fb.feature_wunsch) withText.push(fb);
+        }
+
+        var cDiv = document.getElementById('afb-comments');
+        if (!cDiv) return;
+
+        if (!withText.length) { cDiv.style.display = 'none'; return; }
+        cDiv.style.display = '';
+
+        var cRows = '';
+        for (var k = 0; k < withText.length; k++) {
+            var f = withText[k];
+            var dt = (f.zeitstempel || '').substring(0, 10) || '–';
+            var parts = [];
+            if (f.verbesserung) parts.push(esc(f.verbesserung));
+            if (f.feature_wunsch) parts.push('<span style="color:var(--as-orange,#e8a735);font-weight:600">Wunsch:</span> ' + esc(f.feature_wunsch));
+            cRows += '<tr>' +
+                '<td style="white-space:nowrap;font-size:.82rem;vertical-align:top;color:#888">' + esc(dt) + '</td>' +
+                '<td style="font-size:.85rem;vertical-align:top">' + parts.join('<br>') + '</td>' +
+                '</tr>';
+        }
+        var cBody = document.getElementById('afb-comments-tbody');
+        if (cBody) cBody.innerHTML = cRows;
+
+        var loadMore = document.getElementById('afb-load-more');
+        if (loadMore) loadMore.style.display = afbHasMore ? '' : 'none';
     }
 
     // ── Trend-Chart (Canvas) ─────────────────────────────────────────
