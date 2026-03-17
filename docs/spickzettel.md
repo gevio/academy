@@ -134,3 +134,62 @@ php scripts/generate-experten-json.php
 | Feedback | `N8N_FEEDBACK_WEBHOOK` |
 | Q&A | `N8N_QA_WEBHOOK` |
 | Upvote | `N8N_UPVOTE_WEBHOOK` |
+
+---
+
+## 7. Release-Management
+
+Jede abgeschlossene Aufgabe (Feature, Bugfix, Refactoring) **muss** mit einem Release dokumentiert werden. Ohne diesen Schritt ist die Aufgabe nicht abgeschlossen.
+
+### Datenbank & CLI
+
+| Was | Pfad |
+|---|---|
+| Release-DB | `storage/releases/releases.sqlite` (SQLite, gitignored, pro Umgebung separat) |
+| CLI-Tool | `php cli/release.php` |
+
+### Befehle
+
+```bash
+cd /var/www/dev.as26.cool-camp.site
+
+# DB initialisieren (einmalig pro Umgebung)
+php cli/release.php init
+
+# Aktuelle Version anzeigen
+php cli/release.php current
+
+# Changelog anzeigen (optional mit Limit)
+php cli/release.php log
+php cli/release.php log --limit=10
+
+# Neues Release eintragen
+php cli/release.php release 1.2.3 "Kurze Beschreibung der Änderung"
+```
+
+### Semantic Versioning
+
+| Stufe | Wann | Beispiel |
+|---|---|---|
+| **PATCH** | Bugfixes, kleine Korrekturen | `1.0.0` → `1.0.1` |
+| **MINOR** | Neue Features, Erweiterungen | `1.0.1` → `1.1.0` |
+| **MAJOR** | Breaking Changes | `1.1.0` → `2.0.0` |
+
+### Ablauf: Neues Release erzeugen
+
+1. Code-Änderungen fertigstellen und testen
+2. Git-Commit erstellen
+3. Release eintragen:
+   ```bash
+   php cli/release.php release <X.Y.Z> "Beschreibung"
+   ```
+   → Aktualisiert automatisch `APP_VERSION` in `config/.env`
+4. Erneut committen (Version-Bump) und pushen
+
+### Deployment auf Produktion
+
+```bash
+cd /var/www/as26.cool-camp.site && git pull
+php cli/release.php init          # falls DB noch nicht existiert
+php cli/release.php release <X.Y.Z> "Beschreibung"   # gleiche Version wie auf Dev
+```
