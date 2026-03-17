@@ -12,7 +12,7 @@ public/api/workshops.json
 public/api/aussteller.json
 public/api/experten.json
 public/api/standplan.json
-public/api/veranstaltungsorte.json
+# veranstaltungsorte.json wird NICHT per Cron generiert → bleibt im Repo
 
 # Generierte Bilder (per Cron aus Notion)
 public/img/aussteller/

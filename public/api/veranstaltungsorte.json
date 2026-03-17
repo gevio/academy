@@ -1,0 +1,46 @@
+{
+  "generated": "2026-02-27T12:25:54.327Z",
+  "bild": "/img/plan/overview.jpg",
+  "orte": {
+    "buehne-fgo": {
+      "x": 71.5,
+      "y": 29.6,
+      "label": "Selbstausbau Academy Bühne"
+    },
+    "buehne-a6": {
+      "x": 73.6,
+      "y": 57.5,
+      "label": "Vortragsbühne Halle A6"
+    },
+    "foyer-west": {
+      "x": 5.2,
+      "y": 27.5,
+      "label": "Foyer West/Atrium"
+    },
+    "wiese-fgo": {
+      "x": 19.5,
+      "y": 32.9,
+      "label": "Wiese Freigelände West"
+    },
+    "foyer-empore": {
+      "x": 10.6,
+      "y": 34.2,
+      "label": "Foyer West/Empore"
+    },
+    "raum-oesterreich": {
+      "x": 3.6,
+      "y": 46.1,
+      "label": "Raum Österreich (Foyer West)"
+    },
+    "raum-schweiz": {
+      "x": 9.6,
+      "y": 46.7,
+      "label": "Raum Schweiz (Foyer West)"
+    },
+    "raum-liechtenstein": {
+      "x": 16.2,
+      "y": 40.2,
+      "label": "Raum Liechtenstein (Foyer West)"
+    }
+  }
+}
