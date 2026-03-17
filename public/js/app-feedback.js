@@ -199,6 +199,25 @@
       /* ── Step-Wrapper ── */
       .afm-step { display: none; }
       .afm-step.active { display: block; }
+
+      /* ── Tooltip ── */
+      #afm-tooltip {
+        position: fixed; bottom: 1.75rem; left: 5.5rem; z-index: 9000;
+        background: rgba(55,47,44,.92); color: #fff;
+        padding: .4rem .75rem; border-radius: 8px;
+        font-size: .82rem; font-weight: 600; white-space: nowrap;
+        pointer-events: none; opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity .3s, transform .3s;
+        font-family: 'PT Sans', sans-serif;
+      }
+      #afm-tooltip.visible { opacity: 1; transform: translateX(0); }
+      #afm-tooltip::after {
+        content: ''; position: absolute; top: 50%; left: -6px;
+        transform: translateY(-50%);
+        border: 6px solid transparent; border-left: none;
+        border-right-color: rgba(55,47,44,.92);
+      }
     `;
     document.head.appendChild(css);
 
@@ -209,6 +228,20 @@
     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
     btn.addEventListener('click', openPanel);
     document.body.appendChild(btn);
+
+    // Tooltip (1x pro Session)
+    if (!sessionStorage.getItem('as_feedback_tooltip_shown')) {
+      var tip = document.createElement('span');
+      tip.id = 'afm-tooltip';
+      tip.textContent = 'App bewerten';
+      document.body.appendChild(tip);
+      setTimeout(function() { tip.classList.add('visible'); }, 800);
+      setTimeout(function() {
+        tip.classList.remove('visible');
+        setTimeout(function() { tip.remove(); }, 300);
+      }, 4200);
+      sessionStorage.setItem('as_feedback_tooltip_shown', '1');
+    }
 
     // ── Panel ────────────────────────────────────────────────────────────
     var panel = document.createElement('div');
