@@ -332,6 +332,25 @@
       .asc-send-btn:disabled { background: var(--as-beige, #BFB7AF); cursor: not-allowed; }
       .asc-send-btn svg { width: 18px; height: 18px; }
 
+      /* ── Tooltip ── */
+      #as-chat-tooltip {
+        position: fixed; bottom: 1.75rem; right: 5.5rem; z-index: 9000;
+        background: rgba(55,47,44,.92); color: #fff;
+        padding: .4rem .75rem; border-radius: 8px;
+        font-size: .82rem; font-weight: 600; white-space: nowrap;
+        pointer-events: none; opacity: 0;
+        transform: translateX(8px);
+        transition: opacity .3s, transform .3s;
+        font-family: 'PT Sans', sans-serif;
+      }
+      #as-chat-tooltip.visible { opacity: 1; transform: translateX(0); }
+      #as-chat-tooltip::after {
+        content: ''; position: absolute; top: 50%; right: -6px;
+        transform: translateY(-50%);
+        border: 6px solid transparent; border-right: none;
+        border-left-color: rgba(55,47,44,.92);
+      }
+
       /* ── Mobile ── */
       @media (max-width: 440px) {
         #as-chat-panel { max-width: 100%; border-radius: 16px 16px 0 0; }
@@ -350,6 +369,20 @@
       <span id="as-chat-badge"></span>
     `;
     document.body.appendChild(btn);
+
+    // Tooltip (1x pro Session)
+    if (!sessionStorage.getItem('as_chat_tooltip_shown')) {
+      var tip = document.createElement('span');
+      tip.id = 'as-chat-tooltip';
+      tip.textContent = 'Messe-Assistent';
+      document.body.appendChild(tip);
+      setTimeout(function() { tip.classList.add('visible'); }, 600);
+      setTimeout(function() {
+        tip.classList.remove('visible');
+        setTimeout(function() { tip.remove(); }, 300);
+      }, 4000);
+      sessionStorage.setItem('as_chat_tooltip_shown', '1');
+    }
 
     // Panel
     const panel = document.createElement('div');
