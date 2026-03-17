@@ -188,13 +188,13 @@ textarea::placeholder{color:var(--as-beige)}
 .faq-item a:hover{text-decoration:underline}
 
 /* ═══ FOOTER ═══ */
-footer{text-align:center;padding:2rem 1.5rem 5rem;color:var(--text-light);font-size:.8rem}
+footer{text-align:center;padding:2rem 1.5rem;color:var(--text-light);font-size:.8rem}
 .footer-logo{height:96px;margin-bottom:.5rem;opacity:.5;filter:grayscale(100%);transition:opacity .2s}
 .footer-logo:hover{opacity:.8}
 footer p{margin-top:.3rem}
 footer a{color:var(--text-light);text-decoration:none;transition:color .15s}
 footer a:hover{color:var(--as-rot)}
-.footer-partners{display:flex;justify-content:center;align-items:center;gap:2rem;margin:1.2rem -1.5rem -5rem;padding:1rem 1.5rem 5rem;background:rgba(0,0,0,.06);border-radius:0 0 0 0}
+.footer-partners{display:flex;justify-content:center;align-items:center;gap:2rem;margin:1.2rem -1.5rem -2rem;padding:1rem 1.5rem 4.5rem;background:rgba(0,0,0,.06);border-radius:0 0 0 0}
 .footer-partners img{height:52px;width:auto;opacity:.7;transition:opacity .2s}
 .footer-partners a:hover img{opacity:1}\n.app-version{color:var(--text-light,#999);font-size:.65rem;opacity:.5;margin:.25rem 0 0;text-align:center}
 /* Footer CTA row */
