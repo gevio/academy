@@ -11,8 +11,7 @@ public/qr/*.png
 public/api/workshops.json
 public/api/aussteller.json
 public/api/experten.json
-public/api/standplan.json
-# veranstaltungsorte.json wird NICHT per Cron generiert → bleibt im Repo
+# standplan.json + veranstaltungsorte.json werden NICHT per Cron generiert → bleiben im Repo
 
 # Generierte Bilder (per Cron aus Notion)
 public/img/aussteller/
