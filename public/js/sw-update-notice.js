@@ -1,5 +1,9 @@
 // App-Version (automatisch aktualisiert von cli/release.php)
+<<<<<<< Updated upstream
 var APP_VERSION = '1.3.1';
+=======
+var APP_VERSION = '1.3.0';
+>>>>>>> Stashed changes
 (function(){var el=document.querySelector('.app-version');if(el)el.textContent='v'+APP_VERSION;})();
 
 (function () {
