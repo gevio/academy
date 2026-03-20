@@ -643,13 +643,15 @@ TPL;
             $properties['Webshop'] = ['url' => $aussteller['webshop']];
         }
 
-        // Logo aus Aussteller-DB übernehmen
-        if (!empty($aussteller['logo'])) {
+        // Logo übernehmen: lokale URL verwenden (Notion signed URLs funktionieren nicht als external)
+        if (!empty($aussteller['logo_local'])) {
+            $siteUrl = defined('SITE_URL') ? SITE_URL : 'https://agenda.adventuresouthside.com';
+            $logoUrl = rtrim($siteUrl, '/') . '/' . ltrim($aussteller['logo_local'], '/');
             $properties['Logo'] = [
                 'files' => [[
                     'type' => 'external',
-                    'name' => ($aussteller['firma'] ?? 'Logo') . '.png',
-                    'external' => ['url' => $aussteller['logo']],
+                    'name' => ($aussteller['firma'] ?? 'Logo') . '.webp',
+                    'external' => ['url' => $logoUrl],
                 ]],
             ];
         }

@@ -89,6 +89,10 @@ if ($ausData) {
     $aussteller['website']       = $aussteller['website']       ?: ($ausData['website'] ?? '');
     $aussteller['stand']         = $aussteller['stand']         ?: ($ausData['stand'] ?? '');
     $aussteller['kategorien']    = $aussteller['kategorien']    ?: ($ausData['kategorien'] ?? []);
+    // logo_local kommt nur aus JSON (lokaler Pfad zum heruntergeladenen Logo)
+    if (empty($aussteller['logo_local']) && !empty($ausData['logo_local'])) {
+        $aussteller['logo_local'] = $ausData['logo_local'];
+    }
 }
 $aussteller['page_id'] = $pageId;
 
