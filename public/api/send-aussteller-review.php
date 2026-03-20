@@ -34,7 +34,7 @@ if (empty(ADMIN_SECRET) || $secret !== ADMIN_SECRET) {
 // ── Input ────────────────────────────────────────────
 $input = json_decode(file_get_contents('php://input'), true);
 $ausstellerId = $input['aussteller_id'] ?? '';
-$deadline     = $input['deadline'] ?? date('Y-m-d', strtotime('+4 weeks'));
+$deadline     = $input['deadline'] ?? date('Y-m-d', strtotime('+14 days'));
 $kontaktEmail = $input['kontakt_email'] ?? '';
 
 if (!preg_match('/^[a-f0-9\-]{32,36}$/', $ausstellerId)) {

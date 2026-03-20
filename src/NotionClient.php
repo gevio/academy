@@ -583,6 +583,7 @@ TPL;
             'kontakt_nachname' => $kontaktNachname,
             'kontakt_duzen'    => $kontaktDuzen,
             'kategorien'       => array_map(fn($k) => $k['name'], $props['Kategorie']['multi_select'] ?? []),
+            'event_ids'        => array_column($props['Event']['relation'] ?? [], 'id'),
         ];
     }
 
@@ -640,6 +641,23 @@ TPL;
         }
         if (!empty($aussteller['webshop'])) {
             $properties['Webshop'] = ['url' => $aussteller['webshop']];
+        }
+
+        // Logo aus Aussteller-DB übernehmen
+        if (!empty($aussteller['logo'])) {
+            $properties['Logo'] = [
+                'files' => [[
+                    'type' => 'external',
+                    'name' => ($aussteller['firma'] ?? 'Logo') . '.png',
+                    'external' => ['url' => $aussteller['logo']],
+                ]],
+            ];
+        }
+
+        // Event-Relation aus Aussteller-DB übernehmen
+        if (!empty($aussteller['event_ids'])) {
+            $eventRelations = array_map(fn($id) => ['id' => $id], $aussteller['event_ids']);
+            $properties['Event'] = ['relation' => $eventRelations];
         }
 
         // Kontakt-Email
