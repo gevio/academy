@@ -717,7 +717,16 @@ TPL;
         $blocks[] = self::todoBlock('Alles korrekt – Freigabe erteilt');
         $blocks[] = self::divider();
 
-        // 5) Rechtehinweis
+        // 5) Absenden-Hinweis (Option B)
+        $blocks[] = self::h3('Fertig? Bitte absenden!');
+        $blocks[] = self::calloutBlock(
+            'Wenn Sie alle Angaben geprüft haben, setzen Sie bitte den Status (ganz oben) von "Entwurf" auf "Eingereicht". ' .
+            'Wir werden dann benachrichtigt und prüfen Ihre Angaben.',
+            '☝'
+        );
+        $blocks[] = self::divider();
+
+        // 6) Rechtehinweis
         $blocks[] = self::paragraph('**Wichtig:** Ich bestätige, dass ich über alle Rechte an den hochgeladenen Inhalten verfüge. Ich räume der Rough Road Events GmbH sowie von ihr beauftragten Dritten das zeitlich, räumlich und inhaltlich unbeschränkte Recht ein, dieses Material für redaktionelle und werbliche Zwecke zu nutzen.');
 
         return $this->request('POST', '/pages', [
