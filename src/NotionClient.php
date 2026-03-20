@@ -619,6 +619,9 @@ TPL;
             'Deadline' => [
                 'date' => ['start' => $deadline],
             ],
+            'Team-Freigabe' => [
+                'checkbox' => false,
+            ],
         ];
 
         // Beschreibung vorausfüllen

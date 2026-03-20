@@ -54,6 +54,7 @@ Nach Bearbeitung:
 | `Deadline` | date | Frist für Rückmeldung des Ausstellers |
 | `Änderungsdatum` | date | Letzte Änderung durch den Aussteller |
 | `Kontakt-Email` | email | Ansprechpartner, wird per n8n aus Kontakte Master befüllt |
+| `Team-Freigabe` | checkbox | Nur vom Team setzbar (hidden für Kunde). Workflow C prüft diese Checkbox. |
 | `Kommentar` | rich_text | Internes Kommentarfeld fürs Team |
 
 **Status-Flow:**
@@ -172,10 +173,14 @@ In `aussteller.js` → `renderProfile()`:
 
 **Trigger:** Schedule (alle 15–30 Min)
 
+**Sicherheit:** Nur wenn `Status = Freigegeben` **UND** `Team-Freigabe = true` (Checkbox).
+Der Kunde kann zwar den Status auf "Freigegeben" setzen, aber die Checkbox ist für ihn
+unsichtbar (hidden). Nur das Team kann die Checkbox setzen → doppelte Absicherung.
+
 ```
 [Schedule Trigger]
     ↓
-[Notion: Query "AS26_Aussteller Reviews" WHERE Status = "Freigegeben"]
+[Notion: Query "AS26_Aussteller Reviews" WHERE Status = "Freigegeben" AND Team-Freigabe = true]
     ↓
 [Notion: Review-Seite lesen → Firmenname, Beschreibung, Messe-Special, Webseite, Webshop, Logo]
     ↓
