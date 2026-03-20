@@ -16,6 +16,8 @@ define('NOTION_REVIEW_DB',    getenv('NOTION_REVIEW_DB') ?: '');
 define('NOTION_EMAIL_DB',     getenv('NOTION_EMAIL_DB') ?: '');
 define('NOTION_REVIEW_TEMPLATE', getenv('NOTION_REVIEW_TEMPLATE') ?: '');
 define('NOTION_EMAIL_TEMPLATE',  getenv('NOTION_EMAIL_TEMPLATE') ?: '');
+define('NOTION_AUSSTELLER_REVIEW_DB',     getenv('NOTION_AUSSTELLER_REVIEW_DB') ?: '');
+define('NOTION_AUSSTELLER_EMAIL_TEMPLATE', getenv('NOTION_AUSSTELLER_EMAIL_TEMPLATE') ?: '');
 define('ADMIN_SECRET',        getenv('ADMIN_SECRET') ?: '');
 define('N8N_FEEDBACK_WEBHOOK', getenv('N8N_FEEDBACK_WEBHOOK') ?: '');
 define('N8N_QA_WEBHOOK',       getenv('N8N_QA_WEBHOOK') ?: '');

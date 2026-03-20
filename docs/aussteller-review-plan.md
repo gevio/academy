@@ -10,7 +10,7 @@
 | Backend | `send-review.php` → `NotionClient::createReviewPage()` |
 | Notion DBs | Workshop Reviews DB (`NOTION_REVIEW_DB`), E-Mails Ausgehend (`NOTION_EMAIL_DB`) |
 | Flow | Review-Seite in Notion erstellen → E-Mail-Draft pro Referent → Referent bearbeitet in Notion → Team prüft → Freigabe |
-| Status-Flow | Offen → In Review → Änderungen nötig → Freigegeben |
+| Status-Flow | Offen → In Review → Änderungen nötig → Freigegeben → Abgeschlossen |
 
 ## 2. Ziel: Aussteller-Review
 
@@ -21,7 +21,7 @@ Aussteller sollen folgende Felder selbst bearbeiten können:
 | **Logo** | `Logo` | files |
 | **Firmenname/Titel** | `Name` / `Firma` | title |
 | **Langtext/Beschreibung** | `Beschreibung` | rich_text |
-| **Langtext/Messe-Special** | `Angebote auf der Messe` | rich_text |
+| **Messe-Special** | `Messe-Special` | rich_text |
 | **Link Webseite** | `Webseite` | url |
 | **Link Shop** | `Webshop` | url |
 
@@ -33,19 +33,37 @@ Nach Bearbeitung:
 
 ## 3. Benötigte Komponenten
 
-### 3.1 Notion: Neue Datenbank "Aussteller Reviews"
+### 3.1 Notion: Datenbank "AS26_Aussteller Reviews" ✅
 
-**Datenbank-Properties:**
+> DB-ID: `d9797aa541bb47dab3b4f6766a646c61`
+> `.env`: `NOTION_AUSSTELLER_REVIEW_DB`
+
+**Datenbank-Properties (ist-Stand):**
 
 | Property | Typ | Beschreibung |
 |---|---|---|
-| `Review-Titel` | title | "Review – {Firmenname}" |
-| `Event` | select | "Southside 2026" |
-| `Aussteller` | relation | → Aussteller-DB |
-| `Review-Status` | status | Offen / In Review / Änderungen nötig / Freigegeben |
-| `Deadline` | date | Frist für Rückmeldung |
-| `Kontakt-Email` | email | Ansprechpartner beim Aussteller |
-| `Notizen` | rich_text | Interne Notizen / weitere Emails |
+| `Firmenname` | title | Name des Ausstellers |
+| `Logo` | files | Logo-Upload durch Aussteller |
+| `Beschreibung` | rich_text | Langtext-Beschreibung |
+| `Messe-Special` | rich_text | Messe-Special / Angebote auf der Messe |
+| `Webseite` | url | Link zur Firmen-Website |
+| `Webshop` | url | Link zum Online-Shop |
+| `Aussteller (AS26)` | relation | → AS26_Aussteller (single_property) |
+| `Event` | relation | → Master-Veranstaltungen (zeigt Title, z.B. "Adventure Southside 2026") |
+| `Status` | select | Entwurf / Eingereicht / Freigegeben / Übertragen |
+| `Deadline` | date | Frist für Rückmeldung des Ausstellers |
+| `Änderungsdatum` | date | Letzte Änderung durch den Aussteller |
+| `Kontakt-Email` | email | Ansprechpartner, wird per n8n aus Kontakte Master befüllt |
+| `Kommentar` | rich_text | Internes Kommentarfeld fürs Team |
+
+**Status-Flow:**
+```
+Entwurf → Eingereicht → Freigegeben → Übertragen
+```
+- **Entwurf:** Review-Seite erstellt, noch nicht an Aussteller gesendet
+- **Eingereicht:** Aussteller hat Daten geprüft/bearbeitet
+- **Freigegeben:** Team hat Review geprüft und freigegeben
+- **Übertragen:** Daten wurden in Aussteller-DB zurückgeschrieben (n8n)
 
 **Seiteninhalt (Body-Template):**
 
@@ -54,7 +72,9 @@ Nach Bearbeitung:
 3. **Aktuelle Aussteller-Daten:**
    - Firmenname
    - Beschreibung (Langtext)
-   - Webseite/Shop-Link
+   - Messe-Special
+   - Webseite-Link
+   - Webshop-Link
    - Logo (Bild-Block oder Platzhalter)
    - Stand-Nr.
    - Kategorien
@@ -62,7 +82,9 @@ Nach Bearbeitung:
    - [ ] Logo geprüft / neu hochgeladen
    - [ ] Firmenname korrekt
    - [ ] Beschreibung geprüft / aktualisiert
+   - [ ] Messe-Special geprüft / aktualisiert
    - [ ] Webseite-Link geprüft / aktualisiert
+   - [ ] Webshop-Link geprüft / aktualisiert
    - [ ] Alles korrekt – Freigabe erteilt
 
 ### 3.2 Notion: E-Mails Ausgehend DB (bestehend nutzen)
@@ -92,7 +114,9 @@ Bitte bis {DEADLINE} prüfen und freigeben.
 Folgende Daten können Sie bearbeiten:
 • Firmenname/Titel
 • Beschreibung (Langtext)
-• Webseite/Shop-Link
+• Messe-Special
+• Webseite-Link
+• Webshop-Link
 • Logo (neues Bild hochladen)
 
 Bei Fragen antworten Sie einfach auf diese E-Mail.
@@ -137,7 +161,7 @@ Nach Freigabe sollen die Daten **automatisch** in die Aussteller-DB zurückgesch
 ```
 [Schedule Trigger: alle 5-10 Min]
     ↓
-[Notion: Query "Aussteller Reviews" WHERE Review-Status = "Freigegeben"]
+[Notion: Query "AS26_Aussteller Reviews" WHERE Status = "Freigegeben"]
     ↓
 [Filter: Nur neue Freigaben (noch nicht verarbeitet)]
     ↓
@@ -145,7 +169,7 @@ Nach Freigabe sollen die Daten **automatisch** in die Aussteller-DB zurückgesch
     ↓
 [Notion: Aussteller-DB-Seite updaten (Titel, Beschreibung, Webseite, Logo)]
     ↓
-[Review-Status auf "Abgeschlossen" setzen]
+[Status auf "Übertragen" setzen]
     ↓
 [Optional: Telegram-Benachrichtigung ans Team]
     ↓
@@ -177,31 +201,27 @@ Nach Freigabe sollen die Daten **automatisch** in die Aussteller-DB zurückgesch
 
 ---
 
-## 4. Notion: Kontakt-Email der Aussteller
+## 4. Notion: Kontakt-Email der Aussteller ✅
 
-**Prüfen:** Hat die Aussteller-DB bereits ein Email-Feld?
+Die Review-DB hat ein `Kontakt-Email` (email) Property. Dieses wird **per n8n automatisch aus "Kontakte Master" befüllt**.
 
-- Falls ja → direkt nutzen
-- Falls nein → Property `Kontakt-Email` (type: email) zur Aussteller-DB hinzufügen
-- Alternative: Separate Kontakt-DB mit Relation zur Aussteller-DB
-
-**Ohne Email-Adresse kann kein Review-Link verschickt werden!**
+**Voraussetzung:** n8n-Workflow muss die Kontakt-Email beim Erstellen der Review-Seite aus der Kontakte-Master-DB holen und eintragen.
 
 ---
 
 ## 5. Implementierungsreihenfolge
 
 ### Phase 1: Notion Setup
-1. [ ] Aussteller-DB prüfen: Email-Feld vorhanden? Ggf. anlegen
-2. [ ] Neue Notion-DB "Aussteller Reviews" anlegen (Properties s.o.)
-3. [ ] Review-Seitentemplate erstellen und testen
-4. [ ] E-Mail-Template für Aussteller-Review erstellen
+1. [x] Neue Notion-DB "AS26_Aussteller Reviews" angelegt (13 Properties)
+2. [x] `.env` erweitern: `NOTION_AUSSTELLER_REVIEW_DB`, `NOTION_AUSSTELLER_EMAIL_TEMPLATE`
+3. [x] Event-Relation (→ Master-Veranstaltungen) in DB ergänzt
+4. [ ] Review-Seitentemplate erstellen und testen
+5. [ ] E-Mail-Template für Aussteller-Review erstellen
 
 ### Phase 2: PHP Backend
-5. [ ] `NotionClient.php` erweitern: `createAusstellerReviewPage()`
-6. [ ] `NotionClient.php` erweitern: Email-Draft für Aussteller
-7. [ ] Neuer Endpoint `send-aussteller-review.php`
-8. [ ] `.env` erweitern: `NOTION_AUSSTELLER_REVIEW_DB=...`
+6. [ ] `NotionClient.php` erweitern: `createAusstellerReviewPage()`
+7. [ ] `NotionClient.php` erweitern: Email-Draft für Aussteller
+8. [ ] Neuer Endpoint `send-aussteller-review.php`
 9. [ ] Testen: Review-Seite + Email-Draft werden korrekt erstellt
 
 ### Phase 3: Frontend
@@ -224,7 +244,7 @@ Nach Freigabe sollen die Daten **automatisch** in die Aussteller-DB zurückgesch
 | Aspekt | Workshop Review | Aussteller Review (neu) |
 |---|---|---|
 | Empfänger | Referenten (Personen) | Aussteller (Firmen) |
-| Editierbare Felder | Titel, Beschreibung, Bulletpoints, Kategorien, Format, Dauer, Ort, Datum | Logo, Firmenname, Beschreibung, Webseite |
+| Editierbare Felder | Titel, Beschreibung, Bulletpoints, Kategorien, Format, Dauer, Ort, Datum | Logo, Firmenname, Beschreibung, Messe-Special, Webseite, Webshop |
 | Datei-Upload | Foto (Referent) | Logo (Firma) |
 | Auto-Update nach Freigabe | ❌ Nein (manuell) | ✅ Ja (n8n Workflow) |
 | Notion-DB | Workshop Reviews | Aussteller Reviews (neu) |
@@ -234,9 +254,10 @@ Nach Freigabe sollen die Daten **automatisch** in die Aussteller-DB zurückgesch
 
 ## 7. Offene Fragen
 
-1. **Email-Adressen:** Haben alle 162 Aussteller eine Kontakt-Email in Notion?
-2. **Logo-Upload:** Soll das Logo direkt in Notion hochgeladen werden (Notion Files) oder per externem Link?
+1. **Email-Adressen:** Haben alle 162 Aussteller eine Kontakt-Email in Notion? → Kontakt-Email wird per n8n aus Kontakte Master befüllt
+2. **Logo-Upload:** Soll das Logo direkt in Notion hochgeladen werden (Notion Files) oder per externem Link? → Notion Files (files-Property in Review-DB)
 3. **Mehrere Ansprechpartner pro Aussteller?** → Eine oder mehrere Review-Emails?
-4. **JSON-Export:** Wie wird `aussteller.json` aktuell generiert? Manuelles Script oder automatisch?
+4. ~~**JSON-Export:** Wie wird `aussteller.json` aktuell generiert?~~ → ✅ Beantwortet: Cron stündlich (--skip-images) + nachts (mit Logos)
 5. **Batch-Versand:** Sollen Reviews einzeln oder gesammelt an alle Aussteller verschickt werden?
 6. **Duzen/Siezen:** Einheitlich oder pro Aussteller konfigurierbar?
+7. ~~**Event-Relation:** Noch in Notion-DB ergänzen~~ → ✅ Erledigt (relation → Master-Veranstaltungen)

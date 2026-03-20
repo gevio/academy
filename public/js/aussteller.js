@@ -346,11 +346,24 @@
       .map(k => `<span class="aussteller-tag">${escapeHtml(k)}</span>`)
       .join('');
 
+    // Messe-Special
+    let messeSpecialHtml = '';
+    if (a.messe_special) {
+      messeSpecialHtml = `<div class="map-profile-special">
+        <div class="map-profile-special-badge">🎯 Messe-Special</div>
+        <div class="map-profile-special-text">${escapeHtml(a.messe_special)}</div>
+      </div>`;
+    }
+
     // Links
     let linksHtml = '';
     if (a.website) {
       const display = a.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
       linksHtml += `<a class="map-profile-link" href="${escapeHtml(a.website)}" target="_blank" rel="noopener">\ud83c\udf10 ${escapeHtml(display)}</a>`;
+    }
+    if (a.webshop) {
+      const shopDisplay = a.webshop.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      linksHtml += `<a class="map-profile-link" href="${escapeHtml(a.webshop)}" target="_blank" rel="noopener">🛒 ${escapeHtml(shopDisplay)}</a>`;
     }
     if (a.instagram) {
       linksHtml += `<a class="map-profile-link" href="${escapeHtml(a.instagram)}" target="_blank" rel="noopener">\ud83d\udcf7 Instagram</a>`;
@@ -392,6 +405,7 @@
         </div>
       </div>
       ${a.beschreibung ? `<div class="map-profile-desc">${escapeHtml(a.beschreibung)}</div>` : ''}
+      ${messeSpecialHtml}
       <div class="map-profile-links">${linksHtml}</div>
       <div class="map-profile-tags">${tagsHtml}</div>
       ${wsHtml}

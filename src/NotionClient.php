@@ -523,6 +523,297 @@ TPL;
         ]);
     }
 
+    // ── AUSSTELLER-REVIEW-SYSTEM ─────────────────────────
+
+    /**
+     * Erweiterte Aussteller-Details für Review-Erstellung lesen.
+     * Liest alle Felder die für die Review-Seite vorausgefüllt werden.
+     */
+    public function getAusstellerForReview(string $pageId): array
+    {
+        $data = $this->request('GET', "/pages/{$pageId}");
+        if (!$data) return [];
+        $props = $data['properties'] ?? [];
+
+        $logo = '';
+        $logoFiles = $props['Logo']['files'] ?? [];
+        if (!empty($logoFiles)) {
+            $f = $logoFiles[0];
+            $logo = $f['file']['url'] ?? $f['external']['url'] ?? '';
+        }
+
+        // Kontakt-Daten: über Relation "Kontakt (Master)" → E-Mail, Vorname, Nachname, Du/Sie
+        $kontaktEmail = '';
+        $kontaktVorname = '';
+        $kontaktNachname = '';
+        $kontaktDuzen = false;
+        $kontaktIds = array_column($props['Kontakt (Master)']['relation'] ?? [], 'id');
+        if (!empty($kontaktIds)) {
+            $kontaktData = $this->request('GET', "/pages/{$kontaktIds[0]}");
+            if ($kontaktData) {
+                $kontaktProps = $kontaktData['properties'] ?? [];
+                $kontaktEmail = $kontaktProps['E-Mail']['email'] ?? '';
+                $kontaktVorname = $this->extractRichText($kontaktProps['Vorname'] ?? []);
+                $kontaktNachname = $this->extractRichText($kontaktProps['Nachname'] ?? []);
+                $kontaktDuzen = (bool) ($kontaktProps['Du/Sie']['checkbox'] ?? false);
+            }
+        }
+
+        // Stand-Nr aus rich_text oder select
+        $stand = '';
+        if (isset($props['Stand'])) {
+            if (($props['Stand']['type'] ?? '') === 'rich_text') {
+                $stand = $this->extractRichText($props['Stand']);
+            } elseif (($props['Stand']['type'] ?? '') === 'select') {
+                $stand = $props['Stand']['select']['name'] ?? '';
+            }
+        }
+
+        return [
+            'id'               => $pageId,
+            'firma'            => $this->extractTitle($props['Aussteller'] ?? $props['Firma'] ?? $props['Name'] ?? []),
+            'beschreibung'     => $this->extractRichText($props['Beschreibung'] ?? []),
+            'messe_special'    => $this->extractRichText($props['Messe-Special'] ?? []),
+            'website'          => $props['Website']['url'] ?? $props['Webseite']['url'] ?? '',
+            'webshop'          => $props['Webshop']['url'] ?? '',
+            'logo'             => $logo,
+            'stand'            => $stand,
+            'kontakt_email'    => $kontaktEmail,
+            'kontakt_vorname'  => $kontaktVorname,
+            'kontakt_nachname' => $kontaktNachname,
+            'kontakt_duzen'    => $kontaktDuzen,
+            'kategorien'       => array_map(fn($k) => $k['name'], $props['Kategorie']['multi_select'] ?? []),
+        ];
+    }
+
+    /**
+     * Review-Seite in der AS26_Aussteller Reviews DB erstellen.
+     * Befüllt Properties mit aktuellen Aussteller-Daten + Body mit Anleitung/Checkliste.
+     *
+     * @param array  $aussteller  Aussteller-Daten (von getAusstellerForReview oder JSON)
+     * @param string $deadline    ISO-Datum (z.B. 2026-06-01)
+     * @param string $kontaktEmail  E-Mail des Ansprechpartners (optional)
+     * @return array|null  Notion Page (inkl. „id" und „url")
+     */
+    public function createAusstellerReviewPage(array $aussteller, string $deadline, string $kontaktEmail = ''): ?array
+    {
+        $decode = fn(string $s): string => html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        foreach (['firma', 'beschreibung', 'messe_special', 'website', 'webshop', 'stand'] as $k) {
+            if (isset($aussteller[$k]) && is_string($aussteller[$k])) {
+                $aussteller[$k] = $decode($aussteller[$k]);
+            }
+        }
+
+        // ── Page Properties ──
+        $properties = [
+            'Firmenname' => [
+                'title' => [['text' => ['content' => $aussteller['firma'] ?? '']]],
+            ],
+            'Aussteller (AS26)' => [
+                'relation' => [['id' => $aussteller['page_id'] ?? $aussteller['id']]],
+            ],
+            'Status' => [
+                'select' => ['name' => 'Entwurf'],
+            ],
+            'Deadline' => [
+                'date' => ['start' => $deadline],
+            ],
+        ];
+
+        // Beschreibung vorausfüllen
+        if (!empty($aussteller['beschreibung'])) {
+            $properties['Beschreibung'] = [
+                'rich_text' => [['text' => ['content' => mb_substr($aussteller['beschreibung'], 0, 2000)]]],
+            ];
+        }
+
+        // Messe-Special vorausfüllen
+        if (!empty($aussteller['messe_special'])) {
+            $properties['Messe-Special'] = [
+                'rich_text' => [['text' => ['content' => mb_substr($aussteller['messe_special'], 0, 2000)]]],
+            ];
+        }
+
+        // URLs vorausfüllen
+        if (!empty($aussteller['website'])) {
+            $properties['Webseite'] = ['url' => $aussteller['website']];
+        }
+        if (!empty($aussteller['webshop'])) {
+            $properties['Webshop'] = ['url' => $aussteller['webshop']];
+        }
+
+        // Kontakt-Email
+        $email = $kontaktEmail ?: ($aussteller['kontakt_email'] ?? '');
+        if (!empty($email)) {
+            $properties['Kontakt-Email'] = ['email' => $email];
+        }
+
+        // ── Page Body (Blöcke) ──
+        $blocks = [];
+        $deadlineDe = $this->formatDeadlineDe($deadline);
+
+        // 1) Anleitung
+        $blocks[] = self::h3('Anleitung');
+        $blocks[] = self::calloutBlock(
+            'Bitte prüfen Sie die Daten Ihres Aussteller-Eintrags für die Adventure Southside 2026. ' .
+            'Änderungen können Sie direkt in den Feldern oben (Properties) vornehmen. ' .
+            'Für Ihr Logo laden Sie bitte eine Datei im Logo-Feld hoch.',
+            '📋'
+        );
+        $blocks[] = self::paragraph("**Deadline:** {$deadlineDe}");
+        $blocks[] = self::divider();
+
+        // 2) Aktuelle Daten (zur Orientierung)
+        $blocks[] = self::h3('Aktuelle Daten (Übersicht)');
+        $blocks[] = self::paragraph("**Firmenname:** {$aussteller['firma']}");
+        $blocks[] = self::paragraph("**Stand:** " . ($aussteller['stand'] ?: '(wird noch zugewiesen)'));
+
+        $kategorien = implode(', ', $aussteller['kategorien'] ?? []);
+        if ($kategorien) {
+            $blocks[] = self::paragraph("**Kategorien:** {$kategorien}");
+        }
+
+        $blocks[] = self::divider();
+
+        // 3) Editierbare Felder – Hinweise
+        $blocks[] = self::h3('Bitte prüfen & bearbeiten');
+        $blocks[] = self::paragraph('Die folgenden Felder können Sie **direkt in den Properties** (oben) bearbeiten:');
+        $blocks[] = self::bullet('**Firmenname** – Name wie er in der App erscheint');
+        $blocks[] = self::bullet('**Beschreibung** – Langtext über Ihr Unternehmen');
+        $blocks[] = self::bullet('**Messe-Special** – Besondere Angebote/Aktionen auf der Messe');
+        $blocks[] = self::bullet('**Webseite** – Link zu Ihrer Website');
+        $blocks[] = self::bullet('**Webshop** – Link zu Ihrem Online-Shop');
+        $blocks[] = self::bullet('**Logo** – Firmenlogo hochladen (PNG bevorzugt, transparenter Hintergrund wenn möglich)');
+        $blocks[] = self::divider();
+
+        // 4) Checkliste
+        $blocks[] = self::h3('Checkliste');
+        $blocks[] = self::todoBlock('Logo geprüft / neu hochgeladen');
+        $blocks[] = self::todoBlock('Firmenname korrekt');
+        $blocks[] = self::todoBlock('Beschreibung geprüft / aktualisiert');
+        $blocks[] = self::todoBlock('Messe-Special geprüft / aktualisiert');
+        $blocks[] = self::todoBlock('Webseite-Link geprüft / aktualisiert');
+        $blocks[] = self::todoBlock('Webshop-Link geprüft / aktualisiert');
+        $blocks[] = self::todoBlock('Alles korrekt – Freigabe erteilt');
+        $blocks[] = self::divider();
+
+        // 5) Rechtehinweis
+        $blocks[] = self::paragraph('**Wichtig:** Ich bestätige, dass ich über alle Rechte an den hochgeladenen Inhalten verfüge. Ich räume der Rough Road Events GmbH sowie von ihr beauftragten Dritten das zeitlich, räumlich und inhaltlich unbeschränkte Recht ein, dieses Material für redaktionelle und werbliche Zwecke zu nutzen.');
+
+        return $this->request('POST', '/pages', [
+            'parent' => ['database_id' => NOTION_AUSSTELLER_REVIEW_DB],
+            'properties' => $properties,
+            'children' => $blocks,
+        ]);
+    }
+
+    /**
+     * E-Mail-Draft für Aussteller-Review erstellen.
+     * Nutzt die bestehende E-Mails Ausgehend DB.
+     */
+    public function createAusstellerEmailDraft(
+        string $firmenname,
+        string $toAdresse,
+        string $vorname,
+        string $nachname,
+        string $reviewUrl,
+        string $deadline,
+        bool $duzen = false
+    ): ?array {
+        $deadlineDe = $this->formatDeadlineDe($deadline);
+
+        // Du-Form (informell)
+        $templateDu = <<<'TPL'
+Hi {VORNAME},
+
+vielen Dank für deine Teilnahme an der Adventure Southside 2026!
+
+Bitte prüfe deinen Aussteller-Eintrag und nimm ggf. Änderungen vor:
+
+👉 {REVIEW_LINK}
+
+Bitte bis {DEADLINE} prüfen und freigeben.
+
+Folgende Daten kannst du bearbeiten:
+• Firmenname/Titel
+• Beschreibung (Langtext)
+• Messe-Special
+• Webseite-Link
+• Webshop-Link
+• Logo (neues Bild hochladen)
+
+Bei Fragen antworte einfach auf diese E-Mail.
+
+Viele Grüße,
+Das Adventure Southside Team
+TPL;
+
+        // Sie-Form (formell)
+        $templateSie = <<<'TPL'
+Hallo {VORNAME} {NACHNAME},
+
+vielen Dank für Ihre Teilnahme an der Adventure Southside 2026!
+
+Bitte prüfen Sie Ihren Aussteller-Eintrag und nehmen Sie ggf. Änderungen vor:
+
+👉 {REVIEW_LINK}
+
+Bitte bis {DEADLINE} prüfen und freigeben.
+
+Folgende Daten können Sie bearbeiten:
+• Firmenname/Titel
+• Beschreibung (Langtext)
+• Messe-Special
+• Webseite-Link
+• Webshop-Link
+• Logo (neues Bild hochladen)
+
+Bei Fragen antworten Sie einfach auf diese E-Mail.
+
+Viele Grüße,
+Das Adventure Southside Team
+TPL;
+
+        $templateText = $duzen ? $templateDu : $templateSie;
+
+        $emailText = str_replace(
+            ['{VORNAME}', '{NACHNAME}', '{REVIEW_LINK}', '{DEADLINE}'],
+            [$vorname, $nachname, $reviewUrl, $deadlineDe],
+            $templateText
+        );
+
+        $betreff = "Review: Ihr Eintrag bei Adventure Southside 2026 – {$firmenname}";
+
+        $properties = [
+            'Betreff' => [
+                'title' => [['text' => ['content' => $betreff]]],
+            ],
+            'Status' => [
+                'select' => ['name' => 'Draft'],
+            ],
+            'TO-Adresse' => [
+                'rich_text' => [['text' => ['content' => $toAdresse]]],
+            ],
+            'E-Mail-Text' => [
+                'rich_text' => [['text' => ['content' => $emailText]]],
+            ],
+            'Versand-Info' => [
+                'select' => ['name' => 'n8n'],
+            ],
+            'Template-Name' => [
+                'rich_text' => [['text' => ['content' => 'Review-Link Aussteller (Kommentieren)']]],
+            ],
+            'Event-Bezug' => [
+                'multi_select' => [['name' => 'Southside 2026']],
+            ],
+        ];
+
+        return $this->request('POST', '/pages', [
+            'parent' => ['database_id' => NOTION_EMAIL_DB],
+            'properties' => $properties,
+        ]);
+    }
+
     // ── Block-Builder Helpers (static) ───────────────────
 
     private static function paragraph(string $text): array

@@ -153,6 +153,15 @@ do {
             if (!empty($ms['name'])) $kategorien[] = $ms['name'];
         }
 
+        // Messe-Special (rich_text)
+        $messeSpecial = '';
+        foreach ($props['Messe-Special']['rich_text'] ?? [] as $t) {
+            $messeSpecial .= $t['plain_text'] ?? '';
+        }
+
+        // Webshop (url)
+        $webshop = $props['Webshop']['url'] ?? '';
+
         // Website (url)
         $website = $props['Website']['url'] ?? '';
 
@@ -202,21 +211,23 @@ do {
         }
 
         $entry = [
-            'id'           => $id,
-            'page_id'      => $page['id'],
-            'firma'        => $firma,
-            'stand'        => $stand,
-            'beschreibung' => trim($beschreibung),
-            'kategorien'   => $kategorien,
-            'website'      => $website ?: '',
-            'domain'       => $domain,
-            'instagram'    => $instagram ?: '',
-            'logo_url'     => $logoUrl ?: '',
-            'logo_local'   => $logoLocal,
-            'stand_x'      => $standX,
-            'stand_y'      => $standY,
-            'stand_w'      => $standW,
-            'stand_h'      => $standH,
+            'id'             => $id,
+            'page_id'        => $page['id'],
+            'firma'          => $firma,
+            'stand'          => $stand,
+            'beschreibung'   => trim($beschreibung),
+            'messe_special'  => trim($messeSpecial),
+            'kategorien'     => $kategorien,
+            'website'        => $website ?: '',
+            'webshop'        => $webshop ?: '',
+            'domain'         => $domain,
+            'instagram'      => $instagram ?: '',
+            'logo_url'       => $logoUrl ?: '',
+            'logo_local'     => $logoLocal,
+            'stand_x'        => $standX,
+            'stand_y'        => $standY,
+            'stand_w'        => $standW,
+            'stand_h'        => $standH,
         ];
 
         $all[] = $entry;
