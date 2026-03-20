@@ -21,7 +21,9 @@ Aussteller sollen folgende Felder selbst bearbeiten können:
 | **Logo** | `Logo` | files |
 | **Firmenname/Titel** | `Name` / `Firma` | title |
 | **Langtext/Beschreibung** | `Beschreibung` | rich_text |
-| **Link Webseite/Shop** | `Webseite` | url |
+| **Langtext/Messe-Special** | `Angebote auf der Messe` | rich_text |
+| **Link Webseite** | `Webseite` | url |
+| **Link Shop** | `Webshop` | url |
 
 Nach Bearbeitung:
 - **Mail ans Team** zum Review
