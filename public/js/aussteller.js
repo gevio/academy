@@ -10,6 +10,22 @@
   const AUSSTELLER_URL = '/api/aussteller.json';
   const WORKSHOPS_URL = '/api/workshops.json';
   const AUS_FAV_KEY = 'as26_fav_aussteller';
+  const ADMIN_KEY = 'asa_admin_secret';
+
+  // ── Admin-Modus (gleich wie details.html) ────────────
+  (function initAdmin() {
+    const params = new URLSearchParams(location.search);
+    const secret = params.get('admin');
+    if (secret) {
+      sessionStorage.setItem(ADMIN_KEY, secret);
+      params.delete('admin');
+      const cleanUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      history.replaceState(null, '', cleanUrl);
+    }
+  })();
+
+  function isAdmin() { return !!sessionStorage.getItem(ADMIN_KEY); }
+  function getAdminSecret() { return sessionStorage.getItem(ADMIN_KEY) || ''; }
 
   // Statisches Hallen-Mapping (Prefix → Bild + Label)
   const HALLEN = {
@@ -396,6 +412,19 @@
       </button>
     </div>`;
 
+    // Admin: Review-Button
+    let adminHtml = '';
+    if (isAdmin()) {
+      adminHtml = `<div class="admin-actions" style="margin:.8rem 0;padding:.6rem;background:#fff3cd;border:2px dashed #e76f51;border-radius:8px;text-align:center">
+        <span style="font-size:.75rem;color:#666;display:block;margin-bottom:.4rem">🔧 Admin</span>
+        <button class="btn btn-primary" id="send-aussteller-review-btn" data-id="${a.id}" data-firma="${escapeHtml(a.firma)}"
+            style="background:#e76f51;border:none;font-weight:600;padding:.5rem 1rem;color:#fff;border-radius:6px;cursor:pointer">
+            📧 Review an Aussteller senden
+        </button>
+        <div id="aussteller-review-result" style="margin-top:.5rem;font-size:.85rem"></div>
+      </div>`;
+    }
+
     container.innerHTML = `
       <div class="map-profile-header">
         ${logoHtml}
@@ -410,6 +439,7 @@
       <div class="map-profile-tags">${tagsHtml}</div>
       ${wsHtml}
       ${shareHtml}
+      ${adminHtml}
     `;
 
     // Profile Fav click handler
@@ -451,6 +481,63 @@
           navigator.share(shareData).catch(() => {});
         } else {
           location.href = 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(shareData.text + '\\n\\n' + url);
+        }
+      });
+    }
+
+    // Admin: Review senden Event
+    const reviewBtn = document.getElementById('send-aussteller-review-btn');
+    if (reviewBtn) {
+      reviewBtn.addEventListener('click', async () => {
+        const ausId = reviewBtn.dataset.id;
+        const firma = reviewBtn.dataset.firma;
+        const resultEl = document.getElementById('aussteller-review-result');
+
+        const deadlineDefault = new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0];
+        const deadline = prompt(
+          `Review für "${firma}" erstellen?\n\nDeadline (YYYY-MM-DD):`,
+          deadlineDefault
+        );
+        if (!deadline) return;
+
+        reviewBtn.disabled = true;
+        reviewBtn.textContent = '⏳ Wird erstellt…';
+        resultEl.textContent = '';
+
+        try {
+          const resp = await fetch('/api/send-aussteller-review.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Admin-Secret': getAdminSecret(),
+            },
+            body: JSON.stringify({ aussteller_id: ausId, deadline: deadline }),
+          });
+          const data = await resp.json();
+
+          if (data.success) {
+            let emailInfo = '';
+            if (data.email_result) {
+              emailInfo = data.email_result.ok
+                ? `<small>✅ E-Mail-Draft: ${data.email_result.name} (${data.email_result.email})</small>`
+                : `<small>⚠️ E-Mail-Draft fehlgeschlagen</small>`;
+            }
+            if (data.warning) {
+              emailInfo += `<br><small>⚠️ ${data.warning}</small>`;
+            }
+            resultEl.innerHTML = `<span style="color:green">✅ Review erstellt!</span><br>
+              ${emailInfo}<br>
+              <a href="${data.review_url}" target="_blank" style="color:#e76f51">→ Review-Seite öffnen</a>`;
+            reviewBtn.textContent = '✅ Erstellt';
+          } else {
+            resultEl.innerHTML = `<span style="color:red">❌ ${data.error || 'Fehler'}</span>`;
+            reviewBtn.textContent = '📧 Review an Aussteller senden';
+            reviewBtn.disabled = false;
+          }
+        } catch (err) {
+          resultEl.innerHTML = `<span style="color:red">❌ Netzwerkfehler</span>`;
+          reviewBtn.textContent = '📧 Review an Aussteller senden';
+          reviewBtn.disabled = false;
         }
       });
     }
