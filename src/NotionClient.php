@@ -740,67 +740,34 @@ TPL;
     ): ?array {
         $deadlineDe = $this->formatDeadlineDe($deadline);
 
-        // Du-Form (informell)
-        $templateDu = <<<'TPL'
-Hi {VORNAME},
+        // Template aus Notion lesen (NOTION_AUSSTELLER_EMAIL_TEMPLATE)
+        $templateText = '';
+        $betreffTemplate = '';
+        if (!empty(NOTION_AUSSTELLER_EMAIL_TEMPLATE)) {
+            $tplPage = $this->request('GET', '/pages/' . NOTION_AUSSTELLER_EMAIL_TEMPLATE);
+            if ($tplPage) {
+                $tplProps = $tplPage['properties'] ?? [];
+                $templateText = $this->extractRichText($tplProps['E-Mail-Text'] ?? []);
+                $betreffTemplate = $this->extractTitle($tplProps['Betreff'] ?? []);
+            }
+        }
 
-vielen Dank für deine Teilnahme an der Adventure Southside 2026!
+        // Fallback: hardcoded Template falls Notion-Template nicht lesbar
+        if (empty($templateText)) {
+            $templateText = "Hi VORNAME,\n\nvielen Dank für deine Teilnahme an der Adventure Southside 2026!\n\nBitte prüfe deinen Aussteller-Eintrag:\n\n👉 REVIEW_LINK\n\nDeadline: DEADLINE\n\nViele Grüße,\nDas Adventure Southside Team";
+        }
 
-Bitte prüfe deinen Aussteller-Eintrag und nimm ggf. Änderungen vor:
-
-👉 {REVIEW_LINK}
-
-Bitte bis {DEADLINE} prüfen und freigeben.
-
-Folgende Daten kannst du bearbeiten:
-• Firmenname/Titel
-• Beschreibung (Langtext)
-• Messe-Special
-• Webseite-Link
-• Webshop-Link
-• Logo (neues Bild hochladen)
-
-Bei Fragen antworte einfach auf diese E-Mail.
-
-Viele Grüße,
-Das Adventure Southside Team
-TPL;
-
-        // Sie-Form (formell)
-        $templateSie = <<<'TPL'
-Hallo {VORNAME} {NACHNAME},
-
-vielen Dank für Ihre Teilnahme an der Adventure Southside 2026!
-
-Bitte prüfen Sie Ihren Aussteller-Eintrag und nehmen Sie ggf. Änderungen vor:
-
-👉 {REVIEW_LINK}
-
-Bitte bis {DEADLINE} prüfen und freigeben.
-
-Folgende Daten können Sie bearbeiten:
-• Firmenname/Titel
-• Beschreibung (Langtext)
-• Messe-Special
-• Webseite-Link
-• Webshop-Link
-• Logo (neues Bild hochladen)
-
-Bei Fragen antworten Sie einfach auf diese E-Mail.
-
-Viele Grüße,
-Das Adventure Southside Team
-TPL;
-
-        $templateText = $duzen ? $templateDu : $templateSie;
-
+        // Platzhalter ersetzen
         $emailText = str_replace(
-            ['{VORNAME}', '{NACHNAME}', '{REVIEW_LINK}', '{DEADLINE}'],
+            ['VORNAME', 'NACHNAME', 'REVIEW_LINK', 'DEADLINE'],
             [$vorname, $nachname, $reviewUrl, $deadlineDe],
             $templateText
         );
 
-        $betreff = "Review: Ihr Eintrag bei Adventure Southside 2026 – {$firmenname}";
+        // Betreff: aus Notion-Template oder Fallback
+        $betreff = !empty($betreffTemplate)
+            ? str_replace('Template: ', '', $betreffTemplate)
+            : "Aussteller-Datencheck – Bitte prüfe deine Angaben für die Adventure Southside 2026";
 
         $properties = [
             'Betreff' => [
