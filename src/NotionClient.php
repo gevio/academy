@@ -759,6 +759,9 @@ TPL;
             $templateText = "Hi VORNAME,\n\nvielen Dank für deine Teilnahme an der Adventure Southside 2026!\n\nBitte prüfe deinen Aussteller-Eintrag:\n\n👉 REVIEW_LINK\n\nDeadline: DEADLINE\n\nViele Grüße,\nDas Adventure Southside Team";
         }
 
+        // HTML-Tags in Markdown konvertieren (Template aus Notion kann <b>-Tags enthalten)
+        $templateText = preg_replace('/<b>(.*?)<\/b>/i', '**$1**', $templateText);
+
         // Platzhalter ersetzen
         $emailText = str_replace(
             ['VORNAME', 'NACHNAME', 'REVIEW_LINK', 'DEADLINE'],
@@ -782,7 +785,7 @@ TPL;
                 'rich_text' => [['text' => ['content' => $toAdresse]]],
             ],
             'E-Mail-Text' => [
-                'rich_text' => [['text' => ['content' => $emailText]]],
+                'rich_text' => self::richTextFromMarkdown($emailText),
             ],
             'Versand-Info' => [
                 'select' => ['name' => 'n8n'],
