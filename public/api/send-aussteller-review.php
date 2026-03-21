@@ -105,10 +105,40 @@ if (empty($aussteller['firma'])) {
     exit;
 }
 
-// ── 2) Kontakt-Email ermitteln ───────────────────────
+// ── 2) Duplikat-Check: existiert bereits eine aktive Review? ──
+$existingReview = $notion->queryDatabase(NOTION_AUSSTELLER_REVIEW_DB, [
+    'filter' => [
+        'and' => [
+            [
+                'property' => 'Aussteller (AS26)',
+                'relation' => ['contains' => $pageId],
+            ],
+            [
+                'property' => 'Status',
+                'select'   => ['does_not_equal' => 'Übertragen'],
+            ],
+        ],
+    ],
+    'page_size' => 1,
+]);
+
+if (!empty($existingReview['results'])) {
+    $existing = $existingReview['results'][0];
+    $existingUrl = $existing['url'] ?? '';
+    $existingStatus = $existing['properties']['Status']['select']['name'] ?? '';
+    http_response_code(409);
+    echo json_encode([
+        'error'  => 'Es existiert bereits eine aktive Review für diesen Aussteller.',
+        'status' => $existingStatus,
+        'review_url' => $existingUrl,
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// ── 3) Kontakt-Email ermitteln ───────────────────────
 $email = $kontaktEmail ?: ($aussteller['kontakt_email'] ?? '');
 
-// ── 3) Review-Seite erstellen ────────────────────────
+// ── 4) Review-Seite erstellen ────────────────────────
 $reviewPage = $notion->createAusstellerReviewPage($aussteller, $deadline, $email);
 
 if (!$reviewPage || empty($reviewPage['id'])) {
@@ -120,7 +150,7 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
-// ── 4) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──
+// ── 5) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──
 $emailResult = null;
 if (!empty($email)) {
     // Ansprechpartner: Vorname aus Kontakt (Master), Fallback Firmenname

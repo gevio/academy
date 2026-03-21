@@ -541,6 +541,11 @@
               ${emailInfo}<br>
               <a href="${data.review_url}" target="_blank" style="color:#e76f51">→ Review-Seite öffnen</a>`;
             reviewBtn.textContent = '✅ Erstellt';
+          } else if (resp.status === 409 && data.review_url) {
+            resultEl.innerHTML = `<span style="color:#e76f51">⚠️ Review existiert bereits (${data.status})</span><br>
+              <a href="${data.review_url}" target="_blank" style="color:#e76f51">→ Bestehende Review öffnen</a>`;
+            reviewBtn.textContent = '📧 Review an Aussteller senden';
+            reviewBtn.disabled = false;
           } else {
             resultEl.innerHTML = `<span style="color:red">❌ ${data.error || 'Fehler'}</span>`;
             reviewBtn.textContent = '📧 Review an Aussteller senden';
