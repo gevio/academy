@@ -14,12 +14,24 @@
 
   // ── Admin-Modus (gleich wie details.html) ────────────
   (function initAdmin() {
-    const params = new URLSearchParams(location.search);
-    const secret = params.get('admin');
+    // Admin-Secret kann in ?admin=... ODER im Hash #...?admin=... stehen
+    let secret = new URLSearchParams(location.search).get('admin');
+    if (!secret && location.hash.includes('admin=')) {
+      secret = new URLSearchParams(location.hash.split('?')[1] || '').get('admin');
+    }
     if (secret) {
       sessionStorage.setItem(ADMIN_KEY, secret);
+      // URL bereinigen
+      const params = new URLSearchParams(location.search);
       params.delete('admin');
-      const cleanUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + location.hash;
+      let hash = location.hash;
+      if (hash.includes('admin=')) {
+        const hashBase = hash.split('?')[0];
+        const hashParams = new URLSearchParams(hash.split('?')[1] || '');
+        hashParams.delete('admin');
+        hash = hashBase + (hashParams.toString() ? '?' + hashParams.toString() : '');
+      }
+      const cleanUrl = location.pathname + (params.toString() ? '?' + params.toString() : '') + hash;
       history.replaceState(null, '', cleanUrl);
     }
   })();
