@@ -424,16 +424,14 @@
       </button>
     </div>`;
 
-    // Admin: Review-Button
+    // Admin: Review-Button (mit Vorab-Check)
     let adminHtml = '';
     if (isAdmin()) {
       adminHtml = `<div class="admin-actions" style="margin:.8rem 0;padding:.6rem;background:#fff3cd;border:2px dashed #e76f51;border-radius:8px;text-align:center">
-        <span style="font-size:.75rem;color:#666;display:block;margin-bottom:.4rem">🔧 Admin</span>
-        <button class="btn btn-primary" id="send-aussteller-review-btn" data-id="${a.id}" data-firma="${escapeHtml(a.firma)}"
-            style="background:#e76f51;border:none;font-weight:600;padding:.5rem 1rem;color:#fff;border-radius:6px;cursor:pointer">
-            📧 Review an Aussteller senden
-        </button>
-        <div id="aussteller-review-result" style="margin-top:.5rem;font-size:.85rem"></div>
+        <span style="font-size:.75rem;color:#666;display:block;margin-bottom:.4rem">Admin</span>
+        <div id="aussteller-review-area" data-id="${a.id}" data-firma="${escapeHtml(a.firma)}">
+          <span style="color:#999;font-size:.85rem">Review-Status wird geladen...</span>
+        </div>
       </div>`;
     }
 
@@ -497,66 +495,85 @@
       });
     }
 
-    // Admin: Review senden Event
-    const reviewBtn = document.getElementById('send-aussteller-review-btn');
-    if (reviewBtn) {
-      reviewBtn.addEventListener('click', async () => {
-        const ausId = reviewBtn.dataset.id;
-        const firma = reviewBtn.dataset.firma;
-        const resultEl = document.getElementById('aussteller-review-result');
+    // Admin: Review-Status prüfen und Button/Status anzeigen
+    const reviewArea = document.getElementById('aussteller-review-area');
+    if (reviewArea) {
+      const ausId = reviewArea.dataset.id;
+      const firma = reviewArea.dataset.firma;
 
-        const deadlineDefault = new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0];
-        const deadline = prompt(
-          `Review für "${firma}" erstellen?\n\nDeadline (YYYY-MM-DD):`,
-          deadlineDefault
-        );
-        if (!deadline) return;
-
-        reviewBtn.disabled = true;
-        reviewBtn.textContent = '⏳ Wird erstellt…';
-        resultEl.textContent = '';
-
-        try {
-          const resp = await fetch('/api/send-aussteller-review.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Admin-Secret': getAdminSecret(),
-            },
-            body: JSON.stringify({ aussteller_id: ausId, deadline: deadline }),
-          });
-          const data = await resp.json();
-
-          if (data.success) {
-            let emailInfo = '';
-            if (data.email_result) {
-              emailInfo = data.email_result.ok
-                ? `<small>✅ E-Mail-Draft: ${data.email_result.name} (${data.email_result.email})</small>`
-                : `<small>⚠️ E-Mail-Draft fehlgeschlagen</small>`;
-            }
-            if (data.warning) {
-              emailInfo += `<br><small>⚠️ ${data.warning}</small>`;
-            }
-            resultEl.innerHTML = `<span style="color:green">✅ Review erstellt!</span><br>
-              ${emailInfo}<br>
-              <a href="${data.review_url}" target="_blank" style="color:#e76f51">→ Review-Seite öffnen</a>`;
-            reviewBtn.textContent = '✅ Erstellt';
-          } else if (resp.status === 409 && data.review_url) {
-            resultEl.innerHTML = `<span style="color:#e76f51">⚠️ Review existiert bereits (${data.status})</span><br>
-              <a href="${data.review_url}" target="_blank" style="color:#e76f51">→ Bestehende Review öffnen</a>`;
-            reviewBtn.textContent = '📧 Review an Aussteller senden';
-            reviewBtn.disabled = false;
+      // Vorab-Check: existiert bereits eine Review?
+      fetch(`/api/check-aussteller-review.php?aussteller_id=${ausId}`, {
+        headers: { 'X-Admin-Secret': getAdminSecret() },
+      })
+        .then(r => r.json())
+        .then(check => {
+          if (check.exists) {
+            // Review existiert bereits – Status + Link anzeigen
+            const statusColors = { 'Entwurf': '#e76f51', 'Eingereicht': '#2196F3', 'Freigegeben': '#4CAF50' };
+            const color = statusColors[check.status] || '#666';
+            reviewArea.innerHTML = `<span style="color:${color};font-weight:600">Review: ${check.status}</span><br>
+              <a href="${check.review_url}" target="_blank" style="color:#e76f51;font-size:.85rem">Review in Notion oeffnen</a>`;
           } else {
-            resultEl.innerHTML = `<span style="color:red">❌ ${data.error || 'Fehler'}</span>`;
-            reviewBtn.textContent = '📧 Review an Aussteller senden';
-            reviewBtn.disabled = false;
+            // Keine Review – Button anzeigen
+            reviewArea.innerHTML = `<button class="btn btn-primary" id="send-aussteller-review-btn"
+                style="background:#e76f51;border:none;font-weight:600;padding:.5rem 1rem;color:#fff;border-radius:6px;cursor:pointer">
+                Review an Aussteller senden
+              </button>
+              <div id="aussteller-review-result" style="margin-top:.5rem;font-size:.85rem"></div>`;
+
+            // Click-Handler für neuen Button
+            document.getElementById('send-aussteller-review-btn').addEventListener('click', async () => {
+              const btn = document.getElementById('send-aussteller-review-btn');
+              const resultEl = document.getElementById('aussteller-review-result');
+
+              const deadlineDefault = new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0];
+              const deadline = prompt(`Review fuer "${firma}" erstellen?\n\nDeadline (YYYY-MM-DD):`, deadlineDefault);
+              if (!deadline) return;
+
+              btn.disabled = true;
+              btn.textContent = 'Wird erstellt...';
+              resultEl.textContent = '';
+
+              try {
+                const resp = await fetch('/api/send-aussteller-review.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'X-Admin-Secret': getAdminSecret(),
+                  },
+                  body: JSON.stringify({ aussteller_id: ausId, deadline: deadline }),
+                });
+                const data = await resp.json();
+
+                if (data.success) {
+                  let emailInfo = '';
+                  if (data.email_result) {
+                    emailInfo = data.email_result.ok
+                      ? `<small>E-Mail-Draft: ${data.email_result.name} (${data.email_result.email})</small>`
+                      : `<small>E-Mail-Draft fehlgeschlagen</small>`;
+                  }
+                  if (data.warning) {
+                    emailInfo += `<br><small>${data.warning}</small>`;
+                  }
+                  reviewArea.innerHTML = `<span style="color:green;font-weight:600">Review erstellt!</span><br>
+                    ${emailInfo}<br>
+                    <a href="${data.review_url}" target="_blank" style="color:#e76f51">Review in Notion oeffnen</a>`;
+                } else {
+                  resultEl.innerHTML = `<span style="color:red">${data.error || 'Fehler'}</span>`;
+                  btn.textContent = 'Review an Aussteller senden';
+                  btn.disabled = false;
+                }
+              } catch (err) {
+                resultEl.innerHTML = `<span style="color:red">Netzwerkfehler</span>`;
+                btn.textContent = 'Review an Aussteller senden';
+                btn.disabled = false;
+              }
+            });
           }
-        } catch (err) {
-          resultEl.innerHTML = `<span style="color:red">❌ Netzwerkfehler</span>`;
-          reviewBtn.textContent = '📧 Review an Aussteller senden';
-          reviewBtn.disabled = false;
-        }
-      });
+        })
+        .catch(() => {
+          reviewArea.innerHTML = `<span style="color:#999;font-size:.85rem">Review-Check fehlgeschlagen</span>`;
+        });
     }
   }
 
