@@ -234,15 +234,33 @@ Die Kontakt-Email wird **beim Erstellen der Review-Seite** per PHP aus der Notio
 14. [x] Review-Button im Aussteller-Profil (nur Admin sichtbar)
 15. [x] Click-Handler: Deadline-Prompt → API-Call → Ergebnis-Anzeige
 
-### Phase 4: n8n Workflows
+### Phase 4: n8n Workflows ✅
 16. [ ] **ACTION ITEM:** Team-Entscheidung E-Mail-Versand (Draft vs. Released)
-17. [ ] **ACTION ITEM:** Emojis aus Notion E-Mail-Template entfernen
-18. [ ] Workflow B: Notification ans Team bei Status "Eingereicht"
-19. [ ] Workflow C: Freigabe → Daten in Aussteller-DB übertragen + Status "Übertragen"
+17. [x] Emojis aus Notion E-Mail-Template entfernt
+18. [x] Workflow B: Notification ans Team bei Status "Eingereicht" (Telegram + SMTP)
+19. [x] Workflow C: Freigabe → Daten in Aussteller-DB übertragen + Status "Übertragen"
+20. [x] `regenerate-aussteller.php` Endpoint für sofortige JSON-Aktualisierung
+21. [x] 5s Wait vor Regenerate (Timing-Fix)
+
+**n8n Workflow-IDs:**
+| Workflow | ID | Trigger |
+|---|---|---|
+| Workflow B: Eingereicht-Notification | *(bestehend)* | Schedule 15 Min |
+| Workflow C: Freigabe → Übertragen | `f0mGzFy9SvXlRMmi` | Schedule 15 Min |
+
+**Workflow C Flow:**
+```
+Schedule (15 Min) → Query (Status=Freigegeben + Team-Freigabe=true)
+  → Daten extrahieren → Aussteller-DB updaten (Notion)
+  → Review-Status → "Übertragen"
+  → 5s Wait → POST /api/regenerate-aussteller.php (aussteller.json)
+  → Telegram Notification
+```
 
 ### Phase 5: Test & Rollout
-20. [ ] End-to-End Test mit einem Test-Aussteller
-21. [ ] Massenversand: Review-Links an alle Aussteller (ggf. in Batches)
+22. [x] End-to-End Test auf Dev (4Wheel24, Charme du Süd)
+23. [ ] Workflow C auf Prod-URL umstellen + aktivieren
+24. [ ] Massenversand: Review-Links an alle Aussteller (ggf. in Batches)
 
 ---
 
@@ -265,7 +283,7 @@ Die Kontakt-Email wird **beim Erstellen der Review-Seite** per PHP aus der Notio
 ## 7. Offene Punkte
 
 1. **ACTION ITEM (Team):** E-Mail-Versand – Draft vs. Released bei Erstellung
-2. **ACTION ITEM (Notion):** Emojis aus E-Mail-Template entfernen
+2. ~~**ACTION ITEM (Notion):** Emojis aus E-Mail-Template entfernen~~ ✅ erledigt
 3. **Mehrere Ansprechpartner pro Aussteller?** → Aktuell wird nur der erste Kontakt verwendet
 4. **Batch-Versand:** Reviews einzeln oder gesammelt an alle 162 Aussteller? (ggf. in Batches à 20-30)
-5. **Logo-Sync:** Nacht-Cron reicht oder sofortige Übernahme gewünscht?
+5. **Logo-Sync:** Nacht-Cron übernimmt Logos automatisch, Texte sofort via Regenerate-Endpoint
