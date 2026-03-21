@@ -467,6 +467,29 @@
     margin-bottom: .75rem;
 }
 .map-profile-desc:empty { display: none; }
+
+/* Messe-Special Highlight */
+.map-profile-special {
+    background: linear-gradient(135deg, rgba(241,136,100, .12), rgba(241,136,100, .05));
+    border: 1px solid var(--as-orange);
+    border-radius: 8px;
+    padding: .75rem 1rem;
+    margin-bottom: .75rem;
+}
+.map-profile-special-badge {
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--as-orange);
+    margin-bottom: .35rem;
+}
+.map-profile-special-text {
+    font-size: .88rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
 .map-profile-links {
     display: flex;
     flex-wrap: wrap;
