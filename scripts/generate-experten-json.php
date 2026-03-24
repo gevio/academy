@@ -130,6 +130,17 @@ if (file_exists($wsFile)) {
     echo "⚠ workshops.json nicht gefunden. Workshop-Verknüpfung wird übersprungen.\n\n";
 }
 
+// ── 0b) Aussteller-Index für Firma↔Aussteller-Abgleich ──
+$ausstellerIndex = []; // firma-name (lower) → aussteller-id
+$ausstellerFile = __DIR__ . '/../public/api/aussteller.json';
+if (file_exists($ausstellerFile)) {
+    $ausData = json_decode(file_get_contents($ausstellerFile), true);
+    foreach (($ausData['aussteller'] ?? []) as $aus) {
+        $ausstellerIndex[mb_strtolower($aus['firma'])] = $aus['id'];
+    }
+    echo "📋 " . count($ausstellerIndex) . " Aussteller als Firma-Lookup geladen.\n";
+}
+
 // ── 1) Alle Referenten laden ──
 echo "📥 Referenten laden...\n";
 $referenten = $notion->getAllReferenten(NOTION_REFERENTEN_DB);
@@ -179,9 +190,34 @@ foreach ($referenten as $ref) {
     }
     sort($allKats);
 
-    // Firma: nur aus Referenten-Funktion oder Bio ableiten (nicht aus Workshop-Ausstellern,
-    // da diese dem Workshop gehören, nicht unbedingt dem einzelnen Referenten)
+    // Firma aus Notion-Relation auflösen (Referent → Firma-DB)
     $firma = '';
+    $firmaAusstellerId = '';
+    if (!empty($ref['firma_ids'])) {
+        $firmaNames = [];
+        foreach ($ref['firma_ids'] as $firmaPageId) {
+            $fName = $notion->getPageTitle($firmaPageId);
+            if ($fName) $firmaNames[] = $fName;
+        }
+        $firma = implode(', ', $firmaNames);
+
+        // Aussteller-Match: Firmanamen gegen Aussteller-DB abgleichen
+        foreach ($firmaNames as $fName) {
+            $fLower = mb_strtolower($fName);
+            // Exakter Match
+            if (isset($ausstellerIndex[$fLower])) {
+                $firmaAusstellerId = $ausstellerIndex[$fLower];
+                break;
+            }
+            // Teilstring-Match: Aussteller-Name im Firmanamen oder umgekehrt
+            foreach ($ausstellerIndex as $ausName => $ausId) {
+                if (str_contains($fLower, $ausName) || str_contains($ausName, $fLower)) {
+                    $firmaAusstellerId = $ausId;
+                    break 2;
+                }
+            }
+        }
+    }
 
     // Foto lokal herunterladen (Notion-S3-URLs sind temporär ~1h)
     if ($downloadImages) {
@@ -202,11 +238,12 @@ foreach ($referenten as $ref) {
         'kategorie' => $ref['kategorie'],
         'website'   => $ref['website'],
         'firma'     => $firma,
+        'firma_aussteller_id' => $firmaAusstellerId,
         'kategorien' => $allKats,
         'workshops' => $workshops,
     ];
 
-    echo "   ✓ {$name} ({$ref['kategorie']}) – " . count($workshops) . " Workshop(s)\n";
+    echo "   ✓ {$name}" . ($firma ? " [{$firma}]" : '') . " – " . count($workshops) . " Workshop(s)\n";
 }
 
 // Alphabetisch nach Nachname sortieren

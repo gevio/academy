@@ -1060,6 +1060,7 @@ TPL;
                     'kategorie' => $props['Kategorie']['select']['name'] ?? '',
                     'website'   => $props['Website']['url'] ?? '',
                     'workshop_ids' => array_column($props['Workshops & Vorträge']['relation'] ?? [], 'id'),
+                    'firma_ids' => array_column($props['Firma']['relation'] ?? [], 'id'),
                 ];
             }
 

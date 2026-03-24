@@ -90,10 +90,23 @@
             let html = '<div class="exp-detail-card">';
 
             // Header mit Avatar + Name
+            // Firma-Link: bevorzugt zum Aussteller, sonst zur Website
+            let firmaHtml = '';
+            if (exp.firma) {
+                if (exp.firma_aussteller_id) {
+                    firmaHtml = `<a href="/aussteller.html#id=${exp.firma_aussteller_id}" class="exp-detail-firma">${escapeHtml(exp.firma)}</a>`;
+                } else if (exp.website) {
+                    firmaHtml = `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-detail-firma">${escapeHtml(exp.firma)}</a>`;
+                } else {
+                    firmaHtml = `<div class="exp-detail-firma">${escapeHtml(exp.firma)}</div>`;
+                }
+            }
+
             html += `<div class="exp-detail-header">
                 ${renderDetailAvatar(exp)}
                 <div class="exp-detail-info">
                     <h1 class="exp-detail-name">${escapeHtml(exp.name)}</h1>
+                    ${firmaHtml}
                     ${exp.funktion ? `<div class="exp-detail-funktion">${escapeHtml(exp.funktion)}</div>` : ''}
                     ${exp.kategorie ? `<span class="exp-detail-kategorie">${escapeHtml(exp.kategorie)}</span>` : ''}
                 </div>
