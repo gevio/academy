@@ -92,13 +92,18 @@
             return `<div class="exp-avatar-placeholder">${getInitials(exp.vorname, exp.nachname)}</div>`;
         }
 
+        function normalizeUrl(url) {
+            if (!url) return '';
+            return url.match(/^https?:\/\//) ? url : 'https://' + url;
+        }
+
         function renderFirmaLink(exp) {
             if (!exp.firma) return '';
             if (exp.firma_aussteller_id) {
                 return `<a href="/aussteller.html#id=${exp.firma_aussteller_id}" class="exp-firma exp-firma-link" onclick="event.stopPropagation()">${escapeHtml(exp.firma)}</a>`;
             }
             if (exp.website) {
-                return `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-firma exp-firma-link" onclick="event.stopPropagation()">${escapeHtml(exp.firma)}</a>`;
+                return `<a href="${escapeHtml(normalizeUrl(exp.website))}" target="_blank" rel="noopener" class="exp-firma exp-firma-link" onclick="event.stopPropagation()">${escapeHtml(exp.firma)}</a>`;
             }
             return `<div class="exp-firma">${escapeHtml(exp.firma)}</div>`;
         }

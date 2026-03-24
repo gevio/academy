@@ -96,7 +96,8 @@
                 if (exp.firma_aussteller_id) {
                     firmaHtml = `<a href="/aussteller.html#id=${exp.firma_aussteller_id}" class="exp-detail-firma">${escapeHtml(exp.firma)}</a>`;
                 } else if (exp.website) {
-                    firmaHtml = `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-detail-firma">${escapeHtml(exp.firma)}</a>`;
+                    const wsUrl = exp.website.match(/^https?:\/\//) ? exp.website : 'https://' + exp.website;
+                    firmaHtml = `<a href="${escapeHtml(wsUrl)}" target="_blank" rel="noopener" class="exp-detail-firma">${escapeHtml(exp.firma)}</a>`;
                 } else {
                     firmaHtml = `<div class="exp-detail-firma">${escapeHtml(exp.firma)}</div>`;
                 }
@@ -123,8 +124,9 @@
 
             // Website
             if (exp.website) {
+                const wsUrl2 = exp.website.match(/^https?:\/\//) ? exp.website : 'https://' + exp.website;
                 const domain = exp.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*/, '');
-                html += `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-website">🌐 ${escapeHtml(domain)}</a>`;
+                html += `<a href="${escapeHtml(wsUrl2)}" target="_blank" rel="noopener" class="exp-website">🌐 ${escapeHtml(domain)}</a>`;
             }
 
             // Workshops
