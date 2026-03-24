@@ -92,6 +92,17 @@
             return `<div class="exp-avatar-placeholder">${getInitials(exp.vorname, exp.nachname)}</div>`;
         }
 
+        function renderFirmaLink(exp) {
+            if (!exp.firma) return '';
+            if (exp.firma_aussteller_id) {
+                return `<a href="/aussteller.html#id=${exp.firma_aussteller_id}" class="exp-firma exp-firma-link" onclick="event.stopPropagation()">${escapeHtml(exp.firma)}</a>`;
+            }
+            if (exp.website) {
+                return `<a href="${escapeHtml(exp.website)}" target="_blank" rel="noopener" class="exp-firma exp-firma-link" onclick="event.stopPropagation()">${escapeHtml(exp.firma)}</a>`;
+            }
+            return `<div class="exp-firma">${escapeHtml(exp.firma)}</div>`;
+        }
+
         function renderCard(exp) {
             const kat = exp.kategorie
                 ? `<span class="exp-kategorie">${escapeHtml(exp.kategorie)}</span>`
@@ -103,14 +114,14 @@
                 .map(k => `<span class="kat-tag">${escapeHtml(k)}</span>`)
                 .join('');
 
-            return `<a href="/experte.html#id=${exp.id}" class="exp-card">
+            return `<div class="exp-card" onclick="location.href='/experte.html#id=${exp.id}'" style="cursor:pointer">
                 ${renderAvatar(exp)}
                 <div class="exp-name">${escapeHtml(exp.name)}</div>
-                ${exp.firma ? `<div class="exp-firma">${escapeHtml(exp.firma)}</div>` : ''}
+                ${renderFirmaLink(exp)}
                 ${funktion}
                 ${kat}
                 ${wsKats ? `<div class="exp-ws-kats">${wsKats}</div>` : ''}
-            </a>`;
+            </div>`;
         }
 
         function getFiltered() {
