@@ -26,6 +26,8 @@ define('N8N_CHAT_WEBHOOK',         getenv('N8N_CHAT_WEBHOOK') ?: '');
 define('N8N_APP_FEEDBACK_WEBHOOK', getenv('N8N_APP_FEEDBACK_WEBHOOK') ?: '');
 define('APP_VERSION',              getenv('APP_VERSION') ?: '1.0.0');
 define('SITE_URL',                 getenv('SITE_URL'));
+define('REVIEW_PUBLIC_URL',        getenv('REVIEW_PUBLIC_URL') ?: getenv('SITE_URL') ?: '');
+define('REVIEW_AUTO_FREIGABE',     getenv('REVIEW_AUTO_FREIGABE') === 'true');
 
 /**
  * Webhook-First Helper: POST JSON an n8n Webhook.

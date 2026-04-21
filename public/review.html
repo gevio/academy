@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Aussteller-Datencheck – AS26</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/review.css">
+</head>
+<body>
+
+<div class="hero">
+    <a href="/" class="hero-top">
+        <img src="/img/logo-southside.png" alt="Adventure Southside" class="hero-logo">
+    </a>
+    <p class="hero-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+</div>
+
+<main class="review-wrap">
+
+    <!-- Loading -->
+    <div id="state-loading" class="review-state">
+        <div class="review-spinner"></div>
+        <p>Daten werden geladen …</p>
+    </div>
+
+    <!-- Error -->
+    <div id="state-error" class="review-state review-state--hidden">
+        <div class="review-icon review-icon--error">✕</div>
+        <h2>Seite nicht gefunden</h2>
+        <p id="error-msg">Dieser Link ist ungültig oder abgelaufen.</p>
+    </div>
+
+    <!-- Submitted / Done -->
+    <div id="state-submitted" class="review-state review-state--hidden">
+        <div class="review-icon review-icon--success">✓</div>
+        <h2>Vielen Dank!</h2>
+        <p>Ihre Daten wurden erfolgreich eingereicht. Wir melden uns, sobald wir alles geprüft haben.</p>
+        <div id="submitted-data" class="review-readonly"></div>
+    </div>
+
+    <!-- Form (Entwurf) -->
+    <div id="state-form" class="review-state review-state--hidden">
+
+        <div class="review-header">
+            <p id="review-greeting" class="review-greeting"></p>
+            <h1 id="firma-heading">Aussteller-Datencheck</h1>
+            <p class="review-intro">Ihre Aussteller-Daten für die <strong>Adventure Southside 2026</strong> – bitte kurz prüfen, ggf. anpassen und am Ende absenden.</p>
+            <div id="deadline-banner" class="review-deadline"></div>
+        </div>
+
+        <div id="logo-section" class="review-logo-wrap review-card" style="display:none">
+            <p class="review-field-label">Aktuelles Logo</p>
+            <img id="logo-img" src="" alt="Firmenlogo" class="review-logo-img">
+            <p class="review-field-hint">Logo-Änderungen: Bitte direkt per E-Mail an <a href="mailto:info@adventuresouthside.com">info@adventuresouthside.com</a> schicken.</p>
+        </div>
+
+        <form id="review-form" class="review-card" novalidate>
+
+            <div class="review-field">
+                <p class="review-field-label">Firmenname</p>
+                <p id="f-firma-display" class="review-readonly-inline"></p>
+                <p class="review-field-hint">Firmenname-Änderungen bitte direkt per E-Mail an <a href="mailto:info@adventuresouthside.com">info@adventuresouthside.com</a>.</p>
+            </div>
+
+            <div class="review-field">
+                <label for="f-webseite" class="review-field-label">Website</label>
+                <input type="url" id="f-webseite" name="webseite" class="review-input" placeholder="https://www.beispiel.de">
+            </div>
+
+            <div class="review-field">
+                <label for="f-webshop" class="review-field-label">Webshop</label>
+                <input type="url" id="f-webshop" name="webshop" class="review-input" placeholder="https://shop.beispiel.de">
+            </div>
+
+            <div class="review-field">
+                <label for="f-beschreibung" class="review-field-label">Beschreibung</label>
+                    <textarea id="f-beschreibung" name="beschreibung" class="review-textarea" rows="5" maxlength="2000" placeholder="Beschreiben Sie Ihr Unternehmen …"></textarea>
+                <p class="review-charcount"><span id="count-beschreibung">0</span> / 2000 Zeichen</p>
+            </div>
+
+            <div class="review-field">
+                <label for="f-messe-special" class="review-field-label">Messe-Special</label>
+                <textarea id="f-messe-special" name="messeSpecial" class="review-textarea" rows="4" maxlength="2000" placeholder="Besondere Angebote oder Aktionen auf der Messe …"></textarea>
+                <p class="review-charcount"><span id="count-messe-special">0</span> / 2000 Zeichen</p>
+            </div>
+
+            <div id="save-msg" class="review-save-msg" aria-live="polite"></div>
+
+            <div class="review-actions">
+                <button type="button" id="btn-save" class="btn-secondary">
+                    <span id="btn-save-text">Zwischenspeichern</span>
+                </button>
+            </div>
+
+        </form>
+
+        <div class="review-card review-submit-section">
+            <h2 class="review-submit-title">Fertig? Bitte absenden!</h2>
+            <p class="review-submit-hint">Wenn Sie alle Angaben geprüft haben, klicken Sie auf <strong>„Jetzt absenden"</strong>. Danach können keine Änderungen mehr vorgenommen werden.</p>
+            <button type="button" id="btn-submit" class="btn-primary btn-large">
+                Jetzt absenden
+            </button>
+        </div>
+
+    </div><!-- /#state-form -->
+
+</main>
+
+<footer class="review-footer">
+    <p>Adventure Southside 2026 · <a href="/impressum.html">Impressum</a></p>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    // ── State ──────────────────────────────────────────────
+    const params  = new URLSearchParams(location.search);
+    const reviewId = params.get('id') || '';
+    let currentStatus = '';
+
+    // ── DOM refs ───────────────────────────────────────────
+    const stateLoading   = document.getElementById('state-loading');
+    const stateError     = document.getElementById('state-error');
+    const stateSubmitted = document.getElementById('state-submitted');
+    const stateForm      = document.getElementById('state-form');
+
+    function showState(el) {
+        [stateLoading, stateError, stateSubmitted, stateForm].forEach(e => {
+            e.classList.toggle('review-state--hidden', e !== el);
+        });
+    }
+
+    // ── Helpers ────────────────────────────────────────────
+    function formatDate(iso) {
+        if (!iso) return '';
+        const [y, m, d] = iso.split('-');
+        return `${d}.${m}.${y}`;
+    }
+
+    function isOverdue(iso) {
+        if (!iso) return false;
+        return new Date(iso) < new Date(new Date().toDateString());
+    }
+
+    function updateCharCount(textarea, countEl) {
+        countEl.textContent = textarea.value.length;
+    }
+
+    // ── Load data ──────────────────────────────────────────
+    if (!reviewId || !/^[a-f0-9\-]{32,36}$/.test(reviewId)) {
+        showState(stateError);
+        document.getElementById('error-msg').textContent = 'Kein gültiger Review-Link. Bitte prüfen Sie Ihre E-Mail.';
+    } else {
+        fetch('/api/get-aussteller-review.php?id=' + encodeURIComponent(reviewId))
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('error-msg').textContent = data.error;
+                    showState(stateError);
+                    return;
+                }
+                currentStatus = data.status || '';
+
+                if (currentStatus === 'Entwurf') {
+                    populateForm(data);
+                    showState(stateForm);
+                } else {
+                    populateSubmitted(data);
+                    showState(stateSubmitted);
+                }
+            })
+            .catch(() => {
+                document.getElementById('error-msg').textContent = 'Verbindungsfehler. Bitte Seite neu laden.';
+                showState(stateError);
+            });
+    }
+
+    // ── Populate form ──────────────────────────────────────
+    function populateForm(data) {
+        document.getElementById('firma-heading').textContent = data.firma || 'Aussteller-Datencheck';
+        const greeting = document.getElementById('review-greeting');
+        greeting.style.display = 'none';
+        document.getElementById('f-firma-display').textContent = data.firma || '';
+        document.getElementById('f-webseite').value    = data.webseite     || '';
+        document.getElementById('f-webshop').value     = data.webshop      || '';
+        document.getElementById('f-beschreibung').value = data.beschreibung || '';
+        document.getElementById('f-messe-special').value = data.messeSpecial || '';
+
+        // Zeichenzähler initialisieren
+        const descEl  = document.getElementById('f-beschreibung');
+        const spezEl  = document.getElementById('f-messe-special');
+        updateCharCount(descEl,  document.getElementById('count-beschreibung'));
+        updateCharCount(spezEl,  document.getElementById('count-messe-special'));
+
+        // Logo
+        if (data.logoUrl) {
+            document.getElementById('logo-img').src = data.logoUrl;
+            document.getElementById('logo-section').style.display = '';
+        }
+
+        // Deadline
+        const deadlineBanner = document.getElementById('deadline-banner');
+        if (data.deadline) {
+            const overdueClass = isOverdue(data.deadline) ? 'review-deadline--overdue' : '';
+            deadlineBanner.className = 'review-deadline ' + overdueClass;
+            deadlineBanner.textContent = isOverdue(data.deadline)
+                ? `⚠ Deadline überschritten (${formatDate(data.deadline)}) – bitte umgehend absenden`
+                : `Deadline: ${formatDate(data.deadline)}`;
+        }
+    }
+
+    // ── Populate submitted view ────────────────────────────
+    function populateSubmitted(data) {
+        const statusLabels = {
+            'Eingereicht': 'Ihre Daten wurden eingereicht und werden geprüft.',
+            'Freigegeben': 'Ihre Daten wurden freigegeben.',
+            'Übertragen':  'Ihre Daten wurden erfolgreich übernommen.',
+        };
+        const el = stateSubmitted.querySelector('p');
+        el.textContent = statusLabels[data.status] || statusLabels['Eingereicht'];
+
+        const container = document.getElementById('submitted-data');
+        container.innerHTML = buildReadonlyView(data);
+    }
+
+    function buildReadonlyView(data) {
+        const fields = [
+            ['Firmenname',    data.firma],
+            ['Website',       data.webseite],
+            ['Webshop',       data.webshop],
+            ['Beschreibung',  data.beschreibung],
+            ['Messe-Special', data.messeSpecial],
+        ];
+        return fields.filter(([, v]) => v).map(([label, value]) => `
+            <div class="readonly-field">
+                <span class="readonly-label">${label}</span>
+                <span class="readonly-value">${escHtml(value)}</span>
+            </div>`).join('');
+    }
+
+    function escHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ── Char counters ──────────────────────────────────────
+    document.getElementById('f-beschreibung').addEventListener('input', function () {
+        updateCharCount(this, document.getElementById('count-beschreibung'));
+    });
+    document.getElementById('f-messe-special').addEventListener('input', function () {
+        updateCharCount(this, document.getElementById('count-messe-special'));
+    });
+
+    // ── Save ───────────────────────────────────────────────
+    const btnSave     = document.getElementById('btn-save');
+    const btnSaveText = document.getElementById('btn-save-text');
+    const saveMsg     = document.getElementById('save-msg');
+
+    function getSavePayload() {
+        return {
+            id:          reviewId,
+            webseite:    document.getElementById('f-webseite').value.trim(),
+            webshop:     document.getElementById('f-webshop').value.trim(),
+            beschreibung: document.getElementById('f-beschreibung').value,
+            messeSpecial: document.getElementById('f-messe-special').value,
+        };
+    }
+
+    function showSaveMsg(text, isError) {
+        saveMsg.textContent = text;
+        saveMsg.className   = 'review-save-msg ' + (isError ? 'review-save-msg--error' : 'review-save-msg--ok');
+        setTimeout(() => { saveMsg.textContent = ''; saveMsg.className = 'review-save-msg'; }, 4000);
+    }
+
+    btnSave.addEventListener('click', function () {
+        const payload = getSavePayload();
+        btnSave.disabled = true;
+        btnSaveText.textContent = 'Wird gespeichert …';
+
+        fetch('/api/update-aussteller-review.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    showSaveMsg('Gespeichert ✓', false);
+                } else {
+                    showSaveMsg(data.error || 'Speichern fehlgeschlagen.', true);
+                }
+            })
+            .catch(() => showSaveMsg('Verbindungsfehler beim Speichern.', true))
+            .finally(() => {
+                btnSave.disabled = false;
+                btnSaveText.textContent = 'Zwischenspeichern';
+            });
+    });
+
+    // ── Submit ─────────────────────────────────────────────
+    document.getElementById('btn-submit').addEventListener('click', function () {
+        if (!confirm('Möchten Sie Ihre Angaben jetzt verbindlich einreichen?\n\nDanach sind keine Änderungen mehr möglich.')) return;
+
+        const btnSubmit = this;
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Wird eingereicht …';
+
+        // Erst speichern, dann einreichen
+        const payload = getSavePayload();
+
+        function doSubmit() {
+            fetch('/api/submit-aussteller-review.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: reviewId }),
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        populateSubmitted({ status: 'Eingereicht', ...payload });
+                        showState(stateSubmitted);
+                    } else {
+                        showSaveMsg(data.error || 'Einreichen fehlgeschlagen.', true);
+                        btnSubmit.disabled = false;
+                        btnSubmit.textContent = 'Jetzt absenden';
+                    }
+                })
+                .catch(() => {
+                    showSaveMsg('Verbindungsfehler. Bitte erneut versuchen.', true);
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = 'Jetzt absenden';
+                });
+        }
+
+        // Zwischenspeichern vor dem Einreichen
+        fetch('/api/update-aussteller-review.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        })
+            .then(() => doSubmit())
+            .catch(() => doSubmit()); // auch ohne Speichern einreichen
+    });
+
+})();
+</script>
+</body>
+</html>

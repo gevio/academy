@@ -150,6 +150,13 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
+// Custom-URL für Kunden-E-Mail: immer die öffentliche Live-Domain – das Dev-System
+// darf Kunden niemals sehen.
+$publicBase = rtrim(REVIEW_PUBLIC_URL ?: (defined('SITE_URL') ? SITE_URL : ''), '/');
+$reviewCustomUrl = $publicBase
+    ? $publicBase . '/review.html?id=' . str_replace('-', '', $reviewPageId)
+    : $reviewUrl;
+
 // ── 5) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──
 $emailResult = null;
 if (!empty($email)) {
@@ -165,7 +172,7 @@ if (!empty($email)) {
         $email,
         $ansprechpartner,
         $aussteller['kontakt_nachname'] ?? '',
-        $reviewUrl,
+        $reviewCustomUrl,
         $deadline,
         $duzen
     );
@@ -178,13 +185,14 @@ if (!empty($email)) {
 
 // ── Response ─────────────────────────────────────────
 $response = [
-    'success'        => true,
-    'review_page_id' => $reviewPageId,
-    'review_url'     => $reviewUrl,
-    'firma'          => $aussteller['firma'],
-    'deadline'       => $deadline,
-    'has_email'      => !empty($email),
-    'email_result'   => $emailResult,
+    'success'            => true,
+    'review_page_id'     => $reviewPageId,
+    'review_url'         => $reviewUrl,
+    'review_custom_url'  => $reviewCustomUrl,
+    'firma'              => $aussteller['firma'],
+    'deadline'           => $deadline,
+    'has_email'          => !empty($email),
+    'email_result'       => $emailResult,
 ];
 
 if (empty($email)) {
