@@ -838,12 +838,37 @@ TPL;
      */
     public function submitAusstellerReview(string $pageId): bool
     {
+        // Bei REVIEW_AUTO_FREIGABE=true direkt auf Freigegeben setzen + Team-Freigabe haken
+        // → n8n Workflow C läuft sofort und überträgt die Daten in die Aussteller-DB.
+        // Flag auf false setzen um zum zweistufigen Prozess zurückzukehren.
+        $autoFreigabe = defined('REVIEW_AUTO_FREIGABE') && REVIEW_AUTO_FREIGABE;
+        $status = $autoFreigabe ? 'Freigegeben' : 'Eingereicht';
+
+        $properties = [
+            'Status' => ['select' => ['name' => $status]],
+        ];
+        if ($autoFreigabe) {
+            $properties['Team-Freigabe'] = ['checkbox' => true];
+        }
+
         $result = $this->request('PATCH', "/pages/{$pageId}", [
-            'properties' => [
-                'Status' => ['select' => ['name' => 'Eingereicht']],
-            ],
+            'properties' => $properties,
         ]);
 
+        return $result !== null;
+    }
+
+    /**
+     * Setzt den Status-Select eines Aussteller-DB-Eintrags.
+     * Wird z.B. vom CLI-Massenversand verwendet.
+     */
+    public function setAusstellerStatus(string $pageId, string $status): bool
+    {
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => [
+                'Status' => ['select' => ['name' => $status]],
+            ],
+        ]);
         return $result !== null;
     }
 
