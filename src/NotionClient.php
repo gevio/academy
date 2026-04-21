@@ -768,6 +768,9 @@ TPL;
             $logoUrl = $f['external']['url'] ?? $f['file']['url'] ?? '';
         }
 
+        // Aussteller-Relation → pageId des verknüpften Aussteller-Eintrags
+        $ausstellerId = $props['Aussteller (AS26)']['relation'][0]['id'] ?? null;
+
         return [
             'id'            => $data['id'],
             'status'        => $props['Status']['select']['name'] ?? '',
@@ -779,6 +782,7 @@ TPL;
             'webseite'      => $props['Webseite']['url'] ?? '',
             'webshop'       => $props['Webshop']['url'] ?? '',
             'logoUrl'       => $logoUrl,
+            'ausstellerId'  => $ausstellerId,
         ];
     }
 

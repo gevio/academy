@@ -198,9 +198,8 @@ foreach ($aussteller as $i => $aus) {
         echo "   ⚠ Keine E-Mail – Draft übersprungen\n";
     }
 
-    // Aussteller-Status auf "Review erfolgt" setzen
-    $statusOk = $notion->setAusstellerStatus($pageId, 'Review erfolgt');
-    echo "   " . ($statusOk ? "✓ Aussteller-Status → 'Review erfolgt'" : "⚠ Status-Update fehlgeschlagen") . "\n";
+    // Aussteller-Status wird NICHT hier gesetzt – erst wenn der Kunde
+    // das Formular auf review.html tatsächlich abschickt (submit-aussteller-review.php).
 
     $stats['sent']++;
     echo "\n";
