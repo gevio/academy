@@ -133,7 +133,7 @@ Body:   { "aussteller_id": "...", "deadline": "2026-06-01" }
 - `getAusstellerForReview(string $pageId): array` – Liest Aussteller + Kontakt-Relation (E-Mail, Vorname, Nachname, Du/Sie)
 - `createAusstellerReviewPage(array $aussteller, string $deadline, string $kontaktEmail): ?array` – setzt auch `Kontakt-Vorname`
 - `createAusstellerEmailDraft(...)` – Liest Notion-Template, ersetzt Platzhalter
-- `getAusstellerReview(string $pageId): ?array` – Öffentlicher Read (id, status, firma, kontaktVorname, …)
+- `getAusstellerReview(string $pageId): ?array` – Öffentlicher Read (id, status, firma, kontaktVorname, ausstellerId, …)
 - `updateAusstellerReview(string $pageId, array $data): bool` – Speichert beschreibung, messeSpecial, webseite, webshop
 - `submitAusstellerReview(string $pageId): bool` – Setzt Status je nach `REVIEW_AUTO_FREIGABE`
 - `setAusstellerStatus(string $pageId, string $status): bool` – Generisches Status-Update (für CLI)
@@ -188,8 +188,10 @@ php cli/send-reviews.php --limit=5              # max. N Aussteller verarbeiten
 1. Alle Aussteller mit Status = "Bereit" aus NOTION_AUSSTELLER_DB laden (paginiert)
 2. Duplikat-Check: Aussteller mit aktiver Review (Status ≠ Übertragen) überspringen
 3. Pro Aussteller: Review-Seite + E-Mail-Draft erstellen (identisch zu `send-aussteller-review.php`)
-4. Aussteller-Status auf "Review erfolgt" setzen
-5. Rate-Limit: 400ms Pause zwischen Requests
+4. Rate-Limit: 400ms Pause zwischen Requests
+
+> **Hinweis:** Der Aussteller-Status in NOTION_AUSSTELLER_DB wird **nicht** beim Versand gesetzt.
+> Er wechselt auf `"Review erfolgt"` erst wenn der Kunde das Formular auf `review.html` tatsächlich abschickt (`submit-aussteller-review.php`).
 
 **Voraussetzung:** Aussteller-DB (`NOTION_AUSSTELLER_DB`) braucht Property `Status` (Select) mit Werten `Bereit` und `Review erfolgt`.
 

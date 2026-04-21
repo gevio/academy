@@ -62,4 +62,10 @@ if (!$ok) {
     exit;
 }
 
+// Aussteller-Status in NOTION_AUSSTELLER_DB auf "Review erfolgt" setzen –
+// erst jetzt, da der Kunde aktiv eingereicht hat.
+if (!empty($review['ausstellerId'])) {
+    $notion->setAusstellerStatus($review['ausstellerId'], 'Review erfolgt');
+}
+
 echo json_encode(['success' => true], JSON_UNESCAPED_UNICODE);
