@@ -150,6 +150,12 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
+// Custom-URL für Kunden-E-Mail (eigenes Frontend statt direkter Notion-Link)
+$siteUrl = defined('SITE_URL') && SITE_URL ? rtrim(SITE_URL, '/') : '';
+$reviewCustomUrl = $siteUrl
+    ? $siteUrl . '/review.html?id=' . str_replace('-', '', $reviewPageId)
+    : $reviewUrl;
+
 // ── 5) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──
 $emailResult = null;
 if (!empty($email)) {
@@ -165,7 +171,7 @@ if (!empty($email)) {
         $email,
         $ansprechpartner,
         $aussteller['kontakt_nachname'] ?? '',
-        $reviewUrl,
+        $reviewCustomUrl,
         $deadline,
         $duzen
     );
@@ -178,13 +184,14 @@ if (!empty($email)) {
 
 // ── Response ─────────────────────────────────────────
 $response = [
-    'success'        => true,
-    'review_page_id' => $reviewPageId,
-    'review_url'     => $reviewUrl,
-    'firma'          => $aussteller['firma'],
-    'deadline'       => $deadline,
-    'has_email'      => !empty($email),
-    'email_result'   => $emailResult,
+    'success'            => true,
+    'review_page_id'     => $reviewPageId,
+    'review_url'         => $reviewUrl,
+    'review_custom_url'  => $reviewCustomUrl,
+    'firma'              => $aussteller['firma'],
+    'deadline'           => $deadline,
+    'has_email'          => !empty($email),
+    'email_result'       => $emailResult,
 ];
 
 if (empty($email)) {

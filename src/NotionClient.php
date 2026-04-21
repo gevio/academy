@@ -740,6 +740,106 @@ TPL;
     }
 
     /**
+     * Öffentliche Felder einer Review-Seite lesen (für Custom Frontend).
+     * Gibt KEINE internen Properties zurück (Team-Freigabe, Kommentar, Kontakt-Email).
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @return array|null  Null wenn nicht gefunden / Fehler
+     */
+    public function getAusstellerReview(string $pageId): ?array
+    {
+        $data = $this->request('GET', "/pages/{$pageId}");
+        if (!$data) return null;
+
+        $props = $data['properties'] ?? [];
+
+        // Logo-URL aus Files-Property
+        $logoUrl = '';
+        $logoFiles = $props['Logo']['files'] ?? [];
+        if (!empty($logoFiles)) {
+            $f = $logoFiles[0];
+            $logoUrl = $f['external']['url'] ?? $f['file']['url'] ?? '';
+        }
+
+        return [
+            'id'          => $data['id'],
+            'status'      => $props['Status']['select']['name'] ?? '',
+            'deadline'    => $props['Deadline']['date']['start'] ?? null,
+            'firma'       => $this->extractTitle($props['Firmenname'] ?? []),
+            'beschreibung'=> $this->extractRichText($props['Beschreibung'] ?? []),
+            'messeSpecial'=> $this->extractRichText($props['Messe-Special'] ?? []),
+            'webseite'    => $props['Webseite']['url'] ?? '',
+            'webshop'     => $props['Webshop']['url'] ?? '',
+            'logoUrl'     => $logoUrl,
+        ];
+    }
+
+    /**
+     * Editierbare Felder einer Review-Seite aktualisieren.
+     * Nur erlaubt wenn Status = "Entwurf" – Caller muss das vorab prüfen.
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @param array  $data    Felder: firma, beschreibung, messeSpecial, webseite, webshop
+     * @return bool
+     */
+    public function updateAusstellerReview(string $pageId, array $data): bool
+    {
+        $properties = [];
+
+        if (isset($data['firma'])) {
+            $properties['Firmenname'] = [
+                'title' => [['text' => ['content' => mb_substr(trim($data['firma']), 0, 255)]]],
+            ];
+        }
+        if (isset($data['beschreibung'])) {
+            $properties['Beschreibung'] = [
+                'rich_text' => [['text' => ['content' => mb_substr(trim($data['beschreibung']), 0, 2000)]]],
+            ];
+        }
+        if (isset($data['messeSpecial'])) {
+            $properties['Messe-Special'] = [
+                'rich_text' => [['text' => ['content' => mb_substr(trim($data['messeSpecial']), 0, 2000)]]],
+            ];
+        }
+        if (isset($data['webseite'])) {
+            $properties['Webseite'] = [
+                'url' => !empty($data['webseite']) ? $data['webseite'] : null,
+            ];
+        }
+        if (isset($data['webshop'])) {
+            $properties['Webshop'] = [
+                'url' => !empty($data['webshop']) ? $data['webshop'] : null,
+            ];
+        }
+
+        if (empty($properties)) return false;
+
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => $properties,
+        ]);
+
+        return $result !== null;
+    }
+
+    /**
+     * Review einreichen: Status auf "Eingereicht" setzen.
+     * Nur sinnvoll wenn Status = "Entwurf" – Caller muss das vorab prüfen.
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @return bool
+     */
+    public function submitAusstellerReview(string $pageId): bool
+    {
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => [
+                'Status' => ['select' => ['name' => 'Eingereicht']],
+            ],
+        ]);
+
+        return $result !== null;
+    }
+
+    /**
      * E-Mail-Draft für Aussteller-Review erstellen.
      * Nutzt die bestehende E-Mails Ausgehend DB.
      */
