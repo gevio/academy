@@ -48,8 +48,14 @@
 }
 
 /* ── Header block ───────────────────────────────────── */
-#state-form { display: flex; flex-direction: column; text-align: left; }
+#state-form { display: flex; flex-direction: column; text-align: left; align-items: stretch; }
 .review-header { margin-bottom: 1.25rem; }
+.review-greeting {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--as-braun-dark);
+    margin-bottom: .35rem;
+}
 .review-header h1 {
     font-size: 1.35rem;
     color: var(--as-braun-dark);
@@ -133,6 +139,18 @@
     line-height: 1.4;
 }
 .review-field-hint a { color: var(--as-rot); }
+
+/* Read-only Anzeige-Feld (z.B. Firmenname) */
+.review-readonly-inline {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 700;
+    padding: .6rem .85rem;
+    background: var(--as-hellbeige);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    line-height: 1.4;
+}
 
 .review-charcount {
     font-size: .78rem;

@@ -671,6 +671,13 @@ TPL;
             $properties['Kontakt-Email'] = ['email' => $email];
         }
 
+        // Kontakt-Vorname (für personalisierte Anrede im Custom Frontend)
+        if (!empty($aussteller['kontakt_vorname'])) {
+            $properties['Kontakt-Vorname'] = [
+                'rich_text' => [['text' => ['content' => $aussteller['kontakt_vorname']]]],
+            ];
+        }
+
         // ── Page Body (Blöcke) ──
         $blocks = [];
         $deadlineDe = $this->formatDeadlineDe($deadline);
@@ -762,15 +769,16 @@ TPL;
         }
 
         return [
-            'id'          => $data['id'],
-            'status'      => $props['Status']['select']['name'] ?? '',
-            'deadline'    => $props['Deadline']['date']['start'] ?? null,
-            'firma'       => $this->extractTitle($props['Firmenname'] ?? []),
-            'beschreibung'=> $this->extractRichText($props['Beschreibung'] ?? []),
-            'messeSpecial'=> $this->extractRichText($props['Messe-Special'] ?? []),
-            'webseite'    => $props['Webseite']['url'] ?? '',
-            'webshop'     => $props['Webshop']['url'] ?? '',
-            'logoUrl'     => $logoUrl,
+            'id'            => $data['id'],
+            'status'        => $props['Status']['select']['name'] ?? '',
+            'deadline'      => $props['Deadline']['date']['start'] ?? null,
+            'firma'         => $this->extractTitle($props['Firmenname'] ?? []),
+            'kontaktVorname'=> $this->extractRichText($props['Kontakt-Vorname'] ?? []),
+            'beschreibung'  => $this->extractRichText($props['Beschreibung'] ?? []),
+            'messeSpecial'  => $this->extractRichText($props['Messe-Special'] ?? []),
+            'webseite'      => $props['Webseite']['url'] ?? '',
+            'webshop'       => $props['Webshop']['url'] ?? '',
+            'logoUrl'       => $logoUrl,
         ];
     }
 

@@ -47,8 +47,9 @@
     <div id="state-form" class="review-state review-state--hidden">
 
         <div class="review-header">
+            <p id="review-greeting" class="review-greeting"></p>
             <h1 id="firma-heading">Aussteller-Datencheck</h1>
-            <p class="review-intro">Bitte prüfen Sie Ihre Angaben für die <strong>Adventure Southside 2026</strong>. Nehmen Sie Korrekturen vor und senden Sie das Formular am Ende ab.</p>
+            <p class="review-intro">Ihre Aussteller-Daten für die <strong>Adventure Southside 2026</strong> – bitte kurz prüfen, ggf. anpassen und am Ende absenden.</p>
             <div id="deadline-banner" class="review-deadline"></div>
         </div>
 
@@ -61,8 +62,9 @@
         <form id="review-form" class="review-card" novalidate>
 
             <div class="review-field">
-                <label for="f-firma" class="review-field-label">Firmenname <span class="required">*</span></label>
-                <input type="text" id="f-firma" name="firma" class="review-input" maxlength="255" required>
+                <p class="review-field-label">Firmenname</p>
+                <p id="f-firma-display" class="review-readonly-inline"></p>
+                <p class="review-field-hint">Firmenname-Änderungen bitte direkt per E-Mail an <a href="mailto:info@adventuresouthside.com">info@adventuresouthside.com</a>.</p>
             </div>
 
             <div class="review-field">
@@ -77,7 +79,7 @@
 
             <div class="review-field">
                 <label for="f-beschreibung" class="review-field-label">Beschreibung</label>
-                <textarea id="f-beschreibung" name="beschreibung" class="review-textarea" rows="5" maxlength="2000" placeholder="Beschreiben Sie Ihr Unternehmen …"></textarea>
+                    <textarea id="f-beschreibung" name="beschreibung" class="review-textarea" rows="5" maxlength="2000" placeholder="Beschreiben Sie Ihr Unternehmen …"></textarea>
                 <p class="review-charcount"><span id="count-beschreibung">0</span> / 2000 Zeichen</p>
             </div>
 
@@ -182,7 +184,10 @@
     // ── Populate form ──────────────────────────────────────
     function populateForm(data) {
         document.getElementById('firma-heading').textContent = data.firma || 'Aussteller-Datencheck';
-        document.getElementById('f-firma').value       = data.firma        || '';
+        const greeting = document.getElementById('review-greeting');
+        greeting.textContent = data.kontaktVorname ? 'Hallo ' + data.kontaktVorname + ',' : '';
+        greeting.style.display = data.kontaktVorname ? '' : 'none';
+        document.getElementById('f-firma-display').textContent = data.firma || '';
         document.getElementById('f-webseite').value    = data.webseite     || '';
         document.getElementById('f-webshop').value     = data.webshop      || '';
         document.getElementById('f-beschreibung').value = data.beschreibung || '';
@@ -260,7 +265,6 @@
     function getSavePayload() {
         return {
             id:          reviewId,
-            firma:       document.getElementById('f-firma').value.trim(),
             webseite:    document.getElementById('f-webseite').value.trim(),
             webshop:     document.getElementById('f-webshop').value.trim(),
             beschreibung: document.getElementById('f-beschreibung').value,
@@ -276,12 +280,6 @@
 
     btnSave.addEventListener('click', function () {
         const payload = getSavePayload();
-        if (!payload.firma) {
-            showSaveMsg('Bitte Firmennamen eintragen.', true);
-            document.getElementById('f-firma').focus();
-            return;
-        }
-
         btnSave.disabled = true;
         btnSaveText.textContent = 'Wird gespeichert …';
 
