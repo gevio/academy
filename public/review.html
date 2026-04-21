@@ -185,8 +185,7 @@
     function populateForm(data) {
         document.getElementById('firma-heading').textContent = data.firma || 'Aussteller-Datencheck';
         const greeting = document.getElementById('review-greeting');
-        greeting.textContent = data.kontaktVorname ? 'Hallo ' + data.kontaktVorname + ',' : '';
-        greeting.style.display = data.kontaktVorname ? '' : 'none';
+        greeting.style.display = 'none';
         document.getElementById('f-firma-display').textContent = data.firma || '';
         document.getElementById('f-webseite').value    = data.webseite     || '';
         document.getElementById('f-webshop').value     = data.webshop      || '';

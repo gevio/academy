@@ -66,8 +66,8 @@ if ($review['status'] !== 'Entwurf') {
     exit;
 }
 
-// Nur bekannte Felder übernehmen
-$allowed = ['firma', 'beschreibung', 'messeSpecial', 'webseite', 'webshop'];
+// Nur bekannte Felder übernehmen (Firmenname wird intern geprüft, nicht über dieses Formular geändert)
+$allowed = ['beschreibung', 'messeSpecial', 'webseite', 'webshop'];
 $data = [];
 foreach ($allowed as $key) {
     if (array_key_exists($key, $input)) {
