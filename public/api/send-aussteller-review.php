@@ -150,10 +150,11 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
-// Custom-URL für Kunden-E-Mail (eigenes Frontend statt direkter Notion-Link)
-$siteUrl = defined('SITE_URL') && SITE_URL ? rtrim(SITE_URL, '/') : '';
-$reviewCustomUrl = $siteUrl
-    ? $siteUrl . '/review.html?id=' . str_replace('-', '', $reviewPageId)
+// Custom-URL für Kunden-E-Mail: immer die öffentliche Live-Domain – das Dev-System
+// darf Kunden niemals sehen.
+$publicBase = rtrim(REVIEW_PUBLIC_URL ?: (defined('SITE_URL') ? SITE_URL : ''), '/');
+$reviewCustomUrl = $publicBase
+    ? $publicBase . '/review.html?id=' . str_replace('-', '', $reviewPageId)
     : $reviewUrl;
 
 // ── 5) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──

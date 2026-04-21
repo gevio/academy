@@ -176,9 +176,10 @@ foreach ($aussteller as $i => $aus) {
     }
 
     $reviewPageId   = $reviewPage['id'];
-    $siteUrl        = defined('SITE_URL') && SITE_URL ? rtrim(SITE_URL, '/') : '';
-    $reviewCustomUrl = $siteUrl
-        ? $siteUrl . '/review.html?id=' . str_replace('-', '', $reviewPageId)
+    // Kunden-URL immer auf Live-Domain – REVIEW_PUBLIC_URL ignoriert SITE_URL bewusst.
+    $publicBase      = rtrim(REVIEW_PUBLIC_URL ?: (defined('SITE_URL') ? SITE_URL : ''), '/');
+    $reviewCustomUrl = $publicBase
+        ? $publicBase . '/review.html?id=' . str_replace('-', '', $reviewPageId)
         : ($reviewPage['url'] ?? '');
 
     echo "   ✓ Review: {$reviewCustomUrl}\n";
