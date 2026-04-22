@@ -24,5 +24,6 @@
 - [x] Firmenname in Review-Formular: Read-only (kein Update über API möglich).
 
 ## 2026-04-21 (offen)
-- [ ] n8n Workflow B/C: Falls noch nicht verbunden – Notion-Integration in DB `AS26_Aussteller Reviews` unter `...` → Connections prüfen.
+- [ ] Massenversand ausführen: `php cli/send-reviews.php --dry-run` auf Prod prüfen → dann live
+- [ ] n8n Workflow C auf Prod aktiv + URL `agenda.adventuresouthside.com` bestätigt?
 

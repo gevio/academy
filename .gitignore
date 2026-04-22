@@ -6,6 +6,7 @@ vendor/
 
 # Generierte QR-Codes
 public/qr/*.png
+public/qr-aussteller/*.png
 
 # Generierte API-Daten (per Cron aus Notion)
 public/api/workshops.json

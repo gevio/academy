@@ -182,6 +182,16 @@ foreach ($aussteller as $i => $aus) {
         ? $publicBase . '/review.html?id=' . str_replace('-', '', $reviewPageId)
         : ($reviewPage['url'] ?? '');
 
+    // App-Link + App-QR sind deterministisch (id-basiert), kein Writeback nötig.
+    $ausstellerCleanId = str_replace('-', '', $pageId);
+    $appLink = $publicBase
+        ? $publicBase . '/aussteller.html#id=' . $ausstellerCleanId
+        : ((defined('SITE_URL') ? rtrim(SITE_URL, '/') : '') . '/aussteller.html#id=' . $ausstellerCleanId);
+
+    $appQrUrl = $publicBase
+        ? $publicBase . '/qr-aussteller/' . $ausstellerCleanId . '.png'
+        : '';
+
     echo "   ✓ Review: {$reviewCustomUrl}\n";
 
     // E-Mail-Draft erstellen
@@ -191,7 +201,16 @@ foreach ($aussteller as $i => $aus) {
         $duzen    = $ausLive['kontakt_duzen'] ?? false;
 
         $emailPage = $notion->createAusstellerEmailDraft(
-            $firma, $email, $vorname, $nachname, $reviewCustomUrl, $deadline, $duzen
+            $firma,
+            $email,
+            $vorname,
+            $nachname,
+            $reviewCustomUrl,
+            $appLink,
+            $appQrUrl,
+            $appQrUrl,
+            $deadline,
+            $duzen
         );
         echo "   " . ($emailPage ? "✓ E-Mail-Draft erstellt" : "⚠ E-Mail-Draft fehlgeschlagen") . "\n";
     } else {

@@ -1,10 +1,10 @@
 <?php
 /**
- * QR-Codes für Workshop-Feedback generieren (deterministische Dateinamen)
+ * QR-Codes für Aussteller generieren (deterministische Dateinamen)
  * 
- * Speichert pro Workshop: public/qr/<id-ohne-hyphens>.png
+ * Speichert pro Aussteller: public/qr-aussteller/<id-ohne-hyphens>.png
  * Diese Dateien werden über Notion-Formel automatisch verlinkt:
- *   Feedback-QR (formula): "https://agenda.adventuresouthside.com/qr/" + replaceAll(id(), "-", "") + ".png"
+ *   App-QR (formula): "https://agenda.adventuresouthside.com/qr-aussteller/" + replaceAll(id(), "-", "") + ".png"
  */
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -27,9 +27,13 @@ $options = new QROptions([
     'imageBase64'   => false,
 ]);
 
-$dbId = '11382138ece1494bafa3cd1bb47dda82';
-$baseUrl = 'https://agenda.adventuresouthside.com/w/';
-$outDir = __DIR__ . '/qr';
+$dbId = getenv('NOTION_AUSSTELLER_DB');
+if (!$dbId) {
+    die("FEHLER: NOTION_AUSSTELLER_DB nicht gefunden in config/.env\n");
+}
+
+$baseUrl = 'https://agenda.adventuresouthside.com/aussteller.html#id=';
+$outDir = __DIR__ . '/qr-aussteller';
 
 if (!is_dir($outDir)) mkdir($outDir, 0755, true);
 
@@ -67,14 +71,13 @@ do {
     $cursor = $resp['next_cursor'] ?? null;
 } while ($resp['has_more'] ?? false);
 
-echo count($pages) . " Workshops gefunden.\n\n";
+echo count($pages) . " Aussteller gefunden.\n\n";
 
 if (count($pages) === 0) {
     die("Keine Seiten gefunden.\n");
 }
 
 // QR-Codes generieren
-$qr = new QRCode($options);
 $ok = 0;
 $skip = 0;
 foreach ($pages as $id) {
@@ -95,7 +98,8 @@ foreach ($pages as $id) {
     }
 
     try {
-        $qr = new QRCode($options); $png = $qr->render($url);
+        $qr = new QRCode($options);
+        $png = $qr->render($url);
         file_put_contents("$outDir/$id.png", $png);
         echo "✓ $id.png\n";
         $ok++;
