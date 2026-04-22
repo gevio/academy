@@ -107,9 +107,9 @@ Gleiche DB wie beim Workshop-Review (`NOTION_EMAIL_DB`). Neues Template:
 
 **E-Mail-Template:** Wird aus Notion gelesen (NOTION_AUSSTELLER_EMAIL_TEMPLATE).
 - Template-ID: `21477417cc7a47f0b513fa54298b68cc`
-- Platzhalter: VORNAME, NACHNAME, REVIEW_LINK, DEADLINE
+- Platzhalter: VORNAME, NACHNAME, REVIEW_LINK, APP_LINK, QR_IMAGE_URL, QR_LINK_URL, DEADLINE
 - **Keine Emojis im E-Mail-Text** (werden in Outlook nicht korrekt dargestellt)
-- `<b>`-Tags im Template werden automatisch zu Notion-Bold konvertiert
+- HTML-Mail wird unterstuetzt (inkl. `<img src="QR_IMAGE_URL">` + Link-Fallback `QR_LINK_URL`)
 
 ### 3.3 PHP: Endpoint `send-aussteller-review.php` ✅
 
@@ -123,8 +123,9 @@ Body:   { "aussteller_id": "...", "deadline": "2026-06-01" }
 1. Aussteller-Daten aus `aussteller.json` + live aus Notion laden (Merge)
 2. Kontakt-Email + Vorname/Nachname über Relation "Kontakt (Master)" ermitteln
 3. Review-Seite in "AS26_Aussteller Reviews"-DB erstellen (inkl. `Kontakt-Vorname`)
-4. E-Mail-Draft in E-Mails-DB erstellen; Review-Link verwendet immer `REVIEW_PUBLIC_URL`
-5. Response mit Review-URL + Email-Status
+4. App-Link aus Aussteller-DB verwenden (Fallback: `REVIEW_PUBLIC_URL/aussteller.html#id=...`) und bei Bedarf in Notion setzen
+5. E-Mail-Draft als HTML in E-Mails-DB erstellen (Review-Link + App-Link + Inline-QR-Bild)
+6. Response mit Review-URL, App-Link, QR-URL + Email-Status
 
 > **REVIEW_PUBLIC_URL:** Kunden-E-Mails enthalten immer `https://agenda.adventuresouthside.com/review.html?id=…`
 > Die interne Dev-URL (`SITE_URL`) wird Kunden niemals exponiert.

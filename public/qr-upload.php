@@ -1,4 +1,16 @@
 <?php
+/**
+ * ⚠️  DEPRECATED: Mit Notion Formel für Feedback-QR nicht mehr nötig!
+ * 
+ * Seit qr-generate.php deterministische Dateinamen speichert und
+ * Feedback-QR als Formel in Notion definiert ist, kann dieses Skript ignoriert werden.
+ * 
+ * Formel: "https://agenda.adventuresouthside.com/qr/" + replaceAll(id(), "-", "") + ".png"
+ * 
+ * Dieses Skript bleibt aus Kompatibilität. Zum Deaktivieren:
+ *   mv public/qr-upload.php public/qr-upload.php.bak
+ */
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/../config');
@@ -12,7 +24,6 @@ echo "Token geladen: " . substr($notionToken, 0, 10) . "...\n";
 
 $dbId = '11382138ece1494bafa3cd1bb47dda82';
 $qrBaseUrl = 'https://agenda.adventuresouthside.com/qr/';
-$liveBaseUrl = 'https://agenda.adventuresouthside.com/w/';
 
 // Alle Seiten holen
 $pages = [];
@@ -60,8 +71,6 @@ foreach ($pages as $pageId) {
     $cleanId = str_replace('-', '', $pageId);
     $qrUrl = $qrBaseUrl . $cleanId . '.png';
 
-    $liveUrl = $liveBaseUrl . $cleanId;
-
     $update = [
         'properties' => [
             'Feedback-QR' => [
@@ -70,9 +79,6 @@ foreach ($pages as $pageId) {
                     'name' => "QR-$cleanId.png",
                     'external' => ['url' => $qrUrl]
                 ]]
-            ],
-            'Live-URL' => [
-                'url' => $liveUrl
             ]
         ]
     ];
