@@ -150,7 +150,25 @@ if (!$reviewPage || empty($reviewPage['id'])) {
 $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
+// Custom-URL für Kunden-E-Mail: immer die öffentliche Live-Domain – das Dev-System
+// darf Kunden niemals sehen.
+$publicBase = rtrim(REVIEW_PUBLIC_URL ?: (defined('SITE_URL') ? SITE_URL : ''), '/');
+$reviewCustomUrl = $publicBase
+    ? $publicBase . '/review.html?id=' . str_replace('-', '', $reviewPageId)
+    : $reviewUrl;
+
 // ── 5) E-Mail-Draft erstellen (nur wenn Email vorhanden) ──
+// App-Link + App-QR sind deterministisch (id-basiert), kein Writeback nötig.
+$ausstellerCleanId = str_replace('-', '', $pageId);
+$appLink = $publicBase
+    ? $publicBase . '/aussteller.html#id=' . $ausstellerCleanId
+    : ((defined('SITE_URL') ? rtrim(SITE_URL, '/') : '') . '/aussteller.html#id=' . $ausstellerCleanId);
+
+// App-QR: PNG aus Notion-Formel (lokal unter public/qr-aussteller/)
+$appQrUrl = $publicBase
+    ? $publicBase . '/qr-aussteller/' . $ausstellerCleanId . '.png'
+    : '';
+
 $emailResult = null;
 if (!empty($email)) {
     // Ansprechpartner: Vorname aus Kontakt (Master), Fallback Firmenname
@@ -165,7 +183,10 @@ if (!empty($email)) {
         $email,
         $ansprechpartner,
         $aussteller['kontakt_nachname'] ?? '',
-        $reviewUrl,
+        $reviewCustomUrl,
+        $appLink,
+        $appQrUrl,
+        $appQrUrl,
         $deadline,
         $duzen
     );
@@ -178,13 +199,16 @@ if (!empty($email)) {
 
 // ── Response ─────────────────────────────────────────
 $response = [
-    'success'        => true,
-    'review_page_id' => $reviewPageId,
-    'review_url'     => $reviewUrl,
-    'firma'          => $aussteller['firma'],
-    'deadline'       => $deadline,
-    'has_email'      => !empty($email),
-    'email_result'   => $emailResult,
+    'success'            => true,
+    'review_page_id'     => $reviewPageId,
+    'review_url'         => $reviewUrl,
+    'review_custom_url'  => $reviewCustomUrl,
+    'app_link'           => $appLink,
+    'app_qr_url'         => $appQrUrl,
+    'firma'              => $aussteller['firma'],
+    'deadline'           => $deadline,
+    'has_email'          => !empty($email),
+    'email_result'       => $emailResult,
 ];
 
 if (empty($email)) {

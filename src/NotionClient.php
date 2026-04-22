@@ -671,6 +671,13 @@ TPL;
             $properties['Kontakt-Email'] = ['email' => $email];
         }
 
+        // Kontakt-Vorname (für personalisierte Anrede im Custom Frontend)
+        if (!empty($aussteller['kontakt_vorname'])) {
+            $properties['Kontakt-Vorname'] = [
+                'rich_text' => [['text' => ['content' => $aussteller['kontakt_vorname']]]],
+            ];
+        }
+
         // ── Page Body (Blöcke) ──
         $blocks = [];
         $deadlineDe = $this->formatDeadlineDe($deadline);
@@ -740,6 +747,136 @@ TPL;
     }
 
     /**
+     * Öffentliche Felder einer Review-Seite lesen (für Custom Frontend).
+     * Gibt KEINE internen Properties zurück (Team-Freigabe, Kommentar, Kontakt-Email).
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @return array|null  Null wenn nicht gefunden / Fehler
+     */
+    public function getAusstellerReview(string $pageId): ?array
+    {
+        $data = $this->request('GET', "/pages/{$pageId}");
+        if (!$data) return null;
+
+        $props = $data['properties'] ?? [];
+
+        // Logo-URL aus Files-Property
+        $logoUrl = '';
+        $logoFiles = $props['Logo']['files'] ?? [];
+        if (!empty($logoFiles)) {
+            $f = $logoFiles[0];
+            $logoUrl = $f['external']['url'] ?? $f['file']['url'] ?? '';
+        }
+
+        // Aussteller-Relation → pageId des verknüpften Aussteller-Eintrags
+        $ausstellerId = $props['Aussteller (AS26)']['relation'][0]['id'] ?? null;
+
+        return [
+            'id'            => $data['id'],
+            'status'        => $props['Status']['select']['name'] ?? '',
+            'deadline'      => $props['Deadline']['date']['start'] ?? null,
+            'firma'         => $this->extractTitle($props['Firmenname'] ?? []),
+            'kontaktVorname'=> $this->extractRichText($props['Kontakt-Vorname'] ?? []),
+            'beschreibung'  => $this->extractRichText($props['Beschreibung'] ?? []),
+            'messeSpecial'  => $this->extractRichText($props['Messe-Special'] ?? []),
+            'webseite'      => $props['Webseite']['url'] ?? '',
+            'webshop'       => $props['Webshop']['url'] ?? '',
+            'logoUrl'       => $logoUrl,
+            'ausstellerId'  => $ausstellerId,
+        ];
+    }
+
+    /**
+     * Editierbare Felder einer Review-Seite aktualisieren.
+     * Nur erlaubt wenn Status = "Entwurf" – Caller muss das vorab prüfen.
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @param array  $data    Felder: firma, beschreibung, messeSpecial, webseite, webshop
+     * @return bool
+     */
+    public function updateAusstellerReview(string $pageId, array $data): bool
+    {
+        $properties = [];
+
+        if (isset($data['firma'])) {
+            $properties['Firmenname'] = [
+                'title' => [['text' => ['content' => mb_substr(trim($data['firma']), 0, 255)]]],
+            ];
+        }
+        if (isset($data['beschreibung'])) {
+            $properties['Beschreibung'] = [
+                'rich_text' => [['text' => ['content' => mb_substr(trim($data['beschreibung']), 0, 2000)]]],
+            ];
+        }
+        if (isset($data['messeSpecial'])) {
+            $properties['Messe-Special'] = [
+                'rich_text' => [['text' => ['content' => mb_substr(trim($data['messeSpecial']), 0, 2000)]]],
+            ];
+        }
+        if (isset($data['webseite'])) {
+            $properties['Webseite'] = [
+                'url' => !empty($data['webseite']) ? $data['webseite'] : null,
+            ];
+        }
+        if (isset($data['webshop'])) {
+            $properties['Webshop'] = [
+                'url' => !empty($data['webshop']) ? $data['webshop'] : null,
+            ];
+        }
+
+        if (empty($properties)) return false;
+
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => $properties,
+        ]);
+
+        return $result !== null;
+    }
+
+    /**
+     * Review einreichen: Status auf "Eingereicht" setzen.
+     * Nur sinnvoll wenn Status = "Entwurf" – Caller muss das vorab prüfen.
+     *
+     * @param string $pageId  UUID der Review-Page (mit Bindestrichen)
+     * @return bool
+     */
+    public function submitAusstellerReview(string $pageId): bool
+    {
+        // Bei REVIEW_AUTO_FREIGABE=true direkt auf Freigegeben setzen + Team-Freigabe haken
+        // → n8n Workflow C läuft sofort und überträgt die Daten in die Aussteller-DB.
+        // Flag auf false setzen um zum zweistufigen Prozess zurückzukehren.
+        $autoFreigabe = defined('REVIEW_AUTO_FREIGABE') && REVIEW_AUTO_FREIGABE;
+        $status = $autoFreigabe ? 'Freigegeben' : 'Eingereicht';
+
+        $properties = [
+            'Status' => ['select' => ['name' => $status]],
+        ];
+        if ($autoFreigabe) {
+            $properties['Team-Freigabe'] = ['checkbox' => true];
+        }
+
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => $properties,
+        ]);
+
+        return $result !== null;
+    }
+
+    /**
+     * Setzt den Status-Select eines Aussteller-DB-Eintrags.
+     * Wird z.B. vom CLI-Massenversand verwendet.
+     */
+    public function setAusstellerStatus(string $pageId, string $status): bool
+    {
+        $result = $this->request('PATCH', "/pages/{$pageId}", [
+            'properties' => [
+                'Status' => ['select' => ['name' => $status]],
+            ],
+        ]);
+        return $result !== null;
+    }
+
+    /**
      * E-Mail-Draft für Aussteller-Review erstellen.
      * Nutzt die bestehende E-Mails Ausgehend DB.
      */
@@ -749,6 +886,9 @@ TPL;
         string $vorname,
         string $nachname,
         string $reviewUrl,
+        string $appLink,
+        string $qrImageUrl,
+        string $qrLinkUrl,
         string $deadline,
         bool $duzen = false
     ): ?array {
@@ -768,16 +908,29 @@ TPL;
 
         // Fallback: hardcoded Template falls Notion-Template nicht lesbar
         if (empty($templateText)) {
-            $templateText = "Hi VORNAME,\n\nvielen Dank für deine Teilnahme an der Adventure Southside 2026!\n\nBitte prüfe deinen Aussteller-Eintrag:\n\n👉 REVIEW_LINK\n\nDeadline: DEADLINE\n\nViele Grüße,\nDas Adventure Southside Team";
+            $templateText = "<p>Hallo VORNAME,</p>\n"
+                . "<p>vielen Dank für eure Teilnahme an der Adventure Southside 2026.</p>\n"
+                . "<p><b>4. Alles korrekt?</b><br>"
+                . "Wenn alles passt, klickt im Formular auf \"Absenden\" – dann werden wir benachrichtigt.</p>\n"
+                . "<p><b>→ Das App-Profil zum Gegencheck findet Ihr hier:</b> APP_LINK</p>\n"
+                . "<p><b>→ Falls Ihr den Link lieber per QR-Code öffnen möchtet:</b></p>\n"
+                . "<p>APP_QR_IMAGE</p>\n"
+                . "<p><i>(APP_QR_LINK)</i></p>\n"
+                . "<p><b>Deadline:</b> DEADLINE</p>\n"
+                . "<p>Bei Fragen meldet Euch jederzeit!</p>\n"
+                . "<p>Herzliche Grüße,<br>Ralf Urbanek<br>Event Director</p>";
         }
 
-        // HTML-Tags in Markdown konvertieren (Template aus Notion kann <b>-Tags enthalten)
-        $templateText = preg_replace('/<b>(.*?)<\/b>/i', '**$1**', $templateText);
+        $appQrImageHtml = $qrImageUrl !== ''
+            ? '<a href="' . htmlspecialchars($qrLinkUrl, ENT_QUOTES, 'UTF-8') . '" target="_blank" rel="noopener">'
+                . '<img src="' . htmlspecialchars($qrImageUrl, ENT_QUOTES, 'UTF-8') . '" alt="QR-Code zum App-Profil" width="220" height="220" style="display:block;border:0;outline:none;text-decoration:none;max-width:220px;height:auto;">'
+                . '</a>'
+            : '(QR-Code nicht verfügbar)';
 
         // Platzhalter ersetzen
         $emailText = str_replace(
-            ['VORNAME', 'NACHNAME', 'REVIEW_LINK', 'DEADLINE'],
-            [$vorname, $nachname, $reviewUrl, $deadlineDe],
+            ['VORNAME', 'NACHNAME', 'REVIEW_LINK', 'APP_LINK', 'APP_QR_IMAGE', 'APP_QR_LINK', 'DEADLINE'],
+            [$vorname, $nachname, $reviewUrl, $appLink, $appQrImageHtml, $qrLinkUrl, $deadlineDe],
             $templateText
         );
 
@@ -914,18 +1067,36 @@ TPL;
         $parts = preg_split('/(\*\*[^*]+\*\*)/', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
         $result = [];
         foreach ($parts as $part) {
-            if (empty($part)) continue;
+            if ($part === '' || $part === null) continue;
             if (preg_match('/^\*\*(.+)\*\*$/', $part, $m)) {
-                $result[] = [
-                    'type' => 'text',
-                    'text' => ['content' => $m[1]],
-                    'annotations' => ['bold' => true],
-                ];
+                foreach (self::chunkText($m[1], 2000) as $chunk) {
+                    $result[] = [
+                        'type' => 'text',
+                        'text' => ['content' => $chunk],
+                        'annotations' => ['bold' => true],
+                    ];
+                }
             } else {
-                $result[] = ['type' => 'text', 'text' => ['content' => $part]];
+                foreach (self::chunkText($part, 2000) as $chunk) {
+                    $result[] = ['type' => 'text', 'text' => ['content' => $chunk]];
+                }
             }
         }
         return $result ?: [['type' => 'text', 'text' => ['content' => '']]];
+    }
+
+    /**
+     * Splittet einen String in Stücke mit max. $max Zeichen (mb-sicher).
+     */
+    private static function chunkText(string $text, int $max): array
+    {
+        if ($text === '') return [''];
+        $chunks = [];
+        $len = mb_strlen($text, 'UTF-8');
+        for ($i = 0; $i < $len; $i += $max) {
+            $chunks[] = mb_substr($text, $i, $max, 'UTF-8');
+        }
+        return $chunks;
     }
 
     /**

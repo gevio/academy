@@ -33,25 +33,47 @@ Automatisch wenn schon auf einer anderen Seite mit ?admin=... angemeldet (sessio
 
 ## 2. QR-Codes erzeugen
 
-Beide Skripte liegen in `public/` und werden auf der **Konsole** ausgeführt:
+**Vereinfachte Formel-Lösung:** QR-PNGs werden mit deterministischem Dateinamen generiert und automatisch über Notion-Formeln verlinkt.
+
+### Workshops: QR-Feedback-Codes
 
 ```bash
-# Ins Projektverzeichnis wechseln
 cd /var/www/dev.as26.cool-camp.site
-
-# 1) QR-Code-PNGs generieren (pro Workshop eine Datei in public/qr/)
 php public/qr-generate.php
-
-# 2) QR-URLs + Live-URLs in die Notion-DB zurückschreiben
-php public/qr-upload.php
 ```
 
-### Was passiert?
+Speichert pro Workshop: `public/qr/<id-ohne-hyphens>.png` (verlinkt auf `https://agenda.adventuresouthside.com/w/<id>`)
+
+**Notion-Formel in NOTION_WORKSHOP_DB:**
+
+| Property | Typ | Formel |
+|---|---|---|
+| **Feedback-QR** | `formula` | `"https://agenda.adventuresouthside.com/qr/" + replaceAll(id(), "-", "") + ".png"` |
+
+### Aussteller: App-QR-Codes
+
+```bash
+cd /var/www/dev.as26.cool-camp.site
+php public/qr-generate-aussteller.php
+```
+
+Speichert pro Aussteller: `public/qr-aussteller/<id-ohne-hyphens>.png` (verlinkt auf `https://agenda.adventuresouthside.com/aussteller.html#id=<id>`)
+
+**Notion-Formel in NOTION_AUSSTELLER_DB:**
+
+| Property | Typ | Formel |
+|---|---|---|
+| **App-QR** | `formula` | `"https://agenda.adventuresouthside.com/qr-aussteller/" + replaceAll(id(), "-", "") + ".png"` |
+
+**Einmalig manuell in Notion einrichten, dann vollautomatisch!**
+
+### Hintergrund
 
 | Skript | Beschreibung |
 |---|---|
-| `qr-generate.php` | Liest alle Workshop-IDs aus Notion, erzeugt pro Workshop eine PNG-Datei unter `public/qr/<id>.png`. Basis-URL: `https://agenda.adventuresouthside.com/w/<id>` |
-| `qr-upload.php` | Schreibt die Property **Feedback-QR** (externer File-Link) und **Live-URL** in jede Notion-Seite zurück. |
+| `qr-generate.php` | Workshops: Liest NOTION_WORKSHOP_DB, erzeugt PNGs unter `public/qr/` für Feedback-Link |
+| `qr-generate-aussteller.php` | Aussteller: Liest NOTION_AUSSTELLER_DB, erzeugt PNGs unter `public/qr-aussteller/` für App-Link |
+| `qr-upload.php` | ⚠️ **Veraltet** – Mit Formel-Properties nicht mehr nötig. |
 
 ---
 

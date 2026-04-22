@@ -14,20 +14,23 @@
 
 ## 2. Ziel: Aussteller-Review
 
-Aussteller sollen folgende Felder selbst bearbeiten können:
+Aussteller können folgende Felder über das Custom-Frontend prüfen und bearbeiten:
 
-| Feld | Notion-Property (Aussteller-DB) | Typ |
+| Feld | Notion-Property (Review-DB) | Editierbar im Frontend |
 |---|---|---|
-| **Logo** | `Logo` | files |
-| **Firmenname/Titel** | `Name` / `Firma` | title |
-| **Langtext/Beschreibung** | `Beschreibung` | rich_text |
-| **Messe-Special** | `Messe-Special` | rich_text |
-| **Link Webseite** | `Webseite` | url |
-| **Link Shop** | `Webshop` | url |
+| **Firmenname** | `Firmenname` | Nein (read-only) |
+| **Langtext/Beschreibung** | `Beschreibung` | Ja |
+| **Messe-Special** | `Messe-Special` | Ja |
+| **Link Webseite** | `Webseite` | Ja |
+| **Link Shop** | `Webshop` | Ja |
+| **Logo** | `Logo` | Nein (Kontakt Team) |
+
+> **Hinweis:** Logo-Änderungen erfolgen nicht über das Formular, sondern per direktem Kontakt zum Team.
+> Firmenname wird beim Erstellen aus der Aussteller-DB übernommen und ist danach unveränderlich.
 
 Nach Bearbeitung:
-- **Notification ans Team** wenn Kunde Status auf "Eingereicht" setzt
-- **Team-Freigabe** → n8n schreibt Daten automatisch in Aussteller-DB zurück
+- Bei `REVIEW_AUTO_FREIGABE=true`: Submit setzt Status direkt auf **Freigegeben** + Team-Freigabe=true → n8n WF C überträgt sofort
+- Bei `REVIEW_AUTO_FREIGABE=false`: Submit setzt Status auf **Eingereicht** → Team prüft manuell → Freigabe
 
 ---
 
@@ -54,17 +57,18 @@ Nach Bearbeitung:
 | `Deadline` | date | Frist für Rückmeldung des Ausstellers |
 | `Änderungsdatum` | date | Letzte Änderung durch den Aussteller |
 | `Kontakt-Email` | email | Ansprechpartner, wird per n8n aus Kontakte Master befüllt |
+| `Kontakt-Vorname` | text | Vorname des Ansprechpartners, wird beim Review-Erstellen gesetzt ✅ |
 | `Team-Freigabe` | checkbox | Nur vom Team setzbar (hidden für Kunde). Workflow C prüft diese Checkbox. |
 | `Kommentar` | rich_text | Internes Kommentarfeld fürs Team |
 
 **Status-Flow:**
 ```
-Entwurf → Eingereicht → Freigegeben → Übertragen
+Entwurf → [Eingereicht →] Freigegeben → Übertragen
 ```
 - **Entwurf:** Review-Seite erstellt, E-Mail versendet, Kunde kann bearbeiten
-- **Eingereicht:** Kunde hat Daten geprüft und Status selbst auf "Eingereicht" gesetzt
-- **Freigegeben:** Team hat Review geprüft und freigegeben
-- **Übertragen:** Daten wurden in Aussteller-DB zurückgeschrieben (n8n)
+- **Eingereicht:** Nur bei `REVIEW_AUTO_FREIGABE=false` – Kunde reicht ein, Team prüft
+- **Freigegeben:** Bei `REVIEW_AUTO_FREIGABE=true` direkt nach Submit (+ Team-Freigabe=true); sonst nach manueller Team-Prüfung
+- **Übertragen:** Daten wurden in Aussteller-DB zurückgeschrieben (n8n Workflow C)
 
 **Seiteninhalt (Body-Template):**
 
@@ -103,9 +107,9 @@ Gleiche DB wie beim Workshop-Review (`NOTION_EMAIL_DB`). Neues Template:
 
 **E-Mail-Template:** Wird aus Notion gelesen (NOTION_AUSSTELLER_EMAIL_TEMPLATE).
 - Template-ID: `21477417cc7a47f0b513fa54298b68cc`
-- Platzhalter: VORNAME, NACHNAME, REVIEW_LINK, DEADLINE
+- Platzhalter: VORNAME, NACHNAME, REVIEW_LINK, APP_LINK, QR_IMAGE_URL, QR_LINK_URL, DEADLINE
 - **Keine Emojis im E-Mail-Text** (werden in Outlook nicht korrekt dargestellt)
-- `<b>`-Tags im Template werden automatisch zu Notion-Bold konvertiert
+- HTML-Mail wird unterstuetzt (inkl. `<img src="QR_IMAGE_URL">` + Link-Fallback `QR_LINK_URL`)
 
 ### 3.3 PHP: Endpoint `send-aussteller-review.php` ✅
 
@@ -117,15 +121,32 @@ Body:   { "aussteller_id": "...", "deadline": "2026-06-01" }
 
 **Ablauf:**
 1. Aussteller-Daten aus `aussteller.json` + live aus Notion laden (Merge)
-2. Kontakt-Email über Relation "Kontakt (Master)" → E-Mail ermitteln
-3. Review-Seite in "AS26_Aussteller Reviews"-DB erstellen (inkl. Logo via SITE_URL)
-4. E-Mail-Draft in E-Mails-DB erstellen (Template aus Notion mit Platzhalter-Ersetzung)
-5. Response mit Review-URL + Email-Status
+2. Kontakt-Email + Vorname/Nachname über Relation "Kontakt (Master)" ermitteln
+3. Review-Seite in "AS26_Aussteller Reviews"-DB erstellen (inkl. `Kontakt-Vorname`)
+4. App-Link aus Aussteller-DB verwenden (Fallback: `REVIEW_PUBLIC_URL/aussteller.html#id=...`) und bei Bedarf in Notion setzen
+5. E-Mail-Draft als HTML in E-Mails-DB erstellen (Review-Link + App-Link + Inline-QR-Bild)
+6. Response mit Review-URL, App-Link, QR-URL + Email-Status
+
+> **REVIEW_PUBLIC_URL:** Kunden-E-Mails enthalten immer `https://agenda.adventuresouthside.com/review.html?id=…`
+> Die interne Dev-URL (`SITE_URL`) wird Kunden niemals exponiert.
 
 **NotionClient-Methoden:**
-- `getAusstellerForReview(string $pageId): array` – Liest Aussteller + Kontakt-Relation
-- `createAusstellerReviewPage(array $aussteller, string $deadline, string $kontaktEmail): ?array`
+- `getAusstellerForReview(string $pageId): array` – Liest Aussteller + Kontakt-Relation (E-Mail, Vorname, Nachname, Du/Sie)
+- `createAusstellerReviewPage(array $aussteller, string $deadline, string $kontaktEmail): ?array` – setzt auch `Kontakt-Vorname`
 - `createAusstellerEmailDraft(...)` – Liest Notion-Template, ersetzt Platzhalter
+- `getAusstellerReview(string $pageId): ?array` – Öffentlicher Read (id, status, firma, kontaktVorname, ausstellerId, …)
+- `updateAusstellerReview(string $pageId, array $data): bool` – Speichert beschreibung, messeSpecial, webseite, webshop
+- `submitAusstellerReview(string $pageId): bool` – Setzt Status je nach `REVIEW_AUTO_FREIGABE`
+- `setAusstellerStatus(string $pageId, string $status): bool` – Generisches Status-Update (für CLI)
+
+**Weitere API-Endpunkte:**
+
+| Endpunkt | Methode | Auth | Beschreibung |
+|---|---|---|---|
+| `get-aussteller-review.php` | GET `?id=` | – (page_id = Token) | Felder der Review lesen |
+| `update-aussteller-review.php` | POST | – | beschreibung/messeSpecial/webseite/webshop speichern |
+| `submit-aussteller-review.php` | POST | – | Review einreichen (Status-Wechsel) |
+| `check-aussteller-review.php` | GET `?aussteller_id=` | X-Admin-Secret | Aktive Review prüfen |
 
 ### 3.4 Frontend: Admin-Button auf Aussteller-Profilseite ✅
 
@@ -134,7 +155,48 @@ In `aussteller.js` → `renderProfile()`:
 - Admin-Modus: `?admin=SECRET` → `sessionStorage` (gleiche Logik wie `details.html`)
 - Deadline-Prompt (Standard: +14 Tage) → POST an API → Ergebnis mit E-Mail-Info + Review-Link
 
-### 3.5 n8n Workflows
+### 3.5 Frontend: Kunden-Review-Formular `review.html` ✅
+
+**URL:** `https://agenda.adventuresouthside.com/review.html?id=<32-hex-page-id>`
+
+Eigenes Frontend ohne Bootstrap, nutzt AS26 Design-System (CSS-Variablen: `--as-rot`, `--as-braun-dark`, …).
+Die page_id dient gleichzeitig als Auth-Token – kein separates Login.
+
+**States:**
+- `loading` → Daten werden aus Notion geladen
+- `form` (Status = Entwurf) → Bearbeitbares Formular
+- `submitted` (Status = Eingereicht / Freigegeben / Übertragen) → Danke-Seite
+- `error` → Fehlermeldung
+
+**Formular-Felder:**
+- Firmenname: read-only (`.review-readonly-inline`)
+- Webseite, Webshop: text inputs
+- Beschreibung, Messe-Special: textareas
+- Absenden: Bestätigungs-Dialog → POST an `submit-aussteller-review.php`
+
+**Auto-Save:** Felder werden beim Verlassen automatisch gespeichert (`blur`-Event → `update-aussteller-review.php`).
+
+### 3.6 CLI: Massenversand `cli/send-reviews.php` ✅
+
+```bash
+php cli/send-reviews.php                        # alle Aussteller mit Status="Bereit"
+php cli/send-reviews.php --dry-run              # Vorschau ohne Änderungen
+php cli/send-reviews.php --deadline=2026-06-01  # Deadline überschreiben (Standard: +14 Tage)
+php cli/send-reviews.php --limit=5              # max. N Aussteller verarbeiten
+```
+
+**Ablauf:**
+1. Alle Aussteller mit Status = "Bereit" aus NOTION_AUSSTELLER_DB laden (paginiert)
+2. Duplikat-Check: Aussteller mit aktiver Review (Status ≠ Übertragen) überspringen
+3. Pro Aussteller: Review-Seite + E-Mail-Draft erstellen (identisch zu `send-aussteller-review.php`)
+4. Rate-Limit: 400ms Pause zwischen Requests
+
+> **Hinweis:** Der Aussteller-Status in NOTION_AUSSTELLER_DB wird **nicht** beim Versand gesetzt.
+> Er wechselt auf `"Review erfolgt"` erst wenn der Kunde das Formular auf `review.html` tatsächlich abschickt (`submit-aussteller-review.php`).
+
+**Voraussetzung:** Aussteller-DB (`NOTION_AUSSTELLER_DB`) braucht Property `Status` (Select) mit Werten `Bereit` und `Review erfolgt`.
+
+### 3.7 n8n Workflows
 
 #### Workflow A: E-Mail-Versand
 
@@ -214,39 +276,49 @@ Die Kontakt-Email wird **beim Erstellen der Review-Seite** per PHP aus der Notio
 ## 5. Implementierungsreihenfolge
 
 ### Phase 1: Notion Setup ✅
-1. [x] Neue Notion-DB "AS26_Aussteller Reviews" angelegt (13 Properties)
+1. [x] Neue Notion-DB "AS26_Aussteller Reviews" angelegt (14 Properties inkl. Kontakt-Vorname)
 2. [x] `.env` erweitern: `NOTION_AUSSTELLER_REVIEW_DB`, `NOTION_AUSSTELLER_EMAIL_TEMPLATE`
 3. [x] Event-Relation (→ Master-Veranstaltungen) in DB ergänzt
 4. [x] E-Mail-Template in Notion angelegt (ID: `21477417cc7a47f0b513fa54298b68cc`)
 5. [x] Notion-Integrationen geteilt: Kontakte Master DB, Event DB
+6. [x] Property `Kontakt-Vorname` (Text) in AS26_Aussteller Reviews DB angelegt
 
 ### Phase 2: PHP Backend ✅
-6. [x] `NotionClient.php`: `getAusstellerForReview()` – inkl. Kontakt-Relation
-7. [x] `NotionClient.php`: `createAusstellerReviewPage()` – Properties + Body-Blöcke
-8. [x] `NotionClient.php`: `createAusstellerEmailDraft()` – Template aus Notion, Platzhalter
-9. [x] `send-aussteller-review.php` – Endpoint mit Auth, Merge, Review + Email
-10. [x] Logo via SITE_URL + logo_local (statt Notion signed URLs)
-11. [x] HTML-Tags aus Template zu Notion-Bold konvertiert
-12. [x] Messe-Special + Webshop in `generate-aussteller-json.php` + Frontend
+7. [x] `NotionClient.php`: `getAusstellerForReview()` – inkl. Kontakt-Relation (Vorname, Nachname, Du/Sie)
+8. [x] `NotionClient.php`: `createAusstellerReviewPage()` – Properties + Body-Blöcke + Kontakt-Vorname
+9. [x] `NotionClient.php`: `createAusstellerEmailDraft()` – Template aus Notion, Platzhalter
+10. [x] `NotionClient.php`: `getAusstellerReview()`, `updateAusstellerReview()`, `submitAusstellerReview()`, `setAusstellerStatus()`
+11. [x] `send-aussteller-review.php` – Endpoint mit Auth, Merge, Review + Email
+12. [x] `get-aussteller-review.php`, `update-aussteller-review.php`, `submit-aussteller-review.php`, `check-aussteller-review.php`
+13. [x] Logo via SITE_URL + logo_local (statt Notion signed URLs)
+14. [x] HTML-Tags aus Template zu Notion-Bold konvertiert
+15. [x] Messe-Special + Webshop in `generate-aussteller-json.php` + Frontend
+16. [x] `REVIEW_PUBLIC_URL` – Kunden-E-Mails immer mit `agenda.adventuresouthside.com`
+17. [x] `REVIEW_AUTO_FREIGABE` – Submit setzt direkt Status "Freigegeben" + Team-Freigabe=true
+18. [x] `cli/send-reviews.php` – Massenversand mit `--dry-run`, `--deadline`, `--limit`
 
 ### Phase 3: Frontend ✅
-13. [x] Admin-Modus in `aussteller.js` (gleiche Logik wie `details.html`)
-14. [x] Review-Button im Aussteller-Profil (nur Admin sichtbar)
-15. [x] Click-Handler: Deadline-Prompt → API-Call → Ergebnis-Anzeige
+19. [x] Admin-Modus in `aussteller.js` (gleiche Logik wie `details.html`)
+20. [x] Review-Button im Aussteller-Profil (nur Admin sichtbar)
+21. [x] Click-Handler: Deadline-Prompt → API-Call → Ergebnis-Anzeige
+22. [x] `review.html` + `review.css` – Kunden-Frontend (formelles Sie, Firmenname read-only, Auto-Save)
 
 ### Phase 4: n8n Workflows ✅
-16. [ ] **ACTION ITEM:** Team-Entscheidung E-Mail-Versand (Draft vs. Released)
-17. [x] Emojis aus Notion E-Mail-Template entfernt
-18. [x] Workflow B: Notification ans Team bei Status "Eingereicht" (Telegram + SMTP)
-19. [x] Workflow C: Freigabe → Daten in Aussteller-DB übertragen + Status "Übertragen"
-20. [x] `regenerate-aussteller.php` Endpoint für sofortige JSON-Aktualisierung
-21. [x] 5s Wait vor Regenerate (Timing-Fix)
+23. [ ] **ACTION ITEM:** Team-Entscheidung E-Mail-Versand (Draft vs. Released)
+24. [x] Emojis aus Notion E-Mail-Template entfernt
+25. [x] Workflow B: Notification ans Team bei Status "Eingereicht" (Telegram + SMTP)
+26. [x] Workflow C: Freigabe → Daten in Aussteller-DB übertragen + Status "Übertragen"
+27. [x] `regenerate-aussteller.php` Endpoint für sofortige JSON-Aktualisierung
+28. [x] 5s Wait vor Regenerate (Timing-Fix)
 
 **n8n Workflow-IDs:**
 | Workflow | ID | Trigger |
 |---|---|---|
 | Workflow B: Eingereicht-Notification | *(bestehend)* | Schedule 15 Min |
 | Workflow C: Freigabe → Übertragen | `f0mGzFy9SvXlRMmi` | Schedule 15 Min |
+
+> **Hinweis:** Bei `REVIEW_AUTO_FREIGABE=true` wird Workflow B (Eingereicht-Benachrichtigung)
+> nie ausgelöst, da Status direkt zu "Freigegeben" springt. Workflow C greift sofort.
 
 **Workflow C Flow:**
 ```
@@ -258,32 +330,38 @@ Schedule (15 Min) → Query (Status=Freigegeben + Team-Freigabe=true)
 ```
 
 ### Phase 5: Test & Rollout
-22. [x] End-to-End Test auf Dev (4Wheel24, Charme du Süd)
-23. [ ] Workflow C auf Prod-URL umstellen + aktivieren
-24. [ ] Massenversand: Review-Links an alle Aussteller (ggf. in Batches)
+29. [x] End-to-End Test auf Dev (4Wheel24, Charme du Süd)
+30. [ ] Workflow C auf Prod-URL prüfen + aktiviert lassen
+31. [x] CLI `cli/send-reviews.php` bereit für Massenversand
+32. [ ] **Massenversand ausführen:** `php cli/send-reviews.php --dry-run` prüfen → dann live
 
 ---
 
 ## 6. Unterschiede zum Workshop-Review
 
-| Aspekt | Workshop Review | Aussteller Review (neu) |
+| Aspekt | Workshop Review | Aussteller Review |
 |---|---|---|
 | Empfänger | Referenten (Personen) | Aussteller (Firmen) |
-| Editierbare Felder | Titel, Beschreibung, Bulletpoints, Kategorien, Format, Dauer, Ort, Datum | Logo, Firmenname, Beschreibung, Messe-Special, Webseite, Webshop |
-| Datei-Upload | Foto (Referent) | Logo (Firma) |
-| Kunde signalisiert "Fertig" | – | Status → "Eingereicht" (Option B) |
-| Team-Notification | – | n8n pollt Status "Eingereicht" → Benachrichtigung |
+| Kunden-Frontend | Notion direkt | Custom `review.html` (eigenes Design) |
+| Editierbare Felder | Titel, Beschreibung, Bulletpoints, Kategorien, Format, Dauer, Ort, Datum | Beschreibung, Messe-Special, Webseite, Webshop |
+| Datei-Upload | Foto (Referent) | Nicht im Frontend (Logo über Team) |
+| Kunde signalisiert "Fertig" | – | Button "Einreichen" in review.html |
+| Team-Notification | – | n8n pollt Status "Eingereicht" → Benachrichtigung (bei Auto-Freigabe: entfällt) |
+| Auto-Freigabe | Nein | Ja (`REVIEW_AUTO_FREIGABE=true`) → direkt Freigegeben + WF C |
 | Auto-Update nach Freigabe | Nein (manuell) | Ja (n8n Workflow C) |
-| Notion-DB | Workshop Reviews | AS26_Aussteller Reviews (neu) |
+| Massenversand | Einzeln | CLI `cli/send-reviews.php` mit Dry-Run |
+| Notion-DB | Workshop Reviews | AS26_Aussteller Reviews |
 | E-Mail-DB | E-Mails Ausgehend (bestehend) | E-Mails Ausgehend (bestehend) |
-| E-Mail-Template | Notion-Seite | Notion-Seite (eigenes Template) |
+| E-Mail-Template | Notion-Seite | Notion-Seite (eigenes Template, ID: `21477417cc7a47f0b513fa54298b68cc`) |
 
 ---
 
 ## 7. Offene Punkte
 
-1. **ACTION ITEM (Team):** E-Mail-Versand – Draft vs. Released bei Erstellung
+1. **ACTION ITEM (Team):** E-Mail-Versand – Draft vs. Released bei Erstellung (aktuell: Draft)
 2. ~~**ACTION ITEM (Notion):** Emojis aus E-Mail-Template entfernen~~ ✅ erledigt
-3. **Mehrere Ansprechpartner pro Aussteller?** → Aktuell wird nur der erste Kontakt verwendet
-4. **Batch-Versand:** Reviews einzeln oder gesammelt an alle 162 Aussteller? (ggf. in Batches à 20-30)
-5. **Logo-Sync:** Nacht-Cron übernimmt Logos automatisch, Texte sofort via Regenerate-Endpoint
+3. ~~**Kontakt-Vorname Property in Review-DB anlegen**~~ ✅ erledigt
+4. **Mehrere Ansprechpartner pro Aussteller?** → Aktuell wird nur der erste Kontakt verwendet
+5. **Massenversand ausführen:** `php cli/send-reviews.php --dry-run` auf Prod prüfen, dann live
+6. **Workflow C auf Prod:** Aktivieren + URL `https://agenda.adventuresouthside.com` bestätigen
+7. **Logo-Sync:** Nacht-Cron übernimmt Logos automatisch, Texte sofort via Regenerate-Endpoint
