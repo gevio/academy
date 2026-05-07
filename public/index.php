@@ -1,7 +1,6 @@
 <?php
 // public/index.php
 require_once __DIR__ . '/../config/bootstrap.php';
-require_once __DIR__ . '/../src/NotionClient.php';
 
 $id = $_GET['id'] ?? '';
 if (!preg_match('/^[a-f0-9\-]{32,36}$/', $id)) {
@@ -11,8 +10,38 @@ if (!preg_match('/^[a-f0-9\-]{32,36}$/', $id)) {
     exit;
 }
 
-$notion = new NotionClient(NOTION_TOKEN);
-$workshop = $notion->getWorkshop($id);
+// ── Workshop-Daten aus workshops.json (kein Live-Notion-Call nötig) ──────────
+$cleanId = str_replace('-', '', $id);
+$allWorkshops = [];
+$workshop = null;
+$kategorien = [];
+$referentFirma = '';
+$referentPerson = '';
+$referentPersons = [];
+$aussteller = [];
+$qaEnabled = false;
+
+$jsonFile = __DIR__ . '/api/workshops.json';
+if (file_exists($jsonFile)) {
+    $jsonData = json_decode(file_get_contents($jsonFile), true);
+    $allWorkshops = $jsonData['workshops'] ?? [];
+    foreach ($allWorkshops as $jws) {
+        if ($jws['id'] === $cleanId) {
+            $workshop = $jws;
+            $kategorien = $jws['kategorien'] ?? [];
+            $wsStatus = $jws['status'] ?? '';
+            $qaEnabled = $jws['qa_enabled'] ?? false;
+            // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
+            if ($wsStatus === 'Referent bestätigt') {
+                $referentFirma = $jws['referent_firma'] ?? '';
+                $referentPerson = $jws['referent_person'] ?? '';
+                $referentPersons = $jws['referent_persons'] ?? [];
+                $aussteller = $jws['aussteller'] ?? [];
+            }
+            break;
+        }
+    }
+}
 
 if (!$workshop) {
     http_response_code(404);
@@ -43,36 +72,6 @@ $detailsDescByType = [
 $detailsDesc = $detailsDescByType[$typRaw] ?? 'Ausfuehrliche Veranstaltungs-Infos';
 if ($typRaw !== '' && !isset($detailsDescByType[$typRaw])) {
     $detailsDesc = 'Ausfuehrliche Infos: ' . $typRaw;
-}
-
-// ── Enriched-Daten aus workshops.json (Kategorien, Referent) ──
-$kategorien = [];
-$referentFirma = '';
-$referentPerson = '';
-$aussteller = [];
-$qaEnabled = false;
-$allWorkshops = [];
-$cleanId = str_replace('-', '', $id);
-
-$jsonFile = __DIR__ . '/api/workshops.json';
-if (file_exists($jsonFile)) {
-    $jsonData = json_decode(file_get_contents($jsonFile), true);
-    $allWorkshops = $jsonData['workshops'] ?? [];
-    foreach (($jsonData['workshops'] ?? []) as $jws) {
-        if ($jws['id'] === $cleanId) {
-            $kategorien = $jws['kategorien'] ?? [];
-            $wsStatus = $jws['status'] ?? '';
-            $qaEnabled = $jws['qa_enabled'] ?? false;
-            // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
-            if ($wsStatus === 'Referent bestätigt') {
-                $referentFirma = $jws['referent_firma'] ?? '';
-                $referentPerson = $jws['referent_person'] ?? '';
-                $referentPersons = $jws['referent_persons'] ?? [];
-                $aussteller = $jws['aussteller'] ?? [];
-            }
-            break;
-        }
-    }
 }
 
 // Referent-Anzeige formatieren (mit Link zur Experten-Seite)
