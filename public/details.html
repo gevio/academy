@@ -162,10 +162,9 @@
             document.getElementById('back-link').href = backUrl || ('/w/' + wsId);
 
             try {
-                const ts = '?t=' + Date.now();
                 const [wsData, ausData] = await Promise.all([
-                    fetch(API_URL + ts).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
-                    fetch(AUSSTELLER_URL + ts).then(r => r.ok ? r.json() : { aussteller: [] }).catch(() => ({ aussteller: [] }))
+                    fetch(API_URL, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+                    fetch(AUSSTELLER_URL, { cache: 'no-cache' }).then(r => r.ok ? r.json() : { aussteller: [] }).catch(() => ({ aussteller: [] }))
                 ]);
                 const ws = (wsData.workshops || []).find(w => w.id === wsId);
 
