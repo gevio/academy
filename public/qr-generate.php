@@ -7,14 +7,11 @@
  *   Feedback-QR (formula): "https://agenda.adventuresouthside.com/qr/" + replaceAll(id(), "-", "") + ".png"
  */
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/../config');
-$dotenv->load();
+require __DIR__ . '/../config/bootstrap.php';
 
 use chillerlan\QRCode\{QRCode, QROptions};
 
-$notionToken = getenv('NOTION_TOKEN');
+$notionToken = NOTION_TOKEN;
 if (!$notionToken) {
     die("FEHLER: NOTION_TOKEN nicht gefunden in config/.env\n");
 }
@@ -27,8 +24,8 @@ $options = new QROptions([
     'imageBase64'   => false,
 ]);
 
-$dbId = '11382138ece1494bafa3cd1bb47dda82';
-$baseUrl = 'https://agenda.adventuresouthside.com/w/';
+$dbId = NOTION_WORKSHOP_DB;
+$baseUrl = SITE_URL . '/w/';
 $outDir = __DIR__ . '/qr';
 
 if (!is_dir($outDir)) mkdir($outDir, 0755, true);

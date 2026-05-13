@@ -528,7 +528,7 @@
         const id = btn.dataset.id;
         const title = btn.dataset.title;
         const url = location.origin + '/w/' + id;
-        const shareData = { title: title + ' – AS26 Live', text: title, url: url };
+        const shareData = { title: title + ' – ' + (window.AS_BRANDING ? window.AS_BRANDING.name : 'AS26 Live'), text: title, url: url };
         if (window.as26Analytics) {
           window.as26Analytics.track('feature_use', { feature: 'share_workshop', payload: { id: id } });
         }

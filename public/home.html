@@ -255,6 +255,7 @@
         .home-title { font-size: 2.8rem; }
     }
     </style>
+    <script src="/js/branding.js" defer></script>
 </head>
 <body class="home">
 
@@ -278,16 +279,16 @@
 
     <div class="home-hero">
         <div class="home-logos">
-            <img src="/img/logo-southside.png" alt="Adventure Southside" class="home-logo-main">
+            <img src="/img/logo-southside.png" alt="Adventure Southside" class="home-logo-main" data-branding-logo>
             <div class="home-logos-partners">
                 <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
                 <img src="/img/logo-ecamper.png" alt="E-Mobility &amp; Friends">
                 <img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls">
             </div>
         </div>
-        <h1 class="home-title">AS26 <span>Live</span></h1>
+        <h1 class="home-title" data-branding-name>AS26 <span>Live</span></h1>
         <p class="home-subtitle">Dein Messe-Begleiter</p>
-        <p class="home-date">10.–12. Juli 2026 · Messe Friedrichshafen</p>
+        <p class="home-date" data-branding-date>10.–12. Juli 2026 · Messe Friedrichshafen</p>
     </div>
 
     <nav class="home-cta">
@@ -310,10 +311,10 @@
     </nav>
 
     <div class="home-footer">
-        <p>Selbstausbauer Academy @ Adventure Southside 2026</p>
+        <p data-branding-event>Adventure Southside 2026</p>
         <div class="footer-cta-row">
-            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn">🎫 Ticket sichern</a>
-            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live \u2013 Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Referenten &amp; Standplan \u2013 alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn" data-branding-ticket>🎫 Ticket sichern</a>
+            <button class="share-btn" onclick="window.AS_BRANDING?.share()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
         </div>
         <p>
             <a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum & Datenschutz</a>

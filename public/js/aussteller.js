@@ -481,9 +481,9 @@
     if (shareBtn) {
       shareBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const title = shareBtn.dataset.title + ' \u2013 Adventure Southside 2026';
+        const title = shareBtn.dataset.title + ' – ' + (window.AS_BRANDING ? window.AS_BRANDING.eventName : 'Adventure Southside 2026');
         const url = shareBtn.dataset.url;
-        const shareData = { title: title, text: shareBtn.dataset.title + ' auf der Adventure Southside 2026', url: url };
+        const shareData = { title: title, text: shareBtn.dataset.title + ' auf der ' + (window.AS_BRANDING ? window.AS_BRANDING.eventName : 'Adventure Southside 2026'), url: url };
         if (window.as26Analytics) {
           window.as26Analytics.track('feature_use', { feature: 'share_exhibitor', payload: { id: shareBtn.dataset.id || '' } });
         }

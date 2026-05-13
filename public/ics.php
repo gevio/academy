@@ -85,13 +85,13 @@ $title = str_replace(["\r", "\n", ",", ";"], ['', '', '\\,', '\\;'], $workshop['
 $location = str_replace(["\r", "\n", ",", ";"], ['', '', '\\,', '\\;'], $workshop['ort'] ?? 'Messe Friedrichshafen');
 $description = str_replace(["\r", "\n", ",", ";"], ['', ' ', '\\,', '\\;'],
     mb_substr(strip_tags($workshop['beschreibung'] ?? ''), 0, 300));
-$url = 'https://agenda.adventuresouthside.com/w/' . $id;
-$uid = $id . '@agenda.adventuresouthside.com';
+$url = SITE_URL . '/w/' . $id;
+$uid = $id . '@' . parse_url(SITE_URL, PHP_URL_HOST);
 $stamp = gmdate('Ymd\THis\Z');
 
 $ics = "BEGIN:VCALENDAR\r\n";
 $ics .= "VERSION:2.0\r\n";
-$ics .= "PRODID:-//Academy Live//Adventure Southside 2026//DE\r\n";
+$ics .= "PRODID:-//Academy Live//" . APP_EVENT_NAME . "//DE\r\n";
 $ics .= "CALSCALE:GREGORIAN\r\n";
 $ics .= "METHOD:PUBLISH\r\n";
 $ics .= "BEGIN:VEVENT\r\n";

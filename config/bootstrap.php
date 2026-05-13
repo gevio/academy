@@ -28,6 +28,15 @@ define('APP_VERSION',              getenv('APP_VERSION') ?: '1.0.0');
 define('SITE_URL',                 getenv('SITE_URL'));
 define('REVIEW_PUBLIC_URL',        getenv('REVIEW_PUBLIC_URL') ?: getenv('SITE_URL') ?: '');
 define('REVIEW_AUTO_FREIGABE',     getenv('REVIEW_AUTO_FREIGABE') === 'true');
+define('APP_NAME',             getenv('APP_NAME') ?: 'AS26 Live');
+define('APP_EVENT_NAME',       getenv('APP_EVENT_NAME') ?: 'Adventure Southside 2026');
+define('APP_EVENT_SHORT',      getenv('APP_EVENT_SHORT') ?: 'AS26');
+define('APP_EVENT_DATE',       getenv('APP_EVENT_DATE') ?: '10.–12. Juli 2026 · Messe Friedrichshafen');
+define('APP_EVENT_WEBSITE',    getenv('APP_EVENT_WEBSITE') ?: 'https://adventuresouthside.com/');
+define('APP_EVENT_TICKET_URL', getenv('APP_EVENT_TICKET_URL') ?: 'https://adventuresouthside.com/');
+define('APP_LOGO',             getenv('APP_LOGO') ?: 'logo-southside.png');
+define('APP_SHARE_URL',        getenv('APP_SHARE_URL') ?: 'https://agenda.adventuresouthside.com');
+define('APP_SHARE_TEXT',       getenv('APP_SHARE_TEXT') ?: 'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Referenten & Standplan – alles in einer App:');
 
 /**
  * Webhook-First Helper: POST JSON an n8n Webhook.
