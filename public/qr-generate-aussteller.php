@@ -7,14 +7,11 @@
  *   App-QR (formula): "https://agenda.adventuresouthside.com/qr-aussteller/" + replaceAll(id(), "-", "") + ".png"
  */
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/../config');
-$dotenv->load();
+require __DIR__ . '/../config/bootstrap.php';
 
 use chillerlan\QRCode\{QRCode, QROptions};
 
-$notionToken = getenv('NOTION_TOKEN');
+$notionToken = NOTION_TOKEN;
 if (!$notionToken) {
     die("FEHLER: NOTION_TOKEN nicht gefunden in config/.env\n");
 }
@@ -27,12 +24,12 @@ $options = new QROptions([
     'imageBase64'   => false,
 ]);
 
-$dbId = getenv('NOTION_AUSSTELLER_DB');
+$dbId = NOTION_AUSSTELLER_DB;
 if (!$dbId) {
     die("FEHLER: NOTION_AUSSTELLER_DB nicht gefunden in config/.env\n");
 }
 
-$baseUrl = 'https://agenda.adventuresouthside.com/aussteller.html#id=';
+$baseUrl = SITE_URL . '/aussteller.html#id=';
 $outDir = __DIR__ . '/qr-aussteller';
 
 if (!is_dir($outDir)) mkdir($outDir, 0755, true);

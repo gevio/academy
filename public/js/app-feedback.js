@@ -256,7 +256,7 @@
         </div>
         <div class="afm-header-info">
           <div class="afm-header-title">App bewerten</div>
-          <div class="afm-header-sub">Adventure Southside 2026</div>
+          <div class="afm-header-sub" data-branding-event>Adventure Southside 2026</div>
         </div>
         <button class="afm-close" id="afm-close" aria-label="Schließen">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>

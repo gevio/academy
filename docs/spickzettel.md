@@ -137,15 +137,17 @@ php scripts/generate-experten-json.php
 
 Übersicht der genutzten DBs (IDs aus `config/.env`):
 
-| Zweck | ENV-Variable |
-|---|---|
-| Workshops | `NOTION_WORKSHOP_DB` |
-| Aussteller | `NOTION_AUSSTELLER_DB` |
-| Referenten/Experten | `NOTION_REFERENTEN_DB` |
-| Feedback | `NOTION_FEEDBACK_DB` |
-| Q&A-Fragen | `NOTION_QA_DB` |
-| Reviews | `NOTION_REVIEW_DB` |
-| E-Mail-Adressen | `NOTION_EMAIL_DB` |
+| Zweck | ENV-Variable | AS26-DB-ID | AN26-DB-ID |
+|---|---|---|---|
+| Workshops | `NOTION_WORKSHOP_DB` | `11382138ece1494bafa3cd1bb47dda82` | `fa2fab25709b4e65bb4e281351322aaa` |
+| Aussteller | `NOTION_AUSSTELLER_DB` | `30a9c964c82f80dab1b6c0f9cb6bef9a` | `afb1ec07595b4a47b10a299d210e8eea` |
+| Referenten/Experten (Slots) | `NOTION_REFERENTEN_DB` | `2a69c964c82f806386fdf6d372ed5c4b` | `8e346ae2083240d5ae9937f665c3eef8` |
+| Feedback | `NOTION_FEEDBACK_DB` | `833c76f1256d444e8e83a0cf8b333992` | `2dfe321a25c24f6aaa5c003e6fa1f4a5` |
+| App-Feedback | `NOTION_APP_FEEDBACK_DB` | `c2fab1ab25a64b89a61de6aa1cb519dd` | ⚠️ TODO |
+| Q&A-Fragen | `NOTION_QA_DB` | `7f2c6f2db4994ecda4a0a591629b1d9c` | `416fff4cb763491f99039bdaad8215f3` |
+| Workshop-Reviews | `NOTION_REVIEW_DB` | `b69393bea0474e7cb34aa314c621d618` | ⚠️ TODO |
+| Aussteller-Reviews | `NOTION_AUSSTELLER_REVIEW_DB` | `d9797aa541bb47dab3b4f6766a646c61` | `1bda03c0b1494ba398c46edc88bd4d33` |
+| E-Mail-Adressen | `NOTION_EMAIL_DB` | `7288c0d68377454f9fccb0a8bb218da9` | ⚠️ TODO |
 
 ---
 

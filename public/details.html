@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/programm.css">
     <script src="/js/ortmap.js" defer></script>
+    <script src="/js/branding.js" defer></script>
 </head>
 <body>
     <header>
@@ -19,7 +20,7 @@
         <div class="badge">Details</div>
     </header>
     <a href="/" class="logo-bar">
-        <img src="/img/logo-southside.png" alt="Adventure Southside">
+        <img src="/img/logo-southside.png" alt="Adventure Southside" data-branding-logo>
     </a>
 
     <main class="detail-content" id="detail-content">
@@ -27,11 +28,11 @@
     </main>
 
     <footer>
-        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo"></a>
-        <p>Adventure Southside 2026</p>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo" data-branding-logo></a>
+        <p data-branding-event>Adventure Southside 2026</p>
         <div class="footer-cta-row">
-            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn">🎫 Ticket sichern</a>
-            <button class="share-btn" onclick="(function(){var d={title:'AS26 Live – Dein Messe-Begleiter',text:'Schau dir die Selbstausbauer Academy auf der Adventure Southside 2026 an! Workshops, Referenten & Standplan – alles in einer App:',url:'https://agenda.adventuresouthside.com'};if(navigator.share){navigator.share(d).catch(function(){})}else{window.location.href='mailto:?subject='+encodeURIComponent(d.title)+'&body='+encodeURIComponent(d.text+'\n\n'+d.url)}})()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn" data-branding-ticket>🎫 Ticket sichern</a>
+            <button class="share-btn" onclick="window.AS_BRANDING?.share()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
         </div>
         <p>
             <a href="/impressum.html">Impressum & Datenschutz</a>
@@ -173,7 +174,7 @@
                     return;
                 }
 
-                document.title = ws.title + ' – AS26 Live';
+                document.title = ws.title + ' – ' + (window.AS_BRANDING ? window.AS_BRANDING.name : 'AS26 Live');
                 renderDetails(ws, wsData.workshops || [], ausData.aussteller || []);
             } catch (err) {
                 console.error('Details-Fehler:', err);
@@ -331,7 +332,7 @@
                     const wsId = shareBtn.dataset.id;
                     const wsTitle = shareBtn.dataset.title;
                     const url = location.origin + '/w/' + wsId;
-                    const shareData = { title: wsTitle + ' – AS26 Live', text: wsTitle, url: url };
+                    const shareData = { title: wsTitle + ' – ' + (window.AS_BRANDING ? window.AS_BRANDING.name : 'AS26 Live'), text: wsTitle, url: url };
                     if (navigator.share) {
                         navigator.share(shareData).catch(() => {});
                     } else {

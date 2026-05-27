@@ -1,5 +1,5 @@
 // App-Version (automatisch aktualisiert von cli/release.php)
-var APP_VERSION = '1.7.0';
+var APP_VERSION = '1.9.3';
 (function(){var el=document.querySelector('.app-version');if(el)el.textContent='v'+APP_VERSION;})();
 
 (function () {

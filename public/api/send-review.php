@@ -164,7 +164,7 @@ $reviewPageId = $reviewPage['id'];
 $reviewUrl    = $reviewPage['url'] ?? "https://notion.so/{$reviewPageId}";
 
 // ── 5) E-Mail-Draft PRO Referent (nur mit E-Mail) ───
-$betreff = "Review: {$wsData['title']} – Adventure Southside 2026";
+$betreff = "Review: {$wsData['title']} – " . APP_EVENT_NAME;
 $emailResults = [];
 
 foreach ($referentsWithEmail as $ref) {

@@ -399,8 +399,8 @@
           </svg>
         </div>
         <div class="asc-header-info">
-          <div class="asc-header-title">AS26-Assistent</div>
-          <div class="asc-header-sub">Adventure Southside 2026</div>
+          <div class="asc-header-title" data-branding-short-name>AS26-Assistent</div>
+          <div class="asc-header-sub" data-branding-event>Adventure Southside 2026</div>
         </div>
         <button class="asc-fav-btn hidden" id="asc-fav-btn" aria-label="Mein Programm anzeigen">
           ❤️ <span id="asc-fav-count">0</span>

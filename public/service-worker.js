@@ -1,5 +1,5 @@
 /**
- * Service Worker – AS26 Live (Adventure Southside 2026)
+ * Service Worker – Messe-Begleiter App
  *
  * Strategien:
  *   Precache:      Alle Shell-Assets beim Install vorab laden
@@ -8,7 +8,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'as26-live-v29';
+const CACHE_NAME = 'app-live-v29';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
@@ -21,7 +21,6 @@ const PRECACHE_URLS = [
   '/css/programm.css',
   '/js/app.js',
   '/js/programm.js',
-  '/img/logo-southside.png',
   '/img/logo-academy.png',
   '/img/icon-192.png',
   '/manifest.json',
