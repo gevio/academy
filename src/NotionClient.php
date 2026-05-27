@@ -1389,6 +1389,36 @@ TPL;
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
+        // Bei 429 (Rate Limit): bis zu 3 Wiederholungen mit Backoff
+        if ($httpCode === 429) {
+            $retries = 3;
+            $wait    = 5; // Sekunden
+            for ($i = 1; $i <= $retries; $i++) {
+                error_log("Notion API 429 – Retry {$i}/{$retries} nach {$wait}s ({$endpoint})");
+                sleep($wait);
+                $wait *= 2; // exponentieller Backoff: 5s, 10s, 20s
+
+                $ch2 = curl_init($url);
+                curl_setopt_array($ch2, [
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER     => $headers,
+                    CURLOPT_TIMEOUT        => 10,
+                ]);
+                if ($method === 'POST') {
+                    curl_setopt($ch2, CURLOPT_POST, true);
+                    curl_setopt($ch2, CURLOPT_POSTFIELDS, $jsonBody ?? '');
+                } elseif ($method === 'PATCH') {
+                    curl_setopt($ch2, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                    curl_setopt($ch2, CURLOPT_POSTFIELDS, $jsonBody ?? '');
+                }
+                $response = curl_exec($ch2);
+                $httpCode = curl_getinfo($ch2, CURLINFO_HTTP_CODE);
+                curl_close($ch2);
+
+                if ($httpCode !== 429) break;
+            }
+        }
+
         if ($httpCode >= 400) {
             error_log("Notion API error {$httpCode}: {$response}");
             return null;

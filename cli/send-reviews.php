@@ -48,13 +48,13 @@ if ($limit) echo "  Limit:    {$limit} Aussteller\n";
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
 
 // ── 1) Aussteller mit Status = "Bereit" laden ────────────────────────────────
-echo "📥 Lade Aussteller mit Status = 'Bereit'...\n";
+echo "📥 Lade Aussteller mit Status = 'bereit'...\n";
 
 $body = [
     'page_size' => 100,
     'filter' => [
         'property' => 'Status',
-        'select'   => ['equals' => 'Bereit'],
+        'select'   => ['equals' => 'bereit'],
     ],
     'sorts' => [
         ['property' => 'Aussteller', 'direction' => 'ascending'],
@@ -104,31 +104,32 @@ if ($total === 0) {
 }
 
 // ── 2) Pro Aussteller Review + Mail erstellen ────────────────────────────────
-$stats = ['sent' => 0, 'skipped' => 0, 'error' => 0];
+$stats    = ['sent' => 0, 'skipped' => 0, 'error' => 0];
+$problems = []; // Dry-Run: Einträge mit Problemen sammeln
 
 foreach ($aussteller as $i => $aus) {
     $num    = $i + 1;
     $pageId = $aus['page_id'];
     $firma  = $aus['firma'];
 
-    echo "[{$num}/{$total}] {$firma}\n";
-
-    // Duplikat-Check
-    $existing = $notion->queryDatabase(NOTION_AUSSTELLER_REVIEW_DB, [
-        'filter' => [
-            'and' => [
-                ['property' => 'Aussteller (AS26)', 'relation' => ['contains' => $pageId]],
-                ['property' => 'Status', 'select' => ['does_not_equal' => 'Übertragen']],
+    // Duplikat-Check (im Dry-Run überspringen – spart 267 Notion-API-Calls)
+    if (!$dryRun) {
+        $existing = $notion->queryDatabase(NOTION_AUSSTELLER_REVIEW_DB, [
+            'filter' => [
+                'and' => [
+                    ['property' => 'Aussteller (AS26)', 'relation' => ['contains' => $pageId]],
+                    ['property' => 'Status', 'select' => ['does_not_equal' => 'Übertragen']],
+                ],
             ],
-        ],
-        'page_size' => 1,
-    ]);
+            'page_size' => 1,
+        ]);
 
-    if (!empty($existing['results'])) {
-        $existStatus = $existing['results'][0]['properties']['Status']['select']['name'] ?? '?';
-        echo "   ⏭ Übersprungen – aktive Review vorhanden (Status: {$existStatus})\n";
-        $stats['skipped']++;
-        continue;
+        if (!empty($existing['results'])) {
+            $existStatus = $existing['results'][0]['properties']['Status']['select']['name'] ?? '?';
+            echo "   ⏭ Übersprungen – aktive Review vorhanden (Status: {$existStatus})\n";
+            $stats['skipped']++;
+            continue;
+        }
     }
 
     // Live-Daten aus Notion laden
@@ -155,15 +156,21 @@ foreach ($aussteller as $i => $aus) {
         }
     }
 
-    $email = $ausLive['kontakt_email'] ?? '';
-
-    echo "   Firma:    {$firma}\n";
-    echo "   E-Mail:   " . ($email ?: '(keine)') . "\n";
-    echo "   Deadline: {$deadline}\n";
+    $email   = $ausLive['kontakt_email'] ?? '';
+    $vorname = $ausLive['kontakt_vorname'] ?? '';
 
     if ($dryRun) {
-        echo "   [DRY-RUN] Würde Review + Mail erstellen\n";
-        $stats['sent']++;
+        $issues = [];
+        if (!$email)   $issues[] = 'Keine E-Mail-Adresse';
+        if (!$vorname) $issues[] = 'Kein Kontakt-Vorname';
+        if (!empty($issues)) {
+            echo "[{$num}/{$total}] {$firma}\n";
+            foreach ($issues as $iss) echo "   ⚠ {$iss}\n";
+            $problems[] = ['firma' => $firma, 'issues' => $issues];
+            $stats['error']++;
+        } else {
+            $stats['sent']++;
+        }
         continue;
     }
 
@@ -223,13 +230,19 @@ foreach ($aussteller as $i => $aus) {
     $stats['sent']++;
     echo "\n";
 
-    usleep(400000); // Rate-Limit: 400ms zwischen Requests
+    usleep($dryRun ? 250000 : 400000); // Rate-Limit: 250ms (Dry-Run) / 400ms (Live)
 }
 
 // ── 3) Zusammenfassung ───────────────────────────────────────────────────────
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
 echo ($dryRun ? "[DRY-RUN] " : "") . "Fertig!\n";
-echo "  Versendet:   {$stats['sent']}\n";
+echo "  Bereit (OK): {$stats['sent']}\n";
 echo "  Übersprungen:{$stats['skipped']}\n";
-echo "  Fehler:      {$stats['error']}\n";
+echo "  Probleme:    {$stats['error']}\n";
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+if ($dryRun && !empty($problems)) {
+    echo "\n⚠ Aussteller mit Problemen:\n";
+    foreach ($problems as $p) {
+        echo "  • {$p['firma']}: " . implode(', ', $p['issues']) . "\n";
+    }
+}
