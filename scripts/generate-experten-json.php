@@ -91,6 +91,12 @@ if (!NOTION_REFERENTEN_DB) {
     die("❌ NOTION_REFERENTEN_DB nicht gesetzt. Bitte in .env eintragen.\n");
 }
 
+// Interne Notion-CRM-Kategorien aus der Referenten-DB, die NICHT ins Frontend übernommen werden.
+const INTERNAL_KATEGORIEN = [
+    'AS26 Altaussteller Vorjahr',
+    'AS26 Anfragen',
+];
+
 if ($downloadImages) {
     echo "📸 Bilder: Refresh aktiv\n";
 } else {
@@ -235,7 +241,7 @@ foreach ($referenten as $ref) {
         'foto'      => $fotoLocal,
         'bio'       => $ref['bio'],
         'funktion'  => $ref['funktion'],
-        'kategorie' => $ref['kategorie'],
+        'kategorie' => in_array($ref['kategorie'], INTERNAL_KATEGORIEN, true) ? '' : $ref['kategorie'],
         'website'   => $ref['website'],
         'firma'     => $firma,
         'firma_aussteller_id' => $firmaAusstellerId,
