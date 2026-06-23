@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Bühnentechnik – AS26 Admin</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- vis-network CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/dist/vis-network.min.js"></script>
+    <style>
+    * { box-sizing: border-box; }
+
+    body { background: #f5f0eb; font-family: 'PT Sans', sans-serif; margin: 0; }
+
+    /* ── Header ── */
+    .bh-header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: .6rem 1rem;
+        background: #fff; border-bottom: 2px solid var(--as-rot, #CF3628);
+        box-shadow: 0 1px 6px rgba(55,47,44,.08);
+        flex-wrap: wrap; gap: .5rem;
+        position: sticky; top: 0; z-index: 10;
+    }
+    .bh-header h1 { font-size: 1.1rem; margin: 0; color: var(--as-braun-dark, #372F2C); }
+    .bh-header a { font-size: .85rem; color: #888; text-decoration: none; }
+    .bh-header a:hover { color: var(--as-rot, #CF3628); }
+
+    /* ── Filter Bar ── */
+    .bh-filters {
+        display: flex; gap: .5rem; flex-wrap: wrap; align-items: center;
+        padding: .6rem 1rem; background: #fff;
+        border-bottom: 1px solid #e8e3de;
+    }
+    .bh-filters label { font-size: .82rem; color: #888; }
+    .bh-filters select {
+        padding: .3rem .5rem; border: 1px solid #ccc; border-radius: 6px;
+        font-family: inherit; font-size: .85rem; background: #fff; cursor: pointer;
+    }
+    .bh-filters .status-btn {
+        padding: .25rem .65rem; border: 2px solid transparent; border-radius: 20px;
+        font-size: .8rem; cursor: pointer; background: #f0ebe6; color: #6E6159;
+        font-family: inherit; transition: all .15s; white-space: nowrap;
+    }
+    .bh-filters .status-btn.active {
+        font-weight: 700; color: #fff;
+    }
+    .bh-filters .status-btn[data-status="all"].active { background: var(--as-rot, #CF3628); border-color: var(--as-rot); }
+    .bh-filters .status-btn[data-status="Aktiv"].active { background: #2ecc71; border-color: #27ae60; }
+    .bh-filters .status-btn[data-status="In Wartung"].active { background: #f39c12; border-color: #d68910; }
+    .bh-filters .status-btn[data-status="Defekt"].active { background: #e74c3c; border-color: #c0392b; }
+    .bh-filters .status-btn[data-status="Reserve"].active { background: #95a5a6; border-color: #7f8c8d; }
+    .bh-filters .status-btn[data-status="Verliehen"].active { background: #3498db; border-color: #2980b9; }
+    .bh-filters .sep { color: #ccc; }
+
+    /* ── Layout ── */
+    .bh-layout {
+        display: flex;
+        height: calc(100vh - 110px);
+    }
+
+    /* ── Graph ── */
+    #network-container {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+        background: #faf8f5;
+    }
+    #network { width: 100%; height: 100%; }
+
+    .graph-overlay {
+        position: absolute; bottom: .75rem; left: .75rem;
+        background: rgba(255,255,255,.92); border-radius: 8px;
+        padding: .5rem .75rem; font-size: .78rem; color: #6E6159;
+        pointer-events: none;
+        box-shadow: 0 1px 6px rgba(55,47,44,.1);
+    }
+    .graph-overlay kbd {
+        background: #e8e3de; padding: .1rem .3rem; border-radius: 3px;
+        font-family: monospace; font-size: .75rem;
+    }
+
+    /* ── Detail Sidebar ── */
+    #detail-panel {
+        width: 300px; flex-shrink: 0;
+        background: #fff; border-left: 1px solid #e8e3de;
+        overflow-y: auto; padding: 1rem;
+        transition: width .2s;
+    }
+    #detail-panel.hidden { width: 0; padding: 0; overflow: hidden; border: none; }
+    #detail-panel h2 { font-size: 1rem; margin: 0 0 .75rem; color: var(--as-braun-dark); }
+    .detail-close {
+        float: right; background: none; border: none; cursor: pointer;
+        color: #aaa; font-size: 1.1rem; padding: 0; margin-left: .5rem;
+    }
+    .detail-close:hover { color: var(--as-rot); }
+
+    .detail-badge {
+        display: inline-block; padding: .2rem .55rem; border-radius: 12px;
+        font-size: .78rem; font-weight: 700; color: #fff; margin-bottom: .75rem;
+    }
+    .detail-section { margin-bottom: .9rem; }
+    .detail-section h3 {
+        font-size: .78rem; text-transform: uppercase; letter-spacing: .05em;
+        color: #aaa; margin: 0 0 .35rem; font-weight: 700;
+    }
+    .detail-row {
+        display: flex; justify-content: space-between; align-items: baseline;
+        font-size: .85rem; margin-bottom: .2rem; gap: .5rem;
+    }
+    .detail-row .key { color: #6E6159; flex-shrink: 0; }
+    .detail-row .val { color: #372F2C; text-align: right; word-break: break-word; }
+    .detail-row .val:empty::before { content: '–'; color: #ccc; }
+    .detail-signal {
+        display: flex; flex-direction: column; gap: .3rem; font-size: .83rem;
+    }
+    .signal-link {
+        padding: .3rem .5rem; background: #f5f0eb; border-radius: 6px;
+        cursor: pointer; border: 1px solid transparent; transition: border-color .1s;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .signal-link:hover { border-color: var(--as-rot, #CF3628); color: var(--as-rot); }
+    .detail-notiz {
+        background: #f5f0eb; border-radius: 6px; padding: .5rem; font-size: .83rem;
+        color: #6E6159; line-height: 1.4;
+    }
+
+    /* ── Legende ── */
+    .legend-bar {
+        display: flex; flex-wrap: wrap; gap: .4rem; padding: .5rem 1rem;
+        background: #fff; border-top: 1px solid #e8e3de; font-size: .78rem;
+    }
+    .legend-item {
+        display: flex; align-items: center; gap: .3rem; color: #6E6159;
+    }
+    .legend-dot {
+        width: 12px; height: 12px; border-radius: 50%; display: inline-block; flex-shrink: 0;
+    }
+    .legend-sep { color: #ccc; padding: 0 .2rem; }
+
+    /* ── Auth ── */
+    .bh-auth {
+        max-width: 360px; margin: 5rem auto; text-align: center;
+        background: #fff; border-radius: 12px; padding: 2rem;
+        box-shadow: 0 2px 12px rgba(55,47,44,.1);
+    }
+    .bh-auth h1 { font-size: 1.3rem; margin-bottom: .5rem; }
+    .bh-auth p { color: #888; margin-bottom: 1.2rem; }
+    .bh-auth input {
+        padding: .5rem .8rem; border: 2px solid #ddd; border-radius: 8px;
+        font-size: 1rem; width: 200px; font-family: inherit;
+    }
+    .bh-auth input:focus { outline: none; border-color: var(--as-rot, #CF3628); }
+    .bh-auth button {
+        padding: .5rem 1rem; background: var(--as-rot, #CF3628); color: #fff;
+        border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+        margin-left: .4rem; font-family: inherit;
+    }
+
+    /* ── Loading ── */
+    .bh-loading {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        text-align: center; color: #888;
+    }
+    .bh-spinner {
+        width: 36px; height: 36px; border: 3px solid #e8e3de;
+        border-top-color: var(--as-rot, #CF3628);
+        border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto .75rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .bh-error {
+        position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        text-align: center; color: #e74c3c; max-width: 300px;
+    }
+
+    @media (max-width: 650px) {
+        #detail-panel { width: 100%; border-left: none; border-top: 1px solid #e8e3de; }
+        .bh-layout { flex-direction: column; }
+        #network-container { height: 55vh; }
+    }
+    </style>
+</head>
+<body>
+
+<!-- Auth -->
+<div id="auth-view">
+    <div class="bh-auth">
+        <h1>🎛️ Bühnentechnik</h1>
+        <p>Admin-Zugang erforderlich</p>
+        <input type="password" id="secret-input" placeholder="Admin-Secret" autofocus>
+        <button onclick="doLogin()">Öffnen</button>
+    </div>
+</div>
+
+<!-- Haupt-UI (hidden until auth) -->
+<div id="main-view" style="display:none; display:flex; flex-direction:column; height:100vh;">
+
+    <!-- Header -->
+    <div class="bh-header">
+        <h1>🎛️ Bühnentechnik &mdash; Blockschaltbild</h1>
+        <div style="display:flex; gap:1rem; align-items:center;">
+            <span id="device-count" style="font-size:.82rem; color:#aaa;"></span>
+            <a href="index.html" id="back-link">← Admin</a>
+        </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="bh-filters">
+        <label>Bühne:</label>
+        <select id="buehne-filter" onchange="applyFilters()">
+            <option value="">Alle Bühnen</option>
+        </select>
+        <span class="sep">|</span>
+        <label>Status:</label>
+        <button class="status-btn active" data-status="all" onclick="setStatusFilter('all')">Alle</button>
+        <button class="status-btn" data-status="Aktiv" onclick="setStatusFilter('Aktiv')">✅ Aktiv</button>
+        <button class="status-btn" data-status="In Wartung" onclick="setStatusFilter('In Wartung')">🔧 Wartung</button>
+        <button class="status-btn" data-status="Defekt" onclick="setStatusFilter('Defekt')">❌ Defekt</button>
+        <button class="status-btn" data-status="Reserve" onclick="setStatusFilter('Reserve')">📦 Reserve</button>
+        <button class="status-btn" data-status="Verliehen" onclick="setStatusFilter('Verliehen')">🔄 Verliehen</button>
+        <span class="sep">|</span>
+        <button class="status-btn" onclick="resetView()" style="font-size:.78rem;">⊞ Reset Ansicht</button>
+    </div>
+
+    <!-- Main Layout: Graph + Detail -->
+    <div class="bh-layout">
+        <div id="network-container">
+            <div id="network"></div>
+            <div id="graph-loading" class="bh-loading">
+                <div class="bh-spinner"></div>
+                <div>Lade Geräte aus Notion…</div>
+            </div>
+            <div id="graph-error" class="bh-error" style="display:none;"></div>
+            <div class="graph-overlay" id="graph-hint" style="display:none;">
+                <kbd>Scroll</kbd> Zoom &ensp; <kbd>Drag</kbd> Verschieben &ensp; Klick auf Gerät für Details
+            </div>
+        </div>
+
+        <div id="detail-panel" class="hidden">
+            <div id="detail-content"></div>
+        </div>
+    </div>
+
+    <!-- Legende -->
+    <div class="legend-bar">
+        <span style="font-size:.78rem; color:#aaa; font-weight:700; margin-right:.3rem;">Status:</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#2ecc71"></span>Aktiv</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f39c12"></span>Wartung</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#e74c3c"></span>Defekt</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#95a5a6"></span>Reserve</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#3498db"></span>Verliehen</span>
+        <span class="legend-sep">|</span>
+        <span style="font-size:.78rem; color:#aaa; font-weight:700; margin-right:.3rem;">Form:</span>
+        <span class="legend-item">■ Kamera/Recorder</span>
+        <span class="legend-item">◆ Mischpult/Switcher</span>
+        <span class="legend-item">● Mikrofon/Speaker</span>
+        <span class="legend-item">▲ Projektor</span>
+        <span class="legend-item">⬡ Netzwerk</span>
+        <span class="legend-item">★ Licht</span>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var secret = '';
+    var network = null;
+    var allNodes = [];
+    var allEdges = [];
+    var buehnenMap = {};
+    var nodesDataset = null;
+    var edgesDataset = null;
+    var activeStatus = 'all';
+
+    // ── Auth ──────────────────────────────────────────────────────────
+    window.doLogin = function () {
+        if (!secret) secret = document.getElementById('secret-input').value.trim();
+        if (!secret) return;
+        sessionStorage.setItem('asa_admin_secret', secret);
+        document.getElementById('auth-view').style.display = 'none';
+        document.getElementById('main-view').style.display = 'flex';
+        document.getElementById('back-link').href = 'index.html?secret=' + encodeURIComponent(secret);
+        loadData();
+    };
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var paramSecret = urlParams.get('secret') || urlParams.get('admin');
+    if (paramSecret) {
+        secret = paramSecret;
+        history.replaceState({}, '', window.location.pathname);
+    } else {
+        secret = sessionStorage.getItem('asa_admin_secret') || '';
+    }
+
+    if (secret) {
+        document.getElementById('auth-view').style.display = 'none';
+        document.getElementById('main-view').style.display = 'flex';
+        document.getElementById('back-link').href = 'index.html?secret=' + encodeURIComponent(secret);
+        loadData();
+    } else {
+        document.getElementById('secret-input').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') window.doLogin();
+        });
+    }
+
+    // ── Daten laden ───────────────────────────────────────────────────
+    function loadData() {
+        fetch('/api/buehne.php?secret=' + encodeURIComponent(secret))
+            .then(function (r) {
+                if (r.status === 403) throw new Error('Ungültiges Admin-Secret');
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
+            .then(function (data) {
+                if (!data.ok) throw new Error(data.error || 'Fehler beim Laden');
+                allNodes = data.nodes || [];
+                allEdges = data.edges || [];
+                buehnenMap = data.buehnen || {};
+                document.getElementById('graph-loading').style.display = 'none';
+                document.getElementById('graph-hint').style.display = 'block';
+                buildBuehneFilter();
+                buildGraph(allNodes, allEdges);
+                document.getElementById('device-count').textContent = allNodes.length + ' Geräte';
+            })
+            .catch(function (err) {
+                document.getElementById('graph-loading').style.display = 'none';
+                var el = document.getElementById('graph-error');
+                el.style.display = 'block';
+                el.innerHTML = '⚠️ ' + err.message + '<br><button onclick="loadData()" style="margin-top:.5rem;padding:.3rem .7rem;cursor:pointer;">Erneut versuchen</button>';
+            });
+    }
+
+    // ── Bühnen-Filter aufbauen ────────────────────────────────────────
+    function buildBuehneFilter() {
+        var select = document.getElementById('buehne-filter');
+        var buehnenSet = {};
+        allNodes.forEach(function (n) {
+            var ids = (n.device && n.device.buehne_ids) || [];
+            ids.forEach(function (id) {
+                buehnenSet[id] = buehnenMap[id] || id;
+            });
+        });
+        Object.keys(buehnenSet).sort().forEach(function (id) {
+            var opt = document.createElement('option');
+            opt.value = id;
+            opt.textContent = buehnenSet[id];
+            select.appendChild(opt);
+        });
+    }
+
+    // ── Graph aufbauen ────────────────────────────────────────────────
+    function buildGraph(nodes, edges) {
+        var container = document.getElementById('network');
+        nodesDataset = new vis.DataSet(nodes);
+        edgesDataset = new vis.DataSet(edges);
+
+        var options = {
+            nodes: {
+                borderWidth: 2,
+                borderWidthSelected: 3,
+                size: 22,
+                font: { size: 13, face: 'PT Sans, sans-serif', color: '#372F2C' },
+                shadow: { enabled: true, color: 'rgba(55,47,44,.15)', size: 6, x: 2, y: 2 },
+            },
+            edges: {
+                width: 2,
+                selectionWidth: 3,
+                font: { size: 10, align: 'middle', color: '#6E6159', background: 'rgba(255,255,255,.8)' },
+                smooth: { type: 'curvedCW', roundness: 0.2 },
+                shadow: false,
+            },
+            layout: {
+                improvedLayout: true,
+            },
+            physics: {
+                enabled: true,
+                stabilization: { iterations: 200, updateInterval: 25 },
+                barnesHut: {
+                    gravitationalConstant: -4000,
+                    centralGravity: 0.3,
+                    springLength: 150,
+                    springConstant: 0.04,
+                    damping: 0.09,
+                },
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200,
+                navigationButtons: false,
+                keyboard: { enabled: true, bindToWindow: false },
+                zoomView: true,
+                dragView: true,
+            },
+        };
+
+        network = new vis.Network(container, { nodes: nodesDataset, edges: edgesDataset }, options);
+
+        network.on('click', function (params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var node = nodesDataset.get(nodeId);
+                showDetail(node);
+            } else {
+                hideDetail();
+            }
+        });
+
+        network.on('stabilized', function () {
+            network.fit({ animation: { duration: 600, easingFunction: 'easeInOutQuad' } });
+        });
+    }
+
+    // ── Detail Panel ──────────────────────────────────────────────────
+    function showDetail(node) {
+        var panel = document.getElementById('detail-panel');
+        var content = document.getElementById('detail-content');
+        panel.classList.remove('hidden');
+
+        var d = node.device || {};
+        var statusColors = {
+            'Aktiv': '#2ecc71', 'In Wartung': '#f39c12',
+            'Defekt': '#e74c3c', 'Reserve': '#95a5a6', 'Verliehen': '#3498db'
+        };
+        var badgeColor = '';
+        Object.keys(statusColors).forEach(function (k) {
+            if ((d.status || '').indexOf(k) !== -1) badgeColor = statusColors[k];
+        });
+        if (!badgeColor) badgeColor = '#95a5a6';
+
+        var buehneNames = ((d.buehne_ids || []).map(function (id) {
+            return buehnenMap[id] || id;
+        })).join(', ') || '–';
+
+        // Verknüpfte Geräte-Namen
+        function linkedNames(ids) {
+            if (!ids || !ids.length) return '';
+            return ids.map(function (id) {
+                var n = nodesDataset ? nodesDataset.get(id) : null;
+                return '<span class="signal-link" onclick="focusNode(\'' + id + '\')">'
+                    + (n ? n.label : id.substring(0, 8) + '…')
+                    + '</span>';
+            }).join('');
+        }
+
+        var html = '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+            + '<h2 style="margin:0 0 .4rem;">' + esc(node.label) + '</h2>'
+            + '<button class="detail-close" onclick="hideDetail()">✕</button>'
+            + '</div>'
+            + '<span class="detail-badge" style="background:' + badgeColor + '">' + esc(d.status || '–') + '</span>';
+
+        html += '<div class="detail-section"><h3>Grunddaten</h3>'
+            + detailRow('Kategorie', d.kategorie)
+            + detailRow('Rolle', d.rolle)
+            + detailRow('Besitz', d.besitz)
+            + detailRow('Bühne', buehneNames)
+            + detailRow('Seriennummer', d.seriennummer)
+            + '</div>';
+
+        html += '<div class="detail-section"><h3>Eingang (Input)</h3>'
+            + detailRow('Kabel', d.input_kabel)
+            + detailRow('Protokoll', d.input_protokoll)
+            + detailRow('Anschluss', d.input_anschluss)
+            + '</div>';
+
+        html += '<div class="detail-section"><h3>Ausgang (Output)</h3>'
+            + detailRow('Kabel', d.output_kabel)
+            + detailRow('Protokoll', d.output_protokoll)
+            + detailRow('Anschluss', d.output_anschluss)
+            + '</div>';
+
+        // Signalfluss
+        var vonHtml = linkedNames(d.signal_kommt_von);
+        var zuHtml  = linkedNames(d.signal_geht_zu);
+        if (vonHtml || zuHtml) {
+            html += '<div class="detail-section"><h3>Signalfluss</h3>';
+            if (vonHtml) html += '<div style="font-size:.78rem;color:#aaa;margin-bottom:.2rem;">Signal kommt von:</div><div class="detail-signal">' + vonHtml + '</div>';
+            if (zuHtml)  html += '<div style="font-size:.78rem;color:#aaa;margin:.4rem 0 .2rem;">Signal geht zu:</div><div class="detail-signal">' + zuHtml + '</div>';
+            html += '</div>';
+        }
+
+        if (d.kaskaden_notiz) {
+            html += '<div class="detail-section"><h3>Kaskaden-Notiz</h3>'
+                + '<div class="detail-notiz">' + esc(d.kaskaden_notiz) + '</div></div>';
+        }
+        if (d.notizen) {
+            html += '<div class="detail-section"><h3>Notizen</h3>'
+                + '<div class="detail-notiz">' + esc(d.notizen) + '</div></div>';
+        }
+        if (d.specs_url) {
+            html += '<div class="detail-section"><h3>Specs</h3>'
+                + '<a href="' + esc(d.specs_url) + '" target="_blank" rel="noopener" '
+                + 'style="font-size:.85rem;color:var(--as-rot,#CF3628);word-break:break-all;display:block;">'
+                + '↗ ' + esc(d.specs_url.replace(/^https?:\/\//, '').split('/')[0]) + '</a></div>';
+        }
+
+        content.innerHTML = html;
+    }
+
+    function hideDetail() {
+        document.getElementById('detail-panel').classList.add('hidden');
+    }
+
+    function detailRow(key, val) {
+        return '<div class="detail-row"><span class="key">' + esc(key) + '</span>'
+            + '<span class="val">' + esc(val || '') + '</span></div>';
+    }
+
+    function esc(str) {
+        return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    window.focusNode = function (id) {
+        if (!network) return;
+        network.selectNodes([id]);
+        network.focus(id, { scale: 1.2, animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
+        var node = nodesDataset ? nodesDataset.get(id) : null;
+        if (node) showDetail(node);
+    };
+
+    // ── Filter ────────────────────────────────────────────────────────
+    window.setStatusFilter = function (status) {
+        activeStatus = status;
+        document.querySelectorAll('.status-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.dataset.status === status);
+        });
+        applyFilters();
+    };
+
+    window.applyFilters = function () {
+        var buehneId = document.getElementById('buehne-filter').value;
+        var filtered = allNodes.filter(function (n) {
+            var d = n.device || {};
+            var statusOk = activeStatus === 'all' || (d.status || '').indexOf(activeStatus) !== -1;
+            var buehneOk = !buehneId || (d.buehne_ids || []).indexOf(buehneId) !== -1;
+            return statusOk && buehneOk;
+        });
+        var filteredIds = filtered.map(function (n) { return n.id; });
+        var filteredEdges = allEdges.filter(function (e) {
+            return filteredIds.indexOf(e.from) !== -1 && filteredIds.indexOf(e.to) !== -1;
+        });
+        if (nodesDataset && edgesDataset) {
+            nodesDataset.clear();
+            edgesDataset.clear();
+            nodesDataset.add(filtered);
+            edgesDataset.add(filteredEdges);
+            document.getElementById('device-count').textContent = filtered.length + ' Geräte';
+            network.fit({ animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
+        }
+        hideDetail();
+    };
+
+    window.resetView = function () {
+        if (!network) return;
+        network.fit({ animation: { duration: 600, easingFunction: 'easeInOutQuad' } });
+    };
+
+}());
+</script>
+</body>
+</html>

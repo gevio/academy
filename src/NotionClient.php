@@ -1499,4 +1499,81 @@ TPL;
         ]);
         return !empty($result['results']);
     }
+
+    // ── BÜHNENTECHNIK ────────────────────────────────────
+
+    /**
+     * Alle Bühnen aus NOTION_MASTER_BUEHNEN_DB laden.
+     * Gibt eine Map [pageId => name] zurück für Namensauflösung.
+     */
+    public function getBuehnen(string $dbId): array
+    {
+        $result = $this->queryDatabase($dbId, ['page_size' => 100]);
+        $map = [];
+        foreach (($result['results'] ?? []) as $page) {
+            $props = $page['properties'] ?? [];
+            $name = $this->extractTitle($props['Name'] ?? [])
+                 ?: $this->extractTitle($props['Bühne'] ?? [])
+                 ?: $this->extractTitle($props['Titel'] ?? [])
+                 ?: ($page['id'] ?? '');
+            $map[$page['id']] = $name;
+        }
+        return $map;
+    }
+
+    /**
+     * Alle Geräte aus NOTION_STAGE_DB laden.
+     * Gibt Array von Geräten mit allen Properties inkl. Signalfluss-Relationen zurück.
+     */
+    public function getBuehnetechnik(string $dbId): array
+    {
+        $devices = [];
+        $cursor = null;
+
+        do {
+            $body = ['page_size' => 100];
+            if ($cursor) $body['start_cursor'] = $cursor;
+            $result = $this->queryDatabase($dbId, $body);
+            if (!$result) break;
+
+            foreach (($result['results'] ?? []) as $page) {
+                $props = $page['properties'] ?? [];
+
+                // Foto URL
+                $foto = '';
+                $fotoFiles = $props['Foto']['files'] ?? [];
+                if (!empty($fotoFiles)) {
+                    $f = $fotoFiles[0];
+                    $foto = $f['file']['url'] ?? $f['external']['url'] ?? '';
+                }
+
+                $devices[] = [
+                    'id'               => $page['id'],
+                    'name'             => $this->extractTitle($props['Name'] ?? []),
+                    'kategorie'        => $props['Kategorie']['select']['name'] ?? '',
+                    'status'           => $props['Status']['select']['name'] ?? '',
+                    'besitz'           => $props['Besitz']['select']['name'] ?? '',
+                    'seriennummer'     => $this->extractRichText($props['Seriennummer'] ?? []),
+                    'notizen'          => $this->extractRichText($props['Notizen'] ?? []),
+                    'foto'             => $foto,
+                    'input_kabel'      => $props['Input – Kabel']['select']['name'] ?? '',
+                    'input_protokoll'  => $props['Input – Protokoll']['select']['name'] ?? '',
+                    'input_anschluss'  => $props['Input – Anschluss']['select']['name'] ?? '',
+                    'output_kabel'     => $props['Output – Kabel']['select']['name'] ?? '',
+                    'output_protokoll' => $props['Output – Protokoll']['select']['name'] ?? '',
+                    'output_anschluss' => $props['Output – Anschluss']['select']['name'] ?? '',
+                    'rolle'            => $props['Rolle']['select']['name'] ?? '',
+                    'kaskaden_notiz'   => $this->extractRichText($props['Kaskaden-Notiz'] ?? []),
+                    'specs_url'        => $props['Specs URL']['url'] ?? '',
+                    'signal_kommt_von' => array_column($props['Signal kommt von']['relation'] ?? [], 'id'),
+                    'signal_geht_zu'   => array_column($props['Signal geht zu']['relation'] ?? [], 'id'),
+                    'buehne_ids'       => array_column($props['Bühne']['relation'] ?? [], 'id'),
+                ];
+            }
+
+            $cursor = $result['has_more'] ? ($result['next_cursor'] ?? null) : null;
+        } while ($cursor);
+
+        return $devices;
+    }
 }
