@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>AS26 Admin</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    .adm { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem; font-family: 'PT Sans', sans-serif; }
+    .adm h1 { font-size: 1.5rem; margin: 0 0 .3rem; color: var(--as-braun-dark, #372F2C); }
+    .adm-subtitle { color: #888; font-size: .9rem; margin-bottom: 2rem; }
+
+    /* Auth */
+    .adm-auth { text-align: center; margin-top: 4rem; }
+    .adm-auth h1 { margin-bottom: .5rem; }
+    .adm-auth p { color: #888; margin-bottom: 1.5rem; }
+    .adm-auth input {
+        padding: .5rem .8rem; border: 2px solid #ddd; border-radius: 8px;
+        font-size: 1rem; width: 240px; font-family: inherit;
+    }
+    .adm-auth input:focus { outline: none; border-color: var(--as-rot, #CF3628); }
+    .adm-auth button {
+        padding: .5rem 1.1rem; background: var(--as-rot, #CF3628); color: #fff;
+        border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+        margin-left: .5rem; font-family: inherit;
+    }
+    .adm-auth button:hover { background: var(--as-dunkelrot, #9E3323); }
+
+    /* Tool Grid */
+    .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.25rem;
+    }
+    .tool-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.5rem 1.25rem;
+        box-shadow: 0 2px 12px rgba(55,47,44,.10);
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        border: 2px solid transparent;
+        transition: border-color .15s, box-shadow .15s, transform .12s;
+        cursor: pointer;
+    }
+    .tool-card:hover {
+        border-color: var(--as-rot, #CF3628);
+        box-shadow: 0 4px 20px rgba(207,54,40,.15);
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: inherit;
+    }
+    .tool-card-icon { font-size: 2.2rem; line-height: 1; }
+    .tool-card-title { font-size: 1.05rem; font-weight: 700; color: var(--as-braun-dark, #372F2C); }
+    .tool-card-desc { font-size: .85rem; color: #6E6159; line-height: 1.4; }
+    .tool-card-tag {
+        display: inline-block; margin-top: auto; padding: .2rem .55rem;
+        background: var(--as-sand, #F5F0EB); border-radius: 4px;
+        font-size: .75rem; color: #6E6159; font-weight: 600;
+        align-self: flex-start;
+    }
+
+    /* Footer */
+    .adm-footer { margin-top: 2.5rem; text-align: center; font-size: .8rem; color: #aaa; }
+    .adm-footer a { color: #aaa; }
+
+    @media (max-width: 500px) {
+        .tool-grid { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body style="background: #f5f0eb;">
+
+<div class="adm" id="app">
+    <!-- Auth -->
+    <div class="adm-auth" id="auth-form">
+        <h1>🛠️ AS26 Admin</h1>
+        <p>Admin-Zugang erforderlich</p>
+        <input type="password" id="secret-input" placeholder="Admin-Secret" autofocus>
+        <button onclick="doLogin()">Öffnen</button>
+    </div>
+
+    <!-- Dashboard (hidden until auth) -->
+    <div id="dashboard" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+            <div>
+                <h1>🛠️ Admin Dashboard</h1>
+                <p class="adm-subtitle">Adventure Southside 2026 · Interner Bereich</p>
+            </div>
+            <a href="/" style="font-size:.85rem; color:#888;">← App</a>
+        </div>
+
+        <div class="tool-grid">
+            <a class="tool-card" href="analytics.html" id="link-analytics">
+                <span class="tool-card-icon">📊</span>
+                <span class="tool-card-title">Statistik</span>
+                <span class="tool-card-desc">Session-Daten, Page Views, Geräte, Browser, App-Feedback & CSV-Export</span>
+                <span class="tool-card-tag">Analytics</span>
+            </a>
+            <a class="tool-card" href="/tools/map-editor.html" target="_blank" rel="noopener">
+                <span class="tool-card-icon">🗺️</span>
+                <span class="tool-card-title">Standplan-Editor</span>
+                <span class="tool-card-desc">Aussteller-Stände auf dem Hallenplan positionieren und Koordinaten speichern</span>
+                <span class="tool-card-tag">Mapping Tool</span>
+            </a>
+            <a class="tool-card" href="buehne.html" id="link-buehne">
+                <span class="tool-card-icon">🎛️</span>
+                <span class="tool-card-title">Bühnentechnik</span>
+                <span class="tool-card-desc">Interaktives Blockschaltbild – Geräte, Signalfluss und Verschaltung auf einen Blick</span>
+                <span class="tool-card-tag">Blockschaltbild</span>
+            </a>
+        </div>
+
+        <div class="adm-footer">
+            AS26 Admin &middot; <a href="/">Zurück zur App</a>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    'use strict';
+
+    var secret = '';
+
+    function doLogin() {
+        if (!secret) secret = document.getElementById('secret-input').value.trim();
+        if (!secret) return;
+        sessionStorage.setItem('asa_admin_secret', secret);
+        showDashboard();
+    }
+    window.doLogin = doLogin;
+
+    function showDashboard() {
+        // Secret an interne Links anhängen
+        var links = ['link-analytics', 'link-buehne'];
+        links.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) {
+                var href = el.getAttribute('href');
+                el.href = href + '?secret=' + encodeURIComponent(secret);
+            }
+        });
+        document.getElementById('auth-form').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+    }
+
+    // ?secret=... aus URL übernehmen
+    var urlParams = new URLSearchParams(window.location.search);
+    var paramSecret = urlParams.get('secret') || urlParams.get('admin');
+    if (paramSecret) {
+        secret = paramSecret;
+        history.replaceState({}, '', window.location.pathname);
+    } else {
+        secret = sessionStorage.getItem('asa_admin_secret') || '';
+    }
+
+    if (secret) {
+        showDashboard();
+    } else {
+        document.getElementById('auth-form').style.display = 'block';
+        // Enter-Taste
+        document.getElementById('secret-input').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') doLogin();
+        });
+    }
+}());
+</script>
+</body>
+</html>
