@@ -424,3 +424,369 @@ body.wall{background:var(--as-braun-dark)}
     object-fit: contain;
     margin-bottom: .15rem;
 }
+
+/* ═══ SPECIAL BANNER (Messe-Special Werbebanner) ═══ */
+.special-banner-slot {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: .5rem 1.25rem .75rem;
+}
+.special-banner {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--as-hellbeige);
+    border-top: 3px solid var(--as-orange);
+    overflow: hidden;
+}
+.sb-tag {
+    display: inline-block;
+    background: var(--as-orange);
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .2rem .65rem;
+    border-radius: 0 0 6px 0;
+    margin: 0;
+}
+.sb-body {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    padding: .65rem 1rem .4rem;
+}
+.sb-logo-wrap { flex-shrink: 0; }
+.sb-logo {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 6px;
+    border: 1px solid var(--as-hellbeige);
+    background: var(--as-sand);
+    display: block;
+}
+.sb-logo-letter {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--as-sand);
+    color: var(--as-braun-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-radius: 6px;
+    border: 1px solid var(--as-hellbeige);
+}
+.sb-content { flex: 1; min-width: 0; }
+.sb-firma {
+    font-weight: 700;
+    font-size: .9rem;
+    color: var(--as-braun-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sb-text {
+    font-size: .82rem;
+    color: var(--text-light);
+    margin-top: .2rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.sb-actions {
+    display: flex;
+    gap: .5rem;
+    padding: .4rem 1rem .7rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.sb-stand-btn {
+    background: none;
+    border: 1.5px solid var(--as-rot);
+    color: var(--as-rot);
+    font-size: .8rem;
+    font-weight: 700;
+    padding: .28rem .65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s, color .15s;
+    line-height: 1.4;
+}
+.sb-stand-btn:hover, .sb-stand-btn:focus {
+    background: var(--as-rot);
+    color: #fff;
+    outline: none;
+}
+.sb-profile-link {
+    font-size: .82rem;
+    color: var(--as-warmgrau);
+    text-decoration: none;
+    margin-left: auto;
+    transition: color .15s;
+}
+.sb-profile-link:hover { color: var(--as-rot); }
+
+/* ═══ INFO-SEITE ═══ */
+.info-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem;
+}
+.info-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+}
+.info-card h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--as-braun-dark);
+    margin-bottom: .75rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+.info-card p, .info-card li {
+    font-size: .9rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+.info-card ul { list-style: none; padding: 0; margin: 0; }
+.info-card ul li { padding: .25rem 0; }
+.info-card a {
+    color: var(--as-rot);
+    text-decoration: none;
+    font-weight: 700;
+}
+.info-card a:hover { text-decoration: underline; }
+.info-maps-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--as-rot);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .9rem;
+    padding: .6rem 1.2rem;
+    border-radius: 8px;
+    margin-top: .75rem;
+    transition: background .15s;
+}
+.info-maps-btn:hover { background: var(--as-dunkelrot); text-decoration: none; color: #fff; }
+
+/* ═══ KIDS-SEITE ═══ */
+.kids-header-section {
+    background: linear-gradient(135deg, var(--as-braun-dark) 0%, #4a3f3a 100%);
+    padding: 1.5rem 1.25rem 1.25rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.kids-header-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--as-orange), #FFD166, var(--as-orange));
+}
+.kids-header-logo {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: .5rem;
+    filter: brightness(0) invert(1);
+}
+.kids-header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+.kids-header-sub {
+    font-size: .88rem;
+    color: var(--as-pfirsich);
+    margin-top: .3rem;
+}
+.kids-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.25rem 1.25rem 3rem;
+}
+.kids-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--as-orange);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: .85rem;
+    transition: box-shadow .2s, border-color .2s;
+}
+.kids-card:hover { box-shadow: var(--shadow-md); border-left-color: var(--as-rot); }
+.kids-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--as-braun-dark);
+    margin-bottom: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.kids-card-icon { font-size: 1.3rem; }
+.kids-card-bereich {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--as-warmgrau);
+    background: var(--as-sand);
+    border: 1px solid var(--as-hellbeige);
+    border-radius: 4px;
+    padding: .1rem .45rem;
+    margin-bottom: .45rem;
+}
+.kids-card-text {
+    font-size: .88rem;
+    color: var(--text-light);
+    line-height: 1.55;
+}
+.kids-card.highlight { border-left-color: var(--as-rot); background: #fff9f8; }
+.kids-loading, .kids-empty {
+    text-align: center;
+    color: var(--text-light);
+    padding: 3rem 1rem;
+    font-size: .9rem;
+}
+
+/* ═══ FOOD-SEITE ═══ */
+.food-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 3rem;
+}
+.food-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    padding: 1rem 1.1rem;
+    margin-bottom: .65rem;
+    cursor: pointer;
+    transition: box-shadow .2s, border-color .2s;
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+}
+.food-card:hover { box-shadow: var(--shadow-md); border-color: var(--as-orange); }
+.food-card-logo {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid var(--as-hellbeige);
+    background: var(--as-sand);
+    flex-shrink: 0;
+}
+.food-card-letter {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--as-sand);
+    border-radius: 8px;
+    border: 1px solid var(--as-hellbeige);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--as-braun-dark);
+    flex-shrink: 0;
+}
+.food-card-body { flex: 1; min-width: 0; }
+.food-card-firma {
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--as-braun-dark);
+}
+.food-card-stand {
+    font-size: .8rem;
+    color: var(--text-light);
+    margin-top: .15rem;
+}
+.food-card-icons {
+    display: flex;
+    gap: .3rem;
+    margin-top: .3rem;
+    flex-wrap: wrap;
+}
+.food-icon-img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    opacity: .85;
+}
+.food-card-special {
+    font-size: .8rem;
+    color: var(--as-orange);
+    font-weight: 700;
+    margin-top: .2rem;
+}
+.food-map-btn {
+    background: none;
+    border: 1.5px solid var(--as-hellbeige);
+    color: var(--as-warmgrau);
+    font-size: .75rem;
+    padding: .3rem .55rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: border-color .15s, color .15s;
+}
+.food-card:hover .food-map-btn { border-color: var(--as-orange); color: var(--as-orange); }
+.food-empty {
+    text-align: center;
+    color: var(--text-light);
+    padding: 3rem 1rem;
+    font-size: .9rem;
+}
+.food-filter-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: .5rem 1.25rem .25rem;
+}
+.food-header-banner {
+    background: linear-gradient(135deg, #652D23 0%, var(--as-braun-dark) 100%);
+    padding: 1rem 1.25rem;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.food-header-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--as-orange), #FFD166, var(--as-orange));
+}
+.food-header-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+.food-header-sub {
+    font-size: .83rem;
+    color: var(--as-pfirsich);
+    margin-top: .25rem;
+}

@@ -71,6 +71,7 @@ $generators = [
     'workshops'  => __DIR__ . '/../scripts/generate-workshops-json.php',
     'aussteller' => __DIR__ . '/../scripts/generate-aussteller-json.php',
     'experten'   => __DIR__ . '/../scripts/generate-experten-json.php',
+    'kids'       => __DIR__ . '/../scripts/generate-kids-json.php',
 ];
 
 foreach ($generators as $name => $script) {

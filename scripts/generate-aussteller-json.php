@@ -159,6 +159,12 @@ do {
             $messeSpecial .= $t['plain_text'] ?? '';
         }
 
+        // Food-Icons (multi_select) – z.B. "kaffee", "eis", "burger"
+        $foodIcons = [];
+        foreach ($props['Food-Icons']['multi_select'] ?? [] as $ms) {
+            if (!empty($ms['name'])) $foodIcons[] = $ms['name'];
+        }
+
         // Webshop (url)
         $webshop = $props['Webshop']['url'] ?? '';
 
@@ -217,6 +223,7 @@ do {
             'stand'          => $stand,
             'beschreibung'   => trim($beschreibung),
             'messe_special'  => trim($messeSpecial),
+            'food_icons'     => $foodIcons,
             'kategorien'     => $kategorien,
             'website'        => $website ?: '',
             'webshop'        => $webshop ?: '',

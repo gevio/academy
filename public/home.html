@@ -304,11 +304,22 @@
             <span class="cta-icon">🎤</span>
             Unsere Referenten
         </a>
+        <a href="/kids.html" class="cta-btn cta-secondary">
+            <span class="cta-icon">👦</span>
+            Adventure KIDS
+        </a>
+        <a href="/food.html" class="cta-btn cta-secondary">
+            <span class="cta-icon">🍔</span>
+            Food &amp; Gastro
+        </a>
         <a href="/programm.html?tab=favoriten" class="cta-btn cta-secondary" id="fav-btn" style="display:none">
             <span class="cta-icon">❤️</span>
             <span id="fav-label">Meine Favoriten</span>
         </a>
     </nav>
+
+    <!-- ── Messe-Special Banner ── -->
+    <div class="special-banner-slot" id="home-special-banner"></div>
 
     <div class="home-footer">
         <p data-branding-event>Adventure Southside 2026</p>
@@ -317,9 +328,11 @@
             <button class="share-btn" onclick="window.AS_BRANDING?.share()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
         </div>
         <p>
-            <a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum & Datenschutz</a>
+            <a href="/info.html" style="color:var(--text-light);font-size:.75rem">ℹ️ Infos &amp; Anfahrt</a>
             <span style="color:var(--text-light);font-size:.75rem">&nbsp;·&nbsp;</span>
-            <a href="/faq.html" style="color:var(--text-light);font-size:.75rem">FAQ & Hilfe</a>
+            <a href="/impressum.html" style="color:var(--text-light);font-size:.75rem">Impressum &amp; Datenschutz</a>
+            <span style="color:var(--text-light);font-size:.75rem">&nbsp;·&nbsp;</span>
+            <a href="/faq.html" style="color:var(--text-light);font-size:.75rem">FAQ &amp; Hilfe</a>
         </p>
         <p class="app-version" style="color:var(--text-light);font-size:.65rem;opacity:.5;margin:.25rem 0 0"></p>
     </div>
@@ -439,6 +452,7 @@
     })();
 
     </script>
+    <script src="/js/special-banner.js" defer></script>
     <script src="/js/analytics.js" defer></script>
     <script src="/js/chat.js" defer></script>
     <script src="/js/app-feedback.js" defer></script>
