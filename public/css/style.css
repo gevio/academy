@@ -427,9 +427,11 @@ body.wall{background:var(--as-braun-dark)}
 
 /* ═══ SPECIAL BANNER (Messe-Special Werbebanner) ═══ */
 .special-banner-slot {
-    max-width: 600px;
+    max-width: 480px;
     margin: 0 auto;
     padding: .5rem 1.25rem .75rem;
+    box-sizing: border-box;
+    width: 100%;
 }
 .special-banner {
     background: var(--card);
@@ -504,7 +506,7 @@ body.wall{background:var(--as-braun-dark)}
     gap: .5rem;
     padding: .4rem 1rem .7rem;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-between;
 }
 .sb-stand-btn {
     background: none;
@@ -528,8 +530,8 @@ body.wall{background:var(--as-braun-dark)}
     font-size: .82rem;
     color: var(--as-warmgrau);
     text-decoration: none;
-    margin-left: auto;
     transition: color .15s;
+    white-space: nowrap;
 }
 .sb-profile-link:hover { color: var(--as-rot); }
 
@@ -688,6 +690,8 @@ body.wall{background:var(--as-braun-dark)}
     display: flex;
     align-items: center;
     gap: .85rem;
+    text-decoration: none;
+    color: var(--text);
 }
 .food-card:hover { box-shadow: var(--shadow-md); border-color: var(--as-orange); }
 .food-card-logo {

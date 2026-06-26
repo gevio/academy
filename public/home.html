@@ -125,11 +125,11 @@
     /* ── CTA Bereich ── */
     .home-cta {
         background: var(--bg);
-        padding: 1.5rem 1.5rem 2rem;
+        padding: 1.25rem 1.5rem 1.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: .85rem;
+        gap: .6rem;
     }
     .cta-btn {
         display: flex;
@@ -138,17 +138,33 @@
         gap: .65rem;
         width: 100%;
         max-width: 360px;
-        padding: 1rem 1.5rem;
+        padding: .9rem 1.35rem;
         border-radius: var(--radius);
         text-decoration: none;
         font-family: 'PT Sans', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 700;
         border: none;
         cursor: pointer;
         transition: transform .1s, box-shadow .15s, background .15s;
     }
     .cta-btn:active { transform: scale(.97); }
+    /* Kids + Food: 2-Spalten nebeneinander */
+    .cta-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem;
+        width: 100%;
+        max-width: 360px;
+    }
+    .cta-row-2 .cta-btn {
+        font-size: .88rem;
+        padding: .75rem .5rem;
+        flex-direction: column;
+        gap: .25rem;
+        max-width: none;
+    }
+    .cta-row-2 .cta-icon { font-size: 1.15rem; }
     .cta-primary {
         background: var(--as-rot);
         color: #fff;
@@ -304,14 +320,16 @@
             <span class="cta-icon">🎤</span>
             Unsere Referenten
         </a>
-        <a href="/kids.html" class="cta-btn cta-secondary">
-            <span class="cta-icon">👦</span>
-            Adventure KIDS
-        </a>
-        <a href="/food.html" class="cta-btn cta-secondary">
-            <span class="cta-icon">🍔</span>
-            Food &amp; Gastro
-        </a>
+        <div class="cta-row-2">
+            <a href="/kids.html" class="cta-btn cta-secondary">
+                <span class="cta-icon">👦</span>
+                Adventure KIDS
+            </a>
+            <a href="/food.html" class="cta-btn cta-secondary">
+                <span class="cta-icon">🍔</span>
+                Food &amp; Gastro
+            </a>
+        </div>
         <a href="/programm.html?tab=favoriten" class="cta-btn cta-secondary" id="fav-btn" style="display:none">
             <span class="cta-icon">❤️</span>
             <span id="fav-label">Meine Favoriten</span>

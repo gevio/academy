@@ -54,10 +54,10 @@
       : '';
 
     var standBtn = a.stand
-      ? `<button class="food-map-btn" data-show-stand="${esc(a.stand)}" data-firma="${esc(a.firma)}">📍</button>`
+      ? `<button class="food-map-btn" data-show-stand="${esc(a.stand)}" data-firma="${esc(a.firma)}" onclick="event.preventDefault()">📍</button>`
       : '';
 
-    return `<div class="food-card">
+    return `<a href="/aussteller.html#id=${esc(a.id)}" class="food-card">
   ${logoHtml}
   <div class="food-card-body">
     <div class="food-card-firma">${esc(a.firma)}</div>
@@ -66,7 +66,7 @@
     ${specialHtml}
   </div>
   ${standBtn}
-</div>`;
+</a>`;
   }
 
   function getFiltered() {
@@ -95,7 +95,16 @@
 
       if (!allFood.length) {
         document.getElementById('food-list').innerHTML =
-          '<div class="food-empty">Noch keine Food-Anbieter eingetragen.<br>Die Daten werden demnächst freigeschaltet.</div>';
+          `<div class="food-empty">
+            <p>Noch keine Food-Anbieter eingetragen.</p>
+            <p style="margin-top:.5rem;font-size:.82rem">
+              Food-Anbieter werden in Notion mit der Kategorie<br>
+              <strong>„Catering"</strong> oder <strong>„Nahrungsmittel/Getränke"</strong> getaggt.
+            </p>
+            <a href="/aussteller.html" style="display:inline-block;margin-top:1rem;color:var(--as-rot);font-weight:700;text-decoration:none">
+              → Alle Aussteller ansehen
+            </a>
+          </div>`;
         return;
       }
 
