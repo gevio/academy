@@ -217,3 +217,46 @@ cd /var/www/as26.cool-camp.site && git pull
 php cli/release.php init          # falls DB noch nicht existiert
 php cli/release.php release <X.Y.Z> "Beschreibung"   # gleiche Version wie auf Dev
 ```
+
+---
+
+## 8. Standplan-Editor (Map-Editor)
+
+Visuelles Tool zum Verorten von Ausstellerständen auf dem Hallenplan.
+
+| Umgebung | URL |
+|---|---|
+| **Dev** | `https://dev.as26.cool-camp.site/tools/map-editor.html` |
+| **Live** | `https://agenda.adventuresouthside.com/tools/map-editor.html` |
+
+> Kein Admin-Login nötig – Tool ist direkt erreichbar.
+
+### Verfügbare Hallenpläne
+
+| Kürzel | Bereich | Bilddatei |
+|---|---|---|
+| `FW` / `AT` | Foyer West / Atrium | `public/img/plan/FW.jpg` |
+| `FG` / `FGO` | Freigelände West | `public/img/plan/FG.jpg` |
+| `A3` | Halle A3 | `public/img/plan/A3.jpg` |
+| `A4` | Halle A4 | `public/img/plan/A4.jpg` |
+| `A5` | Halle A5 | `public/img/plan/A5.jpg` |
+| `A6` | Halle A6 | `public/img/plan/A6.jpg` |
+| *(Übersicht)* | Gesamtübersicht | `public/img/plan/overview.jpg` |
+
+### Workflow
+
+1. Tool öffnen → Halle auswählen
+2. Aussteller per Klick auf die Karte platzieren (lädt Koordinaten aus `aussteller.json`)
+3. **Speichern** → POST an `/api/standplan-save.php` (schreibt Koordinaten nach Notion)
+4. Ergebnis landet in `public/api/standplan.json`
+
+### Hintergrund
+
+| Was | Wo |
+|---|---|
+| Tool | `tools/map-editor.html` |
+| Hallenplan-Grafiken | `public/img/plan/*.jpg` |
+| Speichern-Endpunkt | `public/api/standplan-save.php` |
+| Ausgabe-JSON | `public/api/standplan.json` |
+
+> **Hinweis:** Neue oder geänderte Hallenplan-Grafiken müssen committed und auf Prod deployed werden – sie werden **nicht** per Cron regeneriert.
