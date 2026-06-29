@@ -25,8 +25,8 @@ class NotionClient
         if (!$data) return null;
 
         $props = $data['properties'] ?? [];
-        $datumStart = $props['Datum']['date']['start'] ?? null;
-        $datumEnd   = $props['Datum']['date']['end'] ?? null;
+        $datumStart = $props['Datum/ Uhrzeit']['date']['start'] ?? null;
+        $datumEnd   = $props['Datum/ Uhrzeit']['date']['end'] ?? null;
         return [
             'id'    => $pageId,
             'title' => $this->extractTitle($props['Titel'] ?? []),
@@ -1153,7 +1153,7 @@ TPL;
 
         $body['sorts'] = [
             ['property' => 'Tag', 'direction' => 'ascending'],
-            ['property' => 'Datum', 'direction' => 'ascending'],
+            ['property' => 'Datum/ Uhrzeit', 'direction' => 'ascending'],
         ];
 
         $all = [];
@@ -1166,8 +1166,8 @@ TPL;
 
             foreach ($data['results'] ?? [] as $page) {
                 $props = $page['properties'] ?? [];
-                $datumStart = $props['Datum']['date']['start'] ?? null;
-                $datumEnd   = $props['Datum']['date']['end'] ?? null;
+                $datumStart = $props['Datum/ Uhrzeit']['date']['start'] ?? null;
+                $datumEnd   = $props['Datum/ Uhrzeit']['date']['end'] ?? null;
                 $all[] = [
                     'id'           => str_replace('-', '', $page['id']),
                     'page_id'      => $page['id'],

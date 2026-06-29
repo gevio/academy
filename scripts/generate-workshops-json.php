@@ -52,7 +52,8 @@ if (empty($workshops)) {
 }
 
 if (empty($workshops)) {
-    die("❌ Keine Workshops in der DB. Abbruch.\n");
+    echo "❌ Keine Workshops in der DB. Abbruch.\n";
+    exit(1);
 }
 
 // ── 1b) Referent-Relationen auflösen ─────────────────────
