@@ -570,20 +570,23 @@ TPL;
         }
 
         return [
-            'id'               => $pageId,
-            'firma'            => $this->extractTitle($props['Aussteller'] ?? $props['Firma'] ?? $props['Name'] ?? []),
-            'beschreibung'     => $this->extractRichText($props['Beschreibung'] ?? []),
-            'messe_special'    => $this->extractRichText($props['Messe-Special'] ?? []),
-            'website'          => $props['Website']['url'] ?? $props['Webseite']['url'] ?? '',
-            'webshop'          => $props['Webshop']['url'] ?? '',
-            'logo'             => $logo,
-            'stand'            => $stand,
-            'kontakt_email'    => $kontaktEmail,
-            'kontakt_vorname'  => $kontaktVorname,
-            'kontakt_nachname' => $kontaktNachname,
-            'kontakt_duzen'    => $kontaktDuzen,
-            'kategorien'       => array_map(fn($k) => $k['name'], $props['Kategorie']['multi_select'] ?? []),
-            'event_ids'        => array_column($props['Event']['relation'] ?? [], 'id'),
+            'id'                    => $pageId,
+            'firma'                 => $this->extractTitle($props['Aussteller'] ?? $props['Firma'] ?? $props['Name'] ?? []),
+            'beschreibung'          => $this->extractRichText($props['Beschreibung'] ?? []),
+            'messe_special'         => $this->extractRichText($props['Messe-Special'] ?? []),
+            'website'               => $props['Website']['url'] ?? $props['Webseite']['url'] ?? '',
+            'webshop'               => $props['Webshop']['url'] ?? '',
+            'logo'                  => $logo,
+            'stand'                 => $stand,
+            'kontakt_email'         => $kontaktEmail,
+            'kontakt_vorname'       => $kontaktVorname,
+            'kontakt_nachname'      => $kontaktNachname,
+            'kontakt_duzen'         => $kontaktDuzen,
+            // Anzahl und ID der Kontakt-(Master)-Relationen – für Guards im Versand
+            'kontakt_master_count'  => count($kontaktIds),
+            'kontakt_master_id'     => $kontaktIds[0] ?? null,
+            'kategorien'            => array_map(fn($k) => $k['name'], $props['Kategorie']['multi_select'] ?? []),
+            'event_ids'             => array_column($props['Event']['relation'] ?? [], 'id'),
         ];
     }
 

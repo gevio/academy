@@ -1,5 +1,5 @@
 // App-Version (automatisch aktualisiert von cli/release.php)
-var APP_VERSION = '2.2.3';
+var APP_VERSION = '2.2.4';
 (function(){var el=document.querySelector('.app-version');if(el)el.textContent='v'+APP_VERSION;})();
 
 (function () {

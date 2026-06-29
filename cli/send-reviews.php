@@ -156,6 +156,19 @@ foreach ($aussteller as $i => $aus) {
         }
     }
 
+    // Guard: genau 1 Kontakt (Master) nötig – überspringen sonst
+    $kontaktCount = $ausLive['kontakt_master_count'] ?? 0;
+    if ($kontaktCount !== 1) {
+        $issue = $kontaktCount === 0
+            ? 'Kein Kontakt (Master) verknüpft'
+            : "Mehrere Kontakte ({$kontaktCount}) verknüpft – unklar welcher Empfänger";
+        echo "[{$num}/{$total}] {$firma}\n";
+        echo "   ⛔ Übersprungen – {$issue}\n\n";
+        $problems[] = ['firma' => $firma, 'issues' => [$issue]];
+        $stats['error']++;
+        continue;
+    }
+
     $email   = $ausLive['kontakt_email'] ?? '';
     $vorname = $ausLive['kontakt_vorname'] ?? '';
 
