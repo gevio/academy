@@ -334,7 +334,7 @@ const VENUE_LABEL_MAP = Object.fromEntries(VENUE_LIST.map(v => [v.id, v.label]))
 const state = {
     staende: {},           // placed: { "A3-300": { x, y, w?, h? } }
     allStandNummern: [],   // all stand numbers from aussteller.json
-    standToPageId: {},     // mapping: stand number -> Notion page UUID
+    standToPageIds: {},    // mapping: stand number -> [{ page_id, firma }, ...]
     currentHalle: '',
     selectedStand: null,   // selected in placed list (for deletion)
     pendingPick: null,     // stand number selected for placement
@@ -375,18 +375,25 @@ async function loadAusstellerData() {
         const data = await res.json();
 
         if (data.aussteller && data.aussteller.length > 0) {
+            const seenStands = new Set();
             state.allStandNummern = [];
             for (const a of data.aussteller) {
                 if (!a.stand || !a.stand.includes('-')) continue;
-                state.allStandNummern.push(a.stand);
 
-                // page_id Mapping speichern
+                // page_id Mapping: mehrere Aussteller pro Standnummer möglich
                 if (a.page_id) {
-                    state.standToPageId[a.stand] = a.page_id;
+                    if (!state.standToPageIds[a.stand]) state.standToPageIds[a.stand] = [];
+                    state.standToPageIds[a.stand].push({ page_id: a.page_id, firma: a.firma || a.stand });
                 }
 
-                // Bestehende Koordinaten aus Notion laden
-                if (a.stand_x != null && a.stand_y != null) {
+                // Standnummer nur einmal in Liste (dedupliziert)
+                if (!seenStands.has(a.stand)) {
+                    seenStands.add(a.stand);
+                    state.allStandNummern.push(a.stand);
+                }
+
+                // Bestehende Koordinaten aus Notion laden (erster Treffer gewinnt)
+                if (a.stand_x != null && a.stand_y != null && !state.staende[a.stand]) {
                     const entry = { x: a.stand_x, y: a.stand_y };
                     if (a.stand_w != null) entry.w = a.stand_w;
                     if (a.stand_h != null) entry.h = a.stand_h;
@@ -396,7 +403,9 @@ async function loadAusstellerData() {
             state.allStandNummern.sort();
 
             const coordCount = Object.keys(state.staende).length;
-            loadStatus.textContent = `${state.allStandNummern.length} Staende, ${coordCount} mit Koordinaten`;
+            const multiCount = Object.values(state.standToPageIds).filter(a => a.length > 1).length;
+            const multiHint = multiCount > 0 ? `, ${multiCount} geteilte Staende` : '';
+            loadStatus.textContent = `${state.allStandNummern.length} Staende, ${coordCount} mit Koordinaten${multiHint}`;
             loadStatus.className = 'load-status ok';
         } else {
             loadStatus.textContent = 'aussteller.json leer - manuell eingeben';
@@ -499,7 +508,13 @@ function renderPending() {
 
     for (const nr of pending) {
         const li = document.createElement('li');
-        li.textContent = nr;
+        const pageIds = state.standToPageIds[nr] || [];
+        if (pageIds.length > 1) {
+            li.innerHTML = nr + `<span style="background:#e94560;color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;margin-left:5px;">×${pageIds.length}</span>`;
+            li.title = pageIds.map(p => p.firma).join(' + ');
+        } else {
+            li.textContent = nr;
+        }
         if (state.pendingPick === nr) li.classList.add('active');
         li.addEventListener('click', () => {
             state.pendingPick = (state.pendingPick === nr) ? null : nr;
@@ -989,22 +1004,25 @@ async function saveToNotion() {
     }
 
     // Nur Staende mit page_id koennen gespeichert werden
+    // Mehrere Aussteller pro Standnummer → je ein Item pro page_id
     const items = [];
     const skipped = [];
     for (const [stand, data] of placed) {
-        const pageId = state.standToPageId[stand];
-        if (!pageId) {
+        const pageIds = state.standToPageIds[stand];
+        if (!pageIds || pageIds.length === 0) {
             skipped.push(stand);
             continue;
         }
-        items.push({
-            page_id: pageId,
-            stand: stand,
-            x: data.x,
-            y: data.y,
-            w: data.w || null,
-            h: data.h || null,
-        });
+        for (const { page_id } of pageIds) {
+            items.push({
+                page_id,
+                stand,
+                x: data.x,
+                y: data.y,
+                w: data.w || null,
+                h: data.h || null,
+            });
+        }
     }
 
     if (items.length === 0) {
