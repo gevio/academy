@@ -112,15 +112,16 @@ if (file_exists($wsFile)) {
     $wsData = json_decode(file_get_contents($wsFile), true);
     foreach (($wsData['workshops'] ?? []) as $ws) {
         $workshopIndex[$ws['id']] = [
-            'id'         => $ws['id'],
-            'title'      => $ws['title'],
-            'typ'        => $ws['typ'],
-            'tag'        => $ws['tag'],
-            'zeit'       => $ws['zeit'],
-            'ort'        => $ws['ort'],
-            'kategorien' => $ws['kategorien'] ?? [],
-            'status'     => $ws['status'] ?? '',
-            'aussteller' => $ws['aussteller'] ?? [],
+            'id'          => $ws['id'],
+            'title'       => $ws['title'],
+            'typ'         => $ws['typ'],
+            'tag'         => $ws['tag'],
+            'zeit'        => $ws['zeit'],
+            'ort'         => $ws['ort'],
+            'datum_start' => $ws['datum_start'] ?? null,
+            'kategorien'  => $ws['kategorien'] ?? [],
+            'status'      => $ws['status'] ?? '',
+            'aussteller'  => $ws['aussteller'] ?? [],
         ];
         // Reverse-Lookup: welche Personen sind als Referent im Workshop eingetragen?
         foreach ($ws['referent_persons'] ?? [] as $person) {

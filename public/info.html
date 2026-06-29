@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Infos & Anfahrt – AS26 Live</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/branding.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="back">← Startseite</a>
+        <div class="badge">Infos &amp; Anfahrt</div>
+    </header>
+
+    <main>
+        <div class="info-section">
+
+            <!-- Öffnungszeiten -->
+            <div class="info-card">
+                <h2>🕐 Öffnungszeiten</h2>
+                <ul>
+                    <li><strong>Freitag, 10. Juli</strong> &nbsp;–&nbsp; 10:00 – 18:00 Uhr</li>
+                    <li><strong>Samstag, 11. Juli</strong> &nbsp;–&nbsp; 10:00 – 18:00 Uhr</li>
+                    <li><strong>Sonntag, 12. Juli</strong> &nbsp;–&nbsp; 10:00 – 17:00 Uhr</li>
+                </ul>
+                <p style="margin-top:.75rem">
+                    <a href="https://adventuresouthside.com/#oeffnungszeiten" target="_blank" rel="noopener">Aktuelle Infos auf der Webseite →</a>
+                </p>
+            </div>
+
+            <!-- Anfahrt -->
+            <div class="info-card">
+                <h2>📍 Anfahrt &amp; Adresse</h2>
+                <p>
+                    <strong>Messe Friedrichshafen GmbH</strong><br>
+                    Neue Messe 1<br>
+                    88046 Friedrichshafen
+                </p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Messe+Friedrichshafen+GmbH,+Neue+Messe+1,+88046+Friedrichshafen"
+                   target="_blank" rel="noopener" class="info-maps-btn">
+                    🗺️ In Google Maps öffnen
+                </a>
+                <p style="margin-top:.85rem">
+                    <a href="https://adventuresouthside.com/anfahrt/" target="_blank" rel="noopener">Alle Anreise-Infos (PKW, Bahn, Parken) →</a>
+                </p>
+            </div>
+
+            <!-- FAQ -->
+            <div class="info-card">
+                <h2>❓ Häufige Fragen</h2>
+                <p>Tickets, Einlass, Programm, Unterkunft &amp; mehr.</p>
+                <p style="margin-top:.5rem">
+                    <a href="https://adventuresouthside.com/faq/" target="_blank" rel="noopener">FAQ auf adventuresouthside.com →</a>
+                </p>
+            </div>
+
+            <!-- Weitere Infos -->
+            <div class="info-card">
+                <h2>🌐 Weitere Infos</h2>
+                <ul>
+                    <li><a href="https://adventuresouthside.com/" target="_blank" rel="noopener">Offizielle Webseite</a></li>
+                    <li><a href="/faq.html">In-App FAQ &amp; Hilfe</a></li>
+                    <li><a href="/programm.html">Zum Programm</a></li>
+                    <li><a href="/aussteller.html">Aussteller &amp; Standplan</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo" data-branding-logo></a>
+        <p data-branding-event>Adventure Southside 2026</p>
+        <div class="footer-cta-row">
+            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn" data-branding-ticket>🎫 Ticket sichern</a>
+            <button class="share-btn" onclick="window.AS_BRANDING?.share()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+        </div>
+        <p>
+            <a href="/impressum.html">Impressum &amp; Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ &amp; Hilfe</a>
+        </p>
+        <p class="app-version"></p>
+    </footer>
+
+    <script src="/js/sw-update-notice.js"></script>
+    <script src="/js/analytics.js" defer></script>
+</body>
+</html>

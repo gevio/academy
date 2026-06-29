@@ -71,6 +71,7 @@ $generators = [
     'workshops'  => __DIR__ . '/../scripts/generate-workshops-json.php',
     'aussteller' => __DIR__ . '/../scripts/generate-aussteller-json.php',
     'experten'   => __DIR__ . '/../scripts/generate-experten-json.php',
+    'kids'       => __DIR__ . '/../scripts/generate-kids-json.php',
 ];
 
 foreach ($generators as $name => $script) {
@@ -97,9 +98,13 @@ foreach ($generators as $name => $script) {
     }
     $gDur = round(microtime(true) - $gt0, 1);
 
-    // Bei Fehler: Output anzeigen
+    // Output immer anzeigen (gekürzt bei OK, vollständig bei FAIL)
     if ($results[$name] === 'FAIL') {
         echo "--- {$name} Output ---\n{$output}--- Ende ---\n";
+    } else {
+        // Letzte Zeile des Outputs zeigen (Zusammenfassung)
+        $lastLine = trim(end($lines));
+        if ($lastLine) echo "    → {$lastLine}\n";
     }
 
     echo date('[Y-m-d H:i:s]') . " {$results[$name]} {$name} ({$gDur}s)\n";

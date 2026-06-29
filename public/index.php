@@ -107,9 +107,24 @@ if (!empty($aussteller)) {
     $firmaHtml = htmlspecialchars($referentFirma);
 }
 
+// ── SVG Kalender-Icon ────────────────────────────────────
+function calIconSvg(int $day, bool $large = false): string {
+    if ($day <= 0) return '';
+    $w = $large ? 32 : 16;
+    $h = $large ? 32 : 16;
+    $cls = $large ? 'cal-icon cal-icon--lg' : 'cal-icon';
+    return '<svg class="'.$cls.'" width="'.$w.'" height="'.$h.'" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+        .'<rect x=".5" y=".5" width="15" height="15" rx="2.5" fill="var(--card,#fff)" stroke="var(--border,#e0d8d0)" stroke-width="1"/>'
+        .'<rect x=".5" y=".5" width="15" height="5.5" rx="2.5" fill="var(--as-rot,#CF3628)"/>'
+        .'<rect x=".5" y="4" width="15" height="1.5" fill="var(--as-rot,#CF3628)"/>'
+        .'<text x="8" y="11" font-size="7" font-family="system-ui,Arial,sans-serif" font-weight="700" fill="var(--text,#372F2C)" text-anchor="middle" dominant-baseline="central">'.$day.'</text>'
+        .'</svg>';
+}
+
 // ── Feedback-Zeitsperre ──────────────────────────────────
 // Feedback erst ab Workshop-Start freischalten
 $feedbackActive = false;
+$workshopDay = 0;
 $startRaw = $workshop['datum_start'] ?? null;
 $startFormatted = '';
 
@@ -118,6 +133,7 @@ if ($startRaw) {
         $workshopStart = new DateTime($startRaw);
         $now = new DateTime('now', new DateTimeZone('Europe/Berlin'));
         $workshopStart->setTimezone(new DateTimeZone('Europe/Berlin'));
+        $workshopDay = (int)$workshopStart->format('j');
         $feedbackActive = ($now >= $workshopStart);
         $startFormatted = $workshopStart->format('d.m.Y, H:i');
     } catch (Exception $e) {
@@ -283,7 +299,7 @@ if (!$eventStarted && !empty($kategorien)) {
                 <?php endforeach; ?>
             </div>
             <div class="meta-row">
-                <?php if ($tag): ?><span class="meta-item">📅 <?= $tag ?></span><?php endif; ?>
+                <?php if ($tag): ?><span class="meta-item"><?= calIconSvg($workshopDay) ?> <?= $tag ?></span><?php endif; ?>
                 <?php if ($zeit): ?><span class="meta-item">🕐 <?= $zeit ?></span><?php endif; ?>
                 <?php if ($ort): ?><span class="meta-item" data-show-ort="<?= $ort ?>">📍 <?= $ort ?></span><?php endif; ?>
             </div>
@@ -334,7 +350,7 @@ if (!$eventStarted && !empty($kategorien)) {
                     <span class="action-desc">
                         Wird freigeschaltet ab Workshop-Start
                         <?php if ($startFormatted): ?>
-                            <br><span class="card-hint">📅 <?= $startFormatted ?> Uhr</span>
+                            <br><span class="card-hint"><?= calIconSvg($workshopDay) ?> <?= $startFormatted ?> Uhr</span>
                         <?php endif; ?>
                     </span>
                 </div>
@@ -343,7 +359,7 @@ if (!$eventStarted && !empty($kategorien)) {
             <!-- Kalender-Download (ab 01.06.2026) -->
             <?php if ($calendarActive): ?>
                 <a href="/w/<?= $id ?>/ical" class="action-card">
-                    <span class="action-icon">📅</span>
+                    <span class="action-icon"><?= calIconSvg($workshopDay, true) ?></span>
                     <span class="action-label">Zum Kalender</span>
                     <span class="action-desc">Termin in deinen Kalender eintragen</span>
                 </a>

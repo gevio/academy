@@ -1,0 +1,54 @@
+{
+    "generated": "2026-06-26T14:47:57+00:00",
+    "count": 6,
+    "attraktionen": [
+        {
+            "name": "Riesenhüpfburg Dschungelwald",
+            "beschreibung": "Hüpfen, klettern und toben in unserem riesigen Dschungelwald – ein Spaß für die Kleinsten!",
+            "bereich": "Freigelände West",
+            "sortierung": 1,
+            "highlight": true,
+            "icon": "🏰"
+        },
+        {
+            "name": "BungeeRun – Wer kommt am weitesten?",
+            "beschreibung": "Ziel beim Bungee-Run ist es, entgegen der immer stärker werdenden Seilspannung weiter als sein Gegner zu laufen und die Markierung zu platzieren. Hier zählt Feingefühl – ein Schritt zu viel und es geht im hohen Bogen zurück an den Start. Wer am weitesten kommt, gewinnt!",
+            "bereich": "Freigelände West",
+            "sortierung": 2,
+            "highlight": true,
+            "icon": "🏆"
+        },
+        {
+            "name": "Kettcar & Bobbycar-Parcours",
+            "beschreibung": "Flitzer-Action auf dem eigens aufgebauten Parcours – für Groß und Klein.",
+            "bereich": "Freigelände West",
+            "sortierung": 3,
+            "highlight": false,
+            "icon": "🚗"
+        },
+        {
+            "name": "Tischkicker",
+            "beschreibung": "Zeig dein Können am Kicker-Tisch – Einzel- oder Doppel-Matches sind erlaubt.",
+            "bereich": "Freigelände West",
+            "sortierung": 4,
+            "highlight": false,
+            "icon": "⚽"
+        },
+        {
+            "name": "Tischtennis",
+            "beschreibung": "Mal eine Runde Ping-Pong gefällig? Die Schläger liegen bereit.",
+            "bereich": "Freigelände West",
+            "sortierung": 5,
+            "highlight": false,
+            "icon": "🏓"
+        },
+        {
+            "name": "Mini-Jeeps",
+            "beschreibung": "Echte Geländewagen für echte Abenteurer: Im hinteren Freigelände West nehmen erfahrene Fahrerinnen und Fahrer Gäste auf dem Offroad-Parcours mit – ein besonderes Mitfahrerlebnis für kleine und große Entdecker.",
+            "bereich": "Freigelände West (hinten)",
+            "sortierung": 6,
+            "highlight": true,
+            "icon": "🚙"
+        }
+    ]
+}
