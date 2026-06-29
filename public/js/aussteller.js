@@ -56,6 +56,18 @@
   let currentSearch = '';
   let currentKat = 'all';
 
+  // Zurück-Navigation: Referrer beim Seitenaufruf einmalig ermitteln.
+  // Wird in closeMap() als Fallback genutzt, wenn kein ?back= param vorhanden.
+  // Einmalig verwendbar – nach Nutzung auf null zurückgesetzt.
+  let _backUrl = (() => {
+    const ref = document.referrer;
+    if (!ref) return null;
+    try {
+      const url = new URL(ref);
+      return (url.origin === location.origin && !url.pathname.includes('/aussteller.html')) ? ref : null;
+    } catch (e) { return null; }
+  })();
+
   // ── Aussteller-Favoriten ──
 
   function getAusstellerFavorites() {
@@ -631,9 +643,10 @@
     document.getElementById('map-image-wrap').innerHTML = '';
     const profile = document.getElementById('map-profile');
     if (profile) profile.innerHTML = '';
-    // Zurück-Navigation: ?back= Parameter nutzen wenn vorhanden
+    // Zurück-Navigation: ?back= Parameter oder gespeicherter Referrer
     const params = new URLSearchParams(window.location.search);
-    const backUrl = params.get('back');
+    const backUrl = params.get('back') || _backUrl;
+    _backUrl = null; // Einmal verwenden, danach zurücksetzen
     if (backUrl) {
       window.location.href = backUrl;
       return;
