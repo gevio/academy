@@ -87,6 +87,11 @@ function downloadLogo(string $notionUrl, string $id, string $imgDir, string $img
         imagesavealpha($src, true);
     }
 
+    // Palette-Images (PNG-8) in Truecolor konvertieren – imagewebp() unterstützt nur Truecolor
+    if (function_exists('imagepalettetotruecolor')) {
+        imagepalettetotruecolor($src);
+    }
+
     imagewebp($src, $localFile, 82);
     imagedestroy($src);
 
