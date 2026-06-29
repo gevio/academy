@@ -105,6 +105,25 @@ if (empty($aussteller['firma'])) {
     exit;
 }
 
+// ── 1b) Guard: genau 1 Kontakt (Master) nötig ───────────────
+$kontaktCount = $aussteller['kontakt_master_count'] ?? null;
+if ($kontaktCount === null) {
+    // Fallback falls Live-Daten nicht verfügbar (nur JSON-Merge)
+    $kontaktCount = !empty($aussteller['kontakt_email']) ? 1 : 0;
+}
+if ($kontaktCount !== 1) {
+    http_response_code(422);
+    $kontaktMsg = $kontaktCount === 0
+        ? 'Kein Kontakt (Master) verknüpft – bitte zuerst in Notion ergänzen.'
+        : "Mehrere Kontakte ({$kontaktCount}) verknüpft – bitte auf genau einen reduzieren.";
+    echo json_encode([
+        'error'         => $kontaktMsg,
+        'kontakt_count' => $kontaktCount,
+        'hint'          => 'Tipp: Relation "Kontakt (Master)" in Notion auf "Limit: 1 Seite" stellen.',
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // ── 2) Duplikat-Check: existiert bereits eine aktive Review? ──
 $existingReview = $notion->queryDatabase(NOTION_AUSSTELLER_REVIEW_DB, [
     'filter' => [
