@@ -321,6 +321,12 @@
     return div.innerHTML;
   }
 
+  function calIcon(dayNum, large) {
+    if (!dayNum || isNaN(+dayNum)) return '';
+    const w = large ? 32 : 16, h = large ? 32 : 16;
+    return `<svg class="cal-icon${large ? ' cal-icon--lg' : ''}" width="${w}" height="${h}" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x=".5" y=".5" width="15" height="15" rx="2.5" fill="var(--card,#fff)" stroke="var(--border,#e0d8d0)" stroke-width="1"/><rect x=".5" y=".5" width="15" height="5.5" rx="2.5" fill="var(--as-rot,#CF3628)"/><rect x=".5" y="4" width="15" height="1.5" fill="var(--as-rot,#CF3628)"/><text x="8" y="11" font-size="7" font-family="system-ui,Arial,sans-serif" font-weight="700" fill="var(--text,#372F2C)" text-anchor="middle" dominant-baseline="central">${+dayNum}</text></svg>`;
+  }
+
   function formatReferent(ws) {
     // Referent/Firma nur anzeigen wenn Status "Referent bestätigt"
     if (ws.status !== 'Referent bestätigt') return '';
@@ -385,6 +391,7 @@
           <a href="/w/${ws.id}?back=${encodeURIComponent(buildBackParam(ws.id))}" class="prog-card-title">${escapeHtml(ws.title)}</a>
           ${typKatRow}
           <div class="meta-row">
+            ${ws.tag ? `<span class="meta-item">${calIcon(ws.datum_start ? new Date(ws.datum_start).getDate() : null)} ${escapeHtml(ws.tag)}</span>` : ''}
             ${ws.zeit ? `<span class="meta-item">🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
             ${ws.ort ? `<span class="meta-item" data-show-ort="${escapeHtml(ws.ort)}">📍 ${escapeHtml(ws.ort)}</span>` : ''}
             ${referentHtml}

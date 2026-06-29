@@ -71,6 +71,18 @@
             return d.innerHTML;
         }
 
+        function calIcon(dayNum, large) {
+            if (!dayNum || isNaN(+dayNum)) return '';
+            const w = large ? 32 : 16, h = large ? 32 : 16;
+            return `<svg class="cal-icon${large ? ' cal-icon--lg' : ''}" width="${w}" height="${h}" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x=".5" y=".5" width="15" height="15" rx="2.5" fill="var(--card,#fff)" stroke="var(--border,#e0d8d0)" stroke-width="1"/><rect x=".5" y=".5" width="15" height="5.5" rx="2.5" fill="var(--as-rot,#CF3628)"/><rect x=".5" y="4" width="15" height="1.5" fill="var(--as-rot,#CF3628)"/><text x="8" y="11" font-size="7" font-family="system-ui,Arial,sans-serif" font-weight="700" fill="var(--text,#372F2C)" text-anchor="middle" dominant-baseline="central">${+dayNum}</text></svg>`;
+        }
+
+        function getCalDay(ws) {
+            if (ws.datum_start) return new Date(ws.datum_start).getDate();
+            const m = { Freitag: 10, Samstag: 11, Sonntag: 12 };
+            return m[ws.tag] || null;
+        }
+
         function getInitials(vorname, nachname) {
             const v = (vorname || '').charAt(0).toUpperCase();
             const n = (nachname || '').charAt(0).toUpperCase();
@@ -139,7 +151,7 @@
                         <div class="exp-ws-title">${escapeHtml(ws.title)}</div>
                         <div class="exp-ws-meta">
                             ${ws.typ ? `<span>${escapeHtml(ws.typ)}</span>` : ''}
-                            ${ws.tag ? `<span>📅 ${escapeHtml(ws.tag)}</span>` : ''}
+                            ${ws.tag ? `<span>${calIcon(getCalDay(ws))} ${escapeHtml(ws.tag)}</span>` : ''}
                             ${ws.zeit ? `<span>🕐 ${escapeHtml(ws.zeit)}</span>` : ''}
                             ${ws.ort ? `<span>📍 ${escapeHtml(ws.ort)}</span>` : ''}
                         </div>
