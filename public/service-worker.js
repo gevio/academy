@@ -8,7 +8,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'app-live-v30';
+const CACHE_NAME = 'app-live-v31';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
