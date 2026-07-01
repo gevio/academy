@@ -75,23 +75,72 @@
         justify-content: center;
         gap: 1.8rem;
     }
+    .home-logos-partners a {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: .4rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform .15s ease, background .15s ease;
+        opacity: 0;
+        animation: fadeInPartner .8s ease forwards;
+        text-decoration: none;
+    }
+    .home-logos-partners a:nth-child(1) { animation-delay: .3s; }
+    .home-logos-partners a:nth-child(2) { animation-delay: .6s; }
+    .home-logos-partners a:nth-child(3) { animation-delay: .9s; }
+    .home-logos-partners a:hover {
+        background: rgba(255,255,255,.08);
+        transform: translateY(-2px);
+    }
+    .home-logos-partners a:hover img { opacity: 1; }
+    .home-logos-partners a:active { transform: scale(.96); }
+    .home-logos-partners a::after {
+        content: '↗';
+        position: absolute;
+        top: -2px;
+        right: -4px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--as-orange);
+        color: #fff;
+        font-size: .65rem;
+        font-weight: 700;
+        line-height: 18px;
+        text-align: center;
+        opacity: .85;
+        box-shadow: 0 2px 6px rgba(0,0,0,.25);
+        pointer-events: none;
+    }
     .home-logos-partners img {
         height: 60px;
         width: auto;
         filter: brightness(0) invert(1);
-        opacity: 0;
-        animation: fadeInPartner .8s ease forwards;
+        opacity: .8;
+        transition: opacity .15s ease;
     }
-    .home-logos-partners img:nth-child(3) {
+    .home-logos-partners a:nth-child(3) img {
         filter: invert(1);
     }
-
-    .home-logos-partners img:nth-child(1) { animation-delay: .3s; }
-    .home-logos-partners img:nth-child(2) { animation-delay: .6s; }
-    .home-logos-partners img:nth-child(3) { animation-delay: .9s; }
     @keyframes fadeInPartner {
         from { opacity: 0; transform: translateY(6px); }
-        to   { opacity: .7; transform: translateY(0); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes partnerPulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(241,136,100,.6); }
+        50%      { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(241,136,100,0); }
+    }
+    .home-logos-partners a.pulse-once {
+        animation: fadeInPartner .8s ease forwards, partnerPulse 1.6s ease-in-out .8s 2;
+    }
+    .home-logos-partners a.pulse-once:nth-child(2) {
+        animation: fadeInPartner .8s ease forwards, partnerPulse 1.6s ease-in-out 1.2s 2;
+    }
+    .home-logos-partners a.pulse-once:nth-child(3) {
+        animation: fadeInPartner .8s ease forwards, partnerPulse 1.6s ease-in-out 1.6s 2;
     }
     .home-title {
         font-size: 2rem;
@@ -297,9 +346,15 @@
         <div class="home-logos">
             <img src="/img/logo-southside.png" alt="Adventure Southside" class="home-logo-main" data-branding-logo>
             <div class="home-logos-partners">
-                <img src="/img/logo-academy.png" alt="Selbstausbauer Academy">
-                <img src="/img/logo-ecamper.png" alt="E-Mobility &amp; Friends">
-                <img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls">
+                <a href="/schwerpunkte.html#academy" aria-label="Selbstausbau Academy – Details ansehen">
+                    <img src="/img/logo-academy.png" alt="Selbstausbau Academy">
+                </a>
+                <a href="/schwerpunkte.html#ecamper" aria-label="E-Mobility & Friends – Details ansehen">
+                    <img src="/img/logo-ecamper.png" alt="E-Mobility &amp; Friends">
+                </a>
+                <a href="/schwerpunkte.html#roadtrip-girls" aria-label="Roadtrip Girls – Details ansehen">
+                    <img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls">
+                </a>
             </div>
         </div>
         <h1 class="home-title" data-branding-name>AS26 <span>Live</span></h1>
@@ -467,6 +522,23 @@
             p.delete('admin');
             history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : '') + location.hash);
         }
+    })();
+
+    // ── Partner-Logos: Pulse beim ersten Besuch + Flag setzen ──
+    (function() {
+        var links = document.querySelectorAll('.home-logos-partners a');
+        if (!links.length) return;
+        var seen = false;
+        try { seen = localStorage.getItem('schwerpunkte_seen') === '1'; } catch(e) {}
+        if (!seen) {
+            links.forEach(function(a) { a.classList.add('pulse-once'); });
+        }
+        links.forEach(function(a) {
+            a.addEventListener('click', function() {
+                try { localStorage.setItem('schwerpunkte_seen', '1'); } catch(e) {}
+                links.forEach(function(l) { l.classList.remove('pulse-once'); });
+            });
+        });
     })();
 
     </script>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#372F2C">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Schwerpunkt-Themen – AS26 Live</title>
+    <meta name="description" content="Die drei Schwerpunkte der Adventure Southside 2026: Selbstausbau Academy, Roadtrip Girls und E-Mobility & Friends.">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icon-192.png">
+    <link rel="apple-touch-icon" href="/img/icon-192.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    .schwerpunkte-section {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 2rem;
+    }
+    .schwerpunkte-intro {
+        text-align: center;
+        color: var(--text-light);
+        font-size: .9rem;
+        line-height: 1.5;
+        margin: 0 0 1.5rem;
+    }
+    .schwerpunkt-card {
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+        border-left: 5px solid var(--as-rot);
+        padding: 1.5rem 1.4rem 1.25rem;
+        margin-bottom: 1.5rem;
+        scroll-margin-top: 1rem;
+    }
+    .schwerpunkt-card.theme-academy { border-left-color: var(--as-orange); }
+    .schwerpunkt-card.theme-roadtripgirls { border-left-color: var(--as-rot); }
+    .schwerpunkt-card.theme-ecamper { border-left-color: var(--as-braun-dark); }
+
+    .schwerpunkt-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: .85rem;
+    }
+    .schwerpunkt-logo-wrap {
+        flex-shrink: 0;
+        width: 84px;
+        height: 84px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .schwerpunkt-logo-wrap img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+    }
+
+    .schwerpunkt-title {
+        flex: 1;
+        min-width: 0;
+    }
+    .schwerpunkt-title h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--as-braun-dark);
+        margin: 0 0 .2rem;
+        line-height: 1.2;
+    }
+    .schwerpunkt-title .schwerpunkt-badge-neu {
+        display: inline-block;
+        background: var(--as-orange);
+        color: #fff;
+        font-size: .65rem;
+        font-weight: 700;
+        letter-spacing: .04em;
+        padding: .12rem .5rem;
+        border-radius: 10px;
+        vertical-align: middle;
+        margin-left: .4rem;
+    }
+    .schwerpunkt-claim {
+        font-style: italic;
+        color: var(--as-dunkelrot);
+        font-size: .9rem;
+        line-height: 1.35;
+        margin: 0;
+    }
+    .schwerpunkt-desc {
+        font-size: .92rem;
+        line-height: 1.6;
+        color: var(--text);
+        margin: 0 0 1rem;
+    }
+    .schwerpunkt-desc a {
+        color: var(--as-rot);
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .schwerpunkt-desc a:hover { text-decoration: underline; }
+
+    .schwerpunkt-facts {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .5rem;
+        background: var(--bg);
+        border-radius: 8px;
+        padding: .85rem 1rem;
+        margin: 0 0 1.15rem;
+    }
+    .schwerpunkt-facts p {
+        font-size: .85rem;
+        color: var(--text);
+        line-height: 1.5;
+        margin: 0;
+    }
+    .schwerpunkt-facts strong { color: var(--as-braun-dark); }
+
+    .schwerpunkt-slot {
+        border-left: 3px solid var(--as-orange);
+        padding: .4rem 0 .4rem .75rem;
+        margin-bottom: .55rem;
+    }
+    .schwerpunkt-slot:last-child { margin-bottom: 0; }
+    .schwerpunkt-slot-title {
+        font-weight: 700;
+        color: var(--as-braun-dark);
+        font-size: .88rem;
+        margin: 0 0 .15rem;
+    }
+    .schwerpunkt-slot p {
+        font-size: .82rem;
+        color: var(--text-light);
+        line-height: 1.45;
+        margin: 0;
+    }
+    .schwerpunkt-card.theme-ecamper .schwerpunkt-slot { border-left-color: var(--as-braun-dark); }
+    .schwerpunkt-card.theme-roadtripgirls .schwerpunkt-slot { border-left-color: var(--as-rot); }
+
+    .schwerpunkt-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .6rem;
+        align-items: center;
+    }
+    .schwerpunkt-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        font-family: 'PT Sans', sans-serif;
+        font-size: .88rem;
+        font-weight: 700;
+        padding: .6rem 1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: transform .1s, background .15s, border-color .15s, color .15s;
+    }
+    .schwerpunkt-btn:active { transform: scale(.97); }
+    .schwerpunkt-btn-primary {
+        background: var(--as-rot);
+        color: #fff;
+    }
+    .schwerpunkt-btn-primary:hover { background: var(--as-dunkelrot); color: #fff; }
+    .schwerpunkt-btn-secondary {
+        background: var(--card);
+        color: var(--text);
+        border: 2px solid var(--border);
+    }
+    .schwerpunkt-btn-secondary:hover { border-color: var(--as-rot); color: var(--as-rot); }
+    .schwerpunkt-btn-share {
+        margin-left: auto;
+        background: none;
+        color: var(--text-light);
+        border: 2px solid var(--border);
+        font-size: .82rem;
+    }
+    .schwerpunkt-btn-share:hover { border-color: var(--as-rot); color: var(--as-rot); }
+
+    /* Theme-Farbe für Primary-Button pro Karte */
+    .schwerpunkt-card.theme-academy .schwerpunkt-btn-primary { background: var(--as-orange); color: var(--as-braun-dark); }
+    .schwerpunkt-card.theme-academy .schwerpunkt-btn-primary:hover { background: #e5744e; color: #fff; }
+    .schwerpunkt-card.theme-ecamper .schwerpunkt-btn-primary { background: var(--as-braun-dark); }
+    .schwerpunkt-card.theme-ecamper .schwerpunkt-btn-primary:hover { background: #4a3f3a; }
+
+    @media (min-width: 500px) {
+        .schwerpunkt-facts { grid-template-columns: 1fr 1fr; }
+        .schwerpunkt-facts .facts-full { grid-column: 1 / -1; }
+        .schwerpunkt-logo-wrap { width: 100px; height: 100px; }
+        .schwerpunkt-title h2 { font-size: 1.4rem; }
+    }
+    </style>
+    <script src="/js/branding.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="back">← Startseite</a>
+        <div class="badge">Schwerpunkte</div>
+    </header>
+
+    <main>
+        <div class="schwerpunkte-section">
+
+            <p class="schwerpunkte-intro">
+                Drei Themenwelten prägen die Adventure Southside 2026 — mit eigenen Bühnen, Bereichen und Community-Events.
+            </p>
+
+            <!-- ══════════════ Selbstausbau Academy ══════════════ -->
+            <article class="schwerpunkt-card theme-academy" id="academy">
+                <div class="schwerpunkt-header">
+                    <div class="schwerpunkt-logo-wrap">
+                        <img src="/img/logo-academy.png" alt="Selbstausbau Academy Logo">
+                    </div>
+                    <div class="schwerpunkt-title">
+                        <h2>Selbstausbau Academy</h2>
+                        <p class="schwerpunkt-claim">Dein Camper. Dein Ausbau. Dein Abenteuer.</p>
+                    </div>
+                </div>
+                <p class="schwerpunkt-desc">
+                    Verwirkliche deinen Traum vom Glück auf Rädern — egal ob Kastenwagen, Pick-Up-Aufbau, Wohnmobil-Upgrade oder Expeditionsmobil. Auf der Academy-Bühne geben dir echte Profis das Know-how, mit dem du dich sicher durch Elektrik, Holzbau und Fahrzeugtechnik traust — und teure Fehler vermeidest.
+                </p>
+                <div class="schwerpunkt-facts">
+                    <p class="facts-full"><strong>Themen:</strong> Basics · Elektrik · Kfz-Technik · Standheizung · Rostbeseitigung · Möbelbau</p>
+                    <p><strong>Auf der Messe:</strong> Selbstausbau Academy Bühne (Halle A6) + zusätzliche Vortragsbühne</p>
+                    <p><strong>Auf der Website:</strong> Videos, Blogbeiträge & Produktvorstellungen — ganzjährig</p>
+                </div>
+                <div class="schwerpunkt-links">
+                    <a class="schwerpunkt-btn schwerpunkt-btn-secondary" href="/programm.html?ort=Selbstausbau%20Academy%20B%C3%BChne">
+                        📋 Workshops in der App
+                    </a>
+                    <a class="schwerpunkt-btn schwerpunkt-btn-primary" href="https://adventuresouthside.com/selbstausbau-academy/" target="_blank" rel="noopener">
+                        🌐 Zur Webseite
+                    </a>
+                    <button class="schwerpunkt-btn schwerpunkt-btn-share" data-share="academy" aria-label="Selbstausbau Academy teilen">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>
+                        Teilen
+                    </button>
+                </div>
+            </article>
+
+            <!-- ══════════════ Roadtrip Girls ══════════════ -->
+            <article class="schwerpunkt-card theme-roadtripgirls" id="roadtrip-girls">
+                <div class="schwerpunkt-header">
+                    <div class="schwerpunkt-logo-wrap">
+                        <img src="/img/logo-roadtripgirls.png" alt="Roadtrip Girls Logo">
+                    </div>
+                    <div class="schwerpunkt-title">
+                        <h2>Roadtrip Girls<span class="schwerpunkt-badge-neu">NEU 2026</span></h2>
+                        <p class="schwerpunkt-claim">Hände ans Steuer. Der Weg gehört euch.</p>
+                    </div>
+                </div>
+                <p class="schwerpunkt-desc">
+                    Community-Event für Frauen, die mutig ihren eigenen Weg gehen — onroad wie offroad. In Kooperation mit Susanne von <a href="https://www.roadtriplove.de/roadtrip-girls-messe/" target="_blank" rel="noopener">roadtriplove.de</a> entsteht ein Ort für Solo-Vanlife, Sicherheit, Technik am eigenen Fahrzeug und Mindset — auf Augenhöhe. Alle sind willkommen, die Inhalte richten sich primär an Frauen.
+                </p>
+                <div class="schwerpunkt-facts">
+                    <div class="schwerpunkt-slot facts-full">
+                        <p class="schwerpunkt-slot-title">🔥 Spirit am Lagerfeuer</p>
+                        <p>Mi 8. Juli (ab 14 Uhr) &amp; Do 9. Juli · Camp Area P-Ost 2 — 24 h nur Frauen, Tipi, Deep-Talks, Workshops.</p>
+                    </div>
+                    <div class="schwerpunkt-slot facts-full">
+                        <p class="schwerpunkt-slot-title">🚐 Rückenwind auf der Messe</p>
+                        <p>Fr 10. – So 12. Juli · Foyer West &amp; Atrium — Vorträge, Interviews, Aussteller mit Roadtrip-Fashion, Reise-Apps, Büchern, Start-ups &amp; Van-Vermietung.</p>
+                    </div>
+                    <p class="facts-full"><strong>Kontakt:</strong> <a href="mailto:servus@roadtriplove.de" style="color:var(--as-rot);text-decoration:none;font-weight:700">servus@roadtriplove.de</a> · Susanne Flachmann</p>
+                </div>
+                <div class="schwerpunkt-links">
+                    <a class="schwerpunkt-btn schwerpunkt-btn-secondary" href="/programm.html?typ=Roadtrip%20Girls.Hub">
+                        📋 Beiträge in der App
+                    </a>
+                    <a class="schwerpunkt-btn schwerpunkt-btn-primary" href="https://adventuresouthside.com/roadtrip-girls/" target="_blank" rel="noopener">
+                        🌐 Zur Webseite
+                    </a>
+                    <button class="schwerpunkt-btn schwerpunkt-btn-share" data-share="roadtrip-girls" aria-label="Roadtrip Girls teilen">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>
+                        Teilen
+                    </button>
+                </div>
+            </article>
+
+            <!-- ══════════════ E-Mobility & Friends ══════════════ -->
+            <article class="schwerpunkt-card theme-ecamper" id="ecamper">
+                <div class="schwerpunkt-header">
+                    <div class="schwerpunkt-logo-wrap">
+                        <img src="/img/logo-ecamper.png" alt="E-Mobility & Friends Logo">
+                    </div>
+                    <div class="schwerpunkt-title">
+                        <h2>E-Mobility &amp; Friends</h2>
+                        <p class="schwerpunkt-claim">Abenteuer trifft Elektromobilität.</p>
+                    </div>
+                </div>
+                <p class="schwerpunkt-desc">
+                    Elektromobilität wird 2026 auf der Adventure Southside so sichtbar und erlebbar wie nie. Fachvorträge, Expertenimpulse und Erfahrungsberichte machen elektrisches Reisen greifbar — organisiert von Silvia Brutschin.
+                </p>
+                <div class="schwerpunkt-facts">
+                    <div class="schwerpunkt-slot facts-full">
+                        <p class="schwerpunkt-slot-title">⚡ E-Mobility &amp; Friends – Ausstellungsfläche</p>
+                        <p>Halle A6 — Unternehmen, Fahrzeugkonzepte, Energieversorgung und nachhaltiges Reisen.</p>
+                    </div>
+                    <div class="schwerpunkt-slot facts-full">
+                        <p class="schwerpunkt-slot-title">🏕️ E-Mobility Camp</p>
+                        <p>Camp Area P-Ost 1 — zum zweiten Mal: eCamper teilen ihre Geschichten direkt im Camp. Reguläres Camp-Ticket + Option „E-Mobility Camp" wählen (begrenzte Plätze).</p>
+                    </div>
+                </div>
+                <div class="schwerpunkt-links">
+                    <a class="schwerpunkt-btn schwerpunkt-btn-secondary" href="/programm.html?typ=eCamper">
+                        📋 Beiträge in der App
+                    </a>
+                    <a class="schwerpunkt-btn schwerpunkt-btn-primary" href="https://adventuresouthside.com/e-mobility-friends/" target="_blank" rel="noopener">
+                        🌐 Zur Webseite
+                    </a>
+                    <button class="schwerpunkt-btn schwerpunkt-btn-share" data-share="ecamper" aria-label="E-Mobility & Friends teilen">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>
+                        Teilen
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer>
+        <a href="/"><img src="/img/logo-southside.png" alt="" class="footer-logo" data-branding-logo></a>
+        <p data-branding-event>Adventure Southside 2026</p>
+        <div class="footer-cta-row">
+            <a href="https://adventuresouthside.com/" target="_blank" rel="noopener" class="ticket-btn" data-branding-ticket>🎫 Ticket sichern</a>
+            <button class="share-btn" onclick="window.AS_BRANDING?.share()"><svg style="vertical-align:middle;margin-right:.3rem" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9V3l8 9-8 9v-6c-7.1 0-11.7 2.1-14.6 7C.8 15.3 4.2 10.1 14 9z"/></svg>Freunden empfehlen</button>
+        </div>
+        <p>
+            <a href="/info.html">ℹ️ Infos &amp; Anfahrt</a>
+            &nbsp;·&nbsp;
+            <a href="/impressum.html">Impressum &amp; Datenschutz</a>
+            &nbsp;·&nbsp;
+            <a href="/faq.html">FAQ &amp; Hilfe</a>
+        </p>
+        <p class="app-version"></p>
+    </footer>
+
+    <script src="/js/sw-update-notice.js"></script>
+    <script src="/js/analytics.js" defer></script>
+    <script>
+    // ── Hash-Anker: sanft scrollen (Header sitzt oben, kein sticky, aber Sicherheitsabstand)
+    (function() {
+        function scrollToHash() {
+            if (!location.hash) return;
+            var el = document.querySelector(location.hash);
+            if (!el) return;
+            setTimeout(function() {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scrollToHash);
+        } else {
+            scrollToHash();
+        }
+        window.addEventListener('hashchange', scrollToHash);
+    })();
+
+    // ── Teilen pro Schwerpunkt (Native Share + mailto Fallback) ──
+    (function() {
+        var data = {
+            'academy': {
+                title: 'Selbstausbau Academy · Adventure Southside 2026',
+                text: 'Selbstausbau Academy: Know-how für Kastenwagen, Wohnmobil-Upgrade & Expeditionsmobil.',
+                anchor: 'academy'
+            },
+            'roadtrip-girls': {
+                title: 'Roadtrip Girls · Adventure Southside 2026',
+                text: 'Roadtrip Girls – Community-Event für Frauen. Solo-Vanlife, Mut, Reisen. NEU 2026.',
+                anchor: 'roadtrip-girls'
+            },
+            'ecamper': {
+                title: 'E-Mobility & Friends · Adventure Southside 2026',
+                text: 'E-Mobility & Friends: Elektrisch Reisen — Ausstellung in Halle A6 + eigenes E-Mobility Camp.',
+                anchor: 'ecamper'
+            }
+        };
+        document.querySelectorAll('[data-share]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var key = btn.getAttribute('data-share');
+                var d = data[key]; if (!d) return;
+                var url = location.origin + '/schwerpunkte.html#' + d.anchor;
+                if (navigator.share) {
+                    navigator.share({ title: d.title, text: d.text, url: url }).catch(function(){});
+                } else {
+                    var mailto = 'mailto:?subject=' + encodeURIComponent(d.title)
+                               + '&body=' + encodeURIComponent(d.text + '\n\n' + url);
+                    location.href = mailto;
+                }
+            });
+        });
+    })();
+    </script>
+</body>
+</html>

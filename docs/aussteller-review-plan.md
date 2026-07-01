@@ -371,3 +371,72 @@ Schedule (15 Min) → Query (Status=Freigegeben + Team-Freigabe=true)
 5. **Massenversand ausführen:** `php cli/send-reviews.php --dry-run` auf Prod prüfen, dann live
 6. **Workflow C auf Prod:** Aktivieren + URL `https://agenda.adventuresouthside.com` bestätigen
 7. **Logo-Sync:** Nacht-Cron übernimmt Logos automatisch, Texte sofort via Regenerate-Endpoint
+
+---
+
+## 8. Kontakt-(Master)-Integrität – Review & Fixes (2026-06-29)
+
+### 8.1 Problem-Beschreibung
+
+Die Relation `Kontakt (Master)` in `AS26_Aussteller` soll **1:1** sein (je Aussteller-Eintrag genau ein Ansprechpartner). In der Praxis können jedoch Anomalien entstehen:
+
+| Typ | Beschreibung | Auswirkung |
+|---|---|---|
+| **Waise** | Eintrag hat 0 Kontakte | Kein Empfänger → Review-Versand blockiert |
+| **Bug** | Eintrag hat >1 Kontakt | Willkürlicher Empfänger → Versand blockiert |
+| **Kein E-Mail** | Kontakt hat keine E-Mail hinterlegt | Kein Mail-Draft möglich |
+| **Legitimes 1:N** | 1 Kontakt → mehrere Einträge (Mehrmarken, Mehrstand) | Korrekt, mehrere Mails (eine pro Eintrag) sind akzeptabel |
+
+### 8.2 Datenmodell-Klärung
+
+- **1 AS26_Aussteller-Eintrag → 1 Review-Seite → 1 E-Mail** (bleibt so)
+- Mehrere Einträge einer Firma (verschiedene Marken/Stände) teilen denselben Kontakt → legitim, jeder bekommt seine eigene Review-Mail
+- Mehrere Mails an denselben Kontakt sind akzeptabel (jede Mail hat eigenen Review-Link und eigene Inhalte)
+
+### 8.3 Implementierte Fixes (v2.2.4)
+
+#### `cli/check-aussteller-contacts.php` — Read-only Bericht ✅
+
+```bash
+php cli/check-aussteller-contacts.php          # schnell (nur Struktur)
+php cli/check-aussteller-contacts.php --emails # + E-Mail-Prüfung (~langsamer)
+```
+
+Kategorisiert alle AS26_Aussteller-Einträge und meldet:
+- ⛔ Waisen (0 Kontakte) – vor Massenversand bereinigen
+- ⛔ Bugs (>1 Kontakt) – auf genau einen reduzieren
+- ⚠ Kein E-Mail (nur mit `--emails`)
+- ℹ️ Legitime 1:N-Relationen (Info)
+
+**Stand 2026-06-29:** 4 Waisen, 0 Bugs, 28 legitime 1:N, 349 OK.
+
+#### `NotionClient::getAusstellerForReview()` — gehärtet ✅
+
+Gibt jetzt zusätzlich zurück:
+- `kontakt_master_count` – Anzahl verknüpfter Kontakte (0, 1, 2+)
+- `kontakt_master_id` – ID des ersten Kontakts (abwärtskompatibel)
+
+#### Guard in `send-aussteller-review.php` ✅
+
+Wenn `kontakt_master_count !== 1`:
+- **HTTP 422** mit klarer Meldung (Admin-Button zeigt Fehler)
+- Keine Review-Seite und keine E-Mail wird erstellt
+
+#### Guard in `cli/send-reviews.php` ✅
+
+Im Massenversand (dry-run + live): Einträge mit ≠1 Kontakt werden übersprungen und in der Problemliste gesammelt.
+
+### 8.4 Empfohlene Maßnahmen (Notion-Config)
+
+> **Einmalig in Notion durchführen – verhindert den Bug dauerhaft auf DB-Ebene:**
+
+1. In `AS26_Aussteller` → Property `Kontakt (Master)` → **„Limit: 1 Seite"** aktivieren  
+   → Notion erlaubt danach maximal 1 Kontakt pro Eintrag.
+
+2. Die 4 Waisen mit Kontakt verknüpfen (Stand 2026-06-29):
+   - EV Camper (`3879c964-c82f-8051-a836-e6c37515fd85`)
+   - Gennaro, Esposito (`3879c964-c82f-80e1-a17a-ee07242bf4ee`)
+   - Messe Alm (`3849c964-c82f-8096-9b1d-f0bb7e814be0`)
+   - Rhein Nutzfahrzeuge GmbH (`3879c964-c82f-8044-868e-e39dcd2a783a`)
+
+3. Vor Massenversand erneut prüfen: `php cli/check-aussteller-contacts.php --emails`
