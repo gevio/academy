@@ -8,7 +8,7 @@
  *   Network-First: API-Daten (workshops.json) + HTML-Seiten – immer frisch
  *   Offline:       Fallback-Seite wenn alles fehlschlägt
  */
-const CACHE_NAME = 'app-live-v29';
+const CACHE_NAME = 'app-live-v30';
 
 // Shell-Assets: werden beim Install vorab gecached
 const PRECACHE_URLS = [
@@ -17,11 +17,14 @@ const PRECACHE_URLS = [
   '/programm.html',
   '/details.html',
   '/offline.html',
+  '/schwerpunkte.html',
   '/css/style.css',
   '/css/programm.css',
   '/js/app.js',
   '/js/programm.js',
   '/img/logo-academy.png',
+  '/img/logo-ecamper.png',
+  '/img/logo-roadtripgirls.png',
   '/img/icon-192.png',
   '/manifest.json',
   '/api/workshops.json',
