@@ -196,9 +196,25 @@
     // Typ select
     const typSelect = document.getElementById('typ-filter');
     if (typSelect) typSelect.value = currentTyp;
-    // Ort select
+    // Ort select (unterstützt Multi-Ort via 'A|B|C')
     const ortSelect = document.getElementById('ort-filter');
-    if (ortSelect) ortSelect.value = currentOrt;
+    if (ortSelect) {
+      const orteVals = currentOrt === 'all' ? [] : currentOrt.split('|').filter(Boolean);
+      let multiOpt = ortSelect.querySelector('option[data-multi="1"]');
+      if (orteVals.length > 1) {
+        if (!multiOpt) {
+          multiOpt = document.createElement('option');
+          multiOpt.dataset.multi = '1';
+          ortSelect.insertBefore(multiOpt, ortSelect.children[1] || null);
+        }
+        multiOpt.value = currentOrt;
+        multiOpt.textContent = `${orteVals.length} Orte: ${orteVals.join(', ')}`;
+        ortSelect.value = currentOrt;
+      } else {
+        if (multiOpt) multiOpt.remove();
+        ortSelect.value = currentOrt;
+      }
+    }
     // Kategorie select
     const katSelect = document.getElementById('kat-filter');
     if (katSelect) katSelect.value = currentKat;
@@ -273,7 +289,8 @@
       list = list.filter(w => w.typ === currentTyp);
     }
     if (currentOrt !== 'all') {
-      list = list.filter(w => w.ort === currentOrt);
+      const orte = currentOrt.split('|').filter(Boolean);
+      list = list.filter(w => orte.includes(w.ort));
     }
     if (currentKat !== 'all') {
       list = list.filter(w => (w.kategorien || []).includes(currentKat));
